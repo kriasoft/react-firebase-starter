@@ -1,0 +1,37 @@
+{
+  "name": "react-static-boilerplate",
+  "scripts": {
+    "lint": "eslint components scripts gulpfile.babel.js webpack.config.js",
+    "test": "mocha --compilers js:babel/register --watch",
+    "build": "gulp build",
+    "start": "gulp serve"
+  },
+  "devDependencies": {
+    "autoprefixer-core": "^5.2.0",
+    "babel": "^5.5.8",
+    "babel-core": "^5.5.8",
+    "babel-eslint": "^3.1.15",
+    "babel-loader": "^5.1.4",
+    "chai": "^3.0.0",
+    "del": "^1.2.0",
+    "eslint": "^0.23.0",
+    "eslint-plugin-react": "^2.5.2",
+    "glob": "^5.0.10",
+    "gulp": "^3.9.0",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-util": "^3.0.5",
+    "lodash": "^3.9.3",
+    "minimist": "^1.1.1",
+    "mocha": "^2.2.5",
+    "node-libs-browser": "^0.5.2",
+    "postcss": "^4.1.11",
+    "postcss-loader": "^0.4.4",
+    "raw-loader": "^0.5.1",
+    "react": "^0.13.3",
+    "run-sequence": "^1.1.0",
+    "through2": "^2.0.0",
+    "vinyl": "^0.5.0",
+    "webpack": "^1.9.11",
+    "webpack-dev-server": "^1.9.0"
+  }
+}
