@@ -11,6 +11,7 @@ import minimist from 'minimist';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackConfig from './webpack.config.js';
+import path from 'path';
 
 const $ = gulpLoadPlugins();
 const argv = minimist(process.argv.slice(2));
@@ -68,5 +69,23 @@ gulp.task('serve', cb => {
       $.util.log('Server is running at ', $.util.colors.magenta('http://localhost:3000/'));
       cb();
     });
+  });
+});
+
+gulp.task('dev-server', function() {
+  const server = new WebpackDevServer(bundler, {
+    contentBase: path.join(__dirname, 'build'),
+    hot: true,
+    filename: 'app.js',
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: 400
+    },
+    stats: { colors: true },
+    historyApiFallback: true
+  });
+  server.listen(3000, 'localhost', function (err) {
+    if (err) console.log(err);
+    console.log('Listening at localhost:3000');
   });
 });
