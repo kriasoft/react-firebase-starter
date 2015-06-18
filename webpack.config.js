@@ -13,7 +13,7 @@ import merge from 'lodash/object/merge';
 const argv = minimist(process.argv.slice(2));
 const DEBUG = !argv.release;
 const VERBOSE = !!argv.verbose;
-const REACT_HOT_LOADER = DEBUG ? 'react-hot!babel' : 'babel';
+const JSX_LOADER = DEBUG ? 'react-hot!babel' : 'babel';
 const AUTOPREFIXER_BROWSERS = [
   'Android 2.3',
   'Android >= 4',
@@ -60,12 +60,28 @@ const config = {
   ],
   module: {
     loaders: [{
+      test: /\.css$/,
+      loader: 'style-loader/useable!' +
+              'css-loader' + (DEBUG ? '/minimize' : '') + '!postcss-loader'
+    }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loader: REACT_HOT_LOADER
+      loader: JSX_LOADER
     }, {
       test: /routes\.jsx?$/,
       loader: './routes-loader.js'
+    }, {
+      test: /\.gif/,
+      loader: 'url-loader?limit=10000&mimetype=image/gif'
+    }, {
+      test: /\.jpg/,
+      loader: 'url-loader?limit=10000&mimetype=image/jpg'
+    }, {
+      test: /\.png/,
+      loader: 'url-loader?limit=10000&mimetype=image/png'
+    }, {
+      test: /\.svg/,
+      loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
     }]
   },
   postcss: [autoprefixer(AUTOPREFIXER_BROWSERS)]
