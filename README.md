@@ -1,12 +1,11 @@
-# React Static Boilerplate
+# React Static Boilerplate ![status](https://img.shields.io/badge/status-early%20preview-orange.svg?style=flat-square)
 
 > Static website generator built on top of React.js and Gulp/Webpack
-
-<em>**NOTE**: It's still in early preview! Feel free to join the project :+1:</em>
 
 ### Features
 
 &nbsp; &nbsp; ✓ Generates static `.html` pages from [React](http://facebook.github.io/react/) components<br>
+&nbsp; &nbsp; ✓ Generates routes based on the list of files in the `/content` folder<br>
 &nbsp; &nbsp; ✓ Next generation JavaScript with [Babel](https://github.com/babel/babel)<br>
 &nbsp; &nbsp; ✓ Next generation CSS with [postCSS](https://github.com/postcss/postcss) and [cssnext](http://cssnext.io/)<br>
 &nbsp; &nbsp; ✓ Development web-server with [React Hot Loader](http://gaearon.github.io/react-hot-loader/)<br>
