@@ -71,7 +71,9 @@ $ npm install
 ```
 ### Related Projects
 
- * [React Starter Kit](https://github.com/kriasoft/react-starter-starter)
+ * [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
+ * [React Routing](https://github.com/kriasoft/react-routing)
+ * [React Decorators](https://github.com/kriasoft/react-decorators)
 
 ### Learn More
 
