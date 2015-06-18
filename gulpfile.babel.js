@@ -74,12 +74,14 @@ gulp.task('dev-server', function() {
     contentBase: path.join(__dirname, 'build'),
     hot: true,
     filename: 'app.js',
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: 400
-    },
     stats: { colors: true },
     historyApiFallback: true
+  });
+  bundler.watch({
+    aggregateTimeout: 300,
+    poll: 400
+  }, function(err, stats) {
+    // actions
   });
   server.listen(3000, 'localhost', function (err) {
     if (err) { console.log(err); }
