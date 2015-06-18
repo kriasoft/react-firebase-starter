@@ -8,14 +8,11 @@ import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import del from 'del';
 import run from 'run-sequence';
-import minimist from 'minimist';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import webpackConfig from './webpack.config.js';
 
 const $ = gulpLoadPlugins();
-const argv = minimist(process.argv.slice(2));
-const verbose = !!argv.verbose;
 const bundler = webpack(webpackConfig);
 
 // Default Gulp task
@@ -85,7 +82,7 @@ gulp.task('dev-server', function() {
     historyApiFallback: true
   });
   server.listen(3000, 'localhost', function (err) {
-    if (err) console.log(err);
+    if (err) { console.log(err); }
     console.log('Listening at localhost:3000');
   });
 });
