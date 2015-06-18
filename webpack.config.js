@@ -13,6 +13,7 @@ import merge from 'lodash/object/merge';
 const argv = minimist(process.argv.slice(2));
 const DEBUG = !argv.release;
 const VERBOSE = !!argv.verbose;
+const REACT_HOT_LOADER = DEBUG ? 'react-hot!babel' : 'babel';
 const AUTOPREFIXER_BROWSERS = [
   'Android 2.3',
   'Android >= 4',
@@ -26,6 +27,10 @@ const AUTOPREFIXER_BROWSERS = [
 
 // Base configuration
 const config = {
+  entry: DEBUG ? [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
+  ] : [],
   output: {
     path: path.join(__dirname, 'build'),
     publicPath: './',
@@ -49,13 +54,15 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
       '__DEV__': DEBUG
-    })
+    }),
+    DEBUG && new webpack.HotModuleReplacementPlugin(),
+    DEBUG && new webpack.NoErrorsPlugin()
   ],
   module: {
     loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
-      loader: 'babel-loader'
+      loader: REACT_HOT_LOADER
     }, {
       test: /routes\.jsx?$/,
       loader: './routes-loader.js'
@@ -66,7 +73,9 @@ const config = {
 
 // Configuration for the client-side bundle
 const appConfig = merge({}, config, {
-  entry: ['./scripts/app.js'].concat(global.hot ? 'webpack/hot/dev-server' : []),
+  entry: config.entry.concat([
+    './scripts/app.js'
+  ]),
   output: {
     filename: 'app.js'
   }
