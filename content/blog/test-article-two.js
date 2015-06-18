@@ -3,7 +3,7 @@
  * Copyright (c) Konstantin Tarkus | MIT License
  */
 
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 
 export default class {
 

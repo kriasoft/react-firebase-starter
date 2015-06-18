@@ -16,6 +16,7 @@
     "del": "^1.2.0",
     "eslint": "^0.23.0",
     "eslint-plugin-react": "^2.5.2",
+    "file-loader": "^0.8.4",
     "glob": "^5.0.10",
     "gulp": "^3.9.0",
     "gulp-load-plugins": "^0.10.0",
@@ -31,6 +32,7 @@
     "react-hot-loader": "^1.2.7",
     "run-sequence": "^1.1.0",
     "through2": "^2.0.0",
+    "url-loader": "^0.5.6",
     "vinyl": "^0.5.0",
     "webpack": "^1.9.11",
     "webpack-dev-server": "^1.9.0"
