@@ -4,7 +4,7 @@
     "lint": "eslint components scripts gulpfile.babel.js webpack.config.js",
     "test": "mocha --compilers js:babel/register --watch",
     "build": "gulp build",
-    "start": "gulp serve"
+    "start": "gulp build && gulp serve"
   },
   "devDependencies": {
     "autoprefixer-core": "^5.2.0",

@@ -13,7 +13,8 @@ import merge from 'lodash/object/merge';
 const argv = minimist(process.argv.slice(2));
 const DEBUG = !argv.release;
 const VERBOSE = !!argv.verbose;
-const JSX_LOADER = DEBUG ? 'react-hot!babel' : 'babel';
+const WATCH = global.watch;
+const JSX_LOADER = WATCH ? 'react-hot!babel' : 'babel';
 const AUTOPREFIXER_BROWSERS = [
   'Android 2.3',
   'Android >= 4',
@@ -27,10 +28,6 @@ const AUTOPREFIXER_BROWSERS = [
 
 // Base configuration
 const config = {
-  entry: DEBUG ? [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server'
-  ] : [],
   output: {
     path: path.join(__dirname, 'build'),
     publicPath: './',
@@ -54,9 +51,7 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
       '__DEV__': DEBUG
-    }),
-    DEBUG && new webpack.HotModuleReplacementPlugin(),
-    DEBUG && new webpack.NoErrorsPlugin()
+    })
   ],
   module: {
     loaders: [{
@@ -89,12 +84,19 @@ const config = {
 
 // Configuration for the client-side bundle
 const appConfig = merge({}, config, {
-  entry: config.entry.concat([
+  entry: (WATCH ? [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server'
+  ] : []).concat([
     './scripts/app.js'
   ]),
   output: {
     filename: 'app.js'
-  }
+  },
+  plugins: config.plugins.concat(WATCH ? [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ] : [])
 });
 
 // Configuration for server-side pre-rendering bundle
