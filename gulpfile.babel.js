@@ -70,6 +70,7 @@ gulp.task('serve', cb => {
 });
 
 gulp.task('dev-server', function() {
+
   const server = new WebpackDevServer(bundler, {
     contentBase: path.join(__dirname, 'build'),
     hot: true,
@@ -78,8 +79,15 @@ gulp.task('dev-server', function() {
       aggregateTimeout: 300,
       poll: 400
     },
-    stats: { colors: true },
+    stats: {
+      colors: true,
+      chunks: false,
+      version: false
+    },
     historyApiFallback: true
+  });
+  bundler.plugin('done', () => {
+    console.log('done');// eslint-disable-line no-console
   });
   server.listen(3000, 'localhost', function (err) {
     if (err) { console.log(err); }
