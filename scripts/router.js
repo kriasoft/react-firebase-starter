@@ -23,8 +23,8 @@ async function render(path, container) {
     } else {
       return React.renderToString(component);
     }
-  } catch (err) {
-    component = React.createElement(routes['/500']());
+  } catch (error) {
+    component = React.createElement(routes['/500'](), { path, error });
     if (container) {
       React.render(component, container);
     } else {
