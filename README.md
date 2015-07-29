@@ -1,9 +1,7 @@
 # React Static Boilerplate ![status](https://img.shields.io/badge/status-early%20preview-orange.svg?style=flat-square)
 
 > A static website starter kit powered by [React.js](http://facebook.github.io/react/)
-> and [Webpack](http://webpack.github.io/). It automatically generates static
-> `.html` pages and routing based on the list of React components in the `src`
-> folder.
+> and [Webpack](http://webpack.github.io/).
 
 Join [#react-static-boilerplate](https://gitter.im/koistya/react-static-boilerplate) chatroom on Gitter to stay up to date.
 
@@ -23,7 +21,8 @@ Join [#react-static-boilerplate](https://gitter.im/koistya/react-static-boilerpl
 Just clone the repo, install Node.js modules and run `npm start`:
 
 ```
-$ git clone -o upstream https://github.com/koistya/react-static-boilerplate MyApp
+$ git clone -o react-static-boilerplate -b master --single-branch \
+      https://github.com/koistya/react-static-boilerplate.git MyApp
 $ cd MyApp
 $ npm install
 $ npm start
@@ -73,8 +72,8 @@ your own project:
 
 ```shell
 $ git checkout master
-$ git fetch upstream
-$ git merge upstream/master
+$ git fetch react-static-boilerplate
+$ git merge react-static-boilerplate/master
 $ npm install
 ```
 ### Related Projects
@@ -92,4 +91,4 @@ $ npm install
  * [Learn ES6](https://babeljs.io/docs/learn-es6/), [ES6 Features](https://github.com/lukehoban/es6features#readme)
 
 ---
-Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya)) &nbsp;|&nbsp; MIT License
+Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya)) and [contributors](https://github.com/koistya/react-static-boilerplate/graphs/contributors) &nbsp;|&nbsp; MIT License
