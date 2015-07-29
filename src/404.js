@@ -1,6 +1,7 @@
 /**
  * React Static Boilerplate
- * Copyright (c) Konstantin Tarkus | MIT License
+ * https://github.com/koistya/react-static-boilerplate
+ * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
 import React from 'react';

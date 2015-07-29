@@ -1,12 +1,12 @@
 /**
  * React Static Boilerplate
- * Copyright (c) Konstantin Tarkus | MIT License
+ * https://github.com/koistya/react-static-boilerplate
+ * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
 import path from 'path';
 import minimist from 'minimist';
 import webpack from 'webpack';
-import gutil from 'gulp-util';
 import autoprefixer from 'autoprefixer-core';
 import merge from 'lodash/object/merge';
 
@@ -14,7 +14,7 @@ const argv = minimist(process.argv.slice(2));
 const DEBUG = !argv.release;
 const VERBOSE = !!argv.verbose;
 const WATCH = global.watch;
-const JSX_LOADER = WATCH ? 'react-hot!babel' : 'babel';
+const SCRIPT_LOADERS = WATCH ? ['react-hot', 'babel'] : ['babel'];
 const AUTOPREFIXER_BROWSERS = [
   'Android 2.3',
   'Android >= 4',
@@ -29,14 +29,14 @@ const AUTOPREFIXER_BROWSERS = [
 // Base configuration
 const config = {
   output: {
-    path: path.join(__dirname, 'build'),
-    publicPath: './',
+    path: path.join(__dirname, '../build'),
+    publicPath: '/',
     sourcePrefix: '  '
   },
   cache: false,
   debug: DEBUG,
   stats: {
-    colors: gutil.colors.supportsColor,
+    colors: true,
     reasons: DEBUG,
     hash: VERBOSE,
     version: VERBOSE,
@@ -57,14 +57,16 @@ const config = {
     loaders: [{
       test: /\.css$/,
       loader: 'style-loader/useable!' +
-              'css-loader' + (DEBUG ? '/minimize' : '') + '!postcss-loader'
+      'css-loader' + (DEBUG ? '' : '/minimize') + '!postcss-loader'
     }, {
       test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loader: JSX_LOADER
+      include: [
+        path.resolve(__dirname, '../src')
+      ],
+      loaders: SCRIPT_LOADERS
     }, {
-      test: /routes\.jsx?$/,
-      loader: './routes-loader.js'
+      test: /[\\\/]app\.js$/,
+      loader: path.join(__dirname, './lib/routes-loader.js')
     }, {
       test: /\.gif/,
       loader: 'url-loader?limit=10000&mimetype=image/gif'
@@ -85,11 +87,11 @@ const config = {
 // Configuration for the client-side bundle
 const appConfig = merge({}, config, {
   entry: (WATCH ? [
-    'webpack-dev-server/client?http://localhost:3000',
-    'webpack/hot/only-dev-server'
+    'webpack/hot/dev-server',
+    'webpack-hot-middleware/client'
   ] : []).concat([
-    './scripts/app.js'
-  ]),
+      './src/js/app.js'
+    ]),
   output: {
     filename: 'app.js'
   },
@@ -101,13 +103,16 @@ const appConfig = merge({}, config, {
 
 // Configuration for server-side pre-rendering bundle
 const pagesConfig = merge({}, config, {
-  entry: './scripts/pages.js',
+  entry: './src/js/app.js',
   output: {
-    filename: 'pages.js',
+    filename: 'app.node.js',
     libraryTarget: 'commonjs2'
   },
   target: 'node',
-  externals: /^[a-z][a-z\.\-0-9]*$/,
+  externals: /^[a-z][a-z\.\-\/0-9]*$/i,
+  plugins: config.plugins.concat([
+    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 })
+  ]),
   node: {
     console: false,
     global: false,

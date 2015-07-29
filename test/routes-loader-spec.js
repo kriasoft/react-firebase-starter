@@ -1,6 +1,7 @@
 /**
  * React Static Boilerplate
- * Copyright (c) Konstantin Tarkus | MIT License
+ * https://github.com/koistya/react-static-boilerplate
+ * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
 import { describe, it } from 'mocha';
@@ -8,7 +9,7 @@ import { expect } from 'chai';
 
 describe('routes-loader', () => {
 
-  it('Should load a list of routes', function(done) {
+  it('Should load a list of routes', done => {
     this.cacheable = () => {};
     this.async = () => (err, result) => {
       expect(err).to.be.null;
@@ -16,7 +17,7 @@ describe('routes-loader', () => {
       done();
     };
 
-    require('../scripts/routes-loader').call(this);
+    require('../tools/lib/routes-loader').call(this);
   });
 
 });
