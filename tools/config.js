@@ -7,7 +7,6 @@
 import path from 'path';
 import minimist from 'minimist';
 import webpack from 'webpack';
-import autoprefixer from 'autoprefixer-core';
 import merge from 'lodash/object/merge';
 
 const argv = minimist(process.argv.slice(2));
@@ -81,7 +80,10 @@ const config = {
       loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
     }]
   },
-  postcss: [autoprefixer(AUTOPREFIXER_BROWSERS)]
+  postcss: [
+    require('cssnext')({ browsers: AUTOPREFIXER_BROWSERS }),
+    require('postcss-nested')()
+  ]
 };
 
 // Configuration for the client-side bundle

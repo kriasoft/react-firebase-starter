@@ -13,8 +13,6 @@ global.watch = true;
 const config = require('./config')[0];
 const bundler = webpack(config);
 
-console.log('config.entry:', config.entry);
-
 browserSync({
   server: {
     baseDir: 'build',
