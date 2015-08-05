@@ -67,7 +67,6 @@ $ npm test
 ### How to Deploy
 
 ```shell
-$ npm run build -- --release    # Builds the project in release mode
 $ npm run deploy                # Deploys the project to GitHub Pages
 ```
 

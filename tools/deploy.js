@@ -5,8 +5,7 @@
  */
 
 export default async () => {
-  await require('./clean')();
-  const pages = await require('./pages')();
-  await require('./bundle')({ pages });
-  await require('./render')({ pages });
+  console.log('deploy');
+  await require('./build')();
+  console.log('TODO: deploy to GitHub pages');
 };

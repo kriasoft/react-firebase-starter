@@ -30,7 +30,6 @@
     "run-sequence": "^1.1.2",
     "through2": "^2.0.0",
     "url-loader": "^0.5.6",
-    "vinyl": "^0.5.0",
     "webpack": "^1.10.5",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^1.2.0"
@@ -38,7 +37,9 @@
   "scripts": {
     "lint": "eslint src tools test",
     "test": "mocha --compilers js:babel/register --watch",
-    "build": "babel-node tools/build",
-    "start": "babel-node tools/build && babel-node tools/serve"
+    "clean": "babel-node --eval \"require('./tools/clean')().catch(err => console.log(err.stack))\"",
+    "build": "babel-node --eval \"require('./tools/build')().catch(err => console.log(err.stack))\"",
+    "start": "babel-node --eval \"require('./tools/start')().catch(err => console.log(err.stack))\"",
+    "deploy": "babel-node --eval \"require('./tools/deploy')().catch(err => console.log(err.stack))\""
   }
 }
