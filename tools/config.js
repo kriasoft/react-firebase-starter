@@ -97,10 +97,18 @@ const appConfig = merge({}, config, {
   output: {
     filename: 'app.js'
   },
-  plugins: config.plugins.concat(WATCH ? [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ] : [])
+  plugins: [
+    ...config.plugins,
+    ...(DEBUG ? [] : [
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.UglifyJsPlugin({compress: {warnings: VERBOSE}}),
+      new webpack.optimize.AggressiveMergingPlugin()
+    ]),
+    ...(WATCH ? [
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin()
+    ] : [])
+  ]
 });
 
 // Configuration for server-side pre-rendering bundle
