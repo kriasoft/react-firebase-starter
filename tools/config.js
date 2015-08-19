@@ -5,13 +5,11 @@
  */
 
 import path from 'path';
-import minimist from 'minimist';
 import webpack from 'webpack';
 import merge from 'lodash/object/merge';
 
-const argv = minimist(process.argv.slice(2));
-const DEBUG = !argv.release;
-const VERBOSE = !!argv.verbose;
+const DEBUG = !process.argv.includes('release');
+const VERBOSE = process.argv.includes('verbose');
 const WATCH = global.watch;
 const SCRIPT_LOADERS = WATCH ? ['react-hot', 'babel'] : ['babel'];
 const AUTOPREFIXER_BROWSERS = [
