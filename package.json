@@ -12,6 +12,7 @@
     "del": "^1.2.0",
     "eslint": "^1.1.0",
     "eslint-plugin-react": "^3.2.1",
+    "fastclick": "1.0.6",
     "file-loader": "^0.8.4",
     "glob": "^5.0.14",
     "gulp": "^3.9.0",
@@ -42,5 +43,10 @@
     "build": "babel-node --eval \"require('./tools/build')().catch(err => console.log(err.stack))\"",
     "start": "babel-node --eval \"require('./tools/start')().catch(err => console.log(err.stack))\"",
     "deploy": "babel-node --eval \"require('./tools/deploy')().catch(err => console.log(err.stack))\""
+  },
+  "dependencies": {
+    "fbjs": "0.1.0-alpha.7",
+    "flux": "^2.1.1",
+    "react-routing": "0.0.4"
   }
 }

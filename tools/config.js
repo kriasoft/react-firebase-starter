@@ -62,7 +62,7 @@ const config = {
       ],
       loaders: SCRIPT_LOADERS
     }, {
-      test: /[\\\/]app\.js$/,
+      test: /[\\\/]router\.js$/,
       loader: path.join(__dirname, './lib/routes-loader.js')
     }, {
       test: /\.gif/,
@@ -90,7 +90,7 @@ const appConfig = merge({}, config, {
     'webpack/hot/dev-server',
     'webpack-hot-middleware/client'
   ] : []).concat([
-      './src/js/app.js'
+      './src/app.js'
     ]),
   output: {
     filename: 'app.js'
@@ -111,7 +111,7 @@ const appConfig = merge({}, config, {
 
 // Configuration for server-side pre-rendering bundle
 const pagesConfig = merge({}, config, {
-  entry: './src/js/app.js',
+  entry: './src/app.js',
   output: {
     filename: 'app.node.js',
     libraryTarget: 'commonjs2'

@@ -9,6 +9,7 @@ import glob from 'glob';
 import React from 'react';
 import createTemplate from 'lodash/string/template';
 import fs from './lib/fs';
+import router from './../src/router.js'
 
 const template = createTemplate(`<!doctype html>
 <html class="no-js" lang="">
@@ -36,17 +37,19 @@ const template = createTemplate(`<!doctype html>
 
 export default async ({ pages }) => {
   console.log('render');
-  const { route } = require('../build/app.node');
+  console.log(pages);
   for (const page of pages) {
-    await route(page.path, async (component) => {
+    await router.dispatch({ path: page.path }, async (state, component) => {
       const data = {
         title: '',
         body: React.renderToString(component)
       };
-      const file = join(__dirname, '../build', page.file.substr(0, page.file.lastIndexOf('.')) + '.html');
+      const name = page.file.substr(0, page.file.lastIndexOf('.'));
+      const dir = name.indexOf('index') >= 0 ? name.substr(0, name.indexOf('index')) : name;
+      const file = join(__dirname, '../build', dir, '/index.html');
       const html = template(data);
       await fs.makeDir(dirname(file));
       await fs.writeFile(file, html);
-    })
+    });
   }
 };
