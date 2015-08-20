@@ -7,10 +7,10 @@
 import 'babel/polyfill';
 import React from 'react';
 import FastClick from 'fastclick';
-import dispatcher from './core/dispatcher.js';
-import router from './router.js';
-import location from './core/location.js';
-import ActionTypes from './constants/ActionTypes.js';
+import dispatcher from './core/dispatcher';
+import router from './router';
+import location from './core/location';
+import ActionTypes from './constants/ActionTypes';
 
 const container = document.body;
 const context = {

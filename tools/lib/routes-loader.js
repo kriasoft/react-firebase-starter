@@ -16,13 +16,14 @@ export default function (source) {
     source = source.replace('import \'babel/polyfill\';', '');
   }
 
-  glob('**/*.{js,jsx}', { cwd: join(__dirname, '../../src') }, function(err, files) {
+  glob('**/*.{js,jsx}', { cwd: join(__dirname, '../../src/pages') }, function(err, files) {
     if (err) {
       return callback(err);
     }
 
     const lines = files.filter(file => !file.startsWith('js/')).map(file => {
       var path = '/' + file;
+      var name = 'Component' + file.replace(/\//g, '').replace(/-/g,'').replace('.js', '');
 
       if (path === '/index.js' || path === '/index.jsx') {
         path = '/';
@@ -36,15 +37,13 @@ export default function (source) {
         path = path.substr(0, path.length - 4);
       }
 
-      if (target === 'node' || path === '/404' || path === '/500') {
-        return `  '${path}': () => require('../${file}'),`;
-      } else {
-        return `  '${path}': () => new Promise(resolve => require(['../${file}'], resolve)),`;
-      }
+      return `
+        const ${name} = require('./pages/${file}');
+        on('${path}',  () => <${name} />);`;
     });
 
     if (lines.length) {
-      return callback(null, source.replace(' routes = {', ' routes = {\n' + lines.join('')));
+      return callback(null, source.replace('/*-- Auto insert routes here --*/', lines.join('')));
     } else {
       return callback(new Error('Cannot find any routes.'));
     }

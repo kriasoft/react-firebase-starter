@@ -1,7 +1,7 @@
 /*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
-import dispatcher from '../core/dispatcher';
+import dispatcher from './dispatcher';
 import ActionTypes from '../constants/ActionTypes';
 
 const location = {

@@ -1,7 +1,7 @@
 /*! React Starter Kit | MIT License | http://www.reactstarterkit.com/ */
 
-import invariant from 'fbjs/lib/invariant.js';
-import location from './../core/location.js';
+import invariant from 'fbjs/lib/invariant';
+import location from '../core/location';
 
 function handleClick(event) {
 

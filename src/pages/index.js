@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import Link from './js/utils/link.js';
+import Link from '../utils/link';
 
 export default class {
 
@@ -14,7 +14,8 @@ export default class {
       <div>
         <h1>Home Page</h1>
         <p>Coming soon.</p>
-        <a href="/about" onClick={Link.handleClick}>Go to About Page</a>
+        <a href="/about" onClick={Link.handleClick}>Go to About Page</a><br />
+        <a href="/blog" onClick={Link.handleClick}>Go to Blog Page</a>
       </div>
     );
   }

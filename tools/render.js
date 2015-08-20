@@ -9,7 +9,7 @@ import glob from 'glob';
 import React from 'react';
 import createTemplate from 'lodash/string/template';
 import fs from './lib/fs';
-import router from './../src/js/router.js'
+import router from './../src/router.js'
 
 const template = createTemplate(`<!doctype html>
 <html class="no-js" lang="">
@@ -37,6 +37,7 @@ const template = createTemplate(`<!doctype html>
 
 export default async ({ pages }) => {
   console.log('render');
+  console.log(pages);
   for (const page of pages) {
     await router.dispatch({ path: page.path }, async (state, component) => {
       const data = {

@@ -9,7 +9,7 @@ import { join } from 'path';
 
 export default () => new Promise((resolve, reject) => {
   console.log('pages');
-  glob('**/*.js', { cwd: join(__dirname, '../src') }, (err, files) => {
+  glob('**/*.js', { cwd: join(__dirname, '../src/pages') }, (err, files) => {
     if (err) {
       reject(err);
     } else {
