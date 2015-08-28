@@ -86,26 +86,23 @@ const config = {
 
 // Configuration for the client-side bundle
 const appConfig = merge({}, config, {
-  entry: (WATCH ? [
-    'webpack/hot/dev-server',
-    'webpack-hot-middleware/client'
-  ] : []).concat([
-      './src/js/app.js'
-    ]),
+  entry: [
+    ...(WATCH && ['webpack-hot-middleware/client']),
+    './src/js/app.js'
+  ],
   output: {
     filename: 'app.js'
   },
   plugins: [
     ...config.plugins,
-    ...(DEBUG ? [] : [
+    ...(!DEBUG && [
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({compress: {warnings: VERBOSE}}),
       new webpack.optimize.AggressiveMergingPlugin()
     ]),
-    ...(WATCH ? [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
-    ] : [])
+    ...(WATCH && [
+      new webpack.HotModuleReplacementPlugin()
+    ])
   ]
 });
 
