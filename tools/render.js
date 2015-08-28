@@ -43,7 +43,9 @@ export default async ({ pages }) => {
         title: '',
         body: React.renderToString(component)
       };
-      const file = join(__dirname, '../build', page.file.substr(0, page.file.lastIndexOf('.')) + '.html');
+      const name = page.file.substr(0, page.file.lastIndexOf('.'));
+      const dir = name.indexOf('index') >= 0 ? name.substr(0, name.indexOf('index')) : name;
+      const file = join(__dirname, '../build', dir, '/index.html');
       const html = template(data);
       await fs.makeDir(dirname(file));
       await fs.writeFile(file, html);
