@@ -85,25 +85,27 @@ const config = {
 };
 
 // Configuration for the client-side bundle
+const entries = (WATCH) ? ['webpack-hot-middleware/client', './src/js/app.js'] : ['./src/js/app.js'];
+
+var plugins = config.plugins;
+if (!DEBUG) {
+  plugins = plugins.concat([
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({compress: {warnings: VERBOSE}}),
+    new webpack.optimize.AggressiveMergingPlugin()
+  ]);
+}
+
+if (WATCH) {
+  plugins = plugins.push(new webpack.HotModuleReplacementPlugin());
+}
+
 const appConfig = merge({}, config, {
-  entry: [
-    ...(WATCH && ['webpack-hot-middleware/client']),
-    './src/js/app.js'
-  ],
+  entry: entries,
   output: {
     filename: 'app.js'
   },
-  plugins: [
-    ...config.plugins,
-    ...(!DEBUG && [
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({compress: {warnings: VERBOSE}}),
-      new webpack.optimize.AggressiveMergingPlugin()
-    ]),
-    ...(WATCH && [
-      new webpack.HotModuleReplacementPlugin()
-    ])
-  ]
+  plugins: plugins
 });
 
 // Configuration for server-side pre-rendering bundle
