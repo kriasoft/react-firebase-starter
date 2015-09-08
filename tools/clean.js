@@ -7,13 +7,8 @@
 import del from 'del';
 import fs from './lib/fs';
 
-export default () => new Promise((resolve, reject) => {
+export default async () => {
   console.log('clean');
-  del(['build/*', '!build/.git'], { dot: true }, err => {
-    if (err) {
-      reject(err);
-    } else {
-      fs.makeDir('build').then(resolve, reject);
-    }
-  });
-});
+  await del(['build/*', '!build/.git'], { dot: true });
+  await fs.mkdir('build');
+};

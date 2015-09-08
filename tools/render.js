@@ -45,7 +45,7 @@ export default async ({ pages }) => {
       };
       const file = join(__dirname, '../build', page.file.substr(0, page.file.lastIndexOf('.')) + '.html');
       const html = template(data);
-      await fs.makeDir(dirname(file));
+      await fs.mkdir(dirname(file));
       await fs.writeFile(file, html);
     })
   }
