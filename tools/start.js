@@ -14,7 +14,6 @@ const config = require('./config')[0];
 const bundler = webpack(config);
 
 export default async () => {
-
   await require('./build')();
 
   browserSync({
@@ -31,22 +30,22 @@ export default async () => {
           stats: config.stats,
 
           hot: true,
-          historyApiFallback: true
+          historyApiFallback: true,
 
           // for other settings see
           // http://webpack.github.io/docs/webpack-dev-middleware.html
         }),
 
         // bundler should be the same as above
-        webpackHotMiddleware(bundler)
-      ]
+        webpackHotMiddleware(bundler),
+      ],
     },
 
     // no need to watch '*.js' here, webpack will take care of it for us,
     // including full page reloads if HMR won't work
     files: [
       'build/**/*.css',
-      'build/**/*.html'
-    ]
+      'build/**/*.html',
+    ],
   });
 };

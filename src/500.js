@@ -9,7 +9,7 @@ import React, { PropTypes } from 'react';
 export default class {
 
   static propTypes = {
-    error: PropTypes.instanceOf(Error)
+    error: PropTypes.instanceOf(Error),
   };
 
   render() {
@@ -25,4 +25,4 @@ export default class {
     );
   }
 
-};
+}

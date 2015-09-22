@@ -13,7 +13,7 @@ export default () => new Promise((resolve, reject) => {
     if (err) {
       reject(err);
     } else {
-      files = files.filter(file => !file.startsWith('js/')).map(file => {
+      const result = files.filter(file => !file.startsWith('js/')).map(file => {
         let path = '/' + file.substr(0, file.lastIndexOf('.'));
         if (path === '/index') {
           path = '/';
@@ -22,7 +22,7 @@ export default () => new Promise((resolve, reject) => {
         }
         return { path, file };
       });
-      resolve(files);
+      resolve(result);
     }
   });
 });

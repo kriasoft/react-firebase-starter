@@ -5,7 +5,6 @@
  */
 
 import { join, dirname } from 'path';
-import glob from 'glob';
 import React from 'react';
 import createTemplate from 'lodash/string/template';
 import fs from './lib/fs';
@@ -34,19 +33,21 @@ const template = createTemplate(`<!doctype html>
 </body>
 </html>`);
 
+async function render(page, component) {
+  const data = {
+    title: '',
+    body: React.renderToString(component),
+  };
+  const file = join(__dirname, '../build', page.file.substr(0, page.file.lastIndexOf('.')) + '.html');
+  const html = template(data);
+  await fs.mkdir(dirname(file));
+  await fs.writeFile(file, html);
+}
+
 export default async ({ pages }) => {
   console.log('render');
   const { route } = require('../build/app.node');
   for (const page of pages) {
-    await route(page.path, async (component) => {
-      const data = {
-        title: '',
-        body: React.renderToString(component)
-      };
-      const file = join(__dirname, '../build', page.file.substr(0, page.file.lastIndexOf('.')) + '.html');
-      const html = template(data);
-      await fs.mkdir(dirname(file));
-      await fs.writeFile(file, html);
-    })
+    await route(page.path, render.bind(undefined, page));
   }
 };

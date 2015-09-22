@@ -8,7 +8,6 @@ import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
 describe('routes-loader', () => {
-
   it('Should load a list of routes', done => {
     this.cacheable = () => {};
     this.async = () => (err, result) => {
@@ -19,5 +18,4 @@ describe('routes-loader', () => {
 
     require('../tools/lib/routes-loader').call(this);
   });
-
 });

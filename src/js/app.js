@@ -6,7 +6,7 @@
 
 import 'babel/polyfill';
 import React from 'react';
-import { canUseDOM } from 'react/lib/ExecutionEnvironment'
+import { canUseDOM } from 'react/lib/ExecutionEnvironment';
 import Layout from './Layout';
 
 const routes = {}; // Auto-generated on build. See tools/lib/routes-loader.js

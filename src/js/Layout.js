@@ -9,7 +9,7 @@ import React, { PropTypes } from 'react';
 class Layout {
 
   static propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired,
   };
 
   render() {
