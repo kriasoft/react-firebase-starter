@@ -5,6 +5,7 @@
  */
 
 import React, { PropTypes } from 'react';
+import Navigation from '../Navigation';
 
 class Layout {
 
@@ -15,6 +16,7 @@ class Layout {
   render() {
     return (
       <div className="Layout">
+        <Navigation />
         {this.props.children}
       </div>
     );

@@ -9,11 +9,11 @@ import { join } from 'path';
 
 export default () => new Promise((resolve, reject) => {
   console.log('pages');
-  glob('**/*.js', { cwd: join(__dirname, '../src') }, (err, files) => {
+  glob('**/*.js', { cwd: join(__dirname, '../pages') }, (err, files) => {
     if (err) {
       reject(err);
     } else {
-      const result = files.filter(file => !file.startsWith('js/')).map(file => {
+      const result = files.map(file => {
         let path = '/' + file.substr(0, file.lastIndexOf('.'));
         if (path === '/index') {
           path = '/';

@@ -13,7 +13,7 @@ Join [#react-static-boilerplate](https://gitter.im/koistya/react-static-boilerpl
 ### Features
 
 &nbsp; &nbsp; ✓ Generates static `.html` pages from [React](http://facebook.github.io/react/) components<br>
-&nbsp; &nbsp; ✓ Generates routes based on the list of files in the `/src` folder<br>
+&nbsp; &nbsp; ✓ Generates routes based on the list of files in the `/pages` folder<br>
 &nbsp; &nbsp; ✓ Next generation JavaScript with [Babel](https://github.com/babel/babel)<br>
 &nbsp; &nbsp; ✓ Next generation CSS with [postCSS](https://github.com/postcss/postcss) and [cssnext](http://cssnext.io/)<br>
 &nbsp; &nbsp; ✓ Development web server with [React Hot Loader](http://gaearon.github.io/react-hot-loader/) and [BrowserSync](http://www.browsersync.io)<br>
@@ -42,15 +42,19 @@ Then open [http://localhost:3000/](http://localhost:3000/) in your browser.
 .
 ├── /build/                     # The folder for compiled output
 ├── /node_modules/              # 3rd-party libraries and utilities
-├── /src/                       # React.js-based web pages
+├── /components/                # React components
+├── /lib/                       # Libraries and utilities
+├── /pages/                     # React.js-based web pages
 │   ├── /blog/                  # Blog post entries example
-│   ├── /img/                   # Website images
-│   ├── /js/                    # JavaScript code and React.js components
-│   ├── /404.js                 # 'Not found' page
-│   ├── /about.js               # 'About' page
-│   └── /index.js               # 'Home' page
-├── /test/                      # Unit tests
-├── /tools/                     # Build automation scripts
+│   ├── /404.js                 # Not Found page
+│   ├── /500.js                 # Error page
+│   ├── /about.js               # About Us page
+│   └── /index.js               # Home page
+├── /static/                    # Static files such as favicon.ico etc.
+├── /test/                      # Unit and integration tests
+├── /tools/                     # Build automation scripts and utilities
+│── app.js                      # The main JavaScript file (entry point)
+│── config.js                   # Website configuration / settings
 │── LICENSE.txt                 # License file
 │── package.json                # Dev dependencies and NPM scripts
 └── README.md                   # Project overview
@@ -83,17 +87,17 @@ $ npm install
 ```
 ### Related Projects
 
- * [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
- * [React Routing](https://github.com/kriasoft/react-routing)
- * [React Decorators](https://github.com/kriasoft/react-decorators)
+  * [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
+  * [React Routing](https://github.com/kriasoft/react-routing)
+  * [React Decorators](https://github.com/kriasoft/react-decorators)
 
 ### Learn More
 
- * [Getting Started with React.js](http://facebook.github.io/react/)
- * [React.js Wiki on GitHub](https://github.com/facebook/react/wiki)
- * [React.js Questions on StackOverflow](http://stackoverflow.com/questions/tagged/reactjs)
- * [React.js Discussion Board](https://discuss.reactjs.org/)
- * [Learn ES6](https://babeljs.io/docs/learn-es6/), [ES6 Features](https://github.com/lukehoban/es6features#readme)
+  * [Getting Started with React.js](http://facebook.github.io/react/)
+  * [Getting Started with GraphQL and Relay](https://quip.com/oLxzA1gTsJsE)
+  * [React.js Questions on StackOverflow](http://stackoverflow.com/questions/tagged/reactjs)
+  * [React.js Discussion Board](https://discuss.reactjs.org/)
+  * [Learn ES6](https://babeljs.io/docs/learn-es6/), [ES6 Features](https://github.com/lukehoban/es6features#readme)
 
 ---
 Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya)) and [contributors](https://github.com/koistya/react-static-boilerplate/graphs/contributors) &nbsp;|&nbsp; MIT License

@@ -16,12 +16,12 @@ export default function(source) {
     source = source.replace('import \'babel/polyfill\';', ''); // eslint-disable-line no-param-reassign
   }
 
-  glob('**/*.{js,jsx}', { cwd: join(__dirname, '../../src') }, (err, files) => {
+  glob('**/*.{js,jsx}', { cwd: join(__dirname, '../../pages') }, (err, files) => {
     if (err) {
       return callback(err);
     }
 
-    const lines = files.filter(file => !file.startsWith('js/')).map(file => {
+    const lines = files.map(file => {
       let path = '/' + file;
 
       if (path === '/index.js' || path === '/index.jsx') {
@@ -37,10 +37,10 @@ export default function(source) {
       }
 
       if (target === 'node' || path === '/404' || path === '/500') {
-        return `  '${path}': () => require('../${file}'),`;
+        return `  '${path}': () => require('./pages/${file}'),`;
       }
 
-      return `  '${path}': () => new Promise(resolve => require(['../${file}'], resolve)),`;
+      return `  '${path}': () => new Promise(resolve => require(['./pages/${file}'], resolve)),`;
     });
 
     if (lines.length) {

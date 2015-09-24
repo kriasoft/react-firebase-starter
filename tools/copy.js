@@ -4,10 +4,13 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
+import copy from './lib/copy';
+
+/**
+ * Copies static files such as robots.txt, favicon.ico to the
+ * output (build) folder.
+ */
 export default async () => {
-  await require('./clean')();
-  await require('./copy')();
-  const pages = await require('./pages')();
-  await require('./bundle')({ pages });
-  await require('./render')({ pages });
+  console.log('copy');
+  await copy('static', 'build');
 };

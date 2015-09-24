@@ -6,6 +6,7 @@
 
 import browserSync from 'browser-sync';
 import webpack from 'webpack';
+import hygienistMiddleware from 'hygienist-middleware';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
@@ -21,6 +22,8 @@ export default async () => {
       baseDir: 'build',
 
       middleware: [
+        hygienistMiddleware('build'),
+
         webpackDevMiddleware(bundler, {
           // IMPORTANT: dev middleware can't access config, so we should
           // provide publicPath by ourselves
