@@ -92,7 +92,7 @@ const config = {
 // Configuration for the client-side bundle
 const appConfig = merge({}, config, {
   entry: [
-    ...(WATCH && ['webpack-hot-middleware/client']),
+    ...(WATCH ? ['webpack-hot-middleware/client'] : []),
     './src/js/app.js',
   ],
   output: {
@@ -100,15 +100,13 @@ const appConfig = merge({}, config, {
   },
   plugins: [
     ...config.plugins,
-    ...(!DEBUG && [
+    ...(!DEBUG ? [
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({compress: {warnings: VERBOSE}}),
       new webpack.optimize.AggressiveMergingPlugin(),
-    ]),
-    ...(WATCH && [
-      new webpack.HotModuleReplacementPlugin(),
-    ]),
-  ],
+    ] : []),
+    ...(WATCH ? [new webpack.HotModuleReplacementPlugin(),] : [])
+  ]
 });
 
 // Configuration for server-side pre-rendering bundle
