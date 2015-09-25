@@ -37,5 +37,5 @@ export default async () => {
   // Push the contents of the build folder to the remote server via Git
   await repo.add('--all .');
   await repo.commit('Update ' + new Date().toISOString());
-  await repo.push(remote.name, remote.branch);
+  await repo.push(remote.name, 'master:' + remote.branch);
 };
