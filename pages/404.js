@@ -4,9 +4,9 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class {
+export default class extends Component {
 
   render() {
     return (

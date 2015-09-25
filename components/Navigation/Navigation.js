@@ -4,10 +4,11 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
-import React from 'react';
+import React, { Component } from 'react';
+import './Navigation.scss';
 import Link from '../Link';
 
-export default class {
+export default class extends Component {
 
   render() {
     return (

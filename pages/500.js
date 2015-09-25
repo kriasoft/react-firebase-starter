@@ -4,9 +4,9 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-export default class {
+export default class extends Component {
 
   static propTypes = {
     error: PropTypes.instanceOf(Error),

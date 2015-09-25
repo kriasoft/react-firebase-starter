@@ -6,7 +6,7 @@
 
 import path from 'path';
 import webpack from 'webpack';
-import merge from 'lodash/object/merge';
+import merge from 'lodash.merge';
 
 const DEBUG = !process.argv.includes('release');
 const VERBOSE = process.argv.includes('verbose');
@@ -51,44 +51,42 @@ const config = {
     }),
   ],
   module: {
-    loaders: [{
-      test: /\.css$/,
-      loader: 'style-loader/useable!' +
-      'css-loader' + (DEBUG ? '' : '/minimize') + '!postcss-loader',
-    }, {
-      test: /\.jsx?$/,
-      include: [
-        path.resolve(__dirname, '../components'),
-        path.resolve(__dirname, '../lib'),
-        path.resolve(__dirname, '../pages'),
-        path.resolve(__dirname, '../app.js'),
-        path.resolve(__dirname, '../config.js'),
-      ],
-      loaders: SCRIPT_LOADERS,
-    }, {
-      test: /[\\\/]app\.js$/,
-      loader: path.join(__dirname, './lib/routes-loader.js'),
-    }, {
-      test: /\.gif/,
-      loader: 'url-loader?limit=10000&mimetype=image/gif',
-    }, {
-      test: /\.jpg/,
-      loader: 'url-loader?limit=10000&mimetype=image/jpg',
-    }, {
-      test: /\.png/,
-      loader: 'url-loader?limit=10000&mimetype=image/png',
-    }, {
-      test: /\.svg/,
-      loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
-    }],
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        include: [
+          path.resolve(__dirname, '../components'),
+          path.resolve(__dirname, '../lib'),
+          path.resolve(__dirname, '../pages'),
+          path.resolve(__dirname, '../app.js'),
+          path.resolve(__dirname, '../config.js'),
+        ],
+        loaders: SCRIPT_LOADERS,
+      }, {
+        test: /[\\\/]app\.js$/,
+        loader: path.join(__dirname, './lib/routes-loader.js'),
+      }, {
+        test: /\.json$/,
+        loader: 'json-loader',
+      }, {
+        test: /\.txt$/,
+        loader: 'raw-loader',
+      }, {
+        test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+        loader: 'url-loader?limit=10000',
+      }, {
+        test: /\.(eot|ttf|wav|mp3)$/,
+        loader: 'file-loader',
+      },
+    ],
   },
   postcss: function plugins() {
     return [
       require('postcss-import')({
         onImport: files => files.forEach(this.addDependency),
       }),
-      require('postcss-nested')(),
-      require('postcss-cssnext')({autoprefixer: AUTOPREFIXER_BROWSERS}),
+      require('precss')(),
+      require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS}),
     ];
   },
 };
@@ -113,6 +111,15 @@ const appConfig = merge({}, config, {
       new webpack.HotModuleReplacementPlugin(),
     ] : []),
   ],
+  module: {
+    loaders: [
+      ...config.module.loaders,
+      {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+    ],
+  },
 });
 
 // Configuration for server-side pre-rendering bundle
@@ -123,10 +130,6 @@ const pagesConfig = merge({}, config, {
     libraryTarget: 'commonjs2',
   },
   target: 'node',
-  externals: /^[a-z][a-z\.\-\/0-9]*$/i,
-  plugins: config.plugins.concat([
-    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
-  ]),
   node: {
     console: false,
     global: false,
@@ -134,6 +137,19 @@ const pagesConfig = merge({}, config, {
     Buffer: false,
     __filename: false,
     __dirname: false,
+  },
+  externals: /^[a-z][a-z\.\-\/0-9]*$/i,
+  plugins: config.plugins.concat([
+    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
+  ]),
+  module: {
+    loaders: [
+      ...config.module.loaders,
+      {
+        test: /\.scss$/,
+        loaders: ['css-loader', 'postcss-loader'],
+      },
+    ],
   },
 });
 

@@ -4,10 +4,11 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import './Layout.scss';
 import Navigation from '../Navigation';
 
-class Layout {
+class Layout extends Component {
 
   static propTypes = {
     children: PropTypes.element.isRequired,

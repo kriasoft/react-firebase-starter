@@ -6,6 +6,7 @@
 
 import 'babel/polyfill';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
 import Location from './lib/Location';
 import Layout from './components/Layout';
@@ -21,7 +22,7 @@ const route = async (path, callback) => {
 if (canUseDOM) {
   const container = document.getElementById('app');
   Location.listen(location => {
-    route(location.pathname, async (component) => React.render(component, container));
+    route(location.pathname, async (component) => ReactDOM.render(component, container));
   });
 }
 
