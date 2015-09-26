@@ -4,10 +4,11 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
-export default async () => {
+import task from './lib/task';
+
+export default task(async function build() {
   await require('./clean')();
   await require('./copy')();
-  const pages = await require('./pages')();
-  await require('./bundle')({ pages });
-  await require('./render')({ pages });
-};
+  await require('./bundle')();
+  await require('./render')();
+});
