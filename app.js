@@ -19,7 +19,7 @@ const route = async (path, callback) => {
   await callback(<Layout>{React.createElement(component)}</Layout>);
 };
 
-if (canUseDOM) {
+function run() {
   const container = document.getElementById('app');
   Location.listen(location => {
     route(location.pathname, async (component) => ReactDOM.render(component, container, () => {
@@ -27,6 +27,16 @@ if (canUseDOM) {
       window.ga('send', 'pageview');
     }));
   });
+}
+
+if (canUseDOM) {
+// Run the application when both DOM is ready
+// and page content is loaded
+  if (window.addEventListener) {
+    window.addEventListener('DOMContentLoaded', run);
+  } else {
+    window.attachEvent('onload', run);
+  }
 }
 
 export default { route, routes };
