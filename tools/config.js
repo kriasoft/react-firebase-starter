@@ -37,7 +37,7 @@ const config = {
     reasons: DEBUG,
     hash: VERBOSE,
     version: VERBOSE,
-    timings: VERBOSE,
+    timings: true,
     chunks: VERBOSE,
     chunkModules: VERBOSE,
     cached: VERBOSE,
@@ -100,6 +100,8 @@ const appConfig = merge({}, config, {
   output: {
     filename: 'app.js',
   },
+  // http://webpack.github.io/docs/configuration.html#devtool
+  devtool: DEBUG ? 'cheap-module-eval-source-map' : false,
   plugins: [
     ...config.plugins,
     ...(DEBUG ? [] : [
