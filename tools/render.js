@@ -10,12 +10,14 @@ import ReactDOM from 'react-dom/server';
 import Html from '../components/Html';
 import fs from './lib/fs';
 
+const DEBUG = !process.argv.includes('release');
+
 async function render(page, component) {
   const data = {
     body: ReactDOM.renderToString(component),
   };
   const file = join(__dirname, '../build', page.file.substr(0, page.file.lastIndexOf('.')) + '.html');
-  const html = ReactDOM.renderToStaticMarkup(<Html {...data} />);
+  const html = ReactDOM.renderToStaticMarkup(<Html debug={DEBUG} {...data} />);
   await fs.mkdir(dirname(file));
   await fs.writeFile(file, html);
 }
