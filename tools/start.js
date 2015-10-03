@@ -11,8 +11,8 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
 global.watch = true;
-const config = require('./config')[0];
-const bundler = webpack(config);
+const webpackConfig = require('./config')[0];
+const bundler = webpack(webpackConfig);
 
 export default async () => {
   await require('./build')();
@@ -27,13 +27,10 @@ export default async () => {
         webpackDevMiddleware(bundler, {
           // IMPORTANT: dev middleware can't access config, so we should
           // provide publicPath by ourselves
-          publicPath: config.output.publicPath,
+          publicPath: webpackConfig.output.publicPath,
 
           // pretty colored output
-          stats: config.stats,
-
-          hot: true,
-          historyApiFallback: true,
+          stats: webpackConfig.stats,
 
           // for other settings see
           // http://webpack.github.io/docs/webpack-dev-middleware.html

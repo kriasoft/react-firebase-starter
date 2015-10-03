@@ -11,7 +11,6 @@ import merge from 'lodash.merge';
 const DEBUG = !process.argv.includes('release');
 const VERBOSE = process.argv.includes('verbose');
 const WATCH = global.watch;
-const SCRIPT_LOADERS = WATCH ? ['react-hot', 'babel'] : ['babel'];
 const AUTOPREFIXER_BROWSERS = [
   'Android 2.3',
   'Android >= 4',
@@ -22,6 +21,18 @@ const AUTOPREFIXER_BROWSERS = [
   'Opera >= 12',
   'Safari >= 7.1',
 ];
+const JS_LOADER = {
+  test: /\.jsx?$/,
+  include: [
+    path.resolve(__dirname, '../components'),
+    path.resolve(__dirname, '../lib'),
+    path.resolve(__dirname, '../pages'),
+    path.resolve(__dirname, '../app.js'),
+    path.resolve(__dirname, '../config.js'),
+  ],
+  loader: 'babel-loader',
+};
+
 
 // Base configuration
 const config = {
@@ -53,16 +64,6 @@ const config = {
   module: {
     loaders: [
       {
-        test: /\.jsx?$/,
-        include: [
-          path.resolve(__dirname, '../components'),
-          path.resolve(__dirname, '../lib'),
-          path.resolve(__dirname, '../pages'),
-          path.resolve(__dirname, '../app.js'),
-          path.resolve(__dirname, '../config.js'),
-        ],
-        loaders: SCRIPT_LOADERS,
-      }, {
         test: /[\\\/]app\.js$/,
         loader: path.join(__dirname, './lib/routes-loader.js'),
       }, {
@@ -86,7 +87,9 @@ const config = {
         onImport: files => files.forEach(this.addDependency),
       }),
       require('precss')(),
-      require('autoprefixer')({browsers: AUTOPREFIXER_BROWSERS}),
+      require('autoprefixer')({
+        browsers: AUTOPREFIXER_BROWSERS
+      }),
     ];
   },
 };
@@ -106,15 +109,41 @@ const appConfig = merge({}, config, {
     ...config.plugins,
     ...(DEBUG ? [] : [
       new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({compress: {warnings: VERBOSE}}),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings: VERBOSE
+        }
+      }),
       new webpack.optimize.AggressiveMergingPlugin(),
     ]),
     ...(WATCH ? [
       new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin(),
     ] : []),
   ],
   module: {
     loaders: [
+      WATCH ? Object.assign({}, JS_LOADER, {
+        query: {
+          // Wraps all React components into arbitrary transforms
+          // https://github.com/gaearon/babel-plugin-react-transform
+          plugins: ['react-transform'],
+          extra: {
+            'react-transform': {
+              transforms: [
+                {
+                  transform: 'react-transform-hmr',
+                  imports: ['react'],
+                  locals: ['module'],
+                }, {
+                  transform: 'react-transform-catch-errors',
+                  imports: ['react', 'redbox-react'],
+                },
+              ],
+            },
+          },
+        },
+      }) : JS_LOADER,
       ...config.module.loaders,
       {
         test: /\.scss$/,
@@ -146,6 +175,7 @@ const pagesConfig = merge({}, config, {
   ]),
   module: {
     loaders: [
+      JS_LOADER,
       ...config.module.loaders,
       {
         test: /\.scss$/,
