@@ -4,6 +4,33 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
-.Navigation {
+$mint: #21CE99;
+$darkgray: #333;
 
+.Navigation {
+ list-style: none;
+ display: flex;
+ flex-direction: row;
+ justify-content: flex-end;
+ margin: 2em 0 5em 0;
+ li {
+   padding: 0 2em;
+   a {
+     padding: 0.5em 1em;
+     text-transform: uppercase;
+     text-decoration: none;
+     cursor: pointer;
+     color: $mint;
+     &:hover {
+       color: $darkgray;
+       border-bottom: 3px solid $mint;
+     }
+     &:visited {
+       color: $mint;
+       &:hover {
+         color: $darkgray;
+       }
+     }
+   }
+ }
 }

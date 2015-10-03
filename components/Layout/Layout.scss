@@ -4,12 +4,33 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
+$darkgray: #333;
+$lightgray: #f7f7f7;
+
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
   margin: 0;
   padding: 0;
+  color: $darkgray;
+  background-color: $lightgray;
+}
+
+@media (min-width: 768px) {
+  .Layout {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .Layout {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .Layout {
+    width: 1170px;
+  }
 }
 
 .Layout {
-
+  margin: 0 auto;
 }
