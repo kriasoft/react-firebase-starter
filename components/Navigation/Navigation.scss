@@ -4,6 +4,37 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
-.Navigation {
+@import '../variables.scss';
 
+.Navigation {
+  display: flex;
+  flex-direction: row;
+  margin: 2em 0 5em 0;
+  list-style: none;
+  justify-content: flex-end;
+
+  li {
+    padding: 0 2em;
+
+    a {
+      padding: 0.5em 1em;
+      color: $brand-color;
+      text-decoration: none;
+      text-transform: uppercase;
+      cursor: pointer;
+
+      &:hover {
+        border-bottom: 3px solid $brand-color;
+        color: $text-color;
+      }
+
+      &:visited {
+        color: $brand-color;
+
+        &:hover {
+          color: $text-color;
+        }
+      }
+    }
+  }
 }
