@@ -29,12 +29,4 @@
     border-bottom: 3px solid $brand-color;
     color: $text-color;
   }
-
-  &:visited {
-    color: $brand-color;
-
-    &:hover {
-      color: $text-color;
-    }
-  }
 }
