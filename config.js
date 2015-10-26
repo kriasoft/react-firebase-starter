@@ -9,4 +9,3 @@ export default {
   description: 'Static website generator for React.js web applications.',
   googleAnalyticsId: 'UA-XXXXX-X',
 };
-

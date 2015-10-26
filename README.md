@@ -31,7 +31,7 @@ Join [#react-static-boilerplate](https://gitter.im/koistya/react-static-boilerpl
 ├── /build/                     # The folder for compiled output
 ├── /node_modules/              # 3rd-party libraries and utilities
 ├── /components/                # React components
-├── /lib/                       # Libraries and utilities
+├── /core/                      # Core framework
 ├── /pages/                     # React.js-based web pages
 │   ├── /blog/                  # Blog post entries example
 │   ├── /404.js                 # Not Found page

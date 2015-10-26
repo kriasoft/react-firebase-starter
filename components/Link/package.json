@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "Link",
   "main": "./Link.js"
 }

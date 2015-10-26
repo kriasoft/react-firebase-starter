@@ -4,7 +4,7 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { googleAnalyticsId } from '../../config';
 
 const trackingCode = { __html:
@@ -16,12 +16,8 @@ const trackingCode = { __html:
   `ga('create','${googleAnalyticsId}','auto');`,
 };
 
-class GoogleAnalytics extends Component {
-
-  render() {
-    return <script dangerouslySetInnerHTML={trackingCode} />;
-  }
-
+function GoogleAnalytics() {
+  return <script dangerouslySetInnerHTML={trackingCode} />;
 }
 
 export default GoogleAnalytics;

@@ -25,7 +25,7 @@ const JS_LOADER = {
   test: /\.jsx?$/,
   include: [
     path.resolve(__dirname, '../components'),
-    path.resolve(__dirname, '../lib'),
+    path.resolve(__dirname, '../core'),
     path.resolve(__dirname, '../pages'),
     path.resolve(__dirname, '../app.js'),
     path.resolve(__dirname, '../config.js'),
@@ -88,7 +88,7 @@ const config = {
       }),
       require('precss')(),
       require('autoprefixer')({
-        browsers: AUTOPREFIXER_BROWSERS
+        browsers: AUTOPREFIXER_BROWSERS,
       }),
     ];
   },
@@ -111,8 +111,8 @@ const appConfig = merge({}, config, {
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
-          warnings: VERBOSE
-        }
+          warnings: VERBOSE,
+        },
       }),
       new webpack.optimize.AggressiveMergingPlugin(),
     ]),
