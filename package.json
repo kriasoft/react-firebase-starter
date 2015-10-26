@@ -43,7 +43,7 @@
   },
   "scripts": {
     "lint": "eslint src tools test",
-    "test": "mocha --compilers js:babel/register --watch",
+    "test": "mocha --compilers js:babel/register",
     "clean": "babel-node --eval \"require('./tools/clean')().catch(err => console.log(err.stack))\"",
     "build": "babel-node --eval \"require('./tools/build')().catch(err => console.log(err.stack))\"",
     "start": "babel-node --eval \"require('./tools/start')().catch(err => console.log(err.stack))\"",
