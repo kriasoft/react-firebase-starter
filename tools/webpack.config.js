@@ -81,11 +81,9 @@ const config = {
       },
     ],
   },
-  postcss: function plugins() {
+  postcss: function plugins(bundler) {
     return [
-      require('postcss-import')({
-        onImport: files => files.forEach(this.addDependency),
-      }),
+      require('postcss-import')({ addDependencyTo: bundler }),
       require('precss')(),
       require('autoprefixer')({
         browsers: AUTOPREFIXER_BROWSERS,
