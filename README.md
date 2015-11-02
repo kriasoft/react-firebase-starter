@@ -76,6 +76,12 @@ $ npm test
 $ npm run deploy                # Deploys the project to GitHub Pages
 ```
 
+Alternatively, you can build a production release to manually deploy to S3, Firebase, Netlify, and other static hosts. Simply run the command below and copy the generated `build` folder to your static host.
+
+```shell
+$ npm run build release         # Build production release 
+```
+
 ### How to Update
 
 You can always fetch and merge the recent changes from this repo back into
