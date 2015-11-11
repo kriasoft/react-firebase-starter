@@ -145,7 +145,7 @@ const appConfig = merge({}, config, {
       ...config.module.loaders,
       {
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+        loaders: ['style-loader', 'css-loader?modules&localIdentName=[name]---[local]---[hash:base64:5]', 'postcss-loader'],
       },
     ],
   },
@@ -177,7 +177,7 @@ const pagesConfig = merge({}, config, {
       ...config.module.loaders,
       {
         test: /\.scss$/,
-        loaders: ['css-loader', 'postcss-loader'],
+        loaders: ['css-loader?modules&localIdentName=[name]---[local]---[hash:base64:5]', 'postcss-loader'],
       },
     ],
   },

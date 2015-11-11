@@ -5,12 +5,12 @@
  */
 
 import React, { PropTypes } from 'react';
-import './Layout.scss';
+import s from './Layout.scss';
 import Navigation from '../Navigation';
 
 function Layout({ children }) {
   return (
-    <div className="Layout">
+    <div className={s.root}>
       <Navigation />
       {children}
     </div>
