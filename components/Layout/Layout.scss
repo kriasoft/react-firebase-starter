@@ -6,32 +6,28 @@
 
 @import '../variables.scss';
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background-color: $body-bg;
-  color: $text-color;
-  font-family: $font-family-base;
-}
-
-.Layout {
-  margin: 0 auto;
-}
-
-@media (min-width: $screen-sm-min) {
-  .Layout {
-    width: calc($screen-sm-min - 18px);
+:global {
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: $body-bg;
+    color: $text-color;
+    font-family: $font-family-base;
   }
 }
 
-@media (min-width: $screen-md-min) {
-  .Layout {
+.root {
+  margin: 0 auto;
+
+  @media (min-width: $screen-sm-min) {
+      width: calc($screen-sm-min - 18px);
+  }
+
+  @media (min-width: $screen-md-min) {
     width: calc($screen-md-min - 22px);
   }
-}
 
-@media (min-width: $screen-lg-min) {
-  .Layout {
+  @media (min-width: $screen-lg-min) {
     width: calc($screen-lg-min - 30px);
   }
 }

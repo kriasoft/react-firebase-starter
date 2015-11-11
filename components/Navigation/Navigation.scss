@@ -6,27 +6,27 @@
 
 @import '../variables.scss';
 
-.Navigation {
+.root {
   display: flex;
   flex-direction: row;
   margin: 2em 0 5em 0;
   list-style: none;
   justify-content: flex-end;
-}
 
-.Navigation-item {
-  padding: 0 2em;
-}
+  .item {
+    padding: 0 2em;
+  }
 
-.Navigation-link {
-  padding: 0.5em 1em;
-  color: $brand-color;
-  text-decoration: none;
-  text-transform: uppercase;
-  cursor: pointer;
+  .link {
+    padding: 0.5em 1em;
+    color: $brand-color;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
 
-  &:hover {
-    border-bottom: 3px solid $brand-color;
-    color: $text-color;
+    &:hover {
+      border-bottom: 3px solid $brand-color;
+      color: $text-color;
+    }
   }
 }
