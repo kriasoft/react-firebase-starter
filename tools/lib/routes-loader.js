@@ -27,9 +27,9 @@ export default function(source) {
       if (path === '/index.js' || path === '/index.jsx') {
         path = '/';
       } else if (path.endsWith('/index.js')) {
-        path = path.substr(0, path.length - 9);
+        path = path.substr(0, path.length - 8);
       } else if (path.endsWith('/index.jsx')) {
-        path = path.substr(0, path.length - 10);
+        path = path.substr(0, path.length - 9);
       } else if (path.endsWith('.js')) {
         path = path.substr(0, path.length - 3);
       } else if (path.endsWith('.jsx')) {
