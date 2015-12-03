@@ -46,7 +46,7 @@ export default function(source) {
       }
 
       if (dir) {
-        let dirpath = path + '/';
+        const dirpath = path + '/';
         subDirectories.push(`  '${dirpath}': () => new Promise(resolve => require(['./pages/${file}'], resolve)),`);
       }
 
