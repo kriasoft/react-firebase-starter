@@ -21,15 +21,20 @@ export default function(source) {
       return callback(err);
     }
 
+    const subDirectories = [];
+
     const lines = files.map(file => {
       let path = '/' + file;
+      let dir = false;
 
       if (path === '/index.js' || path === '/index.jsx') {
         path = '/';
       } else if (path.endsWith('/index.js')) {
-        path = path.substr(0, path.length - 8);
-      } else if (path.endsWith('/index.jsx')) {
+        dir = true;
         path = path.substr(0, path.length - 9);
+      } else if (path.endsWith('/index.jsx')) {
+        dir = true;
+        path = path.substr(0, path.length - 10);
       } else if (path.endsWith('.js')) {
         path = path.substr(0, path.length - 3);
       } else if (path.endsWith('.jsx')) {
@@ -40,8 +45,16 @@ export default function(source) {
         return `  '${path}': () => require('./pages/${file}'),`;
       }
 
+      if (dir) {
+        let dirpath = path + '/';
+        subDirectories.push(`  '${dirpath}': () => new Promise(resolve => require(['./pages/${file}'], resolve)),`);
+      }
+
       return `  '${path}': () => new Promise(resolve => require(['./pages/${file}'], resolve)),`;
     });
+
+    // Add the sub directories to the list of routes
+    Array.prototype.push.apply(lines, subDirectories);
 
     if (lines.length) {
       return callback(null, source.replace(' routes = {', ' routes = {\n' + lines.join('')));
