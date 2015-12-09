@@ -53,7 +53,7 @@ class Link extends Component {
 
   render() {
     const { to, children, ...props } = this.props;
-    return <a onClick={Link.handleClick.bind(this)} {...props}>{children}</a>;
+    return <a {...props} onClick={Link.handleClick.bind(this)}>{children}</a>;
   }
 
 }
