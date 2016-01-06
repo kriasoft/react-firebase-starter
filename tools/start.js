@@ -9,13 +9,15 @@ import webpack from 'webpack';
 import hygienistMiddleware from 'hygienist-middleware';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import build from './build';
+import config from './webpack.config';
 
 global.watch = true;
-const webpackConfig = require('./webpack.config')[0];
+const webpackConfig = config[0];
 const bundler = webpack(webpackConfig);
 
 export default async () => {
-  await require('./build')();
+  await build();
 
   browserSync({
     server: {
