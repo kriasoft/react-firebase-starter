@@ -4,6 +4,7 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
+import 'babel-polyfill';
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 
@@ -15,7 +16,6 @@ describe('routes-loader', () => {
       expect(result).to.not.to.be.empty.and.have.all.keys('/', '/404', '/500');
       done();
     };
-
     require('../tools/lib/routes-loader').call(this, 'const routes = {};');
   });
 });

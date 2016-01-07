@@ -10,6 +10,7 @@
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
+    "babel-register": "^6.3.13",
     "browser-sync": "^2.9.11",
     "chai": "^3.4.0",
     "css-loader": "^0.21.0",
@@ -47,7 +48,7 @@
   },
   "scripts": {
     "lint": "eslint src tools test",
-    "test": "npm run lint && mocha --compilers js:babel/register",
+    "test": "npm run lint && mocha --compilers js:babel-register",
     "clean": "babel-node --eval \"require('./tools/clean').default().catch(err => console.log(err.stack))\"",
     "build": "babel-node --eval \"require('./tools/build').default().catch(err => console.log(err.stack))\"",
     "start": "babel-node --eval \"require('./tools/start').default().catch(err => console.log(err.stack))\"",
