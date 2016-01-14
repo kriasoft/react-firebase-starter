@@ -8,7 +8,7 @@ import React, { PropTypes } from 'react';
 import GoogleAnalytics from '../GoogleAnalytics';
 import config from '../../config';
 
-function Html({ title, description, body, debug }) {
+function Html({ title, description, body, css, debug }) {
   return (
     <html className="no-js" lang="">
       <head>
@@ -20,6 +20,7 @@ function Html({ title, description, body, debug }) {
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
         <script src={'/app.js?' + new Date().getTime()} />
+        <style id="css" dangerouslySetInnerHTML={{ __html: css }} />
       </head>
       <body>
         <div id="app" dangerouslySetInnerHTML={{ __html: body }} />
@@ -33,6 +34,7 @@ Html.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   body: PropTypes.string.isRequired,
+  css: PropTypes.string,
   debug: PropTypes.bool.isRequired,
 };
 

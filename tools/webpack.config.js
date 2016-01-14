@@ -177,7 +177,7 @@ const pagesConfig = merge({}, config, {
       ...config.module.loaders,
       {
         test: /\.scss$/,
-        loaders: ['css-loader', 'postcss-loader'],
+        loaders: ['isomorphic-style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
   },

@@ -16,7 +16,13 @@ const routes = {}; // Auto-generated on build. See tools/lib/routes-loader.js
 const route = async (path, callback) => {
   const handler = routes[path] || routes['/404'];
   const component = await handler();
-  await callback(<Layout>{React.createElement(component)}</Layout>);
+
+  const css = [];
+  const context = {
+    insertCss: styles => css.push(styles._getCss()),
+  };
+
+  await callback(<Layout context={context}>{React.createElement(component)}</Layout>, css);
 };
 
 function run() {
