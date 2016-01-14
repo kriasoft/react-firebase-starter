@@ -5,8 +5,9 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import './Link.scss';
+import style from './Link.scss';
 import Location from '../../core/Location';
+import withStyles from '../withStyles.js';
 
 function isLeftClickEvent(event) {
   return event.button === 0;
@@ -58,4 +59,4 @@ class Link extends Component {
 
 }
 
-export default Link;
+export default withStyles(Link, style);

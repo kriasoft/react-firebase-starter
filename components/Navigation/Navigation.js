@@ -5,8 +5,9 @@
  */
 
 import React from 'react';
-import './Navigation.scss';
+import style from './Navigation.scss';
 import Link from '../Link';
+import withStyles from '../withStyles.js';
 
 function Navigation() {
   return (
@@ -21,4 +22,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default withStyles(Navigation, style);
