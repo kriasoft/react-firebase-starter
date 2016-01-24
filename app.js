@@ -21,6 +21,9 @@ const route = async (path, callback) => {
   const context = {
     insertCss: styles => css.push(styles._getCss()),
   };
+  if (canUseDOM) {
+    context.insertCss = (styles) => styles._insertCss();
+  }
 
   await callback(<Layout context={context}>{React.createElement(component)}</Layout>, css);
 };
