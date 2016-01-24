@@ -33,7 +33,7 @@ class Layout extends Component {
   }
 
   componentWillUnmount() {
-    this.removeCss();
+    setTimeout(this.removeCss, 0);
   }
 
   render() {
