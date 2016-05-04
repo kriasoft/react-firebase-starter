@@ -10,7 +10,14 @@
 
 Visit [demo site](http://react-static.tarkus.me) &nbsp;|&nbsp;
 See [roadmap](https://waffle.io/koistya/react-static-boilerplate) &nbsp;|&nbsp;
-Join [#react-static-boilerplate](https://gitter.im/koistya/react-static-boilerplate) chatroom on Gitter to stay up to date.
+Join [#react-static-boilerplate](https://gitter.im/koistya/react-static-boilerplate) chatroom on Gitter to stay up to date &nbsp;|&nbsp;
+Visit our [sponsors](https://opencollective.com/react-static-boilerplate#sponsor)
+
+<p align="center">
+  <a href="https://opencollective.com/react-static-boilerplate/sponsor/0/website" target="_blank">
+    <img src="https://opencollective.com/react-static-boilerplate/sponsor/0/avatar.svg" width="140" height="64">
+  </a>
+</p>
 
 ### Features
 
@@ -93,11 +100,48 @@ $ git fetch react-static-boilerplate
 $ git merge react-static-boilerplate/master
 $ npm install
 ```
+
+### Backers
+
+Love **React Static Boilerplate** work and community? Help us keep it alive by [donating funds](https://opencollective.com/react-static-boilerplate#support) to cover project expenses!
+
+<a href="https://opencollective.com/react-static-boilerplate/backer/0/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/0/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/1/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/1/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/2/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/2/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/3/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/3/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/4/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/4/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/5/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/5/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/6/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/6/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/7/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/7/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/8/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/8/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/9/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/9/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/10/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/10/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/11/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/11/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/12/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/12/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/13/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/13/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/14/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/14/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/15/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/15/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/16/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/16/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/17/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/17/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/18/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/18/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/19/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/19/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/20/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/20/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/21/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/21/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/22/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/22/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/23/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/23/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/24/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/24/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/25/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/25/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/26/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/26/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/27/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/27/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/28/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/28/avatar.svg"></a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/29/website" target="_blank"><img src="https://opencollective.com/react-static-boilerplate/backer/29/avatar.svg"></a>
+
 ### Related Projects
 
-  * [React Starter Kit](https://github.com/kriasoft/react-starter-kit)
-  * [React Routing](https://github.com/kriasoft/react-routing)
-  * [React Decorators](https://github.com/kriasoft/react-decorators)
+  * [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Isomorphic web app boilerplate (Node.js, React, GraphQL, WebPack, CSS Modules)
+  * [Babel Starter Kit](https://github.com/kriasoft/babel-starter-kit) — JavaScript library boilerplate (ES2015, Babel, Rollup, Mocha, Chai, Sinon, Rewire)
+  * [Universal Router](https://github.com/kriasoft/universal-router) - Isomorphic router for web and single-page applications (SPA)
+  * [Membership Database](https://github.com/membership/membership.db) — SQL schema boilerplate for user accounts, roles and auth tokens
 
 ### Learn More
 
