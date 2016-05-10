@@ -4,7 +4,8 @@
 [![NPM downloads](http://img.shields.io/npm/dm/generator-react-static.svg?style=flat-square)](https://www.npmjs.com/package/generator-react-static)
 [![Build Status](http://img.shields.io/travis/koistya/react-static-boilerplate/master.svg?style=flat-square)](https://travis-ci.org/koistya/react-static-boilerplate)
 [![Dependency Status](http://img.shields.io/david/dev/koistya/react-static-boilerplate.svg?branch=master&style=flat-square)](https://david-dm.org/koistya/react-static-boilerplate#info=devDependencies)
-[![Sponsors](https://opencollective.com/react-static-boilerplate/badge/sponsors.svg?style=flat-square)](https://opencollective.com/react-static-boilerplate#support)
+[![Backers](https://opencollective.com/react-static-boilerplate/badge/backers.svg?style=flat-square)](#backers) 
+[![Sponsors](https://opencollective.com/react-static-boilerplate/badge/sponsors.svg?style=flat-square)](#sponsors)
 [![Chat](https://img.shields.io/badge/chat-%23react--starter--kit-blue.svg?style=flat-square)](https://gitter.im/koistya/react-static-boilerplate)
 
 > Static website starter kit powered by [React.js](http://facebook.github.io/react/) and [Webpack](http://webpack.github.io/)
@@ -41,6 +42,51 @@
   <img src="https://opencollective.com/react-static-boilerplate/sponsor/4/avatar.svg" height="64">
 </a>
 
+
+
+### Backers
+
+Love **React Static Boilerplate** work and community? Help us keep it alive by [donating funds](https://opencollective.com/react-static-boilerplate#support) to cover project expenses!
+
+<a href="https://opencollective.com/react-static-boilerplate/backer/0/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/0/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/1/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/1/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/2/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/2/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/3/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/3/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/4/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/4/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/5/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/5/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/6/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/6/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/7/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/7/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/8/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/8/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/9/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/9/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/10/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/10/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/11/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/11/avatar.svg" height="64">
+</a>
+<a href="https://opencollective.com/react-static-boilerplate/backer/12/website" target="_blank">
+  <img src="https://opencollective.com/react-static-boilerplate/backer/12/avatar.svg" height="64">
+</a>
 
 ### Directory Layout
 
@@ -115,51 +161,6 @@ $ git fetch react-static-boilerplate
 $ git merge react-static-boilerplate/master
 $ npm install
 ```
-
-
-### Backers
-
-Love **React Static Boilerplate** work and community? Help us keep it alive by [donating funds](https://opencollective.com/react-static-boilerplate#support) to cover project expenses!
-
-<a href="https://opencollective.com/react-static-boilerplate/backer/0/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/0/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/1/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/1/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/2/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/2/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/3/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/3/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/4/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/4/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/5/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/5/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/6/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/6/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/7/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/7/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/8/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/8/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/9/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/9/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/10/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/10/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/11/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/11/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/12/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/12/avatar.svg" height="64">
-</a>
 
 
 ### Related Projects
