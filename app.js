@@ -4,7 +4,7 @@
  * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
  */
 
-import 'babel/polyfill';
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { canUseDOM } from 'fbjs/lib/ExecutionEnvironment';
@@ -16,7 +16,7 @@ const routes = {}; // Auto-generated on build. See tools/lib/routes-loader.js
 const route = async (path, callback) => {
   const handler = routes[path] || routes['/404'];
   const component = await handler();
-  await callback(<Layout>{React.createElement(component)}</Layout>);
+  await callback(<Layout>{React.createElement(component.default)}</Layout>);
 };
 
 function run() {
