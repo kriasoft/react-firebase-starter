@@ -18,6 +18,7 @@
     "git-repository": "^0.1.1",
     "glob": "^5.0.15",
     "history": "^1.12.6",
+    "isomorphic-style-loader": "0.0.5",
     "hygienist-middleware": "^0.1.0",
     "lodash.merge": "^3.3.2",
     "mkdirp": "^0.5.1",

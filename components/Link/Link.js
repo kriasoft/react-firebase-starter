@@ -5,7 +5,6 @@
  */
 
 import React, { Component, PropTypes } from 'react';
-import './Link.scss';
 import Location from '../../core/Location';
 
 function isLeftClickEvent(event) {
