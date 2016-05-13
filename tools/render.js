@@ -16,7 +16,7 @@ const DEBUG = !process.argv.includes('release');
 
 function getPages() {
   return new Promise((resolve, reject) => {
-    glob('**/*.js', { cwd: join(__dirname, '../pages') }, (err, files) => {
+    glob('**/*.{js,jsx}', { cwd: join(__dirname, '../pages') }, (err, files) => {
       if (err) {
         reject(err);
       } else {
