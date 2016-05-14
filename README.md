@@ -4,8 +4,9 @@
 [![NPM downloads](http://img.shields.io/npm/dm/generator-react-static.svg?style=flat-square)](https://www.npmjs.com/package/generator-react-static)
 [![Build Status](http://img.shields.io/travis/koistya/react-static-boilerplate/master.svg?style=flat-square)](https://travis-ci.org/koistya/react-static-boilerplate)
 [![Dependency Status](http://img.shields.io/david/koistya/react-static-boilerplate.svg?branch=master&style=flat-square)](https://david-dm.org/koistya/react-static-boilerplate)
-[![Sponsors](https://opencollective.com/react-static-boilerplate/badge/sponsors.svg?style=flat-square)](https://opencollective.com/react-static-boilerplate#support)
-[![Chat](https://img.shields.io/badge/chat-%23react--starter--kit-blue.svg?style=flat-square)](https://gitter.im/koistya/react-static-boilerplate)
+[![GitHub Issues](https://img.shields.io/github/issues/koistya/react-static-boilerplate.svg?style=flat-square)](https://github.com/koistya/react-static-boilerplate/issues)
+[![To-do](https://img.shields.io/waffle/label/koistya/react-static-boilerplate/to-do.svg?style=flat-square)](https://waffle.io/koistya/react-static-boilerplate)
+[![In progress](https://img.shields.io/waffle/label/koistya/react-static-boilerplate/in%20progress.svg?style=flat-square)](https://waffle.io/koistya/react-static-boilerplate)
 
 > Static website starter kit powered by [React.js](http://facebook.github.io/react/) and [Webpack](http://webpack.github.io/)
 
@@ -15,14 +16,13 @@
 &nbsp; &nbsp; ✓ Modern JavaScript syntax ([ES2015](http://babeljs.io/docs/learn-es2015/)+) via [Babel](http://babeljs.io/)<br>
 &nbsp; &nbsp; ✓ Modern CSS syntax (CSS3+) via [PostCSS](https://github.com/postcss/postcss)<br>
 &nbsp; &nbsp; ✓ Application state management via [Redux](http://redux.js.org/)<br>
-&nbsp; &nbsp; ✓ Routing and navigation via [Universal Router](https://github.com/kriasoft/universal-router)<br>
+&nbsp; &nbsp; ✓ Routing and navigation via [React App](https://github.com/kriasoft/react-app), [Universal Router](https://github.com/kriasoft/universal-router), [History](https://github.com/mjackson/history)<br>
 &nbsp; &nbsp; ✓ Modular styles via [CSS Modules](https://github.com/css-modules/css-modules)<br>
 &nbsp; &nbsp; ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading<br>
 &nbsp; &nbsp; ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/)<br>
 &nbsp; &nbsp; ✓ Bundling and optimization with [Webpack](https://webpack.github.io/)<br>
 &nbsp; &nbsp; ✓ Cross-device testing with [Browsersync](https://browsersync.io/)<br>
 &nbsp; &nbsp; ✓ Easy deployment to [GitHub Pages](https://pages.github.com/), [Amazon S3](http://davidwalsh.name/hosting-website-amazon-s3) or [Firebase](https://www.firebase.com/)<br>
-&nbsp; &nbsp; ✓ Minimum dependencies (no Gulp/Grunt)<br>
 &nbsp; &nbsp; ✓ [Yeoman](http://yeoman.io/) generator ([generator-react-static](https://www.npmjs.com/package/generator-react-static))<br>
 &nbsp; &nbsp; ✓ 24/7 community support on [Gitter](https://gitter.im/koistya/react-static-boilerplate) or [StackOverflow](http://stackoverflow.com/questions/tagged/react-starter-kit)<br>
 &nbsp; &nbsp; ✓ Customization requests on [Codementor](https://www.codementor.io/koistya)<br>
@@ -173,7 +173,9 @@ Love **React Static Boilerplate** work and community? Help us keep it alive by [
 
 * [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Isomorphic web app boilerplate (Node.js, React, GraphQL, Webpack, CSS Modules)
 * [Babel Starter Kit](https://github.com/kriasoft/babel-starter-kit) — JavaScript library boilerplate (ES2015, Babel, Rollup, Mocha, Chai, Sinon, Rewire)
+* [React App](https://github.com/kriasoft/react-app) — Bootstrap React application with routing, navigation, context variables and document metadata management
 * [Universal Router](https://github.com/kriasoft/universal-router) — Isomorphic router for web and single-page applications (SPA)
+* [History](https://github.com/mjackson/history) — A wrapper library for HTML5 History API
 * [Membership Database](https://github.com/membership/membership.db) — SQL schema boilerplate for user accounts, roles and auth tokens
 
 
