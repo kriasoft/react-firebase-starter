@@ -1,186 +1,140 @@
 /**
  * React Static Boilerplate
  * https://github.com/koistya/react-static-boilerplate
- * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
+ *
+ * Copyright © 2015-2016 Konstantin Tarkus (@koistya)
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
  */
 
-import path from 'path';
-import webpack from 'webpack';
-import merge from 'lodash.merge';
+const path = require('path');
+const webpack = require('webpack');
+const extend = require('extend');
+const pkg = require('../package.json');
 
-const DEBUG = !process.argv.includes('release');
-const VERBOSE = process.argv.includes('verbose');
-const WATCH = global.watch;
-const AUTOPREFIXER_BROWSERS = [
-  'Android 2.3',
-  'Android >= 4',
-  'Chrome >= 35',
-  'Firefox >= 31',
-  'Explorer >= 9',
-  'iOS >= 7',
-  'Opera >= 12',
-  'Safari >= 7.1',
-];
-const JS_LOADER = {
-  test: /\.jsx?$/,
-  include: [
-    path.resolve(__dirname, '../components'),
-    path.resolve(__dirname, '../core'),
-    path.resolve(__dirname, '../pages'),
-    path.resolve(__dirname, '../app.js'),
-    path.resolve(__dirname, '../config.js'),
-  ],
-  loader: 'babel-loader',
-};
+const isDebug = !(process.argv.includes('--release') || process.argv.includes('-r'));
+const isVerbose = process.argv.includes('--verbose') || process.argv.includes('-v');
 
-
-// Base configuration
+/**
+ * Webpack configuration (core/main.js => build/bundle.js)
+ * http://webpack.github.io/docs/configuration.html
+ */
 const config = {
+
+  // The base directory
+  context: path.resolve(__dirname, '../'),
+
+  // The entry point for the bundle
+  entry: ['./core/app.js'],
+
+  // Options affecting the output of the compilation
   output: {
-    path: path.join(__dirname, '../build'),
+    path: path.resolve(__dirname, '../build'),
     publicPath: '/',
+    file: 'build/[name].js',
     sourcePrefix: '  ',
   },
-  cache: false,
-  debug: DEBUG,
+
+  // Switch loaders to debug or release mode
+  debug: isDebug,
+
+  // Developer tool to enhance debugging, source maps
+  // http://webpack.github.io/docs/configuration.html#devtool
+  devtool: isDebug ? 'source-map' : false,
+
+  // What information should be printed to the console
   stats: {
     colors: true,
-    reasons: DEBUG,
-    hash: VERBOSE,
-    version: VERBOSE,
+    reasons: isDebug,
+    hash: isVerbose,
+    version: isVerbose,
     timings: true,
-    chunks: VERBOSE,
-    chunkModules: VERBOSE,
-    cached: VERBOSE,
-    cachedAssets: VERBOSE,
+    chunks: isVerbose,
+    chunkModules: isVerbose,
+    cached: isVerbose,
+    cachedAssets: isVerbose,
   },
+
+  // The list of plugins for Webpack compiler
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
-      '__DEV__': DEBUG,
+      'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
+      __DEV__: isDebug,
     }),
   ],
+
+  // Options affecting the normal modules
   module: {
     loaders: [
       {
-        test: /[\\\/]app\.js$/,
-        loader: path.join(__dirname, './lib/routes-loader.js'),
-      }, {
+        test: /\.jsx?$/,
+        include: [
+          path.resolve(__dirname, '../components'),
+          path.resolve(__dirname, '../core'),
+          path.resolve(__dirname, '../routes'),
+        ],
+        loader: 'babel-loader',
+        query: extend({}, pkg.babel, { babelrc: false }),
+      },
+      {
+        test: /\.css/,
+        loaders: [
+          'style-loader',
+          `css-loader?${JSON.stringify({
+            sourceMap: isDebug,
+            // CSS Modules https://github.com/css-modules/css-modules
+            modules: true,
+            localIdentName: isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+            // CSS Nano http://cssnano.co/options/
+            minimize: !isDebug,
+          })}`,
+          'postcss-loader',
+        ],
+      },
+      {
         test: /\.json$/,
         loader: 'json-loader',
-      }, {
-        test: /\.txt$/,
-        loader: 'raw-loader',
-      }, {
+      },
+      {
+        test: /\.md$/,
+        loader: path.resolve(__dirname, './webpack.markdown-loader.js'),
+      },
+      {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
         loader: 'url-loader?limit=10000',
-      }, {
+      },
+      {
         test: /\.(eot|ttf|wav|mp3)$/,
         loader: 'file-loader',
       },
     ],
   },
-  postcss: function plugins(bundler) {
+
+  // The list of plugins for PostCSS
+  // https://github.com/postcss/postcss
+  postcss(bundler) {
     return [
       require('postcss-import')({ addDependencyTo: bundler }),
-      require('precss')(),
-      require('autoprefixer')({
-        browsers: AUTOPREFIXER_BROWSERS,
-      }),
+      require('postcss-custom-properties')(),
+      require('postcss-calc')(),
+      require('postcss-color-function')(),
+      require('pleeease-filters')(),
+      require('pixrem')(),
+      require('postcss-pseudoelements')(),
+      require('postcss-selector-not')(),
+      require('autoprefixer')(),
     ];
   },
+
 };
 
-// Configuration for the client-side bundle
-const appConfig = merge({}, config, {
-  entry: [
-    ...(WATCH ? ['webpack-hot-middleware/client'] : []),
-    './app.js',
-  ],
-  output: {
-    filename: 'app.js',
-  },
-  // http://webpack.github.io/docs/configuration.html#devtool
-  devtool: DEBUG ? 'cheap-module-eval-source-map' : false,
-  plugins: [
-    ...config.plugins,
-    ...(DEBUG ? [] : [
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: VERBOSE,
-        },
-      }),
-      new webpack.optimize.AggressiveMergingPlugin(),
-    ]),
-    ...(WATCH ? [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin(),
-    ] : []),
-  ],
-  module: {
-    loaders: [
-      WATCH ? Object.assign({}, JS_LOADER, {
-        query: {
-          // Wraps all React components into arbitrary transforms
-          // https://github.com/gaearon/babel-plugin-react-transform
-          plugins: ['react-transform'],
-          extra: {
-            'react-transform': {
-              transforms: [
-                {
-                  transform: 'react-transform-hmr',
-                  imports: ['react'],
-                  locals: ['module'],
-                }, {
-                  transform: 'react-transform-catch-errors',
-                  imports: ['react', 'redbox-react'],
-                },
-              ],
-            },
-          },
-        },
-      }) : JS_LOADER,
-      ...config.module.loaders,
-      {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'postcss-loader'],
-      },
-    ],
-  },
-});
+// Optimize the bundle in release (production) mode
+if (!isDebug) {
+  config.plugins.push(new webpack.optimize.DedupePlugin());
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin({ compress: { warnings: isVerbose } }));
+  config.plugins.push(new webpack.optimize.AggressiveMergingPlugin());
+}
 
-// Configuration for server-side pre-rendering bundle
-const pagesConfig = merge({}, config, {
-  entry: './app.js',
-  output: {
-    filename: 'app.node.js',
-    libraryTarget: 'commonjs2',
-  },
-  target: 'node',
-  node: {
-    console: false,
-    global: false,
-    process: false,
-    Buffer: false,
-    __filename: false,
-    __dirname: false,
-  },
-  externals: /^[a-z][a-z\.\-\/0-9]*$/i,
-  plugins: config.plugins.concat([
-    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
-  ]),
-  module: {
-    loaders: [
-      JS_LOADER,
-      ...config.module.loaders,
-      {
-        test: /\.scss$/,
-        loaders: ['css-loader', 'postcss-loader'],
-      },
-    ],
-  },
-});
-
-export default [appConfig, pagesConfig];
+module.exports = config;

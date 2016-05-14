@@ -1,24 +1,26 @@
 /**
  * React Static Boilerplate
  * https://github.com/koistya/react-static-boilerplate
- * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
+ *
+ * Copyright © 2015-2016 Konstantin Tarkus (@koistya)
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
  */
 
-import webpack from 'webpack';
-import task from './lib/task';
-import webpackConfig from './webpack.config';
+const webpack = require('webpack');
+const task = require('./task');
+const config = require('./webpack.config');
 
-export default task(function bundle() {
-  return new Promise((resolve, reject) => {
-    const bundler = webpack(webpackConfig);
-    const run = (err, stats) => {
-      if (err) {
-        reject(err);
-      } else {
-        console.log(stats.toString(webpackConfig[0].stats));
-        resolve();
-      }
-    };
-    bundler.run(run);
-  });
-});
+module.exports = task('bundle', new Promise((resolve, reject) => {
+  const bundler = webpack(config);
+  const run = (err, stats) => {
+    if (err) {
+      reject(err);
+    } else {
+      console.log(stats.toString(config.stats));
+      resolve();
+    }
+  };
+  bundler.run(run);
+}));

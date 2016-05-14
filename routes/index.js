@@ -8,11 +8,20 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-const cpy = require('cpy');
-const task = require('./task');
+import home from './home';
+import about from './about';
+import error from './error';
 
-/**
- * Copies static files such as robots.txt, favicon.ico to the
- * output (build) folder.
- */
-module.exports = task('copy', cpy(['static/**/*'], 'build'));
+const routes = {
+
+  path: '/',
+
+  children: [
+    home,
+    about,
+    error,
+  ],
+
+};
+
+export default routes;

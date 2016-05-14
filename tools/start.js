@@ -1,36 +1,44 @@
 /**
  * React Static Boilerplate
  * https://github.com/koistya/react-static-boilerplate
- * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
+ *
+ * Copyright © 2015-2016 Konstantin Tarkus (@koistya)
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
  */
 
-import browserSync from 'browser-sync';
-import webpack from 'webpack';
-import hygienistMiddleware from 'hygienist-middleware';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
+const browserSync = require('browser-sync');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const task = require('./task');
+const config = require('./webpack.config');
 
-global.watch = true;
-const webpackConfig = require('./webpack.config')[0];
-const bundler = webpack(webpackConfig);
+task('start', () => new Promise(resolve => {
+  // Hot Module Replacement (HMR) + React Hot Reload
+  if (config.debug) {
+    config.entry.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client');
+    config.module.loaders.find(x => x.loader === 'babel-loader')
+      .query.plugins.unshift('react-hot-loader/babel');
+    config.plugins.push(new webpack.HotModuleReplacementPlugin());
+    config.plugins.push(new webpack.NoErrorsPlugin());
+  }
 
-export default async () => {
-  await require('./build')();
+  const bundler = webpack(config);
 
   browserSync({
     server: {
-      baseDir: 'build',
+      baseDir: 'static',
 
       middleware: [
-        hygienistMiddleware('build'),
-
         webpackDevMiddleware(bundler, {
           // IMPORTANT: dev middleware can't access config, so we should
           // provide publicPath by ourselves
-          publicPath: webpackConfig.output.publicPath,
+          publicPath: config.output.publicPath,
 
           // pretty colored output
-          stats: webpackConfig.stats,
+          stats: config.stats,
 
           // for other settings see
           // http://webpack.github.io/docs/webpack-dev-middleware.html
@@ -38,6 +46,14 @@ export default async () => {
 
         // bundler should be the same as above
         webpackHotMiddleware(bundler),
+
+        // Serve index.html for all unknown requests
+        (req, res, next) => {
+          if (req.headers.accept.startsWith('text/html')) {
+            req.url = '/index.html'; // eslint-disable-line no-param-reassign
+          }
+          next();
+        },
       ],
     },
 
@@ -48,4 +64,6 @@ export default async () => {
       'build/**/*.html',
     ],
   });
-};
+
+  resolve();
+}));

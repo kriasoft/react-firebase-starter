@@ -3,7 +3,7 @@
 [![NPM version](http://img.shields.io/npm/v/generator-react-static.svg?style=flat-square)](https://www.npmjs.com/package/generator-react-static)
 [![NPM downloads](http://img.shields.io/npm/dm/generator-react-static.svg?style=flat-square)](https://www.npmjs.com/package/generator-react-static)
 [![Build Status](http://img.shields.io/travis/koistya/react-static-boilerplate/master.svg?style=flat-square)](https://travis-ci.org/koistya/react-static-boilerplate)
-[![Dependency Status](http://img.shields.io/david/dev/koistya/react-static-boilerplate.svg?branch=master&style=flat-square)](https://david-dm.org/koistya/react-static-boilerplate#info=devDependencies)
+[![Dependency Status](http://img.shields.io/david/koistya/react-static-boilerplate.svg?branch=master&style=flat-square)](https://david-dm.org/koistya/react-static-boilerplate)
 [![Sponsors](https://opencollective.com/react-static-boilerplate/badge/sponsors.svg?style=flat-square)](https://opencollective.com/react-static-boilerplate#support)
 [![Chat](https://img.shields.io/badge/chat-%23react--starter--kit-blue.svg?style=flat-square)](https://gitter.im/koistya/react-static-boilerplate)
 
@@ -12,16 +12,21 @@
 
 ### Features
 
-&nbsp; &nbsp; ✓ Generates static `.html` pages from [React](http://facebook.github.io/react/) components ([demo](http://react-static.tarkus.me))<br>
-&nbsp; &nbsp; ✓ Generates routes based on the list of files in the `/pages` folder<br>
-&nbsp; &nbsp; ✓ Next generation JavaScript with [Babel](https://github.com/babel/babel)<br>
-&nbsp; &nbsp; ✓ [Sass](http://sass-lang.com/) syntax for CSS via [postCSS](https://github.com/postcss/postcss) and [precss](https://github.com/jonathantneal/precss)<br>
-&nbsp; &nbsp; ✓ Development web server with [Browsersync](http://www.browsersync.io) and [React Transform](https://github.com/gaearon/babel-plugin-react-transform)<br>
-&nbsp; &nbsp; ✓ Bundling and optimization with [Webpack](http://webpack.github.io/)<br>
+&nbsp; &nbsp; ✓ Modern JavaScript syntax ([ES2015](http://babeljs.io/docs/learn-es2015/)+) via [Babel](http://babeljs.io/)<br>
+&nbsp; &nbsp; ✓ Modern CSS syntax (CSS3+) via [PostCSS](https://github.com/postcss/postcss)<br>
+&nbsp; &nbsp; ✓ Application state management via [Redux](http://redux.js.org/)<br>
+&nbsp; &nbsp; ✓ Routing and navigation via [Universal Router](https://github.com/kriasoft/universal-router)<br>
+&nbsp; &nbsp; ✓ Modular styles via [CSS Modules](https://github.com/css-modules/css-modules)<br>
 &nbsp; &nbsp; ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading<br>
+&nbsp; &nbsp; ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/)<br>
+&nbsp; &nbsp; ✓ Bundling and optimization with [Webpack](https://webpack.github.io/)<br>
+&nbsp; &nbsp; ✓ Cross-device testing with [Browsersync](https://browsersync.io/)<br>
 &nbsp; &nbsp; ✓ Easy deployment to [GitHub Pages](https://pages.github.com/), [Amazon S3](http://davidwalsh.name/hosting-website-amazon-s3) or [Firebase](https://www.firebase.com/)<br>
+&nbsp; &nbsp; ✓ Minimum dependencies (no Gulp/Grunt)<br>
 &nbsp; &nbsp; ✓ [Yeoman](http://yeoman.io/) generator ([generator-react-static](https://www.npmjs.com/package/generator-react-static))<br>
-&nbsp; &nbsp; ✓ 24/7 community support in [#react-static-boilerplate](https://gitter.im/koistya/react-static-boilerplate) chat room on Gitter<br>
+&nbsp; &nbsp; ✓ 24/7 community support on [Gitter](https://gitter.im/koistya/react-static-boilerplate) or [StackOverflow](http://stackoverflow.com/questions/tagged/react-starter-kit)<br>
+&nbsp; &nbsp; ✓ Customization requests on [Codementor](https://www.codementor.io/koistya)<br>
+
 
 ### Sponsors
 
@@ -44,26 +49,30 @@
 
 ### Directory Layout
 
+
 ```
 .
 ├── /build/                     # The folder for compiled output
 ├── /node_modules/              # 3rd-party libraries and utilities
-├── /components/                # React components
+├── /components/                # Shared/generic UI components
+│   ├── /layout/                # Layout component
+│   ├── /button/                # Button component
+│   └── /...                    # etc.
 ├── /core/                      # Core framework
-├── /pages/                     # React.js-based web pages
-│   ├── /blog/                  # Blog post entries example
-│   ├── /404.js                 # Not Found page
-│   ├── /500.js                 # Error page
-│   ├── /about.js               # About Us page
-│   └── /index.js               # Home page
+│   ├── /app.js                 # Application entry point (bootstrap)
+│   ├── /store.js               # Application state manager (Redux)
+│   └── /...                    # etc.
+├── /routes/                    # View/screen UI components + routing information
+│   ├── /about/                 # About page
+│   ├── /error/                 # Error page
+│   ├── /home/                  # Home page
+│   └── /...                    # etc.
 ├── /static/                    # Static files such as favicon.ico etc.
 ├── /test/                      # Unit and integration tests
 ├── /tools/                     # Build automation scripts and utilities
-│── app.js                      # The main JavaScript file (entry point)
-│── config.js                   # Website configuration / settings
-│── LICENSE.txt                 # License file
-│── package.json                # Dev dependencies and NPM scripts
-└── README.md                   # Project overview
+│── LICENSE.txt                 # Licensing information
+│── package.json                # The list of project dependencies and NPM scripts
+└── README.md                   # Project overview / getting started guide
 ```
 
 
@@ -75,12 +84,11 @@ Just clone the repo, install Node.js modules and run `npm start`:
 $ git clone -o react-static-boilerplate -b master --single-branch \
       https://github.com/koistya/react-static-boilerplate.git MyApp
 $ cd MyApp
-$ npm install
-$ npm start
+$ npm install           # Install project dependencies listed in package.json
+$ npm start             # Build and launch the app, same as "node tools/start.js"
 ```
 
-Then open [http://localhost:3000/](http://localhost:3000/) in your browser.
-
+**NODE**: Make sure that you have [Node.js](https://nodejs.org/) v6 installed on your local machine.
 
 ### How to Test
 
@@ -106,8 +114,7 @@ $ npm run build release         # Build production release
 
 ### How to Update
 
-You can always fetch and merge the recent changes from this repo back into
-your own project:
+You can always fetch and merge the recent changes from this repo back into your own project:
 
 ```shell
 $ git checkout master
@@ -178,6 +185,11 @@ Love **React Static Boilerplate** work and community? Help us keep it alive by [
 * [React.js Discussion Board](https://discuss.reactjs.org/)
 * [Learn ES6](https://babeljs.io/docs/learn-es6/), [ES6 Features](https://github.com/lukehoban/es6features#readme)
 
+
+### License
+
+Copyright © 2015-2016 Konstantin Tarkus. This source code is licensed under the MIT license found in the
+[LICENSE.txt](https://github.com/koistya/react-static-boilerplate/blob/master/LICENSE.txt) file.
 
 ---
 Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya)) and [contributors](https://github.com/koistya/react-static-boilerplate/graphs/contributors) &nbsp;|&nbsp; MIT License

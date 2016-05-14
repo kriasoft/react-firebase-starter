@@ -1,14 +1,17 @@
 /**
  * React Static Boilerplate
  * https://github.com/koistya/react-static-boilerplate
- * Copyright (c) Konstantin Tarkus (@koistya) | MIT license
+ *
+ * Copyright © 2015-2016 Konstantin Tarkus (@koistya)
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.txt file in the root directory of this source tree.
  */
 
-import task from './lib/task';
+const task = require('./task');
 
-export default task(async function build() {
-  await require('./clean')();
-  await require('./copy')();
-  await require('./bundle')();
-  await require('./render')();
-});
+module.exports = task('build', () => Promise.resolve()
+  .then(() => require('./clean'))
+  .then(() => require('./copy'))
+  .then(() => require('./bundle'))
+);

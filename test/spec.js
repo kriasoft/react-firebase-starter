@@ -8,11 +8,12 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-const cpy = require('cpy');
-const task = require('./task');
+import { expect } from 'chai';
 
-/**
- * Copies static files such as robots.txt, favicon.ico to the
- * output (build) folder.
- */
-module.exports = task('copy', cpy(['static/**/*'], 'build'));
+describe('test suite', () => {
+
+  it('test', () => {
+    expect(true).to.be.equal.true;
+  });
+
+});
