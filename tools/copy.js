@@ -15,4 +15,4 @@ const task = require('./task');
  * Copies static files such as robots.txt, favicon.ico to the
  * output (build) folder.
  */
-module.exports = task('copy', cpy(['static/**/*'], 'build'));
+module.exports = task('copy', cpy(['static/**/*.*'], 'build'));
