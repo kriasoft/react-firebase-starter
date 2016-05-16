@@ -116,14 +116,32 @@ const config = {
   // https://github.com/postcss/postcss
   postcss(bundler) {
     return [
+      // Transfer @import rule by inlining content, e.g. @import 'normalize.css'
+      // https://github.com/postcss/postcss-import
       require('postcss-import')({ addDependencyTo: bundler }),
+      // W3C custom properties for variables, e.g. :root { --color: red; } div { background: var(--color); }
+      // https://github.com/postcss/postcss-custom-properties
       require('postcss-custom-properties')(),
+      // W3C calc() function, e.g. div { height: calc(100px - 2em); }
+      // https://github.com/postcss/postcss-calc
       require('postcss-calc')(),
+      // W3C color() function, e.g. div { background: color(red alpha(90%)); }
+      // https://github.com/postcss/postcss-color-function
       require('postcss-color-function')(),
+      // Convert CSS shorthand filters to SVG equivalent, e.g. .blur { filter: blur(4px); }
+      // https://github.com/iamvdo/pleeease-filters
       require('pleeease-filters')(),
+      // Generate pixel fallback for "rem" units, e.g. div { margin: 2.5rem 2px 3em 100%; }
+      // https://github.com/robwierzbowski/node-pixrem
       require('pixrem')(),
+      // Pseudo elements such as a:before { }
+      // https://github.com/axa-ch/postcss-pseudoelements
       require('postcss-pseudoelements')(),
+      // Transforms :not() W3C CSS Level 4 pseudo class to :not() CSS Level 3 selectors
+      // https://github.com/postcss/postcss-selector-not
       require('postcss-selector-not')(),
+      // Add vendor prefixes to CSS rules using values from caniuse.com
+      // https://github.com/postcss/autoprefixer
       require('autoprefixer')(),
     ];
   },

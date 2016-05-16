@@ -4,7 +4,7 @@
 [![NPM downloads](http://img.shields.io/npm/dm/generator-react-static.svg?style=flat-square)](https://www.npmjs.com/package/generator-react-static)
 [![Build Status](http://img.shields.io/travis/koistya/react-static-boilerplate/master.svg?style=flat-square)](https://travis-ci.org/koistya/react-static-boilerplate)
 [![Dependency Status](http://img.shields.io/david/koistya/react-static-boilerplate.svg?branch=master&style=flat-square)](https://david-dm.org/koistya/react-static-boilerplate)
-[![GitHub Issues](https://img.shields.io/github/issues/koistya/react-static-boilerplate.svg?style=flat-square)](https://github.com/koistya/react-static-boilerplate/issues)
+[![GitHub Issues](https://img.shields.io/github/issues/koistya/react-static-boilerplate.svg?style=flat-square)](https://github.com/koistya/react-static-boilerplate/issues?q=is:open)
 [![To-do](https://img.shields.io/waffle/label/koistya/react-static-boilerplate/to-do.svg?style=flat-square)](https://waffle.io/koistya/react-static-boilerplate)
 [![In progress](https://img.shields.io/waffle/label/koistya/react-static-boilerplate/in%20progress.svg?style=flat-square)](https://waffle.io/koistya/react-static-boilerplate)
 
@@ -49,8 +49,7 @@
 
 ### Directory Layout
 
-
-```
+```shell
 .
 ├── /build/                     # The folder for compiled output
 ├── /node_modules/              # 3rd-party libraries and utilities
@@ -80,7 +79,7 @@
 
 Just clone the repo, install Node.js modules and run `npm start`:
 
-```
+```shell
 $ git clone -o react-static-boilerplate -b master --single-branch \
       https://github.com/koistya/react-static-boilerplate.git MyApp
 $ cd MyApp
@@ -94,7 +93,7 @@ $ npm start             # Build and launch the app, same as "node tools/start.js
 
 The unit tests are powered by [chai](http://chaijs.com/) and [mocha](http://mochajs.org/).
 
-```
+```shell
 $ npm test
 ```
 
@@ -173,9 +172,9 @@ Love **React Static Boilerplate** work and community? Help us keep it alive by [
 
 * [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Isomorphic web app boilerplate (Node.js, React, GraphQL, Webpack, CSS Modules)
 * [Babel Starter Kit](https://github.com/kriasoft/babel-starter-kit) — JavaScript library boilerplate (ES2015, Babel, Rollup, Mocha, Chai, Sinon, Rewire)
-* [React App](https://github.com/kriasoft/react-app) — Bootstrap React application with routing, navigation, context variables and document metadata management
+* [React App](https://github.com/kriasoft/react-app) — Bootstrap React app with routing, navigation, context variables and title/meta management
 * [Universal Router](https://github.com/kriasoft/universal-router) — Isomorphic router for web and single-page applications (SPA)
-* [History](https://github.com/mjackson/history) — A wrapper library for HTML5 History API
+* [History](https://github.com/mjackson/history) — HTML5 History API wrapper library
 * [Membership Database](https://github.com/membership/membership.db) — SQL schema boilerplate for user accounts, roles and auth tokens
 
 
@@ -194,4 +193,4 @@ Copyright © 2015-2016 Konstantin Tarkus. This source code is licensed under the
 [LICENSE.txt](https://github.com/koistya/react-static-boilerplate/blob/master/LICENSE.txt) file.
 
 ---
-Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya)) and [contributors](https://github.com/koistya/react-static-boilerplate/graphs/contributors) &nbsp;|&nbsp; MIT License
+Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya)) and [contributors](https://github.com/koistya/react-static-boilerplate/graphs/contributors)
