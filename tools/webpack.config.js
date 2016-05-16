@@ -119,7 +119,7 @@ const config = {
       // Transfer @import rule by inlining content, e.g. @import 'normalize.css'
       // https://github.com/postcss/postcss-import
       require('postcss-import')({ addDependencyTo: bundler }),
-      // W3C custom properties for variables, e.g. :root { --color: red; } div { background: var(--color); }
+      // W3C variables, e.g. :root { --color: red; } div { background: var(--color); }
       // https://github.com/postcss/postcss-custom-properties
       require('postcss-custom-properties')(),
       // W3C calc() function, e.g. div { height: calc(100px - 2em); }
