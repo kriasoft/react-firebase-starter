@@ -9,6 +9,7 @@
  */
 
 import 'babel-polyfill';
+import 'whatwg-fetch';
 import { createApp } from 'react-app';
 import store from './store';
 import routes from '../routes';
