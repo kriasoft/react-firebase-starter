@@ -10,10 +10,8 @@
 
 import { createStore } from 'redux';
 
-/**
- * Centralized application state
- * See http://redux.js.org/
- */
+// Centralized application state
+// For more information visit http://redux.js.org/
 const store = createStore((state, action) => {
   // TODO: Add action handlers (aka "reduces")
   switch (action) {

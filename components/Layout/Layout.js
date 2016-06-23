@@ -9,9 +9,11 @@
  */
 
 import React from 'react';
+import Header from './Header';
 import Navigation from './Navigation';
+import s from './Layout.css';
 
-class Header extends React.Component {
+class Layout extends React.Component {
 
   componentDidMount() {
     window.componentHandler.upgradeElement(this.refs.root);
@@ -23,16 +25,18 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header className="mdl-layout__header" ref="root">
-        <div className="mdl-layout__header-row">
-          <span className="mdl-layout-title">React Static Boilerplate</span>
-          <div className="mdl-layout-spacer"></div>
-          <Navigation />
+      <div className="mdl-layout mdl-js-layout" ref="root">
+        <div className="mdl-layout__inner-container">
+          <Header>
+            <span className="mdl-layout-title">React Static Boilerplate</span>
+            <div className="mdl-layout-spacer"></div>
+            <Navigation />
+          </Header>
+          <main {...this.props} className={s.content} />
         </div>
-      </header>
+      </div>
     );
   }
-
 }
 
-export default Header;
+export default Layout;

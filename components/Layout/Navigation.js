@@ -9,10 +9,9 @@
  */
 
 import React from 'react';
-import Header from './Header';
-import s from './Layout.css';
+import Link from '../Link';
 
-class Layout extends React.Component {
+class Navigation extends React.Component {
 
   componentDidMount() {
     window.componentHandler.upgradeElement(this.refs.root);
@@ -24,14 +23,14 @@ class Layout extends React.Component {
 
   render() {
     return (
-      <div className="mdl-layout mdl-js-layout" ref="root">
-        <div className="mdl-layout__inner-container">
-          <Header />
-          <main {...this.props} className={s.content} />
-        </div>
-      </div>
+      <nav className="mdl-navigation" ref="root">
+        <Link className="mdl-navigation__link" to="/">Home</Link>
+        <Link className="mdl-navigation__link" to="/about">About</Link>
+        <Link className="mdl-navigation__link" to="/not-found">Not Found</Link>
+      </nav>
     );
   }
+
 }
 
-export default Layout;
+export default Navigation;

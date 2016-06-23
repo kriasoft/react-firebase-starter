@@ -1,0 +1,21 @@
+[
+  {
+    "path": "/",
+    "page": "./pages/home",
+    "data": {
+      "commits": "GET https://api.github.com/repos/koistya/react-static-boilerplate/commits"
+    }
+  },
+  {
+    "path": "/error",
+    "page": "./pages/error"
+  },
+  {
+    "path": "/about",
+    "page": "./pages/about"
+  },
+  {
+    "path": "/tasks/:status(pending|completed)?",
+    "page": "./pages/home"
+  }
+]

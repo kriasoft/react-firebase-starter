@@ -26,7 +26,9 @@ const config = {
   context: path.resolve(__dirname, '../'),
 
   // The entry point for the bundle
-  entry: ['./core/app.js'],
+  entry: [
+    './main.js',
+  ],
 
   // Options affecting the output of the compilation
   output: {
@@ -58,7 +60,7 @@ const config = {
 
   // The list of plugins for Webpack compiler
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       __DEV__: isDebug,
@@ -73,7 +75,8 @@ const config = {
         include: [
           path.resolve(__dirname, '../components'),
           path.resolve(__dirname, '../core'),
-          path.resolve(__dirname, '../routes'),
+          path.resolve(__dirname, '../pages'),
+          path.resolve(__dirname, '../main.js'),
         ],
         loader: 'babel-loader',
         query: extend({}, pkg.babel, { babelrc: false }),

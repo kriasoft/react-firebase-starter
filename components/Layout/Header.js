@@ -9,9 +9,8 @@
  */
 
 import React from 'react';
-import { Link } from 'react-app';
 
-class Navigation extends React.Component {
+class Header extends React.Component {
 
   componentDidMount() {
     window.componentHandler.upgradeElement(this.refs.root);
@@ -23,14 +22,12 @@ class Navigation extends React.Component {
 
   render() {
     return (
-      <nav className="mdl-navigation" ref="root">
-        <Link className="mdl-navigation__link" to="/">Home</Link>
-        <Link className="mdl-navigation__link" to="/about">About</Link>
-        <Link className="mdl-navigation__link" to="/not-found">Not Found</Link>
-      </nav>
+      <header className="mdl-layout__header" ref="root">
+        <div className="mdl-layout__header-row" {...this.props} />
+      </header>
     );
   }
 
 }
 
-export default Navigation;
+export default Header;

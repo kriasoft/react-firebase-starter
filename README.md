@@ -16,7 +16,7 @@
 &nbsp; &nbsp; ✓ Modern JavaScript syntax ([ES2015](http://babeljs.io/docs/learn-es2015/)+) via [Babel](http://babeljs.io/)<br>
 &nbsp; &nbsp; ✓ Modern CSS syntax (CSS3+) via [PostCSS](https://github.com/postcss/postcss)<br>
 &nbsp; &nbsp; ✓ Application state management via [Redux](http://redux.js.org/)<br>
-&nbsp; &nbsp; ✓ Routing and navigation via [React App](https://github.com/kriasoft/react-app), [Universal Router](https://github.com/kriasoft/universal-router), [History](https://github.com/mjackson/history)<br>
+&nbsp; &nbsp; ✓ Routing and navigation via [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp) [`history`](https://github.com/mjackson/history)<br>
 &nbsp; &nbsp; ✓ Modular styles via [CSS Modules](https://github.com/css-modules/css-modules)<br>
 &nbsp; &nbsp; ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading<br>
 &nbsp; &nbsp; ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/)<br>
@@ -58,10 +58,10 @@
 │   ├── /button/                # Button component
 │   └── /...                    # etc.
 ├── /core/                      # Core framework
-│   ├── /app.js                 # Application entry point (bootstrap)
-│   ├── /store.js               # Application state manager (Redux)
-│   └── /...                    # etc.
-├── /routes/                    # View/screen UI components + routing information
+│   ├── /history.js             # Handles client-side navigation
+│   ├── /router.js              # Handles routing and data fetching
+│   └── /store.js               # Application state manager (Redux)
+├── /pages/                     # React components for web pages
 │   ├── /about/                 # About page
 │   ├── /error/                 # Error page
 │   ├── /home/                  # Home page
@@ -69,9 +69,9 @@
 ├── /static/                    # Static files such as favicon.ico etc.
 ├── /test/                      # Unit and integration tests
 ├── /tools/                     # Build automation scripts and utilities
-│── LICENSE.txt                 # Licensing information
+│── main.js                     # Bootstrap React application (entry point)
 │── package.json                # The list of project dependencies and NPM scripts
-└── README.md                   # Project overview / getting started guide
+└── routes.md                   # This list of application routes
 ```
 
 

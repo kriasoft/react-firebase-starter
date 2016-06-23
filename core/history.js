@@ -8,20 +8,9 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import home from './home';
-import about from './about';
-import error from './error';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import useQueries from 'history/lib/useQueries';
 
-const routes = {
+const history = useQueries(createBrowserHistory)();
 
-  path: '/',
-
-  children: [
-    home,
-    about,
-    error,
-  ],
-
-};
-
-export default routes;
+export default history;
