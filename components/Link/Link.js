@@ -9,6 +9,7 @@
  */
 
 import React, { PropTypes } from 'react';
+import history from '../../core/history';
 
 function isLeftClickEvent(event) {
   return event.button === 0;
@@ -19,12 +20,6 @@ function isModifiedEvent(event) {
 }
 
 class Link extends React.Component {
-
-  static contextTypes = {
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-  };
 
   static propTypes = {
     to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
@@ -50,9 +45,9 @@ class Link extends React.Component {
 
     if (allowTransition) {
       if (this.props.to) {
-        this.context.history.push(this.props.to);
+        history.push(this.props.to);
       } else {
-        this.context.history.push({
+        history.push({
           pathname: event.currentTarget.pathname,
           search: event.currentTarget.search,
         });
@@ -62,7 +57,7 @@ class Link extends React.Component {
 
   render() {
     const { to, ...props } = this.props; // eslint-disable-line no-use-before-define
-    return <a href={this.context.history.createHref(to)} {...props} onClick={this.handleClick} />;
+    return <a href={history.createHref(to)} {...props} onClick={this.handleClick} />;
   }
 
 }

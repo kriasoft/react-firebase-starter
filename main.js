@@ -13,6 +13,7 @@ import 'whatwg-fetch';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
 import store from './core/store';
 import router from './core/router';
@@ -21,27 +22,12 @@ import history from './core/history';
 import routes from '!!./tools/webpack.routes-loader!./routes';
 /* eslint-enable import/no-unresolved */
 
-const context = { store, history };
 const container = document.getElementById('container');
-
-// The top-level React component the goal of which is to provide
-// context variables such as Redux store to all the child components
-class App extends React.Component {
-  static childContextTypes = {
-    history: React.PropTypes.object.isRequired,
-    store: React.PropTypes.object.isRequired,
-  };
-  static propTypes = {
-    component: React.PropTypes.node.isRequired,
-  };
-  getChildContext() { return context; }
-  render() { return this.props.component; }
-}
 
 function render(location) {
   router.resolve(routes, { path: location.pathname })
     .then(component => {
-      ReactDOM.render(<App component={component} />, container);
+      ReactDOM.render(<Provider store={store}>{component}</Provider>, container);
     });
 }
 
