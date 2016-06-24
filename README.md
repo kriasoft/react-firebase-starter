@@ -8,27 +8,13 @@
 [![To-do](https://img.shields.io/waffle/label/koistya/react-static-boilerplate/to-do.svg?style=flat-square)](https://waffle.io/koistya/react-static-boilerplate)
 [![In progress](https://img.shields.io/waffle/label/koistya/react-static-boilerplate/in%20progress.svg?style=flat-square)](https://waffle.io/koistya/react-static-boilerplate)
 
-> Static website starter kit powered by [React.js](http://facebook.github.io/react/) and [Webpack](http://webpack.github.io/)
+> Single-page application boilerplate and tooling powered by [React](http://facebook.github.io/react/)
+> and [Redux](http://redux.js.org/). It's optimized for generating static websites from React components
+> ready to be deployed to a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) hosting
+> such as [GitHub Pages](https://pages.github.com/), [Amazon S3](http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
+> or [Firebase](https://firebase.google.com/docs/hosting/).
 
-
-### Features
-
-&nbsp; &nbsp; ✓ Modern JavaScript syntax ([ES2015](http://babeljs.io/docs/learn-es2015/)+) via [Babel](http://babeljs.io/)<br>
-&nbsp; &nbsp; ✓ Modern CSS syntax (CSS3+) via [PostCSS](https://github.com/postcss/postcss)<br>
-&nbsp; &nbsp; ✓ Application state management via [Redux](http://redux.js.org/)<br>
-&nbsp; &nbsp; ✓ Routing and navigation via [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp) [`history`](https://github.com/mjackson/history)<br>
-&nbsp; &nbsp; ✓ Modular styles via [CSS Modules](https://github.com/css-modules/css-modules)<br>
-&nbsp; &nbsp; ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading<br>
-&nbsp; &nbsp; ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/)<br>
-&nbsp; &nbsp; ✓ Bundling and optimization with [Webpack](https://webpack.github.io/)<br>
-&nbsp; &nbsp; ✓ Cross-device testing with [Browsersync](https://browsersync.io/)<br>
-&nbsp; &nbsp; ✓ Easy deployment to [GitHub Pages](https://pages.github.com/), [Amazon S3](http://davidwalsh.name/hosting-website-amazon-s3) or [Firebase](https://www.firebase.com/)<br>
-&nbsp; &nbsp; ✓ [Yeoman](http://yeoman.io/) generator ([generator-react-static](https://www.npmjs.com/package/generator-react-static))<br>
-&nbsp; &nbsp; ✓ 24/7 community support on [Gitter](https://gitter.im/koistya/react-static-boilerplate) or [StackOverflow](http://stackoverflow.com/questions/tagged/react-starter-kit)<br>
-&nbsp; &nbsp; ✓ Customization requests on [Codementor](https://www.codementor.io/koistya)<br>
-
-
-### Sponsors
+**The work is being sponsored by:**
 
 <a href="https://opencollective.com/react-static-boilerplate/sponsor/0/website" target="_blank">
   <img src="https://opencollective.com/react-static-boilerplate/sponsor/0/avatar.svg" height="64">
@@ -45,6 +31,19 @@
 <a href="https://opencollective.com/react-static-boilerplate/sponsor/4/website" target="_blank">
   <img src="https://opencollective.com/react-static-boilerplate/sponsor/4/avatar.svg" height="64">
 </a>
+
+
+### Features
+
+&nbsp; &nbsp; ✓ Modern JavaScript syntax ([ES2015](http://babeljs.io/docs/learn-es2015/)+) via [Babel](http://babeljs.io/), modern CSS syntax via [PostCSS](https://github.com/postcss/postcss)<br>
+&nbsp; &nbsp; ✓ Component-based UI architecture via [React](http://facebook.github.io/react/), [Webpack](https://webpack.github.io/) and [CSS Modules](https://github.com/css-modules/css-modules)<br>
+&nbsp; &nbsp; ✓ Application state management /w time-travel debugging via [Redux](http://redux.js.org/) (see [`main.js`](main.js), [`core/store.js`](core/store.js))<br>
+&nbsp; &nbsp; ✓ Routing and navigation via [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp) and [`history`](https://github.com/mjackson/history) (see [`main.js`](main.js), [`core/router.js`](core/router.js), [`utils/routes-loader.js`](utils/routes-loader.js))<br>
+&nbsp; &nbsp; ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading via [Webpack](https://webpack.github.io/) and [ES6 System.import()](http://www.2ality.com/2014/09/es6-modules-final.html)<br>
+&nbsp; &nbsp; ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/)<br>
+&nbsp; &nbsp; ✓ Cross-device testing with [Browsersync](https://browsersync.io/) (see [`run.js#start`](run.js))<br>
+&nbsp; &nbsp; ✓ Easy deployment to [GitHub Pages](https://pages.github.com/), [Amazon S3](http://davidwalsh.name/hosting-website-amazon-s3) or [Firebase](https://www.firebase.com/) (see [`run.js#publish`](run.js))<br>
+&nbsp; &nbsp; ✓ 24/7 community support on [Gitter](https://gitter.im/koistya/react-static-boilerplate); customization requests on [Codementor](https://www.codementor.io/koistya)<br>
 
 
 ### Directory Layout
@@ -79,7 +78,7 @@
 
 ### Getting Started
 
-Just clone the repo, install Node.js modules and run `npm start`:
+Just clone the repo, install Node.js modules and run `npm start` (or `node run help`):
 
 ```shell
 $ git clone -o react-static-boilerplate -b master --single-branch \
@@ -90,6 +89,7 @@ $ npm start             # Build and launch the app, same as "node tools/start.js
 ```
 
 **NODE**: Make sure that you have [Node.js](https://nodejs.org/) v6 installed on your local machine.
+
 
 ### How to Test
 
@@ -128,56 +128,13 @@ $ npm install
 ```
 
 
-### Backers
-
-Love **React Static Boilerplate** work and community? Help us keep it alive by [donating funds](https://opencollective.com/react-static-boilerplate#support) to cover project expenses!
-
-<a href="https://opencollective.com/react-static-boilerplate/backer/0/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/0/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/1/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/1/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/2/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/2/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/3/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/3/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/4/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/4/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/5/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/5/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/6/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/6/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/7/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/7/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/8/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/8/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/9/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/9/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/10/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/10/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/11/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/11/avatar.svg" height="64">
-</a>
-
-
 ### Related Projects
 
 * [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Isomorphic web app boilerplate (Node.js, React, GraphQL, Webpack, CSS Modules)
+* [ASP.NET Core Starter Kit](https://github.com/kriasoft/aspnet-starter-kit) — Cross-platform single-page application boilerplate (ASP.NET Core, React, Redux)
 * [Babel Starter Kit](https://github.com/kriasoft/babel-starter-kit) — JavaScript library boilerplate (ES2015, Babel, Rollup, Mocha, Chai, Sinon, Rewire)
-* [React App](https://github.com/kriasoft/react-app) — Bootstrap React app with routing, navigation, context variables and title/meta management
 * [Universal Router](https://github.com/kriasoft/universal-router) — Isomorphic router for web and single-page applications (SPA)
-* [History](https://github.com/mjackson/history) — HTML5 History API wrapper library
-* [Membership Database](https://github.com/membership/membership.db) — SQL schema boilerplate for user accounts, roles and auth tokens
+* [History](https://github.com/mjackson/history) — HTML5 History API wrapper library that handle navigation in single-page apps
 
 
 ### Learn More
