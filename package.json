@@ -42,6 +42,7 @@
     "highlight.js": "^9.4.0",
     "json-loader": "^0.5.4",
     "markdown-it": "^7.0.0",
+    "mkdirp": "^0.5.1",
     "mocha": "^2.5.3",
     "path-to-regexp": "^1.5.3",
     "pixrem": "^3.0.1",
