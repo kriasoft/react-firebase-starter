@@ -98,6 +98,8 @@
     "build": "node run build --release",
     "build:debug": "node run build",
     "publish": "node run publish --release",
+    "publish:gh": "node run publish:gh --release",
+    "publish:s3": "node run publish:s3 --release",
     "start": "node run"
   }
 }

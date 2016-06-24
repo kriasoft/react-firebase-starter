@@ -102,13 +102,14 @@ $ npm test
 
 ### How to Deploy
 
-Update deployment URL in the `run.js` file, then: 
+Update deployment URL inside `run.js` file, the run one of the following commands: 
 
 ```shell
-$ npm run publish               # Puild and publish the website to GitHub Pages
+$ npm run publish:gh            # Puild and publish the website to GitHub Pages
+$ npm run publish:s3            # Puild and publish the website to Amazon S3
 ```
 
-If you need to build the website without publishing it, run:
+If you need just to build the project without publishing it, run:
 
 ```shell
 $ npm run build                 # Build websites into a distributable format 
