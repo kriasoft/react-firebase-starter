@@ -12,7 +12,7 @@ const MarkdownIt = require('markdown-it');
 const hljs = require('highlight.js');
 const fm = require('front-matter');
 
-module.exports = function markdown(source) {
+module.exports = function markdownLoader(source) {
   this.cacheable();
 
   const md = new MarkdownIt({
@@ -22,12 +22,12 @@ module.exports = function markdown(source) {
       if (lang && hljs.getLanguage(lang)) {
         try {
           return hljs.highlight(lang, str).value;
-        } catch (err) { console.error(err.stack); }
+        } catch (err) { console.error(err.stack); } // eslint-disable-line no-console
       }
 
       try {
         return hljs.highlightAuto(str).value;
-      } catch (err) { console.error(err.stack); }
+      } catch (err) { console.error(err.stack); } // eslint-disable-line no-console
 
       return '';
     },

@@ -68,10 +68,12 @@
 │   └── /...                    # etc.
 ├── /static/                    # Static files such as favicon.ico etc.
 ├── /test/                      # Unit and integration tests
-├── /tools/                     # Build automation scripts and utilities
-│── main.js                     # Bootstrap React application (entry point)
+├── /utils/                     # Utility and helper classes
+│── main.js                     # React application entry point
 │── package.json                # The list of project dependencies and NPM scripts
-└── routes.md                   # This list of application routes
+│── routes.json                 # This list of application routes
+│── run.js                      # Build automation script, e.g. `node run build`
+└── webpack.config.js           # Bundling and optimization settings for Webpack
 ```
 
 
@@ -100,14 +102,16 @@ $ npm test
 
 ### How to Deploy
 
+Update deployment URL in the `run.js` file, then: 
+
 ```shell
-$ npm run deploy                # Deploys the project to GitHub Pages
+$ npm run publish               # Puild and publish the website to GitHub Pages
 ```
 
-Alternatively, you can build a production release to manually deploy to S3, Firebase, Netlify, and other static hosts. Simply run the command below and copy the generated `build` folder to your static host.
+If you need to build the website without publishing it, run:
 
 ```shell
-$ npm run build release         # Build production release 
+$ npm run build                 # Build websites into a distributable format 
 ```
 
 
@@ -162,9 +166,6 @@ Love **React Static Boilerplate** work and community? Help us keep it alive by [
 </a>
 <a href="https://opencollective.com/react-static-boilerplate/backer/11/website" target="_blank">
   <img src="https://opencollective.com/react-static-boilerplate/backer/11/avatar.svg" height="64">
-</a>
-<a href="https://opencollective.com/react-static-boilerplate/backer/12/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/backer/12/avatar.svg" height="64">
 </a>
 
 

@@ -8,22 +8,19 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
+/* eslint-disable global-require */
+
 const path = require('path');
 const webpack = require('webpack');
 const extend = require('extend');
-const pkg = require('../package.json');
+const pkg = require('./package.json');
 
 const isDebug = !(process.argv.includes('--release') || process.argv.includes('-r'));
 const isVerbose = process.argv.includes('--verbose') || process.argv.includes('-v');
 
-/**
- * Webpack configuration (core/main.js => build/bundle.js)
- * http://webpack.github.io/docs/configuration.html
- */
+// Webpack configuration (core/main.js => build/bundle.js)
+// http://webpack.github.io/docs/configuration.html
 const config = {
-
-  // The base directory
-  context: path.resolve(__dirname, '../'),
 
   // The entry point for the bundle
   entry: [
@@ -32,7 +29,7 @@ const config = {
 
   // Options affecting the output of the compilation
   output: {
-    path: path.resolve(__dirname, '../build'),
+    path: path.resolve(__dirname, './build'),
     publicPath: '/',
     file: 'build/[name].js',
     sourcePrefix: '  ',
@@ -73,10 +70,10 @@ const config = {
       {
         test: /\.jsx?$/,
         include: [
-          path.resolve(__dirname, '../components'),
-          path.resolve(__dirname, '../core'),
-          path.resolve(__dirname, '../pages'),
-          path.resolve(__dirname, '../main.js'),
+          path.resolve(__dirname, './components'),
+          path.resolve(__dirname, './core'),
+          path.resolve(__dirname, './pages'),
+          path.resolve(__dirname, './main.js'),
         ],
         loader: 'babel-loader',
         query: extend({}, pkg.babel, { babelrc: false }),
@@ -102,7 +99,7 @@ const config = {
       },
       {
         test: /\.md$/,
-        loader: path.resolve(__dirname, './webpack.markdown-loader.js'),
+        loader: path.resolve(__dirname, './utils/markdown-loader.js'),
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,

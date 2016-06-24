@@ -1,4 +1,6 @@
 {
+  "name": "app",
+  "version": "0.0.0",
   "private": true,
   "engines": {
     "node": ">=6",
@@ -37,7 +39,6 @@
     "extend": "^3.0.0",
     "file-loader": "^0.9.0",
     "front-matter": "^2.1.0",
-    "git-repository": "^0.1.4",
     "highlight.js": "^9.4.0",
     "json-loader": "^0.5.4",
     "markdown-it": "^7.0.0",
@@ -88,15 +89,15 @@
     }
   },
   "scripts": {
-    "eslint": "eslint components core routes test tools",
+    "eslint": "eslint components core pages test utils main.js run.js webpack.config.js",
     "stylelint": "stylelint \"components/**/*.css\" \"routes/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
     "test": "mocha --compilers js:babel-register",
     "test:watch": "mocha --compilers js:babel-register --reporter min --watch",
-    "clean": "node tools/clean",
-    "build": "node tools/build --release",
-    "build:debug": "node tools/build",
-    "deploy": "node tools/deploy.gh --release",
-    "start": "node tools/start"
+    "clean": "node run clean",
+    "build": "node run build --release",
+    "build:debug": "node run build",
+    "publish": "node run publish --release",
+    "start": "node run"
   }
 }

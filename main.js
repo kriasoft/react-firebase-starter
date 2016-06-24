@@ -19,7 +19,7 @@ import store from './core/store';
 import router from './core/router';
 import history from './core/history';
 /* eslint-disable import/no-unresolved */
-import routes from '!!./tools/webpack.routes-loader!./routes.json';
+import routes from '!!./utils/routes-loader!./routes.json';
 /* eslint-enable import/no-unresolved */
 
 const container = document.getElementById('container');
