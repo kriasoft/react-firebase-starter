@@ -23,7 +23,7 @@ class ErrorPage extends React.Component {
   }
 
   render() {
-    let title = 'Oups, something went wrong!';
+    let title = 'Error';
     let message = 'Oups, something went wrong!';
     let stackTrace = this.props.error && this.props.error.stack;
 
