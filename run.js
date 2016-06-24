@@ -74,7 +74,7 @@ task('publish', 'Build and publish the website', () => run('publish:gh'));
 
 task('publish:gh', 'Build and publish the website to GitHub Pages', () => {
   const remote = {
-    url: 'https://github.com/koistya/site.git', // TODO: Update deployment URL
+    url: 'https://github.com/<owner>/<repo>.git', // TODO: Update deployment URL
     branch: 'gh-pages',
   };
   const { spawn } = require('child_process'); // eslint-disable-line global-require
