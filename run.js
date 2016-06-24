@@ -37,7 +37,7 @@ task('pages', 'Generate static HTML pages based on routes.json', () => {
   const html = fs.readFileSync('./static/index.html', 'utf8');
   for (const route of routes) {
     if (route.path.includes(':')) continue;
-    let filename = `./build/${route.path.substr(1) || 'index'}.html`;
+    const filename = `./build/${route.path.substr(1) || 'index'}.html`;
     fs.writeFileSync(filename, html, 'utf8');
     if (route.path !== '/') {
       mkdirp.sync(`./build/${route.path.substr(1)}`);
