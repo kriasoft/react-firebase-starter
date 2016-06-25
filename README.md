@@ -78,7 +78,7 @@
 
 ### Getting Started
 
-Just clone the repo, install Node.js modules and run `npm start` (or `node run help`):
+Just clone the repo, install Node.js modules and run `npm start`:
 
 ```shell
 $ git clone -o react-static-boilerplate -b master --single-branch \

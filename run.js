@@ -18,22 +18,29 @@ const browserSync = require('browser-sync');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
+const tasks = new Map();
 const config = require('./webpack.config');
 const routes = require('./routes.json');
-const { task, run } = require('./utils/task');
 
+// Execute a task
+function run(task) {
+  const start = new Date();
+  console.log(`Starting '${task}'...`); // eslint-disable-line no-console
+  return Promise.resolve().then(() => tasks.get(task)()).then(() => {
+    const end = new Date();
+    const time = end.getTime() - start.getTime();
+    console.log(`Finished '${task}' after ${time}ms`); // eslint-disable-line no-console
+  }, err => console.error(err.stack)); // eslint-disable-line no-console
+}
 
-task('clean', 'Clean up the output directory', () =>
-  del(['build/*', '!build/.git'], { dot: true })
-);
+// Clean up the output directory
+tasks.set('clean', () => del(['build/*', '!build/.git'], { dot: true }));
 
+// Copy static files into the output directory
+tasks.set('copy', () => cpy(['static/**/*.*'], 'build'));
 
-task('copy', 'Copy static files into the output directory', () =>
-  cpy(['static/**/*.*'], 'build')
-);
-
-
-task('pages', 'Generate static HTML pages based on routes.json', () => {
+// Generate static HTML pages based on routes.json
+tasks.set('pages', () => {
   const html = fs.readFileSync('./static/index.html', 'utf8');
   for (const route of routes) {
     if (route.path.includes(':')) continue;
@@ -47,8 +54,8 @@ task('pages', 'Generate static HTML pages based on routes.json', () => {
   fs.writeFileSync('./build/404.html', html, 'utf8');
 });
 
-
-task('bundle', 'Bundle JavaScript, CSS and image files with Webpack', () =>
+// Bundle JavaScript, CSS and image files with Webpack
+tasks.set('bundle', () =>
   new Promise((resolve, reject) => {
     webpack(config).run((err, stats) => {
       if (err) {
@@ -61,18 +68,19 @@ task('bundle', 'Bundle JavaScript, CSS and image files with Webpack', () =>
   })
 );
 
-
-task('build', 'Build website into a distributable format', () => Promise.resolve()
+// Build website into a distributable format
+tasks.set('build', () => Promise.resolve()
   .then(() => run('clean'))
   .then(() => run('copy'))
   .then(() => run('bundle'))
   .then(() => run('pages'))
 );
 
+// Build and publish the website
+tasks.set('publish', () => run('publish:gh'));
 
-task('publish', 'Build and publish the website', () => run('publish:gh'));
-
-task('publish:gh', 'Build and publish the website to GitHub Pages', () => {
+// Build and publish the website to GitHub Pages
+tasks.set('publish:gh', () => {
   const remote = {
     url: 'https://github.com/<owner>/<repo>.git', // TODO: Update deployment URL
     branch: 'gh-pages',
@@ -111,8 +119,8 @@ task('publish:gh', 'Build and publish the website to GitHub Pages', () => {
     .then(() => git('push', 'origin', `HEAD:${remote.branch}`, '--force', '--set-upstream'));
 });
 
-
-task('publish:s3', 'Build and publish the website to Amazon S3', () => {
+// Build and publish the website to Amazon S3
+tasks.set('publish:s3', () => {
   const s3 = require('s3'); // eslint-disable-line global-require
   return run('build').then(() => new Promise((resolve, reject) => {
     const client = s3.createClient({
@@ -131,8 +139,8 @@ task('publish:s3', 'Build and publish the website to Amazon S3', () => {
   }));
 });
 
-
-task('start', 'Build website and launch it in a browser for testing (default)', () =>
+// Build website and launch it in a browser for testing (default)
+tasks.set('start', () =>
   new Promise(resolve => {
     // Hot Module Replacement (HMR) + React Hot Reload
     if (config.debug) {
@@ -186,3 +194,6 @@ task('start', 'Build website and launch it in a browser for testing (default)', 
     resolve();
   })
 );
+
+// Execute the specified task or default one. E.g.: node run build
+run(process.argv[2] || 'start');
