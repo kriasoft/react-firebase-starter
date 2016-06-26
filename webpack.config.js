@@ -11,8 +11,9 @@
 /* eslint-disable global-require */
 
 const path = require('path');
-const webpack = require('webpack');
 const extend = require('extend');
+const webpack = require('webpack');
+const AssetsPlugin = require('assets-webpack-plugin');
 const pkg = require('./package.json');
 
 const isDebug = !(process.argv.includes('--release') || process.argv.includes('-r'));
@@ -31,7 +32,8 @@ const config = {
   output: {
     path: path.resolve(__dirname, './build'),
     publicPath: '/',
-    file: 'build/[name].js',
+    filename: isDebug ? '[name].js?[hash]' : '[name].[hash].js',
+    chunkFilename: isDebug ? '[id].js?[hash]' : '[id].[hash].js',
     sourcePrefix: '  ',
   },
 
@@ -61,6 +63,13 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       __DEV__: isDebug,
+    }),
+    // Emit a JSON file with assets paths
+    // https://github.com/sporto/assets-webpack-plugin#options
+    new AssetsPlugin({
+      path: path.resolve(__dirname, './build'),
+      filename: 'assets.json',
+      prettyPrint: true,
     }),
   ],
 

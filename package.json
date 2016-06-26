@@ -17,6 +17,7 @@
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
+    "assets-webpack-plugin": "^3.4.0",
     "autoprefixer": "^6.3.6",
     "babel-core": "^6.10.4",
     "babel-eslint": "^6.1.0",

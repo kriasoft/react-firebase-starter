@@ -41,7 +41,9 @@ tasks.set('copy', () => cpy(['static/**/*.*'], 'build'));
 
 // Generate static HTML pages based on routes.json
 tasks.set('pages', () => {
-  const html = fs.readFileSync('./static/index.html', 'utf8');
+  const assets = require('./build/assets.json'); // eslint-disable-line global-require
+  const html = fs.readFileSync('./static/index.html', 'utf8')
+    .replace(/"\/main\.js"/, `"${assets.main.js}"`);
   for (const route of routes) {
     if (route.path.includes(':')) continue;
     const filename = `./build/${route.path.substr(1) || 'index'}.html`;
