@@ -11,14 +11,6 @@
 import React, { PropTypes } from 'react';
 import history from '../../core/history';
 
-function isLeftClickEvent(event) {
-  return event.button === 0;
-}
-
-function isModifiedEvent(event) {
-  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
-}
-
 class Link extends React.Component {
 
   static propTypes = {
@@ -27,31 +19,31 @@ class Link extends React.Component {
   };
 
   handleClick = (event) => {
-    let allowTransition = true;
-
     if (this.props.onClick) {
       this.props.onClick(event);
     }
 
-    if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
+    if (event.button !== 0 /* left click */) {
+      return;
+    }
+
+    if (event.metaKey || event.altKey || event.ctrlKey || event.shiftKey) {
       return;
     }
 
     if (event.defaultPrevented === true) {
-      allowTransition = false;
+      return;
     }
 
     event.preventDefault();
 
-    if (allowTransition) {
-      if (this.props.to) {
-        history.push(this.props.to);
-      } else {
-        history.push({
-          pathname: event.currentTarget.pathname,
-          search: event.currentTarget.search,
-        });
-      }
+    if (this.props.to) {
+      history.push(this.props.to);
+    } else {
+      history.push({
+        pathname: event.currentTarget.pathname,
+        search: event.currentTarget.search,
+      });
     }
   };
 
