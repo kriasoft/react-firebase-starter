@@ -13,6 +13,7 @@ import 'whatwg-fetch';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import FastClick from 'fastclick';
 import { Provider } from 'react-redux';
 
 import store from './core/store';
@@ -41,3 +42,8 @@ function render(location) {
 // For more information visit https://github.com/ReactJSTraining/history/tree/master/docs#readme
 history.listen(render);
 render(history.getCurrentLocation());
+
+// Eliminates the 300ms delay between a physical tap
+// and the firing of a click event on mobile browsers
+// https://github.com/ftlabs/fastclick
+FastClick.attach(document.body);
