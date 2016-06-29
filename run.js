@@ -13,6 +13,7 @@
 const fs = require('fs');
 const del = require('del');
 const webpack = require('webpack');
+const firebase = require('firebase-tools');
 const browserSync = require('browser-sync');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -74,9 +75,8 @@ tasks.set('build', () => Promise.resolve()
 // Build and publish the website
 // -----------------------------------------------------------------------------
 tasks.set('publish', () => {
-  global.DEBUG = process.argv.includes('--debug') || false;
-  const firebase = require('firebase-tools'); // eslint-disable-line import/no-unresolved
   return run('build')
+    .then(() => firebase.login({ nonInteractive: false }))
     .then(() => firebase.deploy({
       project: 'react-static-boilerplate', // TODO: Update project name
       cwd: __dirname,
