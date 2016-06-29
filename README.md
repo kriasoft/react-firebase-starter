@@ -105,7 +105,7 @@ $ npm run test                  # Run unit tests. Or, `npm run test:watch`
 
 ### How to Deploy
 
-Update deployment URL inside `run.js#publish` file, the run one of the following commands: 
+Update `publish` script in the [`run.js`](run.js) file with your Firebase project name, then run: 
 
 ```shell
 $ node run publish              # Build and publish the website to Firebase, same as `npm run publish`
