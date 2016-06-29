@@ -16,10 +16,10 @@ const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const pkg = require('./package.json');
 
-const isDebug = !(process.argv.includes('--release') || process.argv.includes('-r'));
+const isDebug = global.DEBUG === false ? false : !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose') || process.argv.includes('-v');
 
-// Webpack configuration (main.js => build/main.{hash}.js)
+// Webpack configuration (main.js => public/dist/main.{hash}.js)
 // http://webpack.github.io/docs/configuration.html
 const config = {
 
@@ -33,8 +33,8 @@ const config = {
 
   // Options affecting the output of the compilation
   output: {
-    path: path.resolve(__dirname, './build'),
-    publicPath: '/',
+    path: path.resolve(__dirname, './public/dist'),
+    publicPath: '/dist/',
     filename: isDebug ? '[name].js?[hash]' : '[name].[hash].js',
     chunkFilename: isDebug ? '[id].js?[chunkhash]' : '[id].[chunkhash].js',
     sourcePrefix: '  ',
@@ -70,7 +70,7 @@ const config = {
     // Emit a JSON file with assets paths
     // https://github.com/sporto/assets-webpack-plugin#options
     new AssetsPlugin({
-      path: path.resolve(__dirname, './build'),
+      path: path.resolve(__dirname, './public/dist'),
       filename: 'assets.json',
       prettyPrint: true,
     }),

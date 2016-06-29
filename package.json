@@ -30,7 +30,6 @@
     "babel-runtime": "^6.9.2",
     "browser-sync": "^2.13.0",
     "chai": "^3.5.0",
-    "cpy": "^4.0.1",
     "css-loader": "^0.23.1",
     "del": "^2.2.1",
     "eslint": "^2.13.1",
@@ -44,7 +43,6 @@
     "highlight.js": "^9.5.0",
     "json-loader": "^0.5.4",
     "markdown-it": "^7.0.0",
-    "mkdirp": "^0.5.1",
     "mocha": "^2.5.3",
     "path-to-regexp": "^1.5.3",
     "pixrem": "^3.0.1",
@@ -93,16 +91,15 @@
   },
   "scripts": {
     "eslint": "eslint components core pages test utils main.js run.js webpack.config.js",
-    "stylelint": "stylelint \"components/**/*.css\" \"routes/**/*.css\"",
+    "stylelint": "stylelint \"components/**/*.css\" \"pages/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
     "test": "mocha --compilers js:babel-register",
     "test:watch": "mocha --compilers js:babel-register --reporter min --watch",
     "clean": "node run clean",
-    "build": "node run build --release",
-    "build:debug": "node run build",
-    "publish": "node run publish --release",
-    "publish:gh": "node run publish:gh --release",
-    "publish:s3": "node run publish:s3 --release",
+    "build": "node run build",
+    "build:debug": "node run build --debug",
+    "publish": "node run publish",
+    "publish:debug": "node run publish --debug",
     "start": "node run"
   }
 }

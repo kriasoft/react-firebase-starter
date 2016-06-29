@@ -9,10 +9,8 @@
 [![In progress](https://img.shields.io/waffle/label/koistya/react-static-boilerplate/in%20progress.svg?style=flat-square)](https://waffle.io/koistya/react-static-boilerplate)
 
 > Single-page application boilerplate and tooling powered by [React](http://facebook.github.io/react/)
-> and [Redux](http://redux.js.org/). It's optimized for generating static websites from React components
-> ready to be deployed to a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network) hosting
-> such as [GitHub Pages](https://pages.github.com/), [Amazon S3](http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html)
-> or [Firebase](https://firebase.google.com/docs/hosting/).
+> and [Redux](http://redux.js.org/). It's optimized for generating a static website from React components
+> ready to be deployed to [Firebase](https://firebase.google.com/) CDN hosting.
 
 **The work is being sponsored by:**
 
@@ -42,7 +40,6 @@
 &nbsp; &nbsp; ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading via [Webpack](https://webpack.github.io/) and [ES6 System.import()](http://www.2ality.com/2014/09/es6-modules-final.html)<br>
 &nbsp; &nbsp; ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/)<br>
 &nbsp; &nbsp; ✓ Cross-device testing with [Browsersync](https://browsersync.io/) (see [`run.js#start`](run.js))<br>
-&nbsp; &nbsp; ✓ Easy deployment to [GitHub Pages](https://pages.github.com/), [Amazon S3](http://davidwalsh.name/hosting-website-amazon-s3) or [Firebase](https://www.firebase.com/) (see [`run.js#publish`](run.js))<br>
 &nbsp; &nbsp; ✓ 24/7 community support on [Gitter](https://gitter.im/koistya/react-static-boilerplate); customization requests on [Codementor](https://www.codementor.io/koistya)<br>
 
 
@@ -50,24 +47,29 @@
 
 ```shell
 .
-├── /build/                     # The folder for compiled output
-├── /node_modules/              # 3rd-party libraries and utilities
-├── /components/                # Shared/generic UI components
-│   ├── /layout/                # Layout component
-│   ├── /button/                # Button component
+├── /components/                # Shared or generic UI components
+│   ├── /Button/                # Button component
+│   ├── /Layout/                # Website layout component
+│   ├── /Link  /                # Link component to be used insted of <a>
 │   └── /...                    # etc.
 ├── /core/                      # Core framework
 │   ├── /history.js             # Handles client-side navigation
 │   ├── /router.js              # Handles routing and data fetching
 │   └── /store.js               # Application state manager (Redux)
+├── /node_modules/              # 3rd-party libraries and utilities
 ├── /pages/                     # React components for web pages
 │   ├── /about/                 # About page
 │   ├── /error/                 # Error page
 │   ├── /home/                  # Home page
 │   └── /...                    # etc.
-├── /static/                    # Static files such as favicon.ico etc.
+├── /public/                    # Static files such as favicon.ico etc.
+│   ├── /dist/                  # The folder for compiled output
+│   ├── favicon.ico             # Application icon to be displayed in bookmarks
+│   ├── robots.txt              # Instructions for search engine crawlers
+│   └── /...                    # etc.
 ├── /test/                      # Unit and integration tests
 ├── /utils/                     # Utility and helper classes
+│── index.html                  # HTML page that references application bundle
 │── main.js                     # React application entry point
 │── package.json                # The list of project dependencies and NPM scripts
 │── routes.json                 # This list of application routes
@@ -84,8 +86,9 @@ Just clone the repo, install Node.js modules and run `npm start`:
 $ git clone -o react-static-boilerplate -b master --single-branch \
       https://github.com/koistya/react-static-boilerplate.git MyApp
 $ cd MyApp
+$ npm install -g firebase-tools
 $ npm install           # Install project dependencies listed in package.json
-$ npm start             # Build and launch the app, same as "node tools/start.js"
+$ npm start             # Build and launch the app, same as `node run start`
 ```
 
 **NODE**: Make sure that you have [Node.js](https://nodejs.org/) v6 installed on your local machine.
@@ -96,7 +99,8 @@ $ npm start             # Build and launch the app, same as "node tools/start.js
 The unit tests are powered by [chai](http://chaijs.com/) and [mocha](http://mochajs.org/).
 
 ```shell
-$ npm test
+$ npm run lint
+$ npm run test                  # Or, `npm run test:watch`
 ```
 
 
@@ -105,14 +109,14 @@ $ npm test
 Update deployment URL inside `run.js` file, the run one of the following commands: 
 
 ```shell
-$ npm run publish:gh            # Build and publish the website to GitHub Pages
-$ npm run publish:s3            # Build and publish the website to Amazon S3
+$ firebase login                # Login into Firebase and obtain an authentication token 
+$ npm run publish               # Build and publish the website to Firebase, same as `node run publish`
 ```
 
 If you need just to build the project without publishing it, run:
 
 ```shell
-$ npm run build                 # Build websites into a distributable format 
+$ npm run build                 # Or, `node run build`, `node run build --debug`
 ```
 
 
