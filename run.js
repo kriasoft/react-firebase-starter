@@ -75,6 +75,7 @@ tasks.set('build', () => Promise.resolve()
 // Build and publish the website
 // -----------------------------------------------------------------------------
 tasks.set('publish', () => {
+  global.DEBUG = process.argv.includes('--debug') || false;
   return run('build')
     .then(() => firebase.login({ nonInteractive: false }))
     .then(() => firebase.deploy({

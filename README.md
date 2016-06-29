@@ -111,6 +111,8 @@ Update deployment URL inside `run.js#publish` file, the run one of the following
 $ node run publish              # Build and publish the website to Firebase, same as `npm run publish`
 ```
 
+![publish](https://koistya.github.io/files/react-static-boilerplate-publish.gif)
+
 If you need just to build the project without publishing it, run:
 
 ```shell
