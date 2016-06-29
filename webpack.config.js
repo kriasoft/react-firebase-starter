@@ -19,9 +19,12 @@ const pkg = require('./package.json');
 const isDebug = !(process.argv.includes('--release') || process.argv.includes('-r'));
 const isVerbose = process.argv.includes('--verbose') || process.argv.includes('-v');
 
-// Webpack configuration (core/main.js => build/bundle.js)
+// Webpack configuration (main.js => build/main.{hash}.js)
 // http://webpack.github.io/docs/configuration.html
 const config = {
+
+  // The base directory for resolving the entry option
+  context: __dirname,
 
   // The entry point for the bundle
   entry: [
@@ -33,7 +36,7 @@ const config = {
     path: path.resolve(__dirname, './build'),
     publicPath: '/',
     filename: isDebug ? '[name].js?[hash]' : '[name].[hash].js',
-    chunkFilename: isDebug ? '[id].js?[hash]' : '[id].[hash].js',
+    chunkFilename: isDebug ? '[id].js?[chunkhash]' : '[id].[chunkhash].js',
     sourcePrefix: '  ',
   },
 

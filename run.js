@@ -14,6 +14,7 @@ const del = require('del');
 const cpy = require('cpy');
 const mkdirp = require('mkdirp');
 const webpack = require('webpack');
+const cp = require('child_process');
 const browserSync = require('browser-sync');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -22,24 +23,31 @@ const tasks = new Map();
 const config = require('./webpack.config');
 const routes = require('./routes.json');
 
-// Execute a task
+/* eslint-disable no-console, global-require */
+
 function run(task) {
   const start = new Date();
-  console.log(`Starting '${task}'...`); // eslint-disable-line no-console
+  console.log(`Starting '${task}'...`);
   return Promise.resolve().then(() => tasks.get(task)()).then(() => {
     const end = new Date();
     const time = end.getTime() - start.getTime();
-    console.log(`Finished '${task}' after ${time}ms`); // eslint-disable-line no-console
-  }, err => console.error(err.stack)); // eslint-disable-line no-console
+    console.log(`Finished '${task}' after ${time}ms`);
+  }, err => console.error(err.stack));
 }
 
+//
 // Clean up the output directory
+// -----------------------------------------------------------------------------
 tasks.set('clean', () => del(['build/*', '!build/.git'], { dot: true }));
 
+//
 // Copy static files into the output directory
+// -----------------------------------------------------------------------------
 tasks.set('copy', () => cpy(['static/**/*.*'], 'build'));
 
+//
 // Generate static HTML pages based on routes.json
+// -----------------------------------------------------------------------------
 tasks.set('pages', () => {
   const assets = JSON.parse(fs.readFileSync('./build/assets.json', 'utf8'));
   const html = fs.readFileSync('./static/index.html', 'utf8')
@@ -63,14 +71,16 @@ tasks.set('bundle', () =>
       if (err) {
         reject(err);
       } else {
-        console.log(stats.toString(config.stats)); // eslint-disable-line no-console
+        console.log(stats.toString(config.stats));
         resolve();
       }
     });
   })
 );
 
+//
 // Build website into a distributable format
+// -----------------------------------------------------------------------------
 tasks.set('build', () => Promise.resolve()
   .then(() => run('clean'))
   .then(() => run('copy'))
@@ -78,19 +88,22 @@ tasks.set('build', () => Promise.resolve()
   .then(() => run('pages'))
 );
 
+//
 // Build and publish the website
+// -----------------------------------------------------------------------------
 tasks.set('publish', () => run('publish:gh'));
 
+//
 // Build and publish the website to GitHub Pages
+// -----------------------------------------------------------------------------
 tasks.set('publish:gh', () => {
   const remote = {
     url: 'https://github.com/<owner>/<repo>.git', // TODO: Update deployment URL
     branch: 'gh-pages',
   };
-  const { spawn } = require('child_process'); // eslint-disable-line global-require
   const opts = { cwd: path.resolve(__dirname, './build'), stdio: ['ignore', 'inherit', 'inherit'] };
   const git = (...args) => new Promise((resolve, reject) => {
-    spawn('git', args, opts).on('close', code => {
+    cp.spawn('git', args, opts).on('close', code => {
       if (code === 0) {
         resolve();
       } else {
@@ -121,9 +134,11 @@ tasks.set('publish:gh', () => {
     .then(() => git('push', 'origin', `HEAD:${remote.branch}`, '--force', '--set-upstream'));
 });
 
+//
 // Build and publish the website to Amazon S3
+// -----------------------------------------------------------------------------
 tasks.set('publish:s3', () => {
-  const s3 = require('s3'); // eslint-disable-line global-require
+  const s3 = require('s3');
   return run('build').then(() => new Promise((resolve, reject) => {
     const client = s3.createClient({
       s3Options: {
@@ -141,7 +156,9 @@ tasks.set('publish:s3', () => {
   }));
 });
 
+//
 // Build website and launch it in a browser for testing (default)
+// -----------------------------------------------------------------------------
 tasks.set('start', () =>
   new Promise(resolve => {
     // Hot Module Replacement (HMR) + React Hot Reload
