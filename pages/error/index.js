@@ -31,16 +31,15 @@ class ErrorPage extends React.Component {
 
   render() {
     const [code, title] = this.props.error && this.props.error.status === 404 ?
-      [404, 'Page not found'] :
-      [500, 'Oups, something went wrong'];
+      ['404', 'Page not found'] :
+      ['Error', 'Oups, something went wrong'];
 
     return (
       <div className={s.container}>
         <main className={s.content}>
           <h1 className={s.code}>{code}</h1>
           <p className={s.title}>{title}</p>
-          {
-            code === 404 &&
+          {code === '404' &&
             <p className={s.text}>
               The page you're looking for does not exist or an another error occurred.
             </p>

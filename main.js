@@ -49,7 +49,7 @@ FastClick.attach(document.body);
 // Enable Hot Module Replacement (HMR)
 if (module.hot) {
   module.hot.accept('./routes.json', () => {
-    routes = require('./routes.json');
+    routes = require('./routes.json'); // eslint-disable-line global-require
     render(history.getCurrentLocation());
   });
 }

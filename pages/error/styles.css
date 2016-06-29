@@ -31,16 +31,16 @@
 .code {
   margin: 0;
   color: var(--color);
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
   font-weight: 300;
   font-size: 15em;
   line-height: 1;
 }
 
 .title {
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
   color: var(--color);
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
   font-weight: 400;
   font-size: 2em;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
