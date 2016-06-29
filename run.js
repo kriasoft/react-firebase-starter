@@ -75,7 +75,7 @@ tasks.set('build', () => Promise.resolve()
 // -----------------------------------------------------------------------------
 tasks.set('publish', () => {
   global.DEBUG = process.argv.includes('--debug') || false;
-  const firebase = require('firebase-tools');
+  const firebase = require('firebase-tools'); // eslint-disable-line import/no-unresolved
   return run('build')
     .then(() => firebase.deploy({
       project: 'react-static-boilerplate', // TODO: Update project name
