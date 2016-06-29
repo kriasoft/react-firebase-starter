@@ -18,6 +18,7 @@ const pkg = require('./package.json');
 
 const isDebug = global.DEBUG === false ? false : !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose') || process.argv.includes('-v');
+const useHMR = !!global.HMR; // Hot Module Replacement (HMR)
 
 // Webpack configuration (main.js => public/dist/main.{hash}.js)
 // http://webpack.github.io/docs/configuration.html
@@ -107,7 +108,17 @@ const config = {
       },
       {
         test: /\.json$/,
+        exclude: [
+          path.resolve(__dirname, './routes.json')
+        ],
         loader: 'json-loader',
+      },
+      {
+        test: /\.json$/,
+        include: [
+          path.resolve(__dirname, './routes.json')
+        ],
+        loader: path.resolve(__dirname, `./utils/routes-loader.js`),
       },
       {
         test: /\.md$/,
@@ -177,6 +188,15 @@ if (!isDebug) {
   config.plugins.push(new webpack.optimize.DedupePlugin());
   config.plugins.push(new webpack.optimize.UglifyJsPlugin({ compress: { warnings: isVerbose } }));
   config.plugins.push(new webpack.optimize.AggressiveMergingPlugin());
+}
+
+// Hot Module Replacement (HMR) + React Hot Reload
+if (isDebug && useHMR) {
+  config.entry.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client');
+  config.module.loaders.find(x => x.loader === 'babel-loader')
+    .query.plugins.unshift('react-hot-loader/babel');
+  config.plugins.push(new webpack.HotModuleReplacementPlugin());
+  config.plugins.push(new webpack.NoErrorsPlugin());
 }
 
 module.exports = config;

@@ -19,10 +19,8 @@ import { Provider } from 'react-redux';
 import store from './core/store';
 import router from './core/router';
 import history from './core/history';
-/* eslint-disable import/no-unresolved */
-import routes from '!!./utils/routes-loader!./routes.json';
-/* eslint-enable import/no-unresolved */
 
+let routes = require('./routes.json'); // Loaded with utils/routes-loader.js
 const container = document.getElementById('container');
 
 function renderComponent(component) {
@@ -47,3 +45,11 @@ render(history.getCurrentLocation());
 // and the firing of a click event on mobile browsers
 // https://github.com/ftlabs/fastclick
 FastClick.attach(document.body);
+
+// Enable Hot Module Replacement (HMR)
+if (module.hot) {
+  module.hot.accept('./routes.json', () => {
+    routes = require('./routes.json');
+    render(history.getCurrentLocation());
+  });
+}

@@ -9,7 +9,9 @@
  */
 
 import React from 'react';
-import Layout from '../../components/Layout';
+import history from '../../core/history';
+import Link from '../../components/Link';
+import s from './styles.css';
 
 class ErrorPage extends React.Component {
 
@@ -22,23 +24,33 @@ class ErrorPage extends React.Component {
       'Page Not Found' : 'Error';
   }
 
-  render() {
-    let title = 'Error';
-    let message = 'Oups, something went wrong!';
-    let stackTrace = this.props.error && this.props.error.stack;
+  goBack = event => {
+    event.preventDefault();
+    history.goBack();
+  };
 
-    if (this.props.error && this.props.error.status === 404) {
-      title = 'Page Not Found';
-      message = 'This page does not exist.';
-      stackTrace = null;
-    }
+  render() {
+    const [code, title] = this.props.error && this.props.error.status === 404 ?
+      [404, 'Page not found'] :
+      [500, 'Oups, something went wrong'];
 
     return (
-      <Layout>
-        <h1>{title}</h1>
-        <p>{message}</p>
-        {stackTrace && <pre>{stackTrace}</pre>}
-      </Layout>
+      <div className={s.container}>
+        <main className={s.content}>
+          <h1 className={s.code}>{code}</h1>
+          <p className={s.title}>{title}</p>
+          {
+            code === 404 &&
+            <p className={s.text}>
+              The page you're looking for does not exist or an another error occurred.
+            </p>
+          }
+          <p className={s.text}>
+            <a href="/" onClick={this.goBack}>Go back</a>, or head over to the&nbsp;
+            <Link to="/">home page</Link> to choose a new direction.
+          </p>
+        </main>
+      </div>
     );
   }
 

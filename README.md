@@ -86,9 +86,9 @@ Just clone the repo, install Node.js modules and run `npm start`:
 $ git clone -o react-static-boilerplate -b master --single-branch \
       https://github.com/koistya/react-static-boilerplate.git MyApp
 $ cd MyApp
-$ npm install -g firebase-tools
-$ npm install           # Install project dependencies listed in package.json
-$ npm start             # Build and launch the app, same as `node run start`
+$ npm install -g firebase-tools # Install Firebase CLI tools globally
+$ npm install                   # Install project dependencies listed in package.json
+$ npm start                     # Build and launch the app, same as `node run start`
 ```
 
 **NODE**: Make sure that you have [Node.js](https://nodejs.org/) v6 installed on your local machine.
@@ -99,14 +99,14 @@ $ npm start             # Build and launch the app, same as `node run start`
 The unit tests are powered by [chai](http://chaijs.com/) and [mocha](http://mochajs.org/).
 
 ```shell
-$ npm run lint
-$ npm run test                  # Or, `npm run test:watch`
+$ npm run lint                  # Check JavaScript and CSS code for potential issues
+$ npm run test                  # Run unit tests. Or, `npm run test:watch`
 ```
 
 
 ### How to Deploy
 
-Update deployment URL inside `run.js` file, the run one of the following commands: 
+Update deployment URL inside `run.js#publish` file, the run one of the following commands: 
 
 ```shell
 $ firebase login                # Login into Firebase and obtain an authentication token 

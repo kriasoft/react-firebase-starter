@@ -88,21 +88,12 @@ tasks.set('publish', () => {
 // Build website and launch it in a browser for testing (default)
 // -----------------------------------------------------------------------------
 tasks.set('start', () => {
-  const webpackConfig = require('./webpack.config');
+  global.HMR = !process.argv.includes('--no-hmr'); // Hot Module Replacement (HMR)
   const html = fs.readFileSync('./index.html', 'utf8');
   fs.writeFileSync('./public/index.html', html, 'utf8');
+  const webpackConfig = require('./webpack.config');
+  const bundler = webpack(webpackConfig);
   return new Promise(resolve => {
-    // Hot Module Replacement (HMR) + React Hot Reload
-    if (webpackConfig.debug) {
-      webpackConfig.entry.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client');
-      webpackConfig.module.loaders.find(x => x.loader === 'babel-loader')
-        .query.plugins.unshift('react-hot-loader/babel');
-      webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-      webpackConfig.plugins.push(new webpack.NoErrorsPlugin());
-    }
-
-    const bundler = webpack(webpackConfig);
-
     browserSync({
       server: {
         baseDir: 'public',
