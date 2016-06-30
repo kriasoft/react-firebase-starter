@@ -42,6 +42,8 @@
 &nbsp; &nbsp; ✓ Cross-device testing with [Browsersync](https://browsersync.io/) (see [`run.js#start`](run.js))<br>
 &nbsp; &nbsp; ✓ 24/7 community support on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate); customization requests on [Codementor](https://www.codementor.io/koistya)<br>
 
+**Demo**: https://rsb.kriasoft.com
+
 
 ### Directory Layout
 
