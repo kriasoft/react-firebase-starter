@@ -43,10 +43,9 @@
 
 **Demo**: https://rsb.kriasoft.com &nbsp;|&nbsp; **Share** on
 [Twitter](https://twitter.com/koistya/status/748136479503814656),
-[Reddit](https://www.reddit.com/r/reactjs/comments/4qig4p/react_static_boilerplate_is_now_preconfigured_for/),
-[HackerNews](https://news.ycombinator.com/item?id=12007704) and
-[ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbsp;|&nbsp; **Follow us** on
-[Gitter](https://gitter.im/kriasoft/react-static-boilerplate)
+[Reddit](https://www.reddit.com/r/reactjs/comments/4qig4p/react_static_boilerplate_is_now_preconfigured_for/)
+or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbsp;|&nbsp; **Follow us**
+on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate)
 
 
 ### Directory Layout
