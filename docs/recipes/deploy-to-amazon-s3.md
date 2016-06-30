@@ -14,6 +14,7 @@ $ npm install s3 --save-dev
 
 ```js
 tasks.set('publish', () => {
+  global.DEBUG = process.argv.includes('--debug') || false;
   const s3 = require('s3');
   return run('build').then(() => new Promise((resolve, reject) => {
     const client = s3.createClient({
@@ -33,8 +34,10 @@ tasks.set('publish', () => {
 });
 ```
 
-`4`. Whenever you need to publish your site to Amazon S3 simply run:
+`4`. Whenever you need to compile and publish your site to Amazon S3 simply run:
 
 ```sh
-$ node run publish --release
+$ node run publish
 ```
+
+![publish](https://koistya.github.io/files/react-static-boilerplate-publish.gif)

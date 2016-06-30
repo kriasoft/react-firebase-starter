@@ -8,6 +8,7 @@ tasks.set('publish', () => {
     url: 'https://github.com/<owner>/<repo>.git', // TODO: Update deployment URL
     branch: 'gh-pages',
   };
+  global.DEBUG = process.argv.includes('--debug') || false;
   const spawn = require('child_process').spawn;
   const opts = { cwd: path.resolve(__dirname, './build'), stdio: ['ignore', 'inherit', 'inherit'] };
   const git = (...args) => new Promise((resolve, reject) => {
@@ -43,8 +44,10 @@ tasks.set('publish', () => {
 });
 ```
 
-`2`. Whenever you need to publish your site to GitHub Pages simply run:
+`2`. Whenever you need to compile and publish your site to GitHub Pages simply run:
 
 ```sh
-$ node run publish --release
+$ node run publish
 ```
+
+![publish](https://koistya.github.io/files/react-static-boilerplate-publish.gif)
