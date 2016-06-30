@@ -110,11 +110,13 @@ $ npm run test                  # Run unit tests. Or, `npm run test:watch`
 
 ### How to Deploy
 
-Update `publish` script in the [`run.js`](run.js) file with your Firebase project name, then run: 
+Update `publish` script in the [`run.js`](run.js) file with your full Firebase project name as found in your [Firebase console](https://console.firebase.google.com/). Note that this may have an additional identifier suffix than the shorter name you've provided. Then run: 
 
 ```shell
 $ node run publish              # Build and publish the website to Firebase, same as `npm run publish`
 ```
+
+The first time you publish, you will be prompted to authenticate with Google and generate an authentication token in order for the publish script to continue.
 
 ![publish](https://koistya.github.io/files/react-static-boilerplate-publish.gif)
 
