@@ -1,8 +1,8 @@
 /**
  * React Static Boilerplate
- * https://github.com/koistya/react-static-boilerplate
+ * https://github.com/kriasoft/react-static-boilerplate
  *
- * Copyright © 2015-2016 Konstantin Tarkus (@koistya)
+ * Copyright © 2015-present Kriasoft, LLC. All rights reserved.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.

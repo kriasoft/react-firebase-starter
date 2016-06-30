@@ -13,4 +13,5 @@
 
     JavaScript, HTML5, CSS3
     React, Redux, Material Design Lite (MDL)
-    Babel, Webpack
+    Babel, Webpack, Node.js
+    React Static Boilerplate

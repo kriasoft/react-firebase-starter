@@ -2,11 +2,11 @@
 
 [![NPM version](http://img.shields.io/npm/v/generator-react-static.svg?style=flat-square)](https://www.npmjs.com/package/generator-react-static)
 [![NPM downloads](http://img.shields.io/npm/dm/generator-react-static.svg?style=flat-square)](https://www.npmjs.com/package/generator-react-static)
-[![Build Status](http://img.shields.io/travis/koistya/react-static-boilerplate/master.svg?style=flat-square)](https://travis-ci.org/koistya/react-static-boilerplate)
-[![Dependency Status](http://img.shields.io/david/koistya/react-static-boilerplate.svg?branch=master&style=flat-square)](https://david-dm.org/koistya/react-static-boilerplate)
-[![GitHub Issues](https://img.shields.io/github/issues/koistya/react-static-boilerplate.svg?style=flat-square)](https://github.com/koistya/react-static-boilerplate/issues?q=is:open)
-[![To-do](https://img.shields.io/waffle/label/koistya/react-static-boilerplate/to-do.svg?style=flat-square)](https://waffle.io/koistya/react-static-boilerplate)
-[![In progress](https://img.shields.io/waffle/label/koistya/react-static-boilerplate/in%20progress.svg?style=flat-square)](https://waffle.io/koistya/react-static-boilerplate)
+[![Build Status](http://img.shields.io/travis/kriasoft/react-static-boilerplate/master.svg?style=flat-square)](https://travis-ci.org/kriasoft/react-static-boilerplate)
+[![Dependency Status](http://img.shields.io/david/kriasoft/react-static-boilerplate.svg?branch=master&style=flat-square)](https://david-dm.org/kriasoft/react-static-boilerplate)
+[![GitHub Issues](https://img.shields.io/github/issues/kriasoft/react-static-boilerplate.svg?style=flat-square)](https://github.com/kriasoft/react-static-boilerplate/issues?q=is:open)
+[![To-do](https://img.shields.io/waffle/label/kriasoft/react-static-boilerplate/to-do.svg?style=flat-square)](https://waffle.io/kriasoft/react-static-boilerplate)
+[![In progress](https://img.shields.io/waffle/label/kriasoft/react-static-boilerplate/in%20progress.svg?style=flat-square)](https://waffle.io/kriasoft/react-static-boilerplate)
 
 > Single-page application boilerplate and tooling powered by [React](http://facebook.github.io/react/)
 > and [Redux](http://redux.js.org/). It's optimized for generating a static website from React components
@@ -40,7 +40,7 @@
 &nbsp; &nbsp; ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading via [Webpack](https://webpack.github.io/) and [ES6 System.import()](http://www.2ality.com/2014/09/es6-modules-final.html)<br>
 &nbsp; &nbsp; ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/)<br>
 &nbsp; &nbsp; ✓ Cross-device testing with [Browsersync](https://browsersync.io/) (see [`run.js#start`](run.js))<br>
-&nbsp; &nbsp; ✓ 24/7 community support on [Gitter](https://gitter.im/koistya/react-static-boilerplate); customization requests on [Codementor](https://www.codementor.io/koistya)<br>
+&nbsp; &nbsp; ✓ 24/7 community support on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate); customization requests on [Codementor](https://www.codementor.io/koistya)<br>
 
 
 ### Directory Layout
@@ -84,7 +84,7 @@ Just clone the repo, install Node.js modules and run `npm start`:
 
 ```shell
 $ git clone -o react-static-boilerplate -b master --single-branch \
-      https://github.com/koistya/react-static-boilerplate.git MyApp
+      https://github.com/kriasoft/react-static-boilerplate.git MyApp
 $ cd MyApp
 $ npm install                   # Install project dependencies listed in package.json
 $ node run                      # Build and launch the app, same as `npm start`
@@ -152,8 +152,8 @@ $ npm install
 
 ### License
 
-Copyright © 2015-2016 Konstantin Tarkus. This source code is licensed under the MIT license found in the
-[LICENSE.txt](https://github.com/koistya/react-static-boilerplate/blob/master/LICENSE.txt) file.
+Copyright © 2015-present Kriasoft, LLC. This source code is licensed under the MIT license found in
+the [LICENSE.txt](https://github.com/kriasoft/react-static-boilerplate/blob/master/LICENSE.txt) file.
 
 ---
-Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya)) and [contributors](https://github.com/koistya/react-static-boilerplate/graphs/contributors)
+Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya)) and [contributors](https://github.com/kriasoft/react-static-boilerplate/graphs/contributors)
