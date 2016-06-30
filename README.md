@@ -132,6 +132,16 @@ $ npm install
 ```
 
 
+### How to Contribute
+
+Anyone and everyone is welcome to [contribute](CONTRIBUTING.md) to this project. The best way to
+start is by checking our [open issues](https://github.com/kriasoft/react-static-boilerplate/issues),
+[submit a new issues](https://github.com/kriasoft/react-static-boilerplate/issues/new?labels=bug) or
+[feature request](https://github.com/kriasoft/react-static-boilerplate/issues/new?labels=enhancement),
+participate in discussions, upvote or downvote the issues you like or dislike, send [pull
+requests](CONTRIBUTING.md#pull-requests).
+
+
 ### Related Projects
 
 * [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Isomorphic web app boilerplate (Node.js, React, GraphQL, Webpack, CSS Modules)
