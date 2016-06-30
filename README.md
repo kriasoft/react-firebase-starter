@@ -40,9 +40,14 @@
 &nbsp; &nbsp; ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading via [Webpack](https://webpack.github.io/) and [ES6 System.import()](http://www.2ality.com/2014/09/es6-modules-final.html)<br>
 &nbsp; &nbsp; ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/)<br>
 &nbsp; &nbsp; ✓ Cross-device testing with [Browsersync](https://browsersync.io/) (see [`run.js#start`](run.js))<br>
-&nbsp; &nbsp; ✓ 24/7 community support on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate); customization requests on [Codementor](https://www.codementor.io/koistya)<br>
+&nbsp; &nbsp; ✓ **24/7** community support on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate); customization requests on [Codementor](https://www.codementor.io/koistya)<br>
 
-**Demo**: https://rsb.kriasoft.com
+**Demo**: https://rsb.kriasoft.com &nbsp;|&nbsp; **Share** on
+[Twitter](https://twitter.com/koistya/status/748136479503814656),
+[Reddit](https://www.reddit.com/r/reactjs/comments/4qig4p/react_static_boilerplate_is_now_preconfigured_for/),
+[HackerNews](https://news.ycombinator.com/item?id=12007704) and
+[ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbsp;|&nbsp; **Follow us** on
+[Gitter](https://gitter.im/kriasoft/react-static-boilerplate)
 
 
 ### Directory Layout
