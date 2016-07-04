@@ -1,4 +1,4 @@
-## How to Publish a Static Site to [GitHub Pages](https://pages.github.com/)
+## How to Publish Website to [GitHub Pages](https://pages.github.com/)
 
 `1`. Add deployment script to `run.js`:
 

@@ -45,10 +45,10 @@
 &nbsp; &nbsp; ✓ Cross-device testing with [Browsersync](https://browsersync.io/) (see [`run.js#start`](run.js))<br>
 &nbsp; &nbsp; ✓ **24/7** community support on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate); customization requests on [Codementor](https://www.codementor.io/koistya)<br>
 
-**Demo**: https://rsb.kriasoft.com &nbsp;|&nbsp; **Follow us** on
+**Demo**: https://rsb.kriasoft.com &nbsp;|&nbsp; **View** [docs](./docs) &nbsp;|&nbsp; **Follow us** on
 [Gitter](https://gitter.im/kriasoft/react-static-boilerplate), [Twitter](https://twitter.com/ReactStatic),
 or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbsp;|&nbsp;
-**Send feedback** to [@koistya](https://twitter.com/koistya) (DMs open)
+**Send feedback** to [@koistya](https://twitter.com/koistya)
 
 
 ### Directory Layout
