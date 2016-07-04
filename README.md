@@ -1,11 +1,4 @@
-# React Static Boilerplate
-
-[![NPM version](http://img.shields.io/npm/v/generator-react-static.svg?style=flat-square)](https://www.npmjs.com/package/generator-react-static)
-[![NPM downloads](http://img.shields.io/npm/dm/generator-react-static.svg?style=flat-square)](https://www.npmjs.com/package/generator-react-static)
-[![Build Status](http://img.shields.io/travis/kriasoft/react-static-boilerplate/master.svg?style=flat-square)](https://travis-ci.org/kriasoft/react-static-boilerplate)
-[![Dependency Status](http://img.shields.io/david/kriasoft/react-static-boilerplate.svg?branch=master&style=flat-square)](https://david-dm.org/kriasoft/react-static-boilerplate)
-[![To-do](https://img.shields.io/waffle/label/kriasoft/react-static-boilerplate/to-do.svg?style=flat-square)](https://waffle.io/kriasoft/react-static-boilerplate)
-[![Online Chat](http://img.shields.io/badge/chat_room-%23react--static--boilerplate-blue.svg?style=flat-square)](https://gitter.im/kriasoft/react-static-boilerplate)
+# React Static Boilerplate &nbsp; [![Build Status](http://img.shields.io/travis/kriasoft/react-static-boilerplate/master.svg?style=flat-square)](https://travis-ci.org/kriasoft/react-static-boilerplate) [![To-do](https://img.shields.io/waffle/label/kriasoft/react-static-boilerplate/to-do.svg?style=flat-square)](https://waffle.io/kriasoft/react-static-boilerplate) [![Online Chat](http://img.shields.io/badge/chat_room-%23react--static--boilerplate-blue.svg?style=flat-square)](https://gitter.im/kriasoft/react-static-boilerplate)
 
 > [**React Static Boilerplate**](https://github.com/kriasoft/react-static-boilerplate) (RSB) is an
 > opinionated boilerplate and tooling for creating modern stand-alone web applications (aka
@@ -54,7 +47,8 @@
 
 **Demo**: https://rsb.kriasoft.com &nbsp;|&nbsp; **Follow us** on
 [Gitter](https://gitter.im/kriasoft/react-static-boilerplate), [Twitter](https://twitter.com/ReactStatic),
-or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate)
+or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbsp;|&nbsp;
+**Send feedback** to [@koistya](https://twitter.com/koistya) (DMs open)
 
 
 ### Directory Layout
