@@ -1,8 +1,8 @@
 ## Routing and Navigation
 
 [React Static Boilerplate](https://github.com/kriasoft/react-static-boilerplate) (RSB) uses a
-custom minimalistic (under 100 LOC) declarative routing approach that is easy to customize or
-replace. It's comprised of five major parts:
+custom minimalistic (under 100 LOC) declarative routing approach that is easy to customize. It's
+comprised of five major parts:
 
 * **Routes** — the list of application routes in JSON format (see [`routes.json`](../routes.json))
 * **Routes Loader** — a custom loader for Webpack that converts routes from JSON to JavaScript on
@@ -73,7 +73,7 @@ Will become:
 ```js
 {
   path: '/tasks/:id',
-  regexp: /^\/tasks\/((?:[^\/]+?))(?:\/(?=$))?$/i,
+  pattern: /^\/tasks\/((?:[^\/]+?))(?:\/(?=$))?$/i,
   keys: [{ name: 'id', pattern: '[^\\/]+?', ... }],
   page: function() { return System.import('./pages/tasks/details'); }
 }
