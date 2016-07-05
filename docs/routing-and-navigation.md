@@ -75,7 +75,8 @@ Will become:
   path: '/tasks/:id',
   pattern: /^\/tasks\/((?:[^\/]+?))(?:\/(?=$))?$/i,
   keys: [{ name: 'id', pattern: '[^\\/]+?', ... }],
-  page: function() { return System.import('./pages/tasks/details'); }
+  page: './pages/tasks/details',
+  load: function() { return System.import('./pages/tasks/details'); }
 }
 ```
 
@@ -83,13 +84,13 @@ Given the list of routes you can ask the router to "resolve" the given URI strin
 component. The code for that may look something like this:
 
 ```js
-router.resolve(routes, { path: '/tasks/123' }).then(component => {
+router.resolve(routes, { pathname: '/tasks/123' }).then(component => {
   ReactDOM.render(component, container);
 });
 ```
 
 The `resolve(routes, context)` method will find the first route from the list matching to the
-`/tasks/123` URI string, execute its `page()` method, and return corresponding React component as a
+`/tasks/123` URI string, execute its `load()` method, and return corresponding React component as a
 result wrapped into ES6 Promise (see [`core/router.js`](../core/router.js).
 
 If a route contains some REST API or GraphQL endpoints as data requirements for the given route,
@@ -111,10 +112,9 @@ Finally, you can hook the router's `resolve(..)` method to be called each time w
 
 ```js
 function render(location) {
-  const context = { path: location.pathname };
-  router.resolve(routes, context)
+  router.resolve(routes, location)
     .then(renderComponent)
-    .catch(error => router.resolve(routes, { ...context, error }).then(renderComponent));
+    .catch(error => router.resolve(routes, { ...location, error }).then(renderComponent));
 }
 
 history.listen(render);

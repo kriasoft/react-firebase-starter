@@ -26,9 +26,10 @@ function escape(text) {
  *
  *   {
  *     path: '/about',
- *     pattern: '/^\\/about(?:\/(?=$))?$/i',
+ *     pattern: /^\\/about(?:\/(?=$))?$/i,
  *     keys: [],
- *     page: function () { return new Promise(resolve => require(['./pages/about'], resolve)); }
+ *     page: './pages/about',
+ *     load: function () { return new Promise(resolve => require(['./pages/about'], resolve)); }
  *   }
  */
 module.exports = function routesLoader(source) {
@@ -53,9 +54,10 @@ module.exports = function routesLoader(source) {
       })`;
     output.push('  {\n');
     output.push(`    path: '${escape(route.path)}',\n`);
-    output.push(`    pattern: '${escape(pattern.toString())}',\n`);
+    output.push(`    pattern: ${pattern.toString()},\n`);
     output.push(`    keys: ${JSON.stringify(keys)},\n`);
-    output.push(`    page: function page() { return ${require(escape(route.page))}; },\n`);
+    output.push(`    page: '${escape(route.page)}',\n`);
+    output.push(`    load: function load() { return ${require(escape(route.page))}; },\n`);
     output.push('  },\n');
   }
 
