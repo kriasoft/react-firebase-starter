@@ -3,24 +3,25 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title></title>
+    <title><%= config.title %></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400italic,500,500italic,700,700italic">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://cdn.rawgit.com/tleunen/react-mdl/master/extra/material.min.css">
     <link rel="stylesheet" href="https://cdn.rawgit.com/isagalaev/highlight.js/master/src/styles/default.css">
-    <link rel="apple-touch-icon" href="public/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
   </head>
   <body>
     <div id="container"></div>
     <script src="https://cdn.rawgit.com/tleunen/react-mdl/master/extra/material.min.js"></script>
-    <script src="/dist/main.js"></script>
-    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    <script src="<%= bundle %>"></script>
+    <%_ if (!debug && config.trackingID) { _%>
     <script>
       window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-      ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+      ga('create','<%= config.trackingID %>','auto');ga('send','pageview')
     </script>
     <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    <%_ } _%>
   </body>
 </html>

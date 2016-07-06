@@ -12,21 +12,28 @@
 
 const fs = require('fs');
 const del = require('del');
+const ejs = require('ejs');
 const webpack = require('webpack');
 const firebase = require('firebase-tools');
 const browserSync = require('browser-sync');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const tasks = new Map();
+// TODO: Update configuration settings
+const config = {
+  title: 'React Static Boilerplate',        // Your website title
+  url: 'https://rsb.kriasoft.com',          // Your website URL
+  project: 'react-static-boilerplate',      // Firebase project. See README.md -> How to Deploy
+  trackingID: 'UA-XXXXX-Y',                 // Google Analytics Site's ID
+};
+
+const tasks = new Map(); // The collection of automation tasks ('clean', 'build', 'publish', etc.)
 
 function run(task) {
   const start = new Date();
   console.log(`Starting '${task}'...`);
   return Promise.resolve().then(() => tasks.get(task)()).then(() => {
-    const end = new Date();
-    const time = end.getTime() - start.getTime();
-    console.log(`Finished '${task}' after ${time}ms`);
+    console.log(`Finished '${task}' after ${new Date().getTime() - start.getTime()}ms`);
   }, err => console.error(err.stack));
 }
 
@@ -39,10 +46,25 @@ tasks.set('clean', () => del(['public/dist/*', '!public/dist/.git'], { dot: true
 // Copy ./index.html into the /public folder
 // -----------------------------------------------------------------------------
 tasks.set('html', () => {
+  const webpackConfig = require('./webpack.config');
   const assets = JSON.parse(fs.readFileSync('./public/dist/assets.json', 'utf8'));
-  const html = fs.readFileSync('./index.html', 'utf8')
-    .replace(/"\/dist\/main\.js"/, `"${assets.main.js}"`);
-  fs.writeFileSync('./public/index.html', html, 'utf8');
+  const template = fs.readFileSync('./public/index.ejs', 'utf8');
+  const render = ejs.compile(template, { filename: './public/index.ejs' });
+  const output = render({ debug: webpackConfig.debug, bundle: assets.main.js, config });
+  fs.writeFileSync('./public/index.html', output, 'utf8');
+});
+
+//
+// Generate sitemap.xml
+// -----------------------------------------------------------------------------
+tasks.set('sitemap', () => {
+  const urls = require('./routes.json')
+    .filter(x => !x.path.includes(':'))
+    .map(x => ({ loc: x.path }));
+  const template = fs.readFileSync('./public/sitemap.ejs', 'utf8');
+  const render = ejs.compile(template, { filename: './public/sitemap.ejs' });
+  const output = render({ config, urls });
+  fs.writeFileSync('public/sitemap.xml', output, 'utf8');
 });
 
 //
@@ -69,6 +91,7 @@ tasks.set('build', () => Promise.resolve()
   .then(() => run('clean'))
   .then(() => run('bundle'))
   .then(() => run('html'))
+  .then(() => run('sitemap'))
 );
 
 //
@@ -79,7 +102,7 @@ tasks.set('publish', () => {
   return run('build')
     .then(() => firebase.login({ nonInteractive: false }))
     .then(() => firebase.deploy({
-      project: 'react-static-boilerplate', // TODO: Update project name
+      project: config.project,
       cwd: __dirname,
     }))
     .then(() => { setTimeout(() => process.exit()); });

@@ -77,7 +77,6 @@ or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbs
 │   └── /...                    # etc.
 ├── /test/                      # Unit and integration tests
 ├── /utils/                     # Utility and helper classes
-│── index.html                  # HTML page that references application bundle
 │── main.js                     # React application entry point
 │── package.json                # The list of project dependencies and NPM scripts
 │── routes.json                 # This list of application routes
@@ -113,13 +112,16 @@ $ npm run test                  # Run unit tests. Or, `npm run test:watch`
 
 ### How to Deploy
 
-Update `publish` script in the [`run.js`](run.js) file with your full Firebase project name as found in your [Firebase console](https://console.firebase.google.com/). Note that this may have an additional identifier suffix than the shorter name you've provided. Then run: 
+Update `publish` script in the [`run.js`](run.js) file with your full Firebase project name as found
+in your [Firebase console](https://console.firebase.google.com/). Note that this may have an
+additional identifier suffix than the shorter name you've provided. Then run: 
 
 ```shell
 $ node run publish              # Build and publish the website to Firebase, same as `npm run publish`
 ```
 
-The first time you publish, you will be prompted to authenticate with Google and generate an authentication token in order for the publish script to continue.
+The first time you publish, you will be prompted to authenticate with Google and generate an
+authentication token in order for the publish script to continue.
 
 ![publish](https://koistya.github.io/files/react-static-boilerplate-publish.gif)
 

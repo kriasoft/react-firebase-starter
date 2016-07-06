@@ -4,6 +4,7 @@
 # Compiled output
 public/dist
 public/index.html
+public/sitemap.xml
 
 # Node.js and NPM
 node_modules
