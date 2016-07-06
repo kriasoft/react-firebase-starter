@@ -113,8 +113,10 @@ tasks.set('publish', () => {
 // -----------------------------------------------------------------------------
 tasks.set('start', () => {
   global.HMR = !process.argv.includes('--no-hmr'); // Hot Module Replacement (HMR)
-  const html = fs.readFileSync('./index.html', 'utf8');
-  fs.writeFileSync('./public/index.html', html, 'utf8');
+  const template = fs.readFileSync('./public/index.ejs', 'utf8');
+  const render = ejs.compile(template, { filename: './public/index.ejs' });
+  const output = render({ debug: true, bundle: '/dist/main.js', config });
+  fs.writeFileSync('./public/index.html', output, 'utf8');
   const webpackConfig = require('./webpack.config');
   const bundler = webpack(webpackConfig);
   return new Promise(resolve => {
