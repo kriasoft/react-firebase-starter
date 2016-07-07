@@ -71,6 +71,7 @@ const config = {
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       __DEV__: isDebug,
     }),
+    new webpack.NamedModulesPlugin(),
     // Emit a JSON file with assets paths
     // https://github.com/sporto/assets-webpack-plugin#options
     new AssetsPlugin({
@@ -187,6 +188,9 @@ const config = {
   },
 
 };
+
+// Integrate Webpack 2.x (replace 'es2015' preset with 'es2015-webpack')
+babelConfig.presets = babelConfig.presets.map(x => (x === 'es2015' ? `${x}-native-modules` : x));
 
 // Optimize the bundle in release (production) mode
 if (!isDebug) {
