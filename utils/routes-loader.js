@@ -29,7 +29,7 @@ function escape(text) {
  *     pattern: /^\\/about(?:\/(?=$))?$/i,
  *     keys: [],
  *     page: './pages/about',
- *     load: function () { return new Promise(resolve => require(['./pages/about'], resolve)); }
+ *     load: function () { return System.load('./pages/about'); }
  *   }
  */
 module.exports = function routesLoader(source) {
@@ -42,22 +42,14 @@ module.exports = function routesLoader(source) {
     const keys = [];
     const pattern = toRegExp(route.path, keys);
     const require = route.path === '/' || route.path === '/error' ?
-      module => `Promise.resolve(require('${module}'))` :
-      module => `new Promise(function (resolve, reject) {
-        try {
-          require.ensure(['${module}'], function (require) {
-            resolve(require('${module}'));
-          });
-        } catch (err) {
-          reject(err);
-        }
-      })`;
+      module => `Promise.resolve(require('${escape(module)}'))` :
+      module => `System.import('${escape(module)}')`;
     output.push('  {\n');
     output.push(`    path: '${escape(route.path)}',\n`);
     output.push(`    pattern: ${pattern.toString()},\n`);
     output.push(`    keys: ${JSON.stringify(keys)},\n`);
     output.push(`    page: '${escape(route.page)}',\n`);
-    output.push(`    load: function load() { return ${require(escape(route.page))}; },\n`);
+    output.push(`    load: function load() { return ${require(route.page)}; },\n`);
     output.push('  },\n');
   }
 
