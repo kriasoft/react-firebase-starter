@@ -11,6 +11,7 @@
 import React from 'react';
 import Header from './Header';
 import Navigation from './Navigation';
+import Footer from '../Footer';
 import s from './Layout.css';
 
 class Layout extends React.Component {
@@ -32,7 +33,10 @@ class Layout extends React.Component {
             <div className="mdl-layout-spacer"></div>
             <Navigation />
           </Header>
-          <main {...this.props} className={s.content} />
+          <main className="mdl-layout__content">
+            <div className={s.content} {...this.props} />
+            <Footer />
+          </main>
         </div>
       </div>
     );
