@@ -41,8 +41,7 @@ module.exports = function routesLoader(source) {
   for (const route of routes) {
     const keys = [];
     const pattern = toRegExp(route.path, keys);
-    const require = route.path === '/' || route.path === '/error' ?
-      module => `Promise.resolve(require('${module}'))` :
+    const require = route.chunk ?
       module => `new Promise(function (resolve, reject) {
         try {
           require.ensure(['${module}'], function (require) {
@@ -51,7 +50,9 @@ module.exports = function routesLoader(source) {
         } catch (err) {
           reject(err);
         }
-      })`;
+      })` :
+      module => `Promise.resolve(require('${module}'))`;
+
     output.push('  {\n');
     output.push(`    path: '${escape(route.path)}',\n`);
     output.push(`    pattern: ${pattern.toString()},\n`);

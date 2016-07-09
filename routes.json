@@ -12,6 +12,7 @@
   },
   {
     "path": "/about",
+    "chunk": true,
     "page": "./pages/about"
   },
   {
