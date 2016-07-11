@@ -57,7 +57,12 @@ function resolve(routes, context) {
     }
 
     // TODO: Fetch data required data for the route. See "routes.json" file in the root directory.
-    return route.load().then(Page => <Page.default route={route} error={context.error} />);
+    return route.load().then(results => {
+      let Page = results.shift();
+      let data = results;
+      
+      return <Page.default route={route} data={data} error={context.error} />
+    });
   }
 
   const error = new Error('Page not found');

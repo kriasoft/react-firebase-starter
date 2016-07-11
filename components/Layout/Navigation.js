@@ -26,6 +26,8 @@ class Navigation extends React.Component {
       <nav className="mdl-navigation" ref="root">
         <Link className="mdl-navigation__link" to="/">Home</Link>
         <Link className="mdl-navigation__link" to="/about">About</Link>
+        <Link className="mdl-navigation__link" to="/blog/2016/07/01/Post-1">Post 1</Link>
+        <Link className="mdl-navigation__link" to="/blog/2016/07/01/Post-2">Post 2</Link>
         <Link className="mdl-navigation__link" to="/not-found">Not Found</Link>
       </nav>
     );
