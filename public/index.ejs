@@ -23,5 +23,13 @@
     </script>
     <script src="https://www.google-analytics.com/analytics.js" async defer></script>
     <%_ } _%>
+
+    <script src="/scripts/upup.min.js"></script>
+    <script>
+      UpUp.start({
+        'content-url': '/',
+        'service-worker-url': '/upup.sw.min.js'
+      })
+    </script>
   </body>
 </html>
