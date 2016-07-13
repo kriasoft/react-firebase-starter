@@ -30,6 +30,8 @@ class ErrorPage extends React.Component {
   };
 
   render() {
+    if (this.props.error) console.error(this.props.error); // eslint-disable-line no-console
+
     const [code, title] = this.props.error && this.props.error.status === 404 ?
       ['404', 'Page not found'] :
       ['Error', 'Oups, something went wrong'];
