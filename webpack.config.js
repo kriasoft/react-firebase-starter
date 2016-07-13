@@ -89,7 +89,10 @@ const config = {
           path.resolve(__dirname, './main.js'),
         ],
         loader: 'babel-loader',
-        query: extend({}, pkg.babel, { babelrc: false }),
+        query: extend({}, pkg.babel, {
+          babelrc: false,
+          cacheDirectory: useHMR,
+        }),
       },
       {
         test: /\.css/,
