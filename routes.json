@@ -2,13 +2,15 @@
   {
     "path": "/",
     "page": "./pages/home",
+    "chunk": "main",
     "data": {
       "commits": "GET https://api.github.com/repos/koistya/react-static-boilerplate/commits"
     }
   },
   {
     "path": "/error",
-    "page": "./pages/error"
+    "page": "./pages/error",
+    "chunk": "main"
   },
   {
     "path": "/about",

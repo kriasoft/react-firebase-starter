@@ -158,3 +158,7 @@ This transition is then handled by `history.listen(render)` listener inside the
 RSB comes with a helper component that can be used instead of `<a>` elements, see
 [`components/Link/Link.js`](../components/Link/Link.js). So, instead of writing `<a href="/tasks/123"
 onClick={this.transition}>Show task #123</a>` you can have `<Link to="/tasks/123">Show task #123</Link>`.
+
+### Related Articles
+
+* [You might not need React Router](https://medium.com/@tarkus/you-might-not-need-react-router-38673620f3d) by Konstantin Tarkus

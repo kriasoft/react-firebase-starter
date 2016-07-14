@@ -41,13 +41,13 @@ module.exports = function routesLoader(source) {
   for (const route of routes) {
     const keys = [];
     const pattern = toRegExp(route.path, keys);
-    const require = route.path === '/' || route.path === '/error' ?
-      module => `Promise.resolve(require('${module}'))` :
+    const require = route.chunk && route.chunk === 'main' ?
+      module => `Promise.resolve(require('${escape(module)}'))` :
       module => `new Promise(function (resolve, reject) {
         try {
-          require.ensure(['${module}'], function (require) {
-            resolve(require('${module}'));
-          });
+          require.ensure(['${escape(module)}'], function (require) {
+            resolve(require('${escape(module)}'));
+          }${typeof route.chunk === 'string' ? `, '${escape(route.chunk)}'` : ''});
         } catch (err) {
           reject(err);
         }
@@ -57,7 +57,7 @@ module.exports = function routesLoader(source) {
     output.push(`    pattern: ${pattern.toString()},\n`);
     output.push(`    keys: ${JSON.stringify(keys)},\n`);
     output.push(`    page: '${escape(route.page)}',\n`);
-    output.push(`    load: function load() { return ${require(escape(route.page))}; },\n`);
+    output.push(`    load: function load() { return ${require(route.page)}; },\n`);
     output.push('  },\n');
   }
 
