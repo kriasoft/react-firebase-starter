@@ -1,0 +1,77 @@
+{
+  "name": "generator-react-static",
+  "version": "1.0.1",
+  "description": "Project template for authoring stand-alone web applications (aka SPA) optmized for CDN hosting (in Fireabase). It's built upon best of breed technologies including React (ReactJS), Redux, Babel, Webpack, CSS Modules, PostCSS, Browsersync, HMR, React Hot Loader and more.",
+  "repository": "kriasoft/react-static-boilerplate",
+  "author": "Kriasoft, LLC <hello@kriasoft.com> (https://www.kriasoft.com)",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "reactjs",
+    "react.js",
+    "redux",
+    "routing",
+    "router",
+    "component",
+    "front-end",
+    "babel",
+    "webpack",
+    "postcss",
+    "css modules",
+    "es6",
+    "es2015",
+    "scaffold",
+    "scaffolding",
+    "boilerplate",
+    "yeoman-generator"
+  ],
+  "files": [
+    "generators",
+    "src"
+  ],
+  "main": "generators\\app\\index.js",
+  "dependencies": {
+    "babel-runtime": "^6.9.2",
+    "chalk": "^1.1.3",
+    "yeoman-generator": "^0.23.4",
+    "yosay": "^1.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-core": "^6.10.4",
+    "babel-eslint": "^6.1.2",
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-1": "^6.5.0",
+    "del": "^2.2.1",
+    "eslint": "^3.0.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.10.3",
+    "mocha": "^2.5.3",
+    "yeoman-assert": "^2.2.1",
+    "yeoman-test": "^1.4.0"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-1"
+    ],
+    "plugins": [
+      "transform-runtime"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": "airbnb/base",
+    "rules": {
+      "import/no-mutable-exports": 0
+    }
+  },
+  "scripts": {
+    "build": "node run build",
+    "build:watch": "node run build --watch",
+    "lint": "eslint src test",
+    "test": "mocha",
+    "test:watch": "mocha --reporter min --watch"
+  }
+}
