@@ -7,9 +7,9 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-const path = require('path');
-const assert = require('yeoman-assert');
-const helpers = require('yeoman-test');
+import path from 'path';
+import assert from 'yeoman-assert';
+import helpers from 'yeoman-test';
 
 describe('generator:app', () => {
 
