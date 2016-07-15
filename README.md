@@ -87,17 +87,38 @@ or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbs
 
 ### Getting Started
 
-Just clone the repo, install Node.js modules and run `npm start`:
+**1**. Make sure that you have [Node.js](https://nodejs.org/) v6 or newer installed on your machine.
+
+**2**. Clone this repository or use [Yeoman
+generator](https://github.com/kriasoft/react-static-boilerplate/tree/generator-react-static) to
+bootstrap your project:
 
 ```shell
 $ git clone -o react-static-boilerplate -b master --single-branch \
       https://github.com/kriasoft/react-static-boilerplate.git MyApp
 $ cd MyApp
 $ npm install                   # Install project dependencies listed in package.json
-$ node run                      # Build and launch the app, same as `npm start`
 ```
 
-**NODE**: Make sure that you have [Node.js](https://nodejs.org/) v6 installed on your local machine.
+<p align="center">——— or ———</p>
+
+```shell
+$ npm install -g yo
+$ npm install -g generator-react-static
+$ mkdir MyApp
+$ cd MyApp
+$ yo react-static
+```
+
+**3**. Compile and launch your app by running:
+
+```shell
+$ node run                      # Same as `npm start` or `node run start`
+```
+
+You can also test your app in release (production) mode by running `node run start --release` or
+with HMR and React Hot Loader disabled by running `node run start --no-hmr`. The app should become
+available at [http://localhost:3000/](http://localhost:3000/).
 
 
 ### How to Test
