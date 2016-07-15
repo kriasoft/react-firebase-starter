@@ -1,4 +1,4 @@
-# [React Static](https://github.com/kriasoft/react-static-boilerplate) Generator
+# [React Static](https://github.com/kriasoft/react-static-boilerplate) Generator &nbsp; [![Build Status](http://img.shields.io/travis/kriasoft/react-static-boilerplate/generator-react-static.svg?style=flat-square)](https://travis-ci.org/kriasoft/react-static-boilerplate/branches) [![Online Chat](http://img.shields.io/badge/chat_room-%23react--static--boilerplate-blue.svg?style=flat-square)](https://gitter.im/kriasoft/react-static-boilerplate)
 
 > [Yeoman](http://yeoman.io/) generator for authoring stand-alone web applications (SPA) optimized
 > for CDN hosting in Firebase. It is built upon best of breed technologies including React, Redux,
