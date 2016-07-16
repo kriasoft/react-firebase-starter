@@ -42,11 +42,11 @@ module.exports = function routesLoader(source) {
     const keys = [];
     const pattern = toRegExp(route.path, keys);
     const require = route.chunk && route.chunk === 'main' ?
-      module => `Promise.resolve(require('${escape(module)}'))` :
+      module => `Promise.resolve(require('${escape(module)}').default)` :
       module => `new Promise(function (resolve, reject) {
         try {
           require.ensure(['${escape(module)}'], function (require) {
-            resolve(require('${escape(module)}'));
+            resolve(require('${escape(module)}').default);
           }${typeof route.chunk === 'string' ? `, '${escape(route.chunk)}'` : ''});
         } catch (err) {
           reject(err);
