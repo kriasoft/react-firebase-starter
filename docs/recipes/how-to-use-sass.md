@@ -1,4 +1,4 @@
-## How to Use Sass
+## How to Use Sass/SCSS
 
 **1**. Install [`sass-loader`](https://github.com/jtangelder/sass-loader) as a development dependency:
 
@@ -6,7 +6,8 @@
 $ npm install sass-loader --save-dev
 ```
 
-**2**. Update `webpack.config.js` file to use `sass-loader` for `.scss` files:
+**2**. Update [`webpack.config.js`](../../webpack.config.js) file to use `sass-loader` for `.scss`
+files:
 
 ```js
 const config = {
@@ -30,7 +31,7 @@ const config = {
 }
 ```
 
-**3**: Add one more configuration (pack) for [PostCSS](https://github.com/postcss/postcss) named
+**3**. Add one more configuration (pack) for [PostCSS](https://github.com/postcss/postcss) named
 `sass` to enable [Autoprefixer](https://github.com/postcss/autoprefixer) for your `.scss` files:
 
 ```js
