@@ -1,8 +1,16 @@
 ## How to Use Sass/SCSS
 
-**1**. Install [`sass-loader`](https://github.com/jtangelder/sass-loader) as a development dependency:
+> **Note**: Using plain CSS via [PostCSS](http://postcss.org/) is recommended approach because it
+reduces the size of the tech stack used in the project, enforces you to learn vanilla CSS syntax
+with modern CSS Level 3+ features that allow you doing everything you would normally do with
+Sass/SCSS. Also compilation of plain `.css` files should work faster with `postcss` pre-processor
+than `node-sass`.
+
+**1**. Install [`node-sass`](https://github.com/sass/node-sass) and
+[`sass-loader`](https://github.com/jtangelder/sass-loader) modules as dev dependencies:
 
 ```sh
+$ npm install node-sass --save-dev
 $ npm install sass-loader --save-dev
 ```
 
@@ -51,4 +59,4 @@ const config = {
 }
 ```
 
-For more information visit https://github.com/jtangelder/sass-loader
+For more information visit https://github.com/jtangelder/sass-loader and https://github.com/sass/node-sass
