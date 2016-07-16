@@ -4,7 +4,7 @@
     "page": "./pages/home",
     "chunk": "main",
     "data": {
-      "commits": "GET https://api.github.com/repos/koistya/react-static-boilerplate/commits"
+      "articles": "GET https://gist.githubusercontent.com/koistya/a32919e847531320675764e7308b796a/raw/articles.json"
     }
   },
   {

@@ -11,7 +11,6 @@
 /* eslint-disable global-require */
 
 const path = require('path');
-const extend = require('extend');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const pkg = require('./package.json');
@@ -19,6 +18,10 @@ const pkg = require('./package.json');
 const isDebug = global.DEBUG === false ? false : !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose') || process.argv.includes('-v');
 const useHMR = !!global.HMR; // Hot Module Replacement (HMR)
+const babelConfig = Object.assign({}, pkg.babel, {
+  babelrc: false,
+  cacheDirectory: useHMR,
+});
 
 // Webpack configuration (main.js => public/dist/main.{hash}.js)
 // http://webpack.github.io/docs/configuration.html
@@ -88,11 +91,7 @@ const config = {
           path.resolve(__dirname, './pages'),
           path.resolve(__dirname, './main.js'),
         ],
-        loader: 'babel-loader',
-        query: extend({}, pkg.babel, {
-          babelrc: false,
-          cacheDirectory: useHMR,
-        }),
+        loader: `babel-loader?${JSON.stringify(babelConfig)}`,
       },
       {
         test: /\.css/,
@@ -121,7 +120,10 @@ const config = {
         include: [
           path.resolve(__dirname, './routes.json'),
         ],
-        loader: path.resolve(__dirname, './utils/routes-loader.js'),
+        loaders: [
+          `babel-loader?${JSON.stringify(babelConfig)}`,
+          path.resolve(__dirname, './utils/routes-loader.js'),
+        ],
       },
       {
         test: /\.md$/,
@@ -195,9 +197,8 @@ if (!isDebug) {
 
 // Hot Module Replacement (HMR) + React Hot Reload
 if (isDebug && useHMR) {
+  babelConfig.plugins.unshift('react-hot-loader/babel');
   config.entry.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client');
-  config.module.loaders.find(x => x.loader === 'babel-loader')
-    .query.plugins.unshift('react-hot-loader/babel');
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
   config.plugins.push(new webpack.NoErrorsPlugin());
 }
