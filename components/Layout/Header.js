@@ -22,7 +22,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <header className="mdl-layout__header" ref="root">
+      <header className="mdl-layout__header" ref={node => (this.root = node)}>
         <div className="mdl-layout__header-row" {...this.props} />
       </header>
     );
