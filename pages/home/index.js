@@ -28,8 +28,8 @@ class HomePage extends React.Component {
         <div dangerouslySetInnerHTML={{ __html: html }} />
         <h4>Articles</h4>
         <ul>
-          {this.props.articles.map(article =>
-            <li><a href={article.url}>{article.title}</a> by {article.author}</li>
+          {this.props.articles.map((article, i) =>
+            <li key={i}><a href={article.url}>{article.title}</a> by {article.author}</li>
           )}
         </ul>
         <p>
