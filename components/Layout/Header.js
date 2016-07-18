@@ -13,11 +13,15 @@ import React from 'react';
 class Header extends React.Component {
 
   componentDidMount() {
-    window.componentHandler.upgradeElement(this.root);
+		if (window.componentHandler && this.root) {
+			window.componentHandler.upgradeElement(this.root);
+		}
   }
 
   componentWillUnmount() {
-    window.componentHandler.downgradeElements(this.root);
+		if (window.componentHandler && this.root) {
+			window.componentHandler.downgradeElements(this.root);
+		}
   }
 
   render() {
