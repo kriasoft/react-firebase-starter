@@ -131,8 +131,10 @@ tasks.set('start', () => {
       fs.writeFileSync('./public/index.html', output, 'utf8');
 
       // Launch Browsersync after the initial bundling is complete
+      // For more information visit https://browsersync.io/docs/options
       if (++count === 1) {
         bs.init({
+          port: process.env.PORT || 3000,
           server: {
             baseDir: 'public',
             middleware: [
@@ -154,4 +156,4 @@ tasks.set('start', () => {
 });
 
 // Execute the specified task or default one. E.g.: node run build
-run(process.argv[2] || 'start');
+run(/^\w/.test(process.argv[2] || '') ? process.argv[2] : 'start' /* default */);
