@@ -1,6 +1,6 @@
 {
   "name": "generator-react-static",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Project template for authoring stand-alone web applications (aka SPA) optmized for CDN hosting (in Fireabase). It's built upon best of breed technologies including React (ReactJS), Redux, Babel, Webpack, CSS Modules, PostCSS, Browsersync, HMR, React Hot Loader and more.",
   "repository": "kriasoft/react-static-boilerplate",
   "author": "Kriasoft, LLC <hello@kriasoft.com> (https://www.kriasoft.com)",
