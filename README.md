@@ -87,9 +87,10 @@ or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbs
 
 ### Getting Started
 
-**1**. Make sure that you have [Node.js](https://nodejs.org/) v6 or newer installed on your machine.
+**Step 1**. Make sure that you have [Node.js](https://nodejs.org/) v6 or newer installed on your
+machine.
 
-**2**. Clone this repository or use [Yeoman
+**Step 2**. Clone this repository or use [Yeoman
 generator](https://github.com/kriasoft/react-static-boilerplate/tree/generator-react-static) to
 bootstrap your project:
 
@@ -110,7 +111,7 @@ $ cd MyApp
 $ yo react-static
 ```
 
-**3**. Compile and launch your app by running:
+**Step 3**. Compile and launch your app by running:
 
 ```shell
 $ node run                      # Same as `npm start` or `node run start`
