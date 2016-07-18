@@ -135,6 +135,7 @@ tasks.set('start', () => {
       if (++count === 1) {
         bs.init({
           port: process.env.PORT || 3000,
+          ui: { port: Number(process.env.PORT || 3000) + 1 },
           server: {
             baseDir: 'public',
             middleware: [
