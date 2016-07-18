@@ -6,7 +6,9 @@ with modern CSS Level 3+ features that allow you doing everything you would norm
 Sass/SCSS. Also compilation of plain `.css` files should work faster with `postcss` pre-processor
 than `node-sass`.
 
-**1**. Install [`node-sass`](https://github.com/sass/node-sass) and
+### Step 1
+
+Install [`node-sass`](https://github.com/sass/node-sass) and
 [`sass-loader`](https://github.com/jtangelder/sass-loader) modules as dev dependencies:
 
 ```sh
@@ -14,8 +16,9 @@ $ npm install node-sass --save-dev
 $ npm install sass-loader --save-dev
 ```
 
-**2**. Update [`webpack.config.js`](../../webpack.config.js) file to use `sass-loader` for `.scss`
-files:
+### Step 2
+
+Update [`webpack.config.js`](../../webpack.config.js) file to use `sass-loader` for `.scss` files:
 
 ```js
 const config = {
@@ -39,8 +42,10 @@ const config = {
 }
 ```
 
-**3**. Add one more configuration (pack) for [PostCSS](https://github.com/postcss/postcss) named
-`sass` to enable [Autoprefixer](https://github.com/postcss/autoprefixer) for your `.scss` files:
+### Step 3
+
+Add one more configuration (pack) for [PostCSS](https://github.com/postcss/postcss) named `sass` to
+enable [Autoprefixer](https://github.com/postcss/autoprefixer) for your `.scss` files:
 
 ```js
 const config = {

@@ -1,6 +1,8 @@
 ## How to Publish Website to [GitHub Pages](https://pages.github.com/)
 
-`1`. Add deployment script to `run.js`:
+### Step 1
+
+Add deployment script to `run.js`:
 
 ```js
 tasks.set('publish', () => {
@@ -44,7 +46,9 @@ tasks.set('publish', () => {
 });
 ```
 
-`2`. Whenever you need to compile and publish your site to GitHub Pages simply run:
+### Step 2
+
+Whenever you need to compile and publish your site to GitHub Pages simply run:
 
 ```sh
 $ node run publish

@@ -1,16 +1,22 @@
 ## How to Publish Website to Amazon S3
 
-`1`. Configure S3 bucket for hosting a static site:
+### Step 1
+
+Configure S3 bucket for hosting a static site:
 
 http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
 
-`2`. Install [`s3`](https://github.com/andrewrk/node-s3-client) npm module:
+### Step 2
+
+Install [`s3`](https://github.com/andrewrk/node-s3-client) npm module:
 
 ```sh
 $ npm install s3 --save-dev
 ```
 
-`3`. Add deployment script to `run.js`:
+### Step 3
+
+Add deployment script to `run.js`:
 
 ```js
 tasks.set('publish', () => {
@@ -34,7 +40,9 @@ tasks.set('publish', () => {
 });
 ```
 
-`4`. Whenever you need to compile and publish your site to Amazon S3 simply run:
+Step 4
+
+Whenever you need to compile and publish your site to Amazon S3 simply run:
 
 ```sh
 $ node run publish
