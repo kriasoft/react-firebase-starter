@@ -42,7 +42,7 @@ To compile and launch your app simply run:
 $ node run
 ```
 
-For more information vistit https://github.com/kriasoft/react-static-boilerplate
+For more information visit https://github.com/kriasoft/react-static-boilerplate
 
 
 ### License
