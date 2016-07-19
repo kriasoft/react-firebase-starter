@@ -10,6 +10,7 @@
 
 import React, { PropTypes } from 'react';
 import Layout from '../../components/Layout';
+import s from './styles.css';
 import { title, html } from './index.md';
 
 class HomePage extends React.Component {
@@ -24,7 +25,7 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <Layout>
+      <Layout className={s.content}>
         <div dangerouslySetInnerHTML={{ __html: html }} />
         <h4>Articles</h4>
         <ul>

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.9.1",
+    "classnames": "^2.2.5",
     "fastclick": "^1.0.6",
     "history": "^3.0.0",
     "react": "^15.2.1",
