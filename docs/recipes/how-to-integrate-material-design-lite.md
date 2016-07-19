@@ -16,7 +16,7 @@ const config = {
 
   entry: [
     '!!style!css!react-mdl/extra/material.min.css',  // <==
-    'react-mdl/extra/material.js',                   // <==
+    'react-mdl/extra/material.min.js',               // <==
     './main.js',
   ],
 
@@ -118,7 +118,7 @@ import Button from './components/Button';
 function MyComponent() {
   return (
     <div>
-      <Button>Click me!</Button>
+      <Button raised={true}>Click me!</Button>
     </div>
   );
 }
@@ -128,7 +128,8 @@ export default MyComponent;
 
 ### Step 4
 
-Extend MDL components with your own styles:
+Extend MDL components with your own styles (via [CSS Modules](https://github.com/css-modules/css-modules)
+or [inline styles](https://facebook.github.io/react/tips/inline-styles.html)):
 
 #### `components/Spinner/Spinner.css`
 
