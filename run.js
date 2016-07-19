@@ -121,7 +121,6 @@ tasks.set('start', () => {
       publicPath: webpackConfig.output.publicPath,
       stats: webpackConfig.stats,
     });
-    const webpackHotMiddleware = require('webpack-hot-middleware')(compiler);
     compiler.plugin('done', stats => {
       // Generate index.html page
       const bundle = stats.compilation.chunks.find(x => x.name === 'main').files[0];
@@ -140,14 +139,8 @@ tasks.set('start', () => {
             baseDir: 'public',
             middleware: [
               webpackDevMiddleware,
-              webpackHotMiddleware,
-              // Serve index.html for all unknown requests
-              (req, res, next) => {
-                if (req.headers.accept && req.headers.accept.startsWith('text/html')) {
-                  req.url = '/index.html'; // eslint-disable-line no-param-reassign
-                }
-                next();
-              },
+              require('webpack-hot-middleware')(compiler),
+              require('connect-history-api-fallback')(),
             ],
           },
         }, resolve);
