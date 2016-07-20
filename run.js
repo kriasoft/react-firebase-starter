@@ -89,7 +89,7 @@ tasks.set('build', () => {
     .then(() => run('clean'))
     .then(() => run('bundle'))
     .then(() => run('html'))
-    .then(() => run('sitemap'))
+    .then(() => run('sitemap'));
 });
 
 //
