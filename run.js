@@ -83,18 +83,19 @@ tasks.set('bundle', () => {
 //
 // Build website into a distributable format
 // -----------------------------------------------------------------------------
-tasks.set('build', () => Promise.resolve()
-  .then(() => run('clean'))
-  .then(() => run('bundle'))
-  .then(() => run('html'))
-  .then(() => run('sitemap'))
-);
+tasks.set('build', () => {
+  global.DEBUG = process.argv.includes('--debug') || false;
+  return Promise.resolve()
+    .then(() => run('clean'))
+    .then(() => run('bundle'))
+    .then(() => run('html'))
+    .then(() => run('sitemap'))
+});
 
 //
 // Build and publish the website
 // -----------------------------------------------------------------------------
 tasks.set('publish', () => {
-  global.DEBUG = process.argv.includes('--debug') || false;
   const firebase = require('firebase-tools');
   return run('build')
     .then(() => firebase.login({ nonInteractive: false }))
