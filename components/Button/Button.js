@@ -53,7 +53,7 @@ class Button extends React.Component {
             'mdl-button--colored': colored,
             'mdl-button--primary': primary,
             'mdl-button--accent': accent,
-            'mdl-button--ripple': ripple,
+            'mdl-js-ripple-effect': ripple,
           },
           className
         ),
