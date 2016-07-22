@@ -67,20 +67,20 @@ MDL [source code](https://github.com/google/material-design-lite/tree/mdl-1.x/sr
 component mounts into the DOM, it need to notify MDL runtime that the underlying DOM elements can be
 directly manipulated by MDL; likewise right before the React component is being removed from the DOM
 it needs to notify MDL so it could do proper clean up. MDL provides `upgradeElement(node)` and
-`downgradeElements(nodes)` API methods for that. For example, to implement a Button component you
-would write code similar to this:
+`downgradeElements(nodes)` API methods for that. For example, to implement a [Button](../../components/Button)
+component you would write code similar to this:
 
 #### `components/Button/Button.js`
 
 ```js
 import React, { PropTypes } from 'react';
-import cx from 'classnames';
+import classNames from 'classnames';
 
 class Button extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
-    raised: PropTypes.bool,
+    primary: PropTypes.bool,
   };
 
   componentDidMount() {
@@ -92,16 +92,19 @@ class Button extends React.Component {
   }
 
   render() {
-    return (
-      <button
-        ref={node => (this.root = node)}                    // <==
-        {...this.props}
-        className={cx(
-          'mdl-button',
-          'mdl-js-button',
-          this.props.raised && 'mdl-button--raised',
-          this.props.className)}
-      />
+    const { className, href, primary, children, ...other } = this.props;
+    return React.createElement(
+      href ? 'a' : 'button',
+      {
+        ref: node => (this.root = node),                    // <==
+        className: classNames({
+          'mdl-button mdl-js-button': true,
+          'mdl-button--primary': primary,
+        }),
+        href,
+        ...other
+      },
+      children
     );
   }
 
@@ -118,7 +121,8 @@ import Button from './components/Button';
 function MyComponent() {
   return (
     <div>
-      <Button raised={true}>Click me!</Button>
+      <Button primary={true}>Save</Button>
+      <Button>Cancel</Button>
     </div>
   );
 }
@@ -143,6 +147,7 @@ or [inline styles](https://facebook.github.io/react/tips/inline-styles.html)):
 
 ```js
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 import s from './Spinner.css';
 
 class Spinner extends React.Component {
@@ -160,11 +165,17 @@ class Spinner extends React.Component {
   }
 
   render() {
-    const active = this.props.isActive ? ' is-active' : '';
+    const { className, isActive, ...other } = this.props;
     return (
       <div
         ref={node => (this.root = node)}
-        className={`mdl-spinner mdl-js-spinner ${s.spinner}${active}`}
+        className={classNames({
+          'mdl-spinner mdl-js-spinner': true,
+          'is-active': isActive,
+          s.spinner,
+          className,
+        })}
+        {...other}
       />
     );
   }
