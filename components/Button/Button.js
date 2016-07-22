@@ -21,11 +21,14 @@ class Button extends React.Component {
       PropTypes.func,
     ]),
     type: PropTypes.oneOf(['raised', 'fab', 'mini-fab', 'icon']),
+    to: PropTypes.oneOf([PropTypes.string, PropTypes.object]),
+    href: PropTypes.string,
     className: PropTypes.string,
     colored: PropTypes.bool,
     primary: PropTypes.bool,
     accent: PropTypes.bool,
     ripple: PropTypes.bool,
+    children: PropTypes.node,
   };
 
   componentDidMount() {
@@ -40,7 +43,7 @@ class Button extends React.Component {
     const { component, type, className, colored, to, href,
       primary, accent, ripple, children, ...other } = this.props;
     return React.createElement(
-      component || (to ? Link : (href ? 'a' : 'button')),
+      component || (to ? Link : (href ? 'a' : 'button')), // eslint-disable-line no-nested-ternary
       {
         ref: node => (this.root = node),
         className: cx(
@@ -52,8 +55,10 @@ class Button extends React.Component {
             'mdl-button--accent': accent,
             'mdl-button--ripple': ripple,
           },
-          this.props.className
+          className
         ),
+        to,
+        href,
         ...other,
       },
       children
