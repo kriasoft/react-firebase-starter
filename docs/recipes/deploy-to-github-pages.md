@@ -12,7 +12,7 @@ tasks.set('publish', () => {
   };
   global.DEBUG = process.argv.includes('--debug') || false;
   const spawn = require('child_process').spawn;
-  const opts = { cwd: path.resolve(__dirname, './build'), stdio: ['ignore', 'inherit', 'inherit'] };
+  const opts = { cwd: path.resolve(__dirname, './public'), stdio: ['ignore', 'inherit', 'inherit'] };
   const git = (...args) => new Promise((resolve, reject) => {
     spawn('git', args, opts).on('close', code => {
       if (code === 0) {
