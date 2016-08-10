@@ -6,7 +6,7 @@
 > significantly reduces cost by eliminating the need for servers such as EC2 instances because the
 > entire site can be hosted directly from CDN ([Firebase](https://www.firebase.com/), [GitHub
 > Pages](https://pages.github.com/), [Amazon S3](http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html),
-> or other similar cloud storage). Sites built with RSB cab be fully functional with REST API or
+> or other similar cloud storage). Sites built with RSB can be fully functional with REST API or
 > GraphQL calls to micro-services such as [Amazon Lambda](https://aws.amazon.com/lambda/),
 > [Azure Functions](https://azure.microsoft.com/services/functions/), or dynamic Docker endpoints
 > hosted on [DigitalOcean](https://www.digitalocean.com/?refcode=eef302dbae9f&utm_source=github&utm_medium=oss_sponsorships&utm_campaign=opencollective).
