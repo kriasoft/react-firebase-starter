@@ -21,7 +21,7 @@ tasks.set('publish', () => {
   return Promise.resolve()
     .then(() => run('clean'))
     .then(() => run('build'))
-    .then(() => publish(path.join(__dirname, 'public')));
+    .then(() => publish(`${__dirname}/public`));
 });
 ```
 
