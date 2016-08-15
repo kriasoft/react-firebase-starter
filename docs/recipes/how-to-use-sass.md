@@ -52,7 +52,7 @@ const config = {
   ...
   postcss(bundler) {
     return {
-      default: [
+      defaults: [
         ...
       ],
       sass: [
