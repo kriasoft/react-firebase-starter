@@ -48,7 +48,7 @@
 **Demo**: https://rsb.kriasoft.com &nbsp;|&nbsp; **View** [docs](./docs) &nbsp;|&nbsp; **Follow us** on
 [Gitter](https://gitter.im/kriasoft/react-static-boilerplate), [Twitter](https://twitter.com/ReactStatic),
 or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbsp;|&nbsp;
-**Send feedback** to [@koistya](https://twitter.com/koistya)
+**Learn** to [React.js and ES6](#learn-reactjs-and-es6)
 
 
 ### Directory Layout
@@ -166,14 +166,13 @@ $ npm install
 ```
 
 
-### How to Contribute
+### Learn React.js and ES6
 
-Anyone and everyone is welcome to [contribute](CONTRIBUTING.md) to this project. The best way to
-start is by checking our [open issues](https://github.com/kriasoft/react-static-boilerplate/issues),
-[submit a new issues](https://github.com/kriasoft/react-static-boilerplate/issues/new?labels=bug) or
-[feature request](https://github.com/kriasoft/react-static-boilerplate/issues/new?labels=enhancement),
-participate in discussions, upvote or downvote the issues you like or dislike, send [pull
-requests](CONTRIBUTING.md#pull-requests).
+:mortar_board: &nbsp; **[React.js Training Program](http://www.reactjsprogram.com/?asdf=36750_q0pu0tfa)** by Tyler McGinnis<br>
+:mortar_board: &nbsp; **[React for Beginners](https://reactforbeginners.com/friend/konstantin)** and **[ES6 Training Course](https://es6.io/friend/konstantin)** by Wes Bos<br>
+:green_book: &nbsp; **[React: Up & Running: Building Web Applications](http://amzn.to/2bzweBe)** by Stoyan Stefanov (Aug, 2016)<br>
+:green_book: &nbsp; **[Getting Started with React](http://amzn.to/2bDmSmG)** by Doel Sengupta and Manu Singhal (Apr, 2016)<br>
+:green_book: &nbsp; **[You Don't Know JS: ES6 & Beyond](http://amzn.to/2bKpb4I)** by Kyle Simpson (Dec, 2015)<br>
 
 
 ### Related Projects
@@ -186,13 +185,14 @@ requests](CONTRIBUTING.md#pull-requests).
 * [History](https://github.com/mjackson/history) — HTML5 History API wrapper library that handle navigation in single-page apps
 
 
-### Learn More
+### How to Contribute
 
-* [Getting Started with React.js](http://facebook.github.io/react/)
-* [Getting Started with GraphQL and Relay](https://quip.com/oLxzA1gTsJsE)
-* [React.js Questions on StackOverflow](http://stackoverflow.com/questions/tagged/reactjs)
-* [React.js Discussion Board](https://discuss.reactjs.org/)
-* [Learn ES6](https://babeljs.io/docs/learn-es6/), [ES6 Features](https://github.com/lukehoban/es6features#readme)
+Anyone and everyone is welcome to [contribute](CONTRIBUTING.md) to this project. The best way to
+start is by checking our [open issues](https://github.com/kriasoft/react-static-boilerplate/issues),
+[submit a new issues](https://github.com/kriasoft/react-static-boilerplate/issues/new?labels=bug) or
+[feature request](https://github.com/kriasoft/react-static-boilerplate/issues/new?labels=enhancement),
+participate in discussions, upvote or downvote the issues you like or dislike, send [pull
+requests](CONTRIBUTING.md#pull-requests).
 
 
 ### License
