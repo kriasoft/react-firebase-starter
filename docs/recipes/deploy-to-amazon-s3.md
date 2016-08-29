@@ -6,6 +6,9 @@ Configure S3 bucket for hosting a static site:
 
 http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html
 
+Set both index document and error document to `index.html`. This will allow refreshing any route (e.g. /about) without getting 404.
+![S3 hosting settings for kriasoft/react-static-boilerplate](https://cloud.githubusercontent.com/assets/2770290/18042054/a68f0ca2-6e01-11e6-810d-9100e432b2f3.png)
+
 ### Step 2
 
 Install [`s3`](https://github.com/andrewrk/node-s3-client) npm module:
