@@ -60,6 +60,9 @@ module.exports = function routesLoader(source) {
     if (route.data) {
       output.push(`    data: ${JSON.stringify(route.data)},\n`);
     }
+    if (route.query) {
+      output.push(`    query: ${JSON.stringify(route.query)},\n`);
+    }
     output.push(`    load() {\n      return ${require(route.page)};\n    },\n`);
     output.push('  },\n');
   }
