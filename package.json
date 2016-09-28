@@ -99,12 +99,12 @@
     "stylelint": "stylelint \"components/**/*.css\" \"pages/**/*.css\"",
     "lint": "npm run eslint && npm run stylelint",
     "test": "mocha --compilers js:babel-register",
-    "test:watch": "mocha --compilers js:babel-register --reporter min --watch",
+    "test:watch": "npm run test -- --reporter min --watch",
     "clean": "node run clean",
     "build": "node run build",
-    "build:debug": "node run build --debug",
+    "build:debug": "npm run build -- --debug",
     "publish": "node run publish",
-    "publish:debug": "node run publish --debug",
+    "publish:debug": "npm run publish -- --debug",
     "start": "node run"
   }
 }
