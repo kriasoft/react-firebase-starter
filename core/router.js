@@ -57,10 +57,13 @@ function resolve(routes, context) {
     }
 
     if (route.query) {
-      for (let key in route.query) {
-        let queryParam = route.query[key];
-        route.query[key] = context.query[queryParam];
-      }
+      Object.keys(route.query).forEach(key => {
+        const queryParam = route.query[key];
+
+        if (context.query) {
+          route.query[key] = context.query[queryParam];
+        }
+      });
     }
 
     // Check if the route has any data requirements, for example:

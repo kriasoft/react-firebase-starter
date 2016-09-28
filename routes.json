@@ -21,10 +21,10 @@
     "page": "./pages/home"
   },
   {
-    "path": "/tasks",
-    "page": "./pages/home",
+    "path": "/search",
+    "page": "./pages/about",
     "query": {
-      "status": "status"
+      "text": "text"
     }
   }
 ]
