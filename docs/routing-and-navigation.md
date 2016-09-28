@@ -107,7 +107,7 @@ route that needs to fetch a task by its ID may look like this:
 }
 ```
 
-If a route contains some Query Parameters for the given route, these can be passed down as props when configured. The key is desried prop key and the value is the query parameter key received:
+If a route contains query parameters, these can be passed down as props when configured in routes.json. The key is the desired prop key and the value is the query parameter key received:
 
 ```json
 {
