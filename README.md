@@ -124,11 +124,11 @@ available at [http://localhost:3000/](http://localhost:3000/).
 
 ### How to Test
 
-The unit tests are powered by [chai](http://chaijs.com/) and [mocha](http://mochajs.org/).
+The unit tests are powered by [jest](https://facebook.github.io/jest/).
 
 ```shell
 $ npm run lint                  # Check JavaScript and CSS code for potential issues
-$ npm run test                  # Run unit tests. Or, `npm run test:watch`
+$ npm run test                  # Run unit tests. Or, `npm run test:watch` or `npm run test:cov`
 ```
 
 
@@ -136,7 +136,7 @@ $ npm run test                  # Run unit tests. Or, `npm run test:watch`
 
 Update `publish` script in the [`run.js`](run.js) file with your full Firebase project name as found
 in your [Firebase console](https://console.firebase.google.com/). Note that this may have an
-additional identifier suffix than the shorter name you've provided. Then run: 
+additional identifier suffix than the shorter name you've provided. Then run:
 
 ```shell
 $ node run publish              # Build and publish the website to Firebase, same as `npm run publish`
