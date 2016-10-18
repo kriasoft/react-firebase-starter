@@ -58,7 +58,7 @@ or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbs
 ├── /components/                # Shared or generic UI components
 │   ├── /Button/                # Button component
 │   ├── /Layout/                # Website layout component
-│   ├── /Link  /                # Link component to be used insted of <a>
+│   ├── /Link  /                # Link component to be used instead of <a>
 │   └── /...                    # etc.
 ├── /core/                      # Core framework
 │   ├── /history.js             # Handles client-side navigation
