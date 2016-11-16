@@ -30,7 +30,7 @@ class Header extends React.Component {
           <Link className={`mdl-layout-title ${s.title}`} to="/">
             React Static Boilerplate
           </Link>
-          <div className="mdl-layout-spacer"></div>
+          <div className="mdl-layout-spacer" />
           <Navigation />
         </div>
       </header>
