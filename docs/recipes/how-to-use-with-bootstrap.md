@@ -8,7 +8,7 @@ one needs to configure an extra loader.  
 
 #### 1. Install dependencies:      
 
-    npm install --save bootstrap-sass   # v3      
+    npm install --save jquery bootstrap-sass   # v3      
     npm install --save-dev css-loader node-sass resolve-url-loader sass-loader style-loader url-loader     
     npm install --save-dev extract-text-webpack-plugin     
     npm install --save-dev bootstrap-loader  
