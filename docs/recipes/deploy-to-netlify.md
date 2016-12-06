@@ -17,7 +17,7 @@ With this setup Netlify will build and deploy when you push to git or open a pul
 3. Click `Build your site`
 
 **One Click:**
-[![Deploy to Netli
-fy](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/kriasoft/react-static-boilerplate)
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/kriasoft/react-static-boilerplate)
 
 
