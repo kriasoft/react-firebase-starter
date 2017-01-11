@@ -56,6 +56,16 @@ function resolve(routes, context) {
       continue;
     }
 
+    if (route.query) {
+      Object.keys(route.query).forEach(key => {
+        const queryParam = route.query[key];
+
+        if (context.query) {
+          route.query[key] = context.query[queryParam];
+        }
+      });
+    }
+
     // Check if the route has any data requirements, for example:
     // { path: '/tasks/:id', data: { task: 'GET /api/tasks/$id' }, page: './pages/task' }
     if (route.data) {

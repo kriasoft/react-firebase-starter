@@ -107,6 +107,18 @@ route that needs to fetch a task by its ID may look like this:
 }
 ```
 
+If a route contains query parameters, these can be passed down as props when configured in routes.json. The key is the desired prop key and the value is the query parameter key received:
+
+```json
+{
+  "path": "/tasks",
+  "page": "./pages/tasks/details",
+  "query": {
+    "status": "status",
+  }
+}
+```
+
 Finally, you can hook the router's `resolve(..)` method to be called each time when a user navigates
 (transitions) between pages. The code for that may look something like this:
 

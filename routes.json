@@ -19,5 +19,12 @@
   {
     "path": "/tasks/:status(pending|completed)?",
     "page": "./pages/home"
+  },
+  {
+    "path": "/search",
+    "page": "./pages/about",
+    "query": {
+      "text": "text"
+    }
   }
 ]
