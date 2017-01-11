@@ -132,7 +132,7 @@ tasks.set('start', () => {
 
       // Launch Browsersync after the initial bundling is complete
       // For more information visit https://browsersync.io/docs/options
-      if (++count === 1) {
+      if (++count === 1) { // eslint-disable-line
         bs.init({
           port: process.env.PORT || 3000,
           ui: { port: Number(process.env.PORT || 3000) + 1 },
