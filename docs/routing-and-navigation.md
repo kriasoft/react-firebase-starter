@@ -55,9 +55,8 @@ The [`routes-loader`](../utils/routes-loader.js) performs three tasks:
 * Converts JSON-based routes into JavaScript
 * Converts parametrized URL path strings into regular expressions by using
   [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp)
-* Wraps page/screen UI components' path strings into either `require.ensure(..)` (Webpack 1.x) or
-  `System.import(..)` (Webpack 2.x). For more information see
-  [code-splitting](https://webpack.github.io/docs/code-splitting) in Webpack docs.
+* Wraps page/screen UI components' path strings into `() => System.import(..)`.  For more
+  information see [code-splitting](https://webpack.github.io/docs/code-splitting) in Webpack docs.
 
 For example, a route like this:
 

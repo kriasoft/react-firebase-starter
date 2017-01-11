@@ -29,7 +29,7 @@ function escape(text) {
  *     pattern: /^\\/about(?:\/(?=$))?$/i,
  *     keys: [],
  *     page: './pages/about',
- *     load: function () { return new Promise(resolve => require(['./pages/about'], resolve)); }
+ *     load: function () { return System.load('./pages/about'); }
  *   }
  */
 module.exports = function routesLoader(source) {
@@ -43,15 +43,8 @@ module.exports = function routesLoader(source) {
     const pattern = toRegExp(route.path, keys);
     const require = route.chunk && route.chunk === 'main' ?
       module => `Promise.resolve(require('${escape(module)}').default)` :
-      module => `new Promise(function (resolve, reject) {
-        try {
-          require.ensure(['${escape(module)}'], function (require) {
-            resolve(require('${escape(module)}').default);
-          }${typeof route.chunk === 'string' ? `, '${escape(route.chunk)}'` : ''});
-        } catch (err) {
-          reject(err);
-        }
-      })`;
+      module => `System.import('${escape(module)}').then(x => x.default)`;
+
     output.push('  {\n');
     output.push(`    path: '${escape(route.path)}',\n`);
     output.push(`    pattern: ${pattern.toString()},\n`);
