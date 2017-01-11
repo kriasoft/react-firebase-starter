@@ -1,7 +1,9 @@
 ## How to Publish Website to [GitHub Pages](https://pages.github.com/)
 
 ### Step 1
+Add `const path = require('path');` to `run.js`
 
+### Step 2
 Add deployment script to `run.js`:
 
 ```js
