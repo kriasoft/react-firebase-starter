@@ -13,7 +13,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
-const pkg = require('./package.json');
+const pkg = require('../package.json');
 
 const isDebug = global.DEBUG === false ? false : !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose') || process.argv.includes('-v');
@@ -28,7 +28,7 @@ const babelConfig = Object.assign({}, pkg.babel, {
 const config = {
 
   // The base directory for resolving the entry option
-  context: path.resolve('./src'),
+  context: path.resolve(__dirname, '../src'),
 
   // The entry point for the bundle
   entry: [
@@ -41,7 +41,7 @@ const config = {
 
   // Options affecting the output of the compilation
   output: {
-    path: path.resolve('./public/dist'),
+    path: path.resolve(__dirname, '../public/dist'),
     publicPath: isDebug ? `http://localhost:${process.env.PORT || 3000}/dist/` : '/dist/',
     filename: isDebug ? '[name].js?[hash]' : '[name].[hash].js',
     chunkFilename: isDebug ? '[id].js?[chunkhash]' : '[id].[chunkhash].js',
@@ -74,7 +74,7 @@ const config = {
     // Emit a JSON file with assets paths
     // https://github.com/sporto/assets-webpack-plugin#options
     new AssetsPlugin({
-      path: path.resolve('./public/dist'),
+      path: path.resolve(__dirname, '../public/dist'),
       filename: 'assets.json',
       prettyPrint: true,
     }),
@@ -90,8 +90,8 @@ const config = {
       {
         test: /\.jsx?$/,
         include: [
-          path.resolve('./src'),
-          path.resolve('./components'),
+          path.resolve(__dirname, '../src'),
+          path.resolve(__dirname, '../components'),
         ],
         loader: 'babel-loader',
         options: babelConfig,
@@ -116,20 +116,23 @@ const config = {
           },
           {
             loader: 'postcss-loader',
+            options: {
+              config: './tools/postcss.config.js',
+            },
           },
         ],
       },
       {
         test: /\.json$/,
         exclude: [
-          path.resolve('./src/routes.json'),
+          path.resolve(__dirname, '../src/routes.json'),
         ],
         loader: 'json-loader',
       },
       {
         test: /\.json$/,
         include: [
-          path.resolve('./src/routes.json'),
+          path.resolve(__dirname, '../src/routes.json'),
         ],
         use: [
           {
@@ -137,13 +140,13 @@ const config = {
             options: babelConfig,
           },
           {
-            loader: path.resolve('./tools/routes-loader.js'),
+            loader: path.resolve(__dirname, './routes-loader.js'),
           },
         ],
       },
       {
         test: /\.md$/,
-        loader: path.resolve('./tools/markdown-loader.js'),
+        loader: path.resolve(__dirname, './markdown-loader.js'),
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,

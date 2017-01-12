@@ -71,17 +71,14 @@ or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbs
 │   └── ...                     # etc.
 ├── test/                       # Unit and integration tests
 ├── tools/                      # Utility and helper classes
-├── package.json                # The list of project dependencies and NPM scripts
-├── postcss.config.js           # PostCSS settings for transpiling CSS code
-├── run.js                      # Build automation script, e.g. `node run build`
-└── webpack.config.js           # Bundling and optimization settings for Webpack
+└── package.json                # The list of project dependencies and NPM scripts
 ```
 
 
 ### Getting Started
 
-**Step 1**. Make sure that you have [Node.js](https://nodejs.org/) v6 or newer installed on your
-machine.
+**Step 1**. Make sure that you have [Node.js](https://nodejs.org/) v6 or newer and
+[Yarn](https://yarnpkg.com/) installed on your development machine.
 
 **Step 2**. Clone this repository (alternatively, use [Yeoman
 generator](https://github.com/kriasoft/react-static-boilerplate/tree/generator-react-static) to
@@ -91,18 +88,18 @@ bootstrap your project):
 $ git clone -o react-static-boilerplate -b master --single-branch \
       https://github.com/kriasoft/react-static-boilerplate.git MyApp
 $ cd MyApp
-$ npm install                   # Install project dependencies listed in package.json
+$ yarn install                  # Install project dependencies listed in package.json
 ```
 
 
 **Step 3**. Compile and launch your app by running:
 
 ```shell
-$ node run                      # Same as `npm start` or `node run start`
+$ yarn start                    # Compiles the app and opens it in a browser with "live reload"
 ```
 
-You can also test your app in release (production) mode by running `node run start --release` or
-with HMR and React Hot Loader disabled by running `node run start --no-hmr`. The app should become
+You can also test your app in release (production) mode by running `yarn start -- --release` or
+with HMR and React Hot Loader disabled by running `yarn start -- --no-hmr`. The app should become
 available at [http://localhost:3000/](http://localhost:3000/).
 
 
@@ -111,19 +108,19 @@ available at [http://localhost:3000/](http://localhost:3000/).
 The unit tests are powered by [chai](http://chaijs.com/) and [mocha](http://mochajs.org/).
 
 ```shell
-$ npm run lint                  # Check JavaScript and CSS code for potential issues
-$ npm run test                  # Run unit tests. Or, `npm run test:watch`
+$ yarn lint                     # Check JavaScript and CSS code for potential issues
+$ yarn test                     # Run unit tests. Or, `yarn run test:watch`
 ```
 
 
 ### How to Deploy
 
-Update `publish` script in the [`run.js`](run.js) file with your full Firebase project name as found
-in your [Firebase console](https://console.firebase.google.com/). Note that this may have an
-additional identifier suffix than the shorter name you've provided. Then run: 
+Update `publish` script in the [`tools/publish.js`](tools/publish.js) file with your full Firebase
+project name as found in your [Firebase console](https://console.firebase.google.com/). Note that
+this may have an additional identifier suffix than the shorter name you've provided. Then run: 
 
 ```shell
-$ node run publish              # Build and publish the website to Firebase, same as `npm run publish`
+$ yarn publish                  # Builds and deployes the app to Firebase
 ```
 
 The first time you publish, you will be prompted to authenticate with Google and generate an
@@ -131,10 +128,10 @@ authentication token in order for the publish script to continue.
 
 ![publish](https://koistya.github.io/files/react-static-boilerplate-publish.gif)
 
-If you need just to build the project without publishing it, run:
+If you need to build the project without publishing it, simply run:
 
 ```shell
-$ node run build                # Or, `node run build --release` for production build
+$ yarn build                    # Compiles the app into the /public/dist folder
 ```
 
 
@@ -146,7 +143,7 @@ You can always fetch and merge the recent changes from this repo back into your 
 $ git checkout master
 $ git fetch react-static-boilerplate
 $ git merge react-static-boilerplate/master
-$ npm install
+$ yarn install
 ```
 
 
