@@ -33,8 +33,8 @@ technologies including [React](http://facebook.github.io/react/), [Redux](http:/
 
 ✓ Modern JavaScript syntax ([ES2015](http://babeljs.io/docs/learn-es2015/)+) via [Babel](http://babeljs.io/), modern CSS syntax via [PostCSS](https://github.com/postcss/postcss)<br>
 ✓ Component-based UI architecture via [React](http://facebook.github.io/react/), [Webpack](https://webpack.github.io/) and [CSS Modules](https://github.com/css-modules/css-modules)<br>
-✓ Application state management /w time-travel debugging via [Redux](http://redux.js.org/) (see [`main.js`](main.js), [`core/store.js`](core/store.js))<br>
-✓ Routing and navigation via [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp) and [`history`](https://github.com/mjackson/history) ([`main.js`](main.js), [`core/router.js`](core/router.js), [`utils/routes-loader.js`](utils/routes-loader.js))<br>
+✓ Application state management /w time-travel debugging via [Redux](http://redux.js.org/) (see [`main.js`](src/main.js), [`store.js`](src/store.js))<br>
+✓ Routing and navigation via [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp) and [`history`](https://github.com/mjackson/history) ([`main.js`](src/main.js), [`router.js`](src/router.js), [`tools/routes-loader.js`](tools/routes-loader.js))<br>
 ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading via [Webpack](https://webpack.github.io/) v2<br>
 ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/), cross-device testing with [Browsersync](https://browsersync.io/) (see [`run.js#start`](run.js))<br>
 ✓ **24/7** community support on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate) + *perimum support* on [Skype](https://hatscripts.com/addskype?koistya) ([book a session](https://calendly.com/koistya))<br>
@@ -83,9 +83,9 @@ or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbs
 **Step 1**. Make sure that you have [Node.js](https://nodejs.org/) v6 or newer installed on your
 machine.
 
-**Step 2**. Clone this repository or use [Yeoman
+**Step 2**. Clone this repository (alternatively, use [Yeoman
 generator](https://github.com/kriasoft/react-static-boilerplate/tree/generator-react-static) to
-bootstrap your project:
+bootstrap your project):
 
 ```shell
 $ git clone -o react-static-boilerplate -b master --single-branch \
@@ -94,15 +94,6 @@ $ cd MyApp
 $ npm install                   # Install project dependencies listed in package.json
 ```
 
-<p align="center">——— or ———</p>
-
-```shell
-$ npm install -g yo
-$ npm install -g generator-react-static
-$ mkdir MyApp
-$ cd MyApp
-$ yo react-static
-```
 
 **Step 3**. Compile and launch your app by running:
 
