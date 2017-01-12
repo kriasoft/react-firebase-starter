@@ -28,7 +28,7 @@ const babelConfig = Object.assign({}, pkg.babel, {
 const config = {
 
   // The base directory for resolving the entry option
-  context: __dirname,
+  context: path.resolve('./src'),
 
   // The entry point for the bundle
   entry: [
@@ -41,7 +41,7 @@ const config = {
 
   // Options affecting the output of the compilation
   output: {
-    path: path.resolve(__dirname, './public/dist'),
+    path: path.resolve('./public/dist'),
     publicPath: isDebug ? `http://localhost:${process.env.PORT || 3000}/dist/` : '/dist/',
     filename: isDebug ? '[name].js?[hash]' : '[name].[hash].js',
     chunkFilename: isDebug ? '[id].js?[chunkhash]' : '[id].[chunkhash].js',
@@ -74,7 +74,7 @@ const config = {
     // Emit a JSON file with assets paths
     // https://github.com/sporto/assets-webpack-plugin#options
     new AssetsPlugin({
-      path: path.resolve(__dirname, './public/dist'),
+      path: path.resolve('./public/dist'),
       filename: 'assets.json',
       prettyPrint: true,
     }),
@@ -90,11 +90,8 @@ const config = {
       {
         test: /\.jsx?$/,
         include: [
-          path.resolve(__dirname, './actions'),
-          path.resolve(__dirname, './components'),
-          path.resolve(__dirname, './core'),
-          path.resolve(__dirname, './pages'),
-          path.resolve(__dirname, './main.js'),
+          path.resolve('./src'),
+          path.resolve('./components'),
         ],
         loader: 'babel-loader',
         options: babelConfig,
@@ -125,14 +122,14 @@ const config = {
       {
         test: /\.json$/,
         exclude: [
-          path.resolve(__dirname, './routes.json'),
+          path.resolve('./src/routes.json'),
         ],
         loader: 'json-loader',
       },
       {
         test: /\.json$/,
         include: [
-          path.resolve(__dirname, './routes.json'),
+          path.resolve('./src/routes.json'),
         ],
         use: [
           {
@@ -140,13 +137,13 @@ const config = {
             options: babelConfig,
           },
           {
-            loader: path.resolve(__dirname, './utils/routes-loader.js'),
+            loader: path.resolve('./tools/routes-loader.js'),
           },
         ],
       },
       {
         test: /\.md$/,
-        loader: path.resolve(__dirname, './utils/markdown-loader.js'),
+        loader: path.resolve('./tools/markdown-loader.js'),
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
@@ -165,7 +162,6 @@ const config = {
 
 // Optimize the bundle in release (production) mode
 if (!isDebug) {
-  config.plugins.push(new webpack.optimize.DedupePlugin());
   config.plugins.push(new webpack.optimize.UglifyJsPlugin({
     sourceMap: true,
     compress: {
@@ -180,7 +176,7 @@ if (isDebug && useHMR) {
   babelConfig.plugins.unshift('react-hot-loader/babel');
   config.entry.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client');
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
-  config.plugins.push(new webpack.NoErrorsPlugin());
+  config.plugins.push(new webpack.NoEmitOnErrorsPlugin());
 }
 
 module.exports = config;

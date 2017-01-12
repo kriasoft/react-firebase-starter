@@ -16,9 +16,9 @@ import ReactDOM from 'react-dom';
 import FastClick from 'fastclick';
 import { Provider } from 'react-redux';
 
-import store from './core/store';
-import router from './core/router';
-import history from './core/history';
+import store from './store';
+import router from './router';
+import history from './history';
 
 let routes = require('./routes.json').default; // Loaded with utils/routes-loader.js
 const container = document.getElementById('container');
