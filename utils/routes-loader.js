@@ -66,5 +66,5 @@ module.exports = function routesLoader(source) {
 
   output.push(']');
 
-  return `module.exports = ${output.join('')};`;
+  return `export default ${output.join('')};`;
 };

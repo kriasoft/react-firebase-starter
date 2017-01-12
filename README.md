@@ -1,54 +1,48 @@
-# React Static Boilerplate &nbsp; [![Build Status](http://img.shields.io/travis/kriasoft/react-static-boilerplate/master.svg?style=flat-square)](https://travis-ci.org/kriasoft/react-static-boilerplate) [![To-do](https://img.shields.io/waffle/label/kriasoft/react-static-boilerplate/to-do.svg?style=flat-square)](https://waffle.io/kriasoft/react-static-boilerplate) [![Online Chat](http://img.shields.io/badge/chat_room-%23react--static--boilerplate-blue.svg?style=flat-square)](https://gitter.im/kriasoft/react-static-boilerplate)
+# React Static Boilerplate &nbsp; <a href="https://travis-ci.org/kriasoft/react-static-boilerplate"><img src="http://img.shields.io/travis/kriasoft/react-static-boilerplate/master.svg?style=flat-square" height="20" /></a> <a href="https://github.com/kriasoft/react-static-boilerplate/stargazers"><img src="https://img.shields.io/github/stars/kriasoft/react-static-boilerplate.svg?style=social&label=Star&maxAge=3600" height="20"></a> <a href="https://twitter.com/ReactStatic"><img src="https://img.shields.io/twitter/follow/ReactStatic.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
 
-> [**React Static Boilerplate**](https://github.com/kriasoft/react-static-boilerplate) (RSB) is an
-> opinionated boilerplate and tooling for creating modern stand-alone web applications (aka
-> [SPA](https://en.wikipedia.org/wiki/Single-page_application)s) for a serverless architecture. RSB
-> significantly reduces cost by eliminating the need for servers such as EC2 instances because the
-> entire site can be hosted directly from CDN ([Firebase](https://www.firebase.com/), [GitHub
-> Pages](https://pages.github.com/), [Amazon S3](http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html),
-> or other similar cloud storage). Sites built with RSB can be fully functional with REST API or
-> GraphQL calls to micro-services such as [Amazon Lambda](https://aws.amazon.com/lambda/),
-> [Azure Functions](https://azure.microsoft.com/services/functions/), or dynamic Docker endpoints
-> hosted on [DigitalOcean](https://www.digitalocean.com/?refcode=eef302dbae9f&utm_source=github&utm_medium=oss_sponsorships&utm_campaign=opencollective).
-> RSB demonstrates how to use component-based UI development approach with best of breed
-> technologies including [React](http://facebook.github.io/react/), [Redux](http://redux.js.org/),
-> [Babel](http://babeljs.io/), [Webpack](https://webpack.github.io/), [Browsersync](https://browsersync.io/),
-> [React Hot Loader](http://gaearon.github.io/react-hot-loader/) and more.
+[**React Static Boilerplate**](https://github.com/kriasoft/react-static-boilerplate) (RSB) is a
+boilerplate and tooling for creating modern stand-alone web applications (aka
+[SPA](https://en.wikipedia.org/wiki/Single-page_application)s) for a serverless architecture. RSB
+significantly reduces cost by eliminating the need for servers such as EC2 instances because the
+entire site can be hosted directly from CDN ([Firebase](https://www.firebase.com/), [GitHub
+Pages](https://pages.github.com/), [Amazon S3](http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html),
+or other similar cloud storage). Sites built with RSB can be fully functional with REST API or
+GraphQL calls to micro-services such as [Amazon Lambda](https://aws.amazon.com/lambda/),
+[Azure Functions](https://azure.microsoft.com/services/functions/), or dynamic Docker endpoints
+hosted on [DigitalOcean](https://www.digitalocean.com/?refcode=eef302dbae9f&utm_source=github&utm_medium=oss_sponsorships&utm_campaign=opencollective).
+RSB demonstrates how to use component-based UI development approach with best of breed
+technologies including [React](http://facebook.github.io/react/), [Redux](http://redux.js.org/),
+[Babel](http://babeljs.io/), [Webpack](https://webpack.github.io/), [Browsersync](https://browsersync.io/),
+[React Hot Loader](http://gaearon.github.io/react-hot-loader/) and more. **This work is being
+[sponsored](https://opencollective.com/react-static-boilerplate#support) by**:
 
-**The work is being sponsored by:**
-
-<a href="https://opencollective.com/react-static-boilerplate/sponsor/0/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/sponsor/0/avatar.svg" height="64">
-</a> &nbsp;
-<a href="https://opencollective.com/react-static-boilerplate/sponsor/1/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/sponsor/1/avatar.svg" height="64">
-</a> &nbsp;
-<a href="https://opencollective.com/react-static-boilerplate/sponsor/2/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/sponsor/2/avatar.svg" height="64">
-</a> &nbsp;
-<a href="https://opencollective.com/react-static-boilerplate/sponsor/3/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/sponsor/3/avatar.svg" height="64">
-</a> &nbsp;
-<a href="https://opencollective.com/react-static-boilerplate/sponsor/4/website" target="_blank">
-  <img src="https://opencollective.com/react-static-boilerplate/sponsor/4/avatar.svg" height="64">
-</a>
+<p align="center">
+  <a href="https://rollbar.com/?utm_source=reactstartkit(github)&utm_medium=link&utm_campaign=reactstartkit(github)" target="_blank">
+    <img src="https://koistya.github.io/files/rollbar-384x64.png" width="192" height="32">
+  </a>
+  <a href="https://localizejs.com/?cid=802&utm_source=rsk" target="_blank">
+    <img src="https://koistya.github.io/files/localize-353x64.png" width="176.5" height="32">
+  </a>
+  <a href="https://www.digitalocean.com/?refcode=eef302dbae9f&utm_source=github&utm_medium=oss_sponsorships&utm_campaign=opencollective" target="_blank">
+    <img src="https://koistya.github.io/files/digital-ocean-393x64.png" width="196.5" height="32">
+  </a>
+</p>
 
 
 ### Features
 
-&nbsp; &nbsp; ✓ Modern JavaScript syntax ([ES2015](http://babeljs.io/docs/learn-es2015/)+) via [Babel](http://babeljs.io/), modern CSS syntax via [PostCSS](https://github.com/postcss/postcss)<br>
-&nbsp; &nbsp; ✓ Component-based UI architecture via [React](http://facebook.github.io/react/), [Webpack](https://webpack.github.io/) and [CSS Modules](https://github.com/css-modules/css-modules)<br>
-&nbsp; &nbsp; ✓ Application state management /w time-travel debugging via [Redux](http://redux.js.org/) (see [`main.js`](main.js), [`core/store.js`](core/store.js))<br>
-&nbsp; &nbsp; ✓ Routing and navigation via [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp) and [`history`](https://github.com/mjackson/history) (see [`main.js`](main.js), [`core/router.js`](core/router.js), [`utils/routes-loader.js`](utils/routes-loader.js))<br>
-&nbsp; &nbsp; ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading via [Webpack](https://webpack.github.io/) and [ES6 System.import()](http://www.2ality.com/2014/09/es6-modules-final.html)<br>
-&nbsp; &nbsp; ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/)<br>
-&nbsp; &nbsp; ✓ Cross-device testing with [Browsersync](https://browsersync.io/) (see [`run.js#start`](run.js))<br>
-&nbsp; &nbsp; ✓ **24/7** community support on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate); customization requests on [Codementor](https://www.codementor.io/koistya)<br>
+✓ Modern JavaScript syntax ([ES2015](http://babeljs.io/docs/learn-es2015/)+) via [Babel](http://babeljs.io/), modern CSS syntax via [PostCSS](https://github.com/postcss/postcss)<br>
+✓ Component-based UI architecture via [React](http://facebook.github.io/react/), [Webpack](https://webpack.github.io/) and [CSS Modules](https://github.com/css-modules/css-modules)<br>
+✓ Application state management /w time-travel debugging via [Redux](http://redux.js.org/) (see [`main.js`](main.js), [`core/store.js`](core/store.js))<br>
+✓ Routing and navigation via [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp) and [`history`](https://github.com/mjackson/history) ([`main.js`](main.js), [`core/router.js`](core/router.js), [`utils/routes-loader.js`](utils/routes-loader.js))<br>
+✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading via [Webpack](https://webpack.github.io/) v2<br>
+✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/), cross-device testing with [Browsersync](https://browsersync.io/) (see [`run.js#start`](run.js))<br>
+✓ **24/7** community support on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate) + *perimum support* on [Skype](https://hatscripts.com/addskype?koistya) ([book a session](https://calendly.com/koistya))<br>
 
-**Demo**: https://rsb.kriasoft.com &nbsp;|&nbsp; **View** [docs](./docs) &nbsp;|&nbsp; **Follow us** on
-[Gitter](https://gitter.im/kriasoft/react-static-boilerplate), [Twitter](https://twitter.com/ReactStatic),
+**View** [docs](./docs), [online demo](https://rsb.kriasoft.com) &nbsp;|&nbsp; **Follow us** on
+[Gitter](https://gitter.im/kriasoft/react-static-boilerplate), [Twitter](https://twitter.com/ReactStatic)
 or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbsp;|&nbsp;
-**Learn** to [React.js and ES6](#learn-reactjs-and-es6)
+**Learn** [React.js and ES6](#learn-reactjs-and-es6)
 
 
 ### Directory Layout
@@ -77,10 +71,11 @@ or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbs
 │   └── /...                    # etc.
 ├── /test/                      # Unit and integration tests
 ├── /utils/                     # Utility and helper classes
-│── main.js                     # React application entry point
-│── package.json                # The list of project dependencies and NPM scripts
-│── routes.json                 # This list of application routes
-│── run.js                      # Build automation script, e.g. `node run build`
+├── main.js                     # React application entry point
+├── package.json                # The list of project dependencies and NPM scripts
+├── postcss.config.js           # PostCSS settings for transpiling CSS code
+├── routes.json                 # This list of application routes
+├── run.js                      # Build automation script, e.g. `node run build`
 └── webpack.config.js           # Bundling and optimization settings for Webpack
 ```
 
@@ -177,10 +172,11 @@ $ npm install
 
 ### Related Projects
 
-* [React App SDK](https://github.com/kriasoft/react-app) — Create React apps with just a single dev dependency and zero configuration
 * [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Isomorphic web app boilerplate (Node.js, React, GraphQL, Webpack, CSS Modules)
+* [Node.js API Starter Kit](https://github.com/kriasoft/nodejs-api-starter) — Boilerplate and tooling for building data APIs with Node.js, GraphQL and Relay
 * [ASP.NET Core Starter Kit](https://github.com/kriasoft/aspnet-starter-kit) — Cross-platform single-page application boilerplate (ASP.NET Core, React, Redux)
 * [Babel Starter Kit](https://github.com/kriasoft/babel-starter-kit) — JavaScript library boilerplate (ES2015, Babel, Rollup, Mocha, Chai, Sinon, Rewire)
+* [React App SDK](https://github.com/kriasoft/react-app) — Create React apps with just a single dev dependency and zero configuration
 * [Universal Router](https://github.com/kriasoft/universal-router) — Isomorphic router for web and single-page applications (SPA)
 * [History](https://github.com/mjackson/history) — HTML5 History API wrapper library that handle navigation in single-page apps
 
