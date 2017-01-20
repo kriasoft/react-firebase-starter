@@ -8,7 +8,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-/* eslint-disable global-require, max-len */
+/* eslint-disable global-require, no-confusing-arrow, max-len */
 
 const path = require('path');
 const webpack = require('webpack');
@@ -21,6 +21,7 @@ const useHMR = !!global.HMR; // Hot Module Replacement (HMR)
 const babelConfig = Object.assign({}, pkg.babel, {
   babelrc: false,
   cacheDirectory: useHMR,
+  presets: pkg.babel.presets.map(x => x === 'latest' ? ['latest', { es2015: { modules: false } }] : x),
 });
 
 // Webpack configuration (main.js => public/dist/main.{hash}.js)
