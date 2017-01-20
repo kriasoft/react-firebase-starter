@@ -5,6 +5,10 @@
 Add deployment script to `run.js`:
 
 ```js
+const path = require('path');
+```
+
+```js
 tasks.set('publish', () => {
   const remote = {
     url: 'https://github.com/<owner>/<repo>.git', // TODO: Update deployment URL
