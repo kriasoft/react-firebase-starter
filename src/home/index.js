@@ -16,7 +16,7 @@ import { title, html } from './index.md';
 class HomePage extends React.Component {
 
   static propTypes = {
-    articles: PropTypes.array.isRequired,
+    articles: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
   };
 
   componentDidMount() {
@@ -26,11 +26,14 @@ class HomePage extends React.Component {
   render() {
     return (
       <Layout className={s.content}>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <div
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
         <h4>Articles</h4>
         <ul>
           {this.props.articles.map((article, i) =>
-            <li key={i}><a href={article.url}>{article.title}</a> by {article.author}</li>
+            <li key={i}><a href={article.url}>{article.title}</a> by {article.author}</li> // eslint-disable-line 
           )}
         </ul>
         <p>
