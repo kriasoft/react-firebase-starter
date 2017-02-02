@@ -55,13 +55,13 @@ class Button extends React.Component {
             'mdl-button--accent': accent,
             'mdl-js-ripple-effect': ripple,
           },
-          className  // eslint-disable-line comma-dangle
+          className,
         ),
         to,
         href,
         ...other,
       },
-      children  // eslint-disable-line comma-dangle
+      children,
     );
   }
 

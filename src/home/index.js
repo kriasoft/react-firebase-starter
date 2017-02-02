@@ -16,7 +16,11 @@ import { title, html } from './index.md';
 class HomePage extends React.Component {
 
   static propTypes = {
-    articles: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+    articles: PropTypes.arrayOf(PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+    }).isRequired).isRequired,
   };
 
   componentDidMount() {
@@ -32,8 +36,10 @@ class HomePage extends React.Component {
         />
         <h4>Articles</h4>
         <ul>
-          {this.props.articles.map((article, i) =>
-            <li key={i}><a href={article.url}>{article.title}</a> by {article.author}</li> // eslint-disable-line 
+          {this.props.articles.map(article =>
+            <li key={article.url}>
+              <a href={article.url}>{article.title}</a>
+            by {article.author}</li>,
           )}
         </ul>
         <p>

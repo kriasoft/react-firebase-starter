@@ -49,11 +49,11 @@ function matchURI(route, path) {
 // Find the route matching the specified location (context), fetch the required data,
 // instantiate and return a React component
 function resolve(routes, context) {
-  for (const route of routes) { // eslint-disable-line
+  for (const route of routes) { // eslint-disable-line no-restricted-syntax
     const params = matchURI(route, context.error ? '/error' : context.pathname);
 
     if (!params) {
-      continue; // eslint-disable-line
+      continue; // eslint-disable-line no-continue
     }
 
     // Check if the route has any data requirements, for example:
