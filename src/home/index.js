@@ -16,7 +16,11 @@ import { title, html } from './index.md';
 class HomePage extends React.Component {
 
   static propTypes = {
-    articles: PropTypes.array.isRequired,
+    articles: PropTypes.arrayOf(PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      author: PropTypes.string.isRequired,
+    }).isRequired).isRequired,
   };
 
   componentDidMount() {
@@ -26,11 +30,16 @@ class HomePage extends React.Component {
   render() {
     return (
       <Layout className={s.content}>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
+        <div
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
         <h4>Articles</h4>
         <ul>
-          {this.props.articles.map((article, i) =>
-            <li key={i}><a href={article.url}>{article.title}</a> by {article.author}</li>
+          {this.props.articles.map(article =>
+            <li key={article.url}>
+              <a href={article.url}>{article.title}</a>
+            by {article.author}</li>,
           )}
         </ul>
         <p>

@@ -38,7 +38,7 @@ module.exports = function routesLoader(source) {
   const output = ['[\n'];
   const routes = JSON.parse(source);
 
-  for (const route of routes) {
+  for (const route of routes) { // eslint-disable-line no-restricted-syntax
     const keys = [];
     const pattern = toRegExp(route.path, keys);
     const require = route.chunk && route.chunk === 'main' ?
@@ -60,7 +60,7 @@ module.exports = function routesLoader(source) {
     if (route.data) {
       output.push(`    data: ${JSON.stringify(route.data)},\n`);
     }
-    output.push(`    load() {\n      return ${require(route.page)};\n    },\n`);
+    output.push(`    load() {\n      return ${require(route.page)};\n    },\n`); // eslint-disable-line import/no-dynamic-require
     output.push('  },\n');
   }
 

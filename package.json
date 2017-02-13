@@ -89,7 +89,11 @@
     "extends": "airbnb",
     "rules": {
       "react/jsx-filename-extension": "off",
-      "react/require-default-props": "off"
+      "react/require-default-props": "off",
+      "import/no-extraneous-dependencies": "off"
+    },
+    "env": {
+      "browser": true
     }
   },
   "stylelint": {
