@@ -39,7 +39,8 @@ class HomePage extends React.Component {
           {this.props.articles.map(article =>
             <li key={article.url}>
               <a href={article.url}>{article.title}</a>
-            by {article.author}</li>,
+              by {article.author}
+            </li>,
           )}
         </ul>
         <p>

@@ -47,8 +47,10 @@ class ErrorPage extends React.Component {
             </p>
           }
           <p className={s.text}>
-            <a href="/" onClick={this.goBack}>Go back</a>, or head over to the&nbsp;
-            <Link to="/">home page</Link> to choose a new direction.
+            <a href="/" onClick={this.goBack}>Go back</a>
+            , or head over to the&nbsp;
+            <Link to="/">home page</Link>
+            to choose a new direction.
           </p>
         </main>
       </div>
