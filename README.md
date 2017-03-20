@@ -120,7 +120,7 @@ project name as found in your [Firebase console](https://console.firebase.google
 this may have an additional identifier suffix than the shorter name you've provided. Then run: 
 
 ```shell
-$ yarn publish                  # Builds and deployes the app to Firebase
+$ yarn run publish                  # Builds and deployes the app to Firebase
 ```
 
 The first time you publish, you will be prompted to authenticate with Google and generate an
