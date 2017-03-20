@@ -19,28 +19,24 @@ $ npm install s3 --save-dev
 
 ### Step 3
 
-Add deployment script to `run.js`:
+Add deployment script to `publish.js`:
 
 ```js
-tasks.set('publish', () => {
-  global.DEBUG = process.argv.includes('--debug') || false;
-  const s3 = require('s3');
-  return run('build').then(() => new Promise((resolve, reject) => {
-    const client = s3.createClient({
-      s3Options: {
-        region: 'us-east-1',
-        sslEnabled: true,
-      },
-    });
-    const uploader = client.uploadDir({
-      localDir: 'public',
-      deleteRemoved: true,
-      s3Params: { Bucket: 'www.example.com' }, // TODO: Update deployment URL
-    });
-    uploader.on('error', reject);
-    uploader.on('end', resolve);
-  }));
-});
+module.exports = task('publish', () => new Promise((resolve, reject) => {
+  const client = s3.createClient({
+    s3Options: {
+      region: 'us-east-1',
+      sslEnabled: true,
+    },
+  });
+  const uploader = client.uploadDir({
+    localDir: 'public',
+    deleteRemoved: true,
+    s3Params: { Bucket: 'artgorithms' },
+  });
+  uploader.on('error', reject);
+  uploader.on('end', resolve);
+}));
 ```
 
 Step 4
@@ -48,7 +44,7 @@ Step 4
 Whenever you need to compile and publish your site to Amazon S3 simply run:
 
 ```sh
-$ node run publish
+$ yarn run publish
 ```
 
 ![publish](https://koistya.github.io/files/react-static-boilerplate-publish.gif)
