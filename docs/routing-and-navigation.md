@@ -41,7 +41,7 @@ file structure. For a simple to-do app, this list of routes may look like this (
 ]
 ```
 
-This list of routes is referenced inside the main application file (where the React app is beeing
+This list of routes is referenced inside the main application file (where the React app is being
 bootstrapped) by using [`routes-loader`](../utils/routes-loader.js) (see [`src/main.js`](../src/main.js)):
 
 ```js
