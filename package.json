@@ -9,6 +9,7 @@
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "classnames": "^2.2.5",
+    "extract-text-webpack-plugin": "^2.1.0",
     "fastclick": "^1.0.6",
     "history": "^4.6.1",
     "react": "^15.4.2",
