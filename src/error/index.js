@@ -9,14 +9,14 @@
  */
 
 import React from 'react';
-import history from '../../core/history';
+import history from '../history';
 import Link from '../../components/Link';
 import s from './styles.css';
 
 class ErrorPage extends React.Component {
 
   static propTypes = {
-    error: React.PropTypes.object,
+    error: React.PropTypes.object,  // eslint-disable-line react/forbid-prop-types
   };
 
   componentDidMount() {
@@ -24,7 +24,7 @@ class ErrorPage extends React.Component {
       'Page Not Found' : 'Error';
   }
 
-  goBack = event => {
+  goBack = (event) => {
     event.preventDefault();
     history.goBack();
   };
@@ -43,12 +43,14 @@ class ErrorPage extends React.Component {
           <p className={s.title}>{title}</p>
           {code === '404' &&
             <p className={s.text}>
-              The page you're looking for does not exist or an another error occurred.
+              The page you&apos;re looking for does not exist or an another error occurred.
             </p>
           }
           <p className={s.text}>
-            <a href="/" onClick={this.goBack}>Go back</a>, or head over to the&nbsp;
-            <Link to="/">home page</Link> to choose a new direction.
+            <a href="/" onClick={this.goBack}>Go back</a>
+            , or head over to the&nbsp;
+            <Link to="/">home page</Link>
+            to choose a new direction.
           </p>
         </main>
       </div>

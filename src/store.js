@@ -12,11 +12,13 @@ import { createStore } from 'redux';
 
 // Centralized application state
 // For more information visit http://redux.js.org/
-const store = createStore((state, action) => {
+const initialState = { count: 0 };
+
+const store = createStore((state = initialState, action) => {
   // TODO: Add action handlers (aka "reducers")
-  switch (action) {
+  switch (action.type) {
     case 'COUNT':
-      return { ...state, count: (state.count || 0) + 1 };
+      return { ...state, count: (state.count) + 1 };
     default:
       return state;
   }

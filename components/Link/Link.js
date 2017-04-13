@@ -9,7 +9,7 @@
  */
 
 import React, { PropTypes } from 'react';
-import history from '../../core/history';
+import history from '../../src/history';
 
 class Link extends React.Component {
 
@@ -49,7 +49,8 @@ class Link extends React.Component {
 
   render() {
     const { to, ...props } = this.props; // eslint-disable-line no-use-before-define
-    return <a href={history.createHref(to)} {...props} onClick={this.handleClick} />;
+    // eslint-disable-next-line jsx-a11y/anchor-has-content
+    return <a href={typeof to === 'string' ? to : history.createHref(to)} {...props} onClick={this.handleClick} />;
   }
 
 }
