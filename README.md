@@ -37,7 +37,7 @@ technologies including [React](http://facebook.github.io/react/), [Redux](http:/
 ✓ Routing and navigation via [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp) and [`history`](https://github.com/mjackson/history) ([`main.js`](src/main.js), [`router.js`](src/router.js), [`tools/routes-loader.js`](tools/routes-loader.js))<br>
 ✓ [Code-splitting](https://github.com/webpack/docs/wiki/code-splitting) and async chunk loading via [Webpack](https://webpack.github.io/) v2<br>
 ✓ Hot Module Replacement ([HMR](https://webpack.github.io/docs/hot-module-replacement.html)) /w [React Hot Loader](http://gaearon.github.io/react-hot-loader/), cross-device testing with [Browsersync](https://browsersync.io/) (see [`run.js`](tools/run.js))<br>
-✓ **24/7** community support on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate) + *perimum support* on [Skype](https://hatscripts.com/addskype?koistya) ([book a session](https://calendly.com/koistya))<br>
+✓ **24/7** community support on [Gitter](https://gitter.im/kriasoft/react-static-boilerplate) + *premium support* on [Skype](https://hatscripts.com/addskype?koistya) ([book a session](https://calendly.com/koistya))<br>
 
 **View** [docs](./docs), [online demo](https://rsb.kriasoft.com) &nbsp;|&nbsp; **Follow us** on
 [Gitter](https://gitter.im/kriasoft/react-static-boilerplate), [Twitter](https://twitter.com/ReactStatic)
