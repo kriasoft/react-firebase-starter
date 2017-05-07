@@ -40,7 +40,7 @@
     "eslint-config-airbnb": "^14.0.0",
     "eslint-plugin-import": "^2.0.1",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.4.1",
+    "eslint-plugin-react": "^7.0.0",
     "file-loader": "^0.10.1",
     "firebase-tools": "^3.0.4",
     "front-matter": "^2.1.0",
