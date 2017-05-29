@@ -12,3 +12,5 @@ npm-debug.log
 
 # Firebase
 firebase-debug.log
+
+.idea/
