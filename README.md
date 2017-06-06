@@ -102,6 +102,13 @@ You can also test your app in release (production) mode by running `yarn start -
 with HMR and React Hot Loader disabled by running `yarn start -- --no-hmr`. The app should become
 available at [http://localhost:3000/](http://localhost:3000/).
 
+### How to generate new components
+
+Use the command bellow and choose a component to be the basis of your new component:
+
+```shel
+$ yarn component
+```
 
 ### How to Test
 
