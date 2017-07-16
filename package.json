@@ -43,6 +43,7 @@
     "file-loader": "^0.10.1",
     "firebase-tools": "^3.5.0",
     "front-matter": "^2.1.2",
+    "generact": "^0.1.1",
     "highlight.js": "^9.10.0",
     "json-loader": "^0.5.4",
     "markdown-it": "^8.3.1",
@@ -112,6 +113,7 @@
     "build:debug": "node tools/build.js --debug",
     "publish": "node tools/publish.js",
     "publish:debug": "node tools/publish.js --debug",
-    "start": "node tools/run.js"
+    "start": "node tools/run.js",
+    "component": "generact"
   }
 }
