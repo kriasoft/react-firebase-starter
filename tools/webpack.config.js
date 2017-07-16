@@ -13,11 +13,13 @@
 const path = require('path');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const pkg = require('../package.json');
 
 const isDebug = global.DEBUG === false ? false : !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose') || process.argv.includes('-v');
 const useHMR = !!global.HMR; // Hot Module Replacement (HMR)
+
 const babelConfig = Object.assign({}, pkg.babel, {
   babelrc: false,
   cacheDirectory: useHMR,
@@ -83,6 +85,7 @@ const config = {
       debug: isDebug,
       minimize: !isDebug,
     }),
+    new ExtractTextPlugin('styles.css'),
   ],
 
   // Options affecting the normal modules
@@ -99,29 +102,32 @@ const config = {
       },
       {
         test: /\.css/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: isDebug,
-              importLoaders: true,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'style-loader',
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: isDebug,
+                importLoaders: true,
               // CSS Modules https://github.com/css-modules/css-modules
-              modules: true,
-              localIdentName: isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
+                modules: true,
+                localIdentName: isDebug ? '[name]_[local]_[hash:base64:3]' : '[hash:base64:4]',
               // CSS Nano http://cssnano.co/options/
-              minimize: !isDebug,
+                minimize: !isDebug,
+              },
             },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              config: './tools/postcss.config.js',
+            {
+              loader: 'postcss-loader',
+              options: {
+                config: './tools/postcss.config.js',
+              },
             },
-          },
-        ],
+          ],
+        }),
       },
       {
         test: /\.json$/,
