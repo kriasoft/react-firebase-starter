@@ -48,30 +48,29 @@ or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbs
 ### Directory Layout
 
 ```shell
-├── components/                 # Shared or generic UI components
-│   ├── Button/                 # Button component
-│   ├── Layout/                 # Website layout component
-│   ├── Link/                   # Link component to be used instead of <a>
-│   └── ...                     # etc.
-├── docs/                       # Documentation to the project
-├── node_modules/               # 3rd-party libraries and utilities
-├── src/                        # Application source code
-│   ├── about/                  # About page
-│   ├── error/                  # Error page
-│   ├── home/                   # Home page
-│   ├── history.js              # Handles client-side navigation
-│   ├── main.js                 # <== Application entry point <===
-│   ├── router.js               # Handles routing and data fetching
-│   ├── routes.json             # This list of application routes
-│   └── store.js                # Application state manager (Redux)
-├── public/                     # Static files such as favicon.ico etc.
-│   ├── dist/                   # The folder for compiled output
-│   ├── favicon.ico             # Application icon to be displayed in bookmarks
-│   ├── robots.txt              # Instructions for search engine crawlers
-│   └── ...                     # etc.
-├── test/                       # Unit and integration tests
-├── tools/                      # Utility and helper classes
-└── package.json                # The list of project dependencies and NPM scripts
+├── docs/                          # Documentation to the project
+├── node_modules/                  # 3rd-party libraries and utilities
+├── public/                        # Static files such as favicon.ico etc.
+│   ├── favicon.ico                # Application icon to be displayed in bookmarks
+│   ├── index.html                 # HTML template
+│   ├── robots.txt                 # Instructions for search engine crawlers
+│   ├── manifest.json              # Application meta data
+│   └── ...                        # etc.
+├── src/                           # Application source code
+│   ├── About/                     # About page
+│   ├── App/                       # Application shell (layout) component
+│   ├── Button/                    # Button component
+│   ├── Link/                      # Link component to be used instead of <a>
+│   ├── ErrorPage/                 # Error page
+│   ├── Home/                      # Home page
+│   ├── history.js                 # Client-side navigation manager
+│   ├── index.js                   # <== Application entry point (main) <===
+│   ├── pages.js                   # Application routes
+│   ├── registerServiceWokrer.json # This list of application routes
+│   └── store.js                   # Application state manager (Redux)
+├── test/                          # Unit and integration tests
+├── tools/                         # Utility and helper classes
+└── package.json                   # The list of project dependencies + NPM scripts
 ```
 
 

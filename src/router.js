@@ -1,90 +1,44 @@
 /**
  * React Static Boilerplate
- * https://github.com/kriasoft/react-static-boilerplate
- *
- * Copyright © 2015-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
+ * Copyright (c) 2015-present Kriasoft. All rights reserved.
  */
 
-import React from 'react';
+/* @flow */
 
-function decodeParam(val) {
-  if (!(typeof val === 'string' || val.length === 0)) {
-    return val;
+import Router from 'universal-router';
+
+const routes = [
+  {
+    path: '/',
+    data: {
+      articles: 'GET https://gist.githubusercontent.com/koistya/a32919e847531320675764e7308b796a/raw/articles.json',
+    },
+    load: () => import(/* webpackChunkName: 'home' */ './Home'),
+  },
+  {
+    path: '/error',
+    load: () => import(/* webpackChunkName: 'main' */ './ErrorPage'),
+  },
+  {
+    path: '/getting-started',
+    load: () => import(/* webpackChunkName: 'start' */ './GettingStarted'),
+  },
+  {
+    path: '/about',
+    load: () => import(/* webpackChunkName: 'about' */ './About'),
+  },
+  {
+    path: '/tasks/:status(pending|completed)?',
+    load: () => import(/* webpackChunkName: 'home' */ './Home'),
+  },
+];
+
+export default new Router(routes, {
+  resolveRoute({ route, next }, params) {
+    return route.load ? route.load()
+      .then(module => ({
+        ...route,
+        ...module.default(),
+      })) : next();
   }
-
-  try {
-    return decodeURIComponent(val);
-  } catch (err) {
-    if (err instanceof URIError) {
-      err.message = `Failed to decode param '${val}'`;
-      err.status = 400;
-    }
-
-    throw err;
-  }
-}
-
-// Match the provided URL path pattern to an actual URI string. For example:
-//   matchURI({ path: '/posts/:id' }, '/dummy') => null
-//   matchURI({ path: '/posts/:id' }, '/posts/123') => { id: 123 }
-function matchURI(route, path) {
-  const match = route.pattern.exec(path);
-
-  if (!match) {
-    return null;
-  }
-
-  const params = Object.create(null);
-
-  for (let i = 1; i < match.length; i += 1) {
-    params[route.keys[i - 1].name] = match[i] !== undefined ? decodeParam(match[i]) : undefined;
-  }
-
-  return params;
-}
-
-// Find the route matching the specified location (context), fetch the required data,
-// instantiate and return a React component
-function resolve(routes, context) {
-  for (const route of routes) { // eslint-disable-line no-restricted-syntax
-    const params = matchURI(route, context.error ? '/error' : context.pathname);
-
-    if (!params) {
-      continue; // eslint-disable-line no-continue
-    }
-
-    // Check if the route has any data requirements, for example:
-    // { path: '/tasks/:id', data: { task: 'GET /api/tasks/$id' }, page: './pages/task' }
-    if (route.data) {
-      // Load page component and all required data in parallel
-      const keys = Object.keys(route.data);
-      return Promise.all([
-        route.load(),
-        ...keys.map((key) => {
-          const query = route.data[key];
-          const method = query.substring(0, query.indexOf(' ')); // GET
-          let url = query.substr(query.indexOf(' ') + 1);      // /api/tasks/$id
-          // TODO: Optimize
-          Object.keys(params).forEach((k) => {
-            url = url.replace(`${k}`, params[k]);
-          });
-          return fetch(url, { method }).then(resp => resp.json());
-        }),
-      ]).then(([Page, ...data]) => {
-        const props = keys.reduce((result, key, i) => ({ ...result, [key]: data[i] }), {});
-        return <Page route={{ ...route, params }} error={context.error} {...props} />;
-      });
-    }
-
-    return route.load().then(Page => <Page route={{ ...route, params }} error={context.error} />);
-  }
-
-  const error = new Error('Page not found');
-  error.status = 404;
-  return Promise.reject(error);
-}
-
-export default { resolve };
+});

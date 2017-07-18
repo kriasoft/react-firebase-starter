@@ -73,7 +73,8 @@ component you would write code similar to this:
 #### `components/Button/Button.js`
 
 ```js
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 class Button extends React.Component {
@@ -146,7 +147,8 @@ or [inline styles](https://facebook.github.io/react/tips/inline-styles.html)):
 #### `components/Spinner/Spinner.js`
 
 ```js
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import s from './Spinner.css';
 
