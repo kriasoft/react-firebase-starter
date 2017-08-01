@@ -8,12 +8,14 @@
 const fs = require('fs');
 const path = require('path');
 
+let file, text, search;
+
 //
 // Inject CSS Modules into webpack.config.dev.js
 // -----------------------------------------------------------------------------
-let file = path.resolve('./node_modules/react-scripts/config/webpack.config.dev.js');
-let text = fs.readFileSync(file, 'utf8');
-let search = /importLoaders: 1,\n\s{12}}/;
+file = path.resolve('./node_modules/react-scripts/config/webpack.config.dev.js');
+text = fs.readFileSync(file, 'utf8');
+search = /importLoaders: 1,\n\s{12}}/;
 
 if (text.match(search)) {
   text = text.replace(search, `importLoaders: 1,
