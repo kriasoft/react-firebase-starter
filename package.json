@@ -19,11 +19,11 @@
     "stylelint-order": "^0.6.0"
   },
   "scripts": {
-    "start": "node tools/setup && react-scripts start",
-    "build": "node tools/setup && react-scripts build",
-    "test": "node tools/setup && react-scripts test --env=jsdom",
-    "lint": "eslint src tools && stylelint \"src/**/*.css\"",
-    "lint-fix": "eslint src tools --fix & stylelint \"src/**/*.css\" --fix",
-    "deploy": "node tools/setup && react-scripts build && gh-pages -d build"
+    "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . && stylelint \"src/**/*.css\"",
+    "lint-fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . --fix & stylelint \"src/**/*.css\" --fix",
+    "build": "node setup && react-scripts build",
+    "test": "node setup && react-scripts test --env=jsdom",
+    "deploy": "node setup && react-scripts build && gh-pages -d build",
+    "start": "node setup && react-scripts start"
   }
 }
