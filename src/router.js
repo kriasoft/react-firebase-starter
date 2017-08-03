@@ -8,6 +8,10 @@
 import React from 'react';
 import Router from 'universal-router';
 
+// The list of all application routes where each route contains a URL path string (pattern),
+// the list of components to load asynchroneously (chunks), data requirements (GraphQL query),
+// and a tiny render() function which shapes the result to be used in the top-level (App) component.
+// https://github.com/kriasoft/universal-router
 const routes = [
   {
     path: '/',
