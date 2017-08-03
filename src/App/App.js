@@ -15,7 +15,6 @@ class App extends React.Component {
   state = {
     menuOpen: false,
     route: {
-      path: '/',
       title: null,
       hero: null,
       component: null,
@@ -36,7 +35,7 @@ class App extends React.Component {
     // Resolve the URL path (window.location) to a page (see pages.js)
     router.resolve({ path: location.pathname })
       .then(route => this.setState({ route }, () => {
-        document.title = route.path === '/'
+        document.title = location.pathname === '/'
           ? `React Static | ${route.title}`
           : `${route.title} | React Static`;
       }));
