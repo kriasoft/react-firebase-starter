@@ -74,8 +74,8 @@ This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][
 
 ### Prerequisites
 
-* [Node.js][nodejs] v8.2.1 or higher + [Yarn][yarn] v0.27.5 or higher &nbsp; (HINT: On Mac install
-  them [Brew][brew])
+* [Node.js][nodejs] v8.2.1 or higher + [Yarn][yarn] v0.27.5 or higher &nbsp; (*HINT: On Mac install
+  them via [Brew][brew]*)
 * [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [stylelint][vcstylelint] plug-ins
 
