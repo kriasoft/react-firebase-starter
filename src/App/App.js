@@ -9,6 +9,7 @@ import React from 'react';
 import router from '../router';
 import history from '../history';
 import AppToolbar from './AppToolbar';
+import AppFooter from './AppFooter';
 import s from './App.css';
 
 class App extends React.Component {
@@ -52,6 +53,7 @@ class App extends React.Component {
         <main className={s.content}>
           {this.state.route.component}
         </main>
+        <AppFooter />
       </div>
     );
   }
