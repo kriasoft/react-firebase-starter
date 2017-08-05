@@ -11,7 +11,6 @@ import cx from 'classnames';
 import Link from '../Link';
 
 class Button extends React.Component {
-
   static propTypes = {
     component: PropTypes.oneOf([
       PropTypes.string,
@@ -38,10 +37,21 @@ class Button extends React.Component {
   }
 
   render() {
-    const { component, type, className, colored, to, href,
-      primary, accent, ripple, children, ...other } = this.props;
+    const {
+      component,
+      type,
+      className,
+      colored,
+      to,
+      href,
+      primary,
+      accent,
+      ripple,
+      children,
+      ...other
+    } = this.props;
     return React.createElement(
-      component || (to ? Link : (href ? 'a' : 'button')), // eslint-disable-line no-nested-ternary
+      component || (to ? Link : href ? 'a' : 'button'), // eslint-disable-line no-nested-ternary
       {
         ref: node => (this.root = node),
         className: cx(
@@ -62,7 +72,6 @@ class Button extends React.Component {
       children,
     );
   }
-
 }
 
 export default Button;

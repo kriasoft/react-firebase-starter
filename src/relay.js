@@ -15,18 +15,23 @@ function fetchQuery(
   // cacheConfig,
   // uploadables,
 ) {
-  return fetch(process.env.REACT_APP_API ? `${process.env.REACT_APP_API}/graphql` : 'http://localhost:8080/graphql', {
-    method: 'POST',
-    headers: {
-      // Add authentication and other headers here
-      'content-type': 'application/json',
+  return fetch(
+    process.env.REACT_APP_API
+      ? `${process.env.REACT_APP_API}/graphql`
+      : 'http://localhost:8080/graphql',
+    {
+      method: 'POST',
+      headers: {
+        // Add authentication and other headers here
+        'content-type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        query: operation.text, // GraphQL text from input
+        variables,
+      }),
     },
-    credentials: 'include',
-    body: JSON.stringify({
-      query: operation.text, // GraphQL text from input
-      variables,
-    }),
-  }).then(response => response.json());
+  ).then(response => response.json());
 }
 
 export default new Environment({

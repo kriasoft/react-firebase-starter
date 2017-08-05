@@ -27,13 +27,18 @@ class AppToolbar extends React.Component {
             </Link>
           </section>
           <section className={cx(s.section, s.sectionEnd)}>
-            <Link className={s.link} href="/getting-started">Get Started</Link>
-            <Link className={s.link} href="/about">About</Link>
+            <Link className={s.link} href="/getting-started">
+              Get Started
+            </Link>
+            <Link className={s.link} href="/about">
+              About
+            </Link>
           </section>
         </div>
-        {this.props.hero && React.cloneElement(this.props.hero, {
-          className: s.hero,
-        })}
+        {this.props.hero &&
+          React.cloneElement(this.props.hero, {
+            className: s.hero,
+          })}
       </header>
     );
   }

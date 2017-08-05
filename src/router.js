@@ -16,7 +16,8 @@ const routes = [
   {
     path: '/',
     data: {
-      articles: 'GET https://gist.githubusercontent.com/koistya/a32919e847531320675764e7308b796a/raw/articles.json',
+      articles:
+        'GET https://gist.githubusercontent.com/koistya/a32919e847531320675764e7308b796a/raw/articles.json',
     },
     components: () => [
       import(/* webpackChunkName: 'home' */ './Home'),
@@ -38,11 +39,13 @@ const routes = [
   },
   {
     path: '/getting-started',
-    components: () => [import(/* webpackChunkName: 'start' */ './GettingStarted')],
+    components: () => [
+      import(/* webpackChunkName: 'start' */ './GettingStarted'),
+    ],
     render: (_, GettingStarted) => ({
       title: 'Getting Started',
       component: <GettingStarted />,
-    })
+    }),
   },
   {
     path: '/about',
@@ -66,10 +69,14 @@ function resolveRoute({ route, next }, params) {
   if (!route.render) return next();
 
   const componentsPromise = route.components
-    ? Promise.all(route.components().map(promise => promise.then(x => x.default)))
+    ? Promise.all(
+        route.components().map(promise => promise.then(x => x.default)),
+      )
     : Promise.resolve([]);
 
-  return componentsPromise.then(components => route.render({ data: null, params }, ...components));
+  return componentsPromise.then(components =>
+    route.render({ data: null, params }, ...components),
+  );
 }
 
 export default new Router(routes, { resolveRoute });

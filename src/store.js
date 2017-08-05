@@ -15,7 +15,7 @@ const store = createStore((state = initialState, action) => {
   // TODO: Add action handlers (aka "reducers")
   switch (action.type) {
     case 'COUNT':
-      return { ...state, count: (state.count) + 1 };
+      return { ...state, count: state.count + 1 };
     default:
       return state;
   }

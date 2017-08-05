@@ -17,21 +17,27 @@ module.exports = {
   ],
 
   rules: {
-    'property-no-unknown': [true, {
-      ignoreProperties: [
-        // CSS Modules composition
-        // https://github.com/css-modules/css-modules#composition
-        'composes',
-      ],
-    }],
+    'property-no-unknown': [
+      true,
+      {
+        ignoreProperties: [
+          // CSS Modules composition
+          // https://github.com/css-modules/css-modules#composition
+          'composes',
+        ],
+      },
+    ],
 
-    'selector-pseudo-class-no-unknown': [true, {
-      ignorePseudoClasses: [
-        // CSS Modules :global scope
-        // https://github.com/css-modules/css-modules#exceptions
-        'global',
-      ],
-    }],
+    'selector-pseudo-class-no-unknown': [
+      true,
+      {
+        ignorePseudoClasses: [
+          // CSS Modules :global scope
+          // https://github.com/css-modules/css-modules#exceptions
+          'global',
+        ],
+      },
+    ],
 
     // https://github.com/hudochenkov/stylelint-order/blob/master/rules/order/README.md
     'order/order': [

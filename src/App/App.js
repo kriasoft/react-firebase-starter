@@ -32,17 +32,19 @@ class App extends React.Component {
     this.unlisten();
   }
 
-  renderComponent = (location) => {
+  renderComponent = location => {
     // Resolve the URL path (window.location) to a page (see pages.js)
-    router.resolve({ path: location.pathname })
-      .then(route => this.setState({ route }, () => {
-        document.title = location.pathname === '/'
-          ? `React Static | ${route.title}`
-          : `${route.title} | React Static`;
-      }));
+    router.resolve({ path: location.pathname }).then(route =>
+      this.setState({ route }, () => {
+        document.title =
+          location.pathname === '/'
+            ? `React Static | ${route.title}`
+            : `${route.title} | React Static`;
+      }),
+    );
   };
 
-  toggleMenu = (event) => {
+  toggleMenu = event => {
     this.setState(x => ({ menuOpen: !x.menuOpen }));
   };
 

@@ -19,12 +19,18 @@ class Hero extends React.Component {
     return (
       <div className={cx(s.root, this.props.className)}>
         <h2 className={s.title}>Bootstrap a new React app in 5 minutes!</h2>
-        <p className={s.desc}><strong>React Static</strong> is a popular boilerplate for building single-page applications and static web sites with React.</p>
-        <p><Link className={s.button} href="/getting-started">Get Started</Link></p>
+        <p className={s.desc}>
+          <strong>React Static</strong> is a popular boilerplate for building
+          single-page applications and static web sites with React.
+        </p>
+        <p>
+          <Link className={s.button} href="/getting-started">
+            Get Started
+          </Link>
+        </p>
       </div>
     );
   }
-
 }
 
 export default Hero;
