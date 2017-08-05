@@ -1,0 +1,7 @@
+{
+  "javascript.validate.enable": false,
+  "search.exclude": {
+    "**/build": true,
+    "**/node_modules": true
+  }
+}
