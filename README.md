@@ -46,7 +46,7 @@ This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][
 
 ### Directory Layout
 
-```shell
+```bash
 ├── node_modules/                  # 3rd-party libraries and utilities
 ├── public/                        # Static files such as favicon.ico etc.
 │   ├── favicon.ico                # Application icon to be displayed in bookmarks
@@ -67,8 +67,8 @@ This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][
 │   ├── registerServiceWokrer.json # This list of application routes
 │   └── store.js                   # Application state manager (Redux)
 ├── test/                          # Unit and integration tests
-├── tools/                         # Utility and helper classes
-└── package.json                   # The list of project dependencies + NPM scripts
+├── package.json                   # The list of project dependencies + NPM scripts
+└── setup.js                       # Customizations for create-react-app
 ```
 
 
@@ -84,7 +84,7 @@ This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][
 
 Just clone the repo and start hacking:
 
-```shell
+```bash
 $ git clone https://github.com/kriasoft/react-static-boilerplate.git MyApp
 $ cd MyApp
 $ yarn install                     # Install project dependencies listed in package.json
@@ -98,7 +98,7 @@ The app should become available at [http://localhost:3000/](http://localhost:300
 
 The unit tests are powered by [chai](http://chaijs.com/) and [mocha](http://mochajs.org/).
 
-```shell
+```bash
 $ yarn lint                        # Check JavaScript and CSS code for potential issues
 $ yarn test                        # Run unit tests. Or, `yarn run test:watch`
 ```
@@ -110,7 +110,7 @@ Update `publish` script in the [`tools/publish.js`](tools/publish.js) file with 
 project name as found in your [Firebase console](https://console.firebase.google.com/). Note that
 this may have an additional identifier suffix than the shorter name you've provided. Then run: 
 
-```shell
+```bash
 $ yarn run publish                 # Builds and deployes the app to Firebase
 ```
 
@@ -121,7 +121,7 @@ authentication token in order for the publish script to continue.
 
 If you need to build the project without publishing it, simply run:
 
-```shell
+```bash
 $ yarn build                       # Compiles the app into the /public/dist folder
 ```
 
