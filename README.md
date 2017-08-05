@@ -74,9 +74,10 @@ This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][
 
 ### Prerequisites
 
-* [Node.js][nodejs] v8.2.1 or higher + [Yarn][yarn] v0.27.5 or higher
-* [VS Code][vscode] editor (preferred) + Code Snippets, EditorConfig, ESLint, Flow, and styleint
-plug-ins.
+* [Node.js][nodejs] v8.2.1 or higher + [Yarn][yarn] v0.27.5 or higher *(HINT: On Mac install these
+  with [Brew][brew])*
+* [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
+  [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [stylelint][vcstylelint] plug-ins
 
 
 ### Getting Started
@@ -188,4 +189,11 @@ and [contributors](https://github.com/kriasoft/react-static-boilerplate/graphs/c
 [postcss]: http://postcss.org/
 [nodejs]: https://nodejs.org/
 [yarn]: https://yarnpkg.com/
-[vscode]: https://code.visualstudio.com/
+[brew]: https://brew.sh/
+[vc]: https://code.visualstudio.com/
+[vcsnippets]: https://marketplace.visualstudio.com/items?itemName=rebornix.project-snippets
+[vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
+[vceslint]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+[vcflow]: https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode
+[vcprettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+[vcstylelint]: https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint
