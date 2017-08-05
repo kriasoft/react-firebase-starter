@@ -1,0 +1,150 @@
+type Comment implements Node {
+  # The ID of an object
+  id: ID!
+  story: Story!
+  parent: Comment!
+  author: User!
+  comments: [Comment]
+  text: String
+  pointsCount: Int!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input CreateCommentInput {
+  storyId: ID!
+  parentId: ID
+  text: String
+  clientMutationId: String
+}
+
+type CreateCommentPayload {
+  story: Comment
+  clientMutationId: String
+}
+
+input CreateStoryInput {
+  title: String
+  text: String
+  url: String
+  clientMutationId: String
+}
+
+type CreateStoryPayload {
+  story: Story
+  clientMutationId: String
+}
+
+type Email {
+  email: String!
+  verified: Boolean!
+}
+
+type Mutation {
+  createStory(input: CreateStoryInput!): CreateStoryPayload
+  updateStory(input: UpdateStoryInput!): UpdateStoryPayload
+  createComment(input: CreateCommentInput!): CreateCommentPayload
+  updateComment(input: UpdateCommentInput!): UpdateCommentPayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+type Query {
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+
+  # Fetches objects given their IDs
+  nodes(
+    # The IDs of objects
+    ids: [ID!]!
+  ): [Node]!
+  me: User
+  stories(after: String, first: Int): StoryConnection
+}
+
+type Story implements Node {
+  # The ID of an object
+  id: ID!
+  author: User!
+  title: String!
+  url: String
+  text: String
+  comments: [Comment]
+  pointsCount: Int!
+  commentsCount: Int!
+  createdAt: String!
+  updatedAt: String!
+}
+
+# A connection to a list of items.
+type StoryConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [StoryEdge]
+  totalCount: Int!
+}
+
+# An edge in a connection.
+type StoryEdge {
+  # The item at the end of the edge
+  node: Story
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+input UpdateCommentInput {
+  id: ID!
+  text: ID
+  clientMutationId: String
+}
+
+type UpdateCommentPayload {
+  story: Comment
+  clientMutationId: String
+}
+
+input UpdateStoryInput {
+  id: ID!
+  title: String
+  text: String
+  url: String
+  clientMutationId: String
+}
+
+type UpdateStoryPayload {
+  story: Story
+  clientMutationId: String
+}
+
+type User implements Node {
+  # The ID of an object
+  id: ID!
+  displayName: String
+  imageUrl: String
+  emails: [Email]
+}

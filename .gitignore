@@ -11,6 +11,7 @@
 /build
 
 # Misc
+__generated__
 .DS_Store
 .env.local
 .env.development.local
@@ -24,6 +25,3 @@ yarn-error.log*
 # VS Code
 .vscode/*
 !.vscode/settings.json
-
-# Firebase
-firebase-debug.log
