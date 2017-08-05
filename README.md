@@ -87,8 +87,8 @@ Just clone the repo and start hacking:
 ```shell
 $ git clone https://github.com/kriasoft/react-static-boilerplate.git MyApp
 $ cd MyApp
-$ yarn install                  # Install project dependencies listed in package.json
-$ yarn start                    # Compiles the app and opens it in a browser with "live reload"
+$ yarn install                     # Install project dependencies listed in package.json
+$ yarn start                       # Compiles the app and opens it in a browser with "live reload"
 ```
 
 The app should become available at [http://localhost:3000/](http://localhost:3000/).
@@ -99,8 +99,8 @@ The app should become available at [http://localhost:3000/](http://localhost:300
 The unit tests are powered by [chai](http://chaijs.com/) and [mocha](http://mochajs.org/).
 
 ```shell
-$ yarn lint                     # Check JavaScript and CSS code for potential issues
-$ yarn test                     # Run unit tests. Or, `yarn run test:watch`
+$ yarn lint                        # Check JavaScript and CSS code for potential issues
+$ yarn test                        # Run unit tests. Or, `yarn run test:watch`
 ```
 
 
@@ -111,7 +111,7 @@ project name as found in your [Firebase console](https://console.firebase.google
 this may have an additional identifier suffix than the shorter name you've provided. Then run: 
 
 ```shell
-$ yarn run publish                  # Builds and deployes the app to Firebase
+$ yarn run publish                 # Builds and deployes the app to Firebase
 ```
 
 The first time you publish, you will be prompted to authenticate with Google and generate an
@@ -122,7 +122,7 @@ authentication token in order for the publish script to continue.
 If you need to build the project without publishing it, simply run:
 
 ```shell
-$ yarn build                    # Compiles the app into the /public/dist folder
+$ yarn build                       # Compiles the app into the /public/dist folder
 ```
 
 
