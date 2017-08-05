@@ -27,8 +27,7 @@ class AppToolbar extends React.Component {
             </Link>
           </section>
           <section className={cx(s.section, s.sectionEnd)}>
-            <Link className={s.link} href="/">Home</Link>
-            <Link className={s.link} href="/getting-started">Getting Started</Link>
+            <Link className={s.link} href="/getting-started">Get Started</Link>
             <Link className={s.link} href="/about">About</Link>
           </section>
         </div>
