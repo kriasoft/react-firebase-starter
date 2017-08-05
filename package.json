@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "gh-pages": "^1.0.0",
+    "husky": "^0.14.3",
     "lint-staged": "^4.0.2",
     "react-scripts": "1.0.10",
     "stylelint": "^8.0.0",
@@ -20,11 +21,11 @@
     "stylelint-order": "^0.6.0"
   },
   "lint-staged": {
-    ".js": [
+    "*.js": [
       "eslint --fix",
       "git add"
     ],
-    ".css": [
+    "*.css": [
       "stylelint --fix",
       "git add"
     ]
