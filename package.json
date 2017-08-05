@@ -12,13 +12,25 @@
   },
   "devDependencies": {
     "gh-pages": "^1.0.0",
+    "lint-staged": "^4.0.2",
     "react-scripts": "1.0.10",
     "stylelint": "^8.0.0",
     "stylelint-config-primer": "^2.0.0",
     "stylelint-config-standard": "^17.0.0",
     "stylelint-order": "^0.6.0"
   },
+  "lint-staged": {
+    ".js": [
+      "eslint --fix",
+      "git add"
+    ],
+    ".css": [
+      "stylelint --fix",
+      "git add"
+    ]
+  },
   "scripts": {
+    "precommit": "lint-staged",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . && stylelint \"src/**/*.css\"",
     "lint-fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . --fix & stylelint \"src/**/*.css\" --fix",
     "build": "node setup && react-scripts build",
