@@ -163,8 +163,10 @@ requests](CONTRIBUTING.md#pull-requests).
 
 ### Related Projects
 
-* [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Isomorphic web app boilerplate (Node.js, React, GraphQL, Webpack, CSS Modules)
-* [Node.js API Starter Kit](https://github.com/kriasoft/nodejs-api-starter) — Boilerplate and tooling for building data APIs with Node.js, GraphQL and Relay
+* [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Boilerplate and tooling for
+  building isomorphic web apps with React and Relay
+* [Node.js API Starter Kit](https://github.com/kriasoft/nodejs-api-starter) — Boilerplate and
+  tooling for building data APIs with Docker, Node.js and GraphQL
 
 
 ### License
