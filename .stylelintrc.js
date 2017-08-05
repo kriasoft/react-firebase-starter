@@ -17,6 +17,22 @@ module.exports = {
   ],
 
   rules: {
+    'property-no-unknown': [true, {
+      ignoreProperties: [
+        // CSS Modules composition
+        // https://github.com/css-modules/css-modules#composition
+        'composes',
+      ],
+    }],
+
+    'selector-pseudo-class-no-unknown': [true, {
+      ignorePseudoClasses: [
+        // CSS Modules :global scope
+        // https://github.com/css-modules/css-modules#exceptions
+        'global',
+      ],
+    }],
+
     // https://github.com/hudochenkov/stylelint-order/blob/master/rules/order/README.md
     'order/order': [
       'custom-properties',
@@ -25,6 +41,8 @@ module.exports = {
       'at-rules',
       'rules',
     ],
+
+    'string-quotes': 'single',
 
     // https://github.com/hudochenkov/stylelint-order/blob/master/rules/properties-order/README.md
     'order/properties-order': primerConfig.rules['order/properties-order'],
