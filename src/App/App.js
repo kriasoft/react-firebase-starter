@@ -8,7 +8,7 @@
 import React from 'react';
 import router from '../router';
 import history from '../history';
-import Toolbar from '../Toolbar';
+import AppToolbar from './AppToolbar';
 import s from './App.css';
 
 class App extends React.Component {
@@ -48,7 +48,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Toolbar hero={this.state.route.hero} />
+        <AppToolbar hero={this.state.route.hero} />
         <main className={s.content}>
           {this.state.route.component}
         </main>

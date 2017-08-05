@@ -8,10 +8,10 @@
 import React from 'react';
 import cx from 'classnames';
 import Link from '../Link';
-import Logo from './Logo';
-import s from './Toolbar.css';
+import AppLogo from './AppLogo';
+import s from './AppToolbar.css';
 
-class Toolbar extends React.Component {
+class AppToolbar extends React.Component {
   static defaultProps = {
     hero: null,
   };
@@ -22,7 +22,7 @@ class Toolbar extends React.Component {
         <div className={s.row}>
           <section className={cx(s.section, s.sectionStart)}>
             <Link className={cx(s.title)} href="/">
-              <Logo className={cx(s.logo)} />
+              <AppLogo className={cx(s.logo)} />
               React Static
             </Link>
           </section>
@@ -40,4 +40,4 @@ class Toolbar extends React.Component {
   }
 }
 
-export default Toolbar;
+export default AppToolbar;

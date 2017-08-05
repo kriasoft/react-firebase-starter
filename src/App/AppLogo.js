@@ -6,9 +6,9 @@
 /* @flow */
 
 import React from 'react';
-import s from './Logo.css';
+import s from './AppLogo.css';
 
-class Logo extends React.Component {
+class AppLogo extends React.Component {
   render() {
     return (
       <svg className={this.props.className} viewBox="0 0 3618.6 3618.6" width="3618.6" height="3618.6">
@@ -21,4 +21,4 @@ class Logo extends React.Component {
   }
 }
 
-export default Logo;
+export default AppLogo;
