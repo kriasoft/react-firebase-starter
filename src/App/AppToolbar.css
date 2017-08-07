@@ -86,6 +86,10 @@
   letter-spacing: 1px;
 }
 
+.sectionEnd > .link:last-of-type {
+  margin-right: 24px;
+}
+
 .hero {
   max-width: 1000px;
   align-self: center;
@@ -104,5 +108,9 @@
 
   .title {
     margin-left: 16px;
+  }
+
+  .sectionEnd > .link:last-of-type {
+    margin-right: 16px;
   }
 }

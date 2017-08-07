@@ -14,6 +14,7 @@ class Home extends React.Component {
       <div className={s.root}>
         <h2>Welcome to React Static Boilerplate</h2>
         <p>Coming soon.</p>
+        {Array.from({ length: 50 }).map(() => <br />)}
       </div>
     );
   }

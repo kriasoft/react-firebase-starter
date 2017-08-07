@@ -6,57 +6,88 @@
 /* @flow */
 
 import React from 'react';
+import isEqual from 'lodash/isEqual';
+import { graphql, QueryRenderer } from 'react-relay';
+
+import relay from '../relay';
 import router from '../router';
 import history from '../history';
-import AppToolbar from './AppToolbar';
-import AppFooter from './AppFooter';
-import s from './App.css';
+import AppRenderer from './AppRenderer';
 
-class App extends React.Component {
+// eslint-disable-next-line no-unused-expressions
+graphql`
+  fragment App_me on User {
+    ...AppToolbar_me
+  }
+`;
+
+type ReadyState = {
+  error: ?Error,
+  props: ?Object,
+  retry: ?() => void,
+};
+
+type Render = (Array<React.Element<*>>, ?Object, ?Object) => any;
+
+type State = {
+  location: Location,
+  params: Object,
+  query: ?Object,
+  variables: Object,
+  components: ?Array<React.Element<*>> | Promise<Array<React.Element<*>>>,
+  render: ?Render,
+};
+
+class App extends React.Component<any, any, State> {
   state = {
-    menuOpen: false,
-    route: {
-      title: null,
-      hero: null,
-      component: null,
-    },
+    location: history.location,
+    params: {},
+    query: null,
+    variables: {},
+    components: null,
+    render: null,
   };
+
+  unlisten: () => void;
 
   componentDidMount() {
     // Start watching for changes in the URL (window.location)
-    this.unlisten = history.listen(this.renderComponent);
-    this.renderComponent(history.location);
+    this.unlisten = history.listen(this.resolveRoute);
+    this.resolveRoute(history.location);
   }
 
   componentWillUnmount() {
     this.unlisten();
   }
 
-  renderComponent = location => {
-    // Resolve the URL path (window.location) to a page (see pages.js)
-    router.resolve({ path: location.pathname }).then(route =>
-      this.setState({ route }, () => {
-        document.title =
-          location.pathname === '/'
-            ? `React Static | ${route.title}`
-            : `${route.title} | React Static`;
-      }),
-    );
-  };
+  resolveRoute = (location: Location) =>
+    // Find the route that matches the provided URL path and query string
+    router.resolve({ path: location.pathname }).then(route => {
+      const variables = isEqual(this.state.variables, route.variables)
+        ? this.state.variables
+        : route.variables;
+      this.setState({ ...route, location, variables });
+    });
 
-  toggleMenu = event => {
-    this.setState(x => ({ menuOpen: !x.menuOpen }));
-  };
+  renderState = ({ error, props, retry }: ReadyState) =>
+    <AppRenderer
+      error={error}
+      data={props}
+      retry={retry}
+      location={this.state.location}
+      params={this.state.params}
+      components={this.state.components}
+      render={this.state.render}
+    />;
 
   render() {
     return (
-      <div>
-        <AppToolbar hero={this.state.route.hero} />
-        <main className={s.content}>
-          {this.state.route.component}
-        </main>
-        <AppFooter />
-      </div>
+      <QueryRenderer
+        environment={relay}
+        query={this.state.query}
+        variables={this.state.variables}
+        render={this.renderState}
+      />
     );
   }
 }

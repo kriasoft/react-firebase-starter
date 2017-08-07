@@ -76,6 +76,7 @@ This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][
 
 * [Node.js][nodejs] v8.2.1 or higher + [Yarn][yarn] v0.27.5 or higher &nbsp; (*HINT: On Mac install
   them via [Brew][brew]*)
+* [Watchman][wm] v4.7.0 or higher, required by the [Relay Compiler][relaycompiler]
 * [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [stylelint][vcstylelint] plug-ins
 
@@ -88,6 +89,7 @@ Just clone the repo and start hacking:
 $ git clone https://github.com/kriasoft/react-static-boilerplate.git MyApp
 $ cd MyApp
 $ yarn install                     # Install project dependencies listed in package.json
+$ yarn relay                       # Pre-compile GraphQL queries with Relay Compiler
 $ yarn start                       # Compiles the app and opens it in a browser with "live reload"
 ```
 
@@ -192,6 +194,8 @@ and [contributors](https://github.com/kriasoft/react-static-boilerplate/graphs/c
 [nodejs]: https://nodejs.org/
 [yarn]: https://yarnpkg.com/
 [brew]: https://brew.sh/
+[wm]: https://facebook.github.io/watchman/
+[relaycompiler]: http://facebook.github.io/relay/docs/relay-compiler.html
 [vc]: https://code.visualstudio.com/
 [vcsnippets]: https://marketplace.visualstudio.com/items?itemName=rebornix.project-snippets
 [vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig

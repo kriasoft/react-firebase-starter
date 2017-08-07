@@ -14,6 +14,7 @@ class GettingStarted extends React.Component {
       <div className={s.root}>
         <h2>Getting Started</h2>
         <p>Coming soon.</p>
+        {Array.from({ length: 50 }).map(() => <br />)}
       </div>
     );
   }

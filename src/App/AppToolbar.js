@@ -7,13 +7,17 @@
 
 import React from 'react';
 import cx from 'classnames';
+import { graphql, createFragmentContainer } from 'react-relay';
+
 import Link from '../Link';
 import AppLogo from './AppLogo';
 import s from './AppToolbar.css';
+import type { AppToolbar_me } from './__generated__/AppToolbar_me.graphql';
 
 class AppToolbar extends React.Component {
-  static defaultProps = {
-    hero: null,
+  props: {
+    me: AppToolbar_me,
+    hero: React.Element<*>,
   };
 
   render() {
@@ -44,4 +48,11 @@ class AppToolbar extends React.Component {
   }
 }
 
-export default AppToolbar;
+export default createFragmentContainer(
+  AppToolbar,
+  graphql`
+    fragment AppToolbar_me on User {
+      displayName
+    }
+  `,
+);

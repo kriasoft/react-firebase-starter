@@ -6,16 +6,16 @@
 /* @flow */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+
 import history from '../history';
 import Link from '../Link';
 import s from './ErrorPage.css';
 
-class ErrorPage extends React.Component {
-  static propTypes = {
-    error: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-  };
+type Props = {
+  error: ?Error,
+};
 
+class ErrorPage extends React.Component<any, Props, any> {
   componentDidMount() {
     document.title =
       this.props.error && this.props.error.status === 404
@@ -23,13 +23,15 @@ class ErrorPage extends React.Component {
         : 'Error';
   }
 
-  goBack = event => {
+  goBack = (event: MouseEvent) => {
     event.preventDefault();
     history.goBack();
   };
 
   render() {
-    if (this.props.error) console.error(this.props.error); // eslint-disable-line no-console
+    if (this.props.error) {
+      console.error(this.props.error); // eslint-disable-line no-console
+    }
 
     const [code, title] =
       this.props.error && this.props.error.status === 404
@@ -55,7 +57,7 @@ class ErrorPage extends React.Component {
               Go back
             </a>
             , or head over to the&nbsp;
-            <Link to="/">home page</Link>
+            <Link href="/">home page</Link>
             to choose a new direction.
           </p>
         </main>
