@@ -1,0 +1,12 @@
+{
+  "editor.formatOnSave": true,
+  "flow.useNPMPackagedFlow": true,
+  "javascript.format.enable": false,
+  "javascript.validate.enable": false,
+  "prettier.eslintIntegration": true,
+  "vsicons.presets.angular": false,
+  "search.exclude": {
+    "**/build": true,
+    "**/node_modules": true
+  }
+}

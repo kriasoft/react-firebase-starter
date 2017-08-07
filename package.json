@@ -2,116 +2,53 @@
   "name": "app",
   "version": "0.0.0",
   "private": true,
-  "engines": {
-    "node": ">=6",
-    "npm": ">=3.8"
-  },
   "dependencies": {
-    "babel-polyfill": "^6.23.0",
     "classnames": "^2.2.5",
-    "fastclick": "^1.0.6",
-    "history": "^4.6.1",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-mdl": "^1.9.0",
-    "react-redux": "^5.0.3",
-    "redux": "^3.6.0",
-    "whatwg-fetch": "^2.0.3"
+    "history": "^4.6.3",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.5.10",
+    "query-string": "^5.0.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-relay": "^1.1.0",
+    "relay-runtime": "^1.1.0",
+    "universal-router": "^3.2.0"
   },
   "devDependencies": {
-    "assets-webpack-plugin": "^3.5.1",
-    "autoprefixer": "^6.7.7",
-    "babel-core": "^6.24.0",
-    "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.4.1",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-latest": "^6.24.0",
-    "babel-preset-react": "^6.23.0",
-    "babel-preset-stage-1": "^6.22.0",
-    "babel-register": "^6.24.0",
-    "babel-runtime": "^6.23.0",
-    "browser-sync": "^2.18.8",
-    "chai": "^4.0.0-canary.1",
-    "connect-history-api-fallback": "^1.3.0",
-    "css-loader": "^0.27.3",
-    "ejs": "^2.5.6",
-    "eslint": "^3.18.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.2",
-    "file-loader": "^0.10.1",
-    "firebase-tools": "^3.5.0",
-    "front-matter": "^2.1.2",
-    "highlight.js": "^9.10.0",
-    "json-loader": "^0.5.4",
-    "markdown-it": "^8.3.1",
-    "mocha": "^3.2.0",
-    "path-to-regexp": "^1.7.0",
-    "pixrem": "^3.0.2",
-    "pleeease-filters": "^3.0.1",
-    "postcss": "^5.2.16",
-    "postcss-calc": "^5.3.1",
-    "postcss-color-function": "^3.0.0",
-    "postcss-custom-media": "^5.0.1",
-    "postcss-custom-properties": "^5.0.2",
-    "postcss-custom-selectors": "^3.0.0",
-    "postcss-flexbugs-fixes": "^2.1.0",
-    "postcss-import": "^9.1.0",
-    "postcss-loader": "^1.3.3",
-    "postcss-media-minmax": "^2.1.2",
-    "postcss-nesting": "^2.3.1",
-    "postcss-selector-matches": "^2.0.5",
-    "postcss-selector-not": "^2.0.0",
-    "react-hot-loader": "^3.0.0-beta.2",
-    "rimraf": "^2.6.1",
-    "s3": "^4.4.0",
-    "style-loader": "^0.14.1",
-    "stylelint": "^7.9.0",
-    "stylelint-config-standard": "^16.0.0",
-    "url-loader": "^0.5.8",
-    "webpack": "^2.2.1",
-    "webpack-dev-middleware": "^1.10.1",
-    "webpack-hot-middleware": "^2.17.1"
+    "babel-plugin-relay": "^1.1.0",
+    "eslint-config-prettier": "^2.3.0",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "eslint-plugin-prettier": "^2.1.2",
+    "flow-bin": "^0.52.0",
+    "gh-pages": "^1.0.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.3",
+    "prettier": "^1.5.3",
+    "react-scripts": "1.0.10",
+    "relay-compiler": "^1.1.0",
+    "stylelint": "^8.0.0",
+    "stylelint-config-primer": "^2.0.0",
+    "stylelint-config-standard": "^17.0.0",
+    "stylelint-order": "^0.6.0"
   },
-  "babel": {
-    "presets": [
-      "latest",
-      "stage-1",
-      "react"
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
     ],
-    "plugins": [
-      "transform-runtime"
+    "*.css": [
+      "stylelint --fix",
+      "git add"
     ]
   },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "extends": "airbnb",
-    "rules": {
-      "react/jsx-filename-extension": "off",
-      "react/require-default-props": "off",
-      "import/no-extraneous-dependencies": "off"
-    },
-    "env": {
-      "browser": true
-    }
-  },
-  "stylelint": {
-    "extends": "stylelint-config-standard",
-    "rules": {
-      "string-quotes": "single"
-    }
-  },
   "scripts": {
-    "eslint": "eslint components src test tools postcss.config.js webpack.config.js",
-    "stylelint": "stylelint \"components/**/*.css\" \"src/**/*.css\"",
-    "lint": "npm run eslint && npm run stylelint",
-    "test": "mocha --compilers js:babel-register",
-    "test:watch": "mocha --compilers js:babel-register --reporter min --watch",
-    "build": "node tools/build.js",
-    "build:debug": "node tools/build.js --debug",
-    "publish": "node tools/publish.js",
-    "publish:debug": "node tools/publish.js --debug",
-    "start": "node tools/run.js"
+    "precommit": "lint-staged",
+    "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . && stylelint \"src/**/*.css\"",
+    "lint-fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . --fix & stylelint \"src/**/*.css\" --fix",
+    "relay": "node setup --download-schema && relay-compiler --src ./src --schema ./src/schema.graphql",
+    "build": "node setup && react-scripts build",
+    "test": "node setup && react-scripts test --env=jsdom",
+    "deploy": "node setup && react-scripts build && gh-pages -d build",
+    "start": "node setup && react-scripts start"
   }
 }

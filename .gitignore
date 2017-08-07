@@ -1,14 +1,27 @@
 # Include your project-specific ignores in this file
-# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+# See https://help.github.com/ignore-files/ for more about ignoring files
 
-# Compiled output
-public/dist
-public/index.html
-public/sitemap.xml
+# Dependencies
+/node_modules
 
-# Node.js and NPM
-node_modules
-npm-debug.log
+# Testing
+/coverage
 
-# Firebase
-firebase-debug.log
+# Production
+/build
+
+# Misc
+__generated__
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# VS Code
+.vscode/*
+!.vscode/settings.json

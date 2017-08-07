@@ -1,0 +1,37 @@
+/**
+ * React Static Boilerplate
+ * Copyright (c) 2015-present Kriasoft. All rights reserved.
+ */
+
+.root {
+  padding: 1em 1em 2em;
+}
+
+.title {
+  font-family: 'Roboto Mono', monospace;
+  letter-spacing: 1px;
+}
+
+.desc {
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 1px;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.5em 2em;
+  margin-top: 1em;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: #fff;
+  border-radius: 2px;
+}
+
+.button:active,
+.button:hover,
+.button:visited {
+  color: #333;
+}

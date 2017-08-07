@@ -1,90 +1,88 @@
 /**
  * React Static Boilerplate
- * https://github.com/kriasoft/react-static-boilerplate
- *
- * Copyright © 2015-present Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
+ * Copyright (c) 2015-present Kriasoft. All rights reserved.
  */
 
+/* @flow */
+
 import React from 'react';
+import Router from 'universal-router';
+import { graphql } from 'relay-runtime';
 
-function decodeParam(val) {
-  if (!(typeof val === 'string' || val.length === 0)) {
-    return val;
-  }
+// The list of all application routes where each route contains a URL path string (pattern),
+// the list of components to load asynchroneously (chunks), data requirements (GraphQL query),
+// and a render() function which shapes the result to be passed into the top-level (App) component.
+// For more information visit https://github.com/kriasoft/universal-router
+const routes = [
+  {
+    path: '/',
+    query: graphql`query routerHomeQuery { me { ...App_me } }`, // prettier-ignore
+    components: () => [
+      import(/* webpackChunkName: 'home' */ './Home'),
+      import(/* webpackChunkName: 'home' */ './Home/Hero'),
+    ],
+    render: ([Home, Hero]) => ({
+      title: 'Home page',
+      hero: <Hero />,
+      body: <Home />,
+    }),
+  },
+  {
+    path: '/error',
+    components: () => [import(/* webpackChunkName: 'main' */ './ErrorPage')],
+    render: ([ErrorPage]) => ({
+      title: 'Error',
+      body: <ErrorPage />,
+    }),
+  },
+  {
+    path: '/getting-started',
+    query: graphql`query routerGettingStartedQuery { me { ...App_me } }`, // prettier-ignore
+    components: () => [
+      import(/* webpackChunkName: 'start' */ './GettingStarted'),
+    ],
+    render: ([GettingStarted]) => ({
+      title: 'Getting Started',
+      body: <GettingStarted />,
+    }),
+  },
+  {
+    path: '/about',
+    query: graphql`query routerAboutQuery { me { ...App_me } }`, // prettier-ignore
+    components: () => [import(/* webpackChunkName: 'about' */ './About')],
+    render: ([About]) => ({
+      title: 'About Us',
+      body: <About />,
+    }),
+  },
+  {
+    path: '/tasks/:status(pending|completed)?',
+    components: () => [import(/* webpackChunkName: 'home' */ './Home')],
+    render: ([Home]) => ({
+      title: 'Untitled Page',
+      body: <Home />,
+    }),
+  },
+];
 
-  try {
-    return decodeURIComponent(val);
-  } catch (err) {
-    if (err instanceof URIError) {
-      err.message = `Failed to decode param '${val}'`;
-      err.status = 400;
-    }
+function resolveRoute({ route, fetch, next }, params) {
+  // Skip routes that have no .render() method
+  if (!route.render) return next();
 
-    throw err;
-  }
+  // Shape the result to be passed into the top-level React component (App)
+  return {
+    params,
+    query: route.query,
+    variables:
+      typeof route.variables === 'function' ? route.variables(params) : params,
+    components:
+      typeof route.components === 'function'
+        ? Promise.all(
+            route.components().map(promise => promise.then(x => x.default)),
+          ).then(components => (route.components = components))
+        : route.components,
+    render: route.render,
+  };
 }
 
-// Match the provided URL path pattern to an actual URI string. For example:
-//   matchURI({ path: '/posts/:id' }, '/dummy') => null
-//   matchURI({ path: '/posts/:id' }, '/posts/123') => { id: 123 }
-function matchURI(route, path) {
-  const match = route.pattern.exec(path);
-
-  if (!match) {
-    return null;
-  }
-
-  const params = Object.create(null);
-
-  for (let i = 1; i < match.length; i += 1) {
-    params[route.keys[i - 1].name] = match[i] !== undefined ? decodeParam(match[i]) : undefined;
-  }
-
-  return params;
-}
-
-// Find the route matching the specified location (context), fetch the required data,
-// instantiate and return a React component
-function resolve(routes, context) {
-  for (const route of routes) { // eslint-disable-line no-restricted-syntax
-    const params = matchURI(route, context.error ? '/error' : context.pathname);
-
-    if (!params) {
-      continue; // eslint-disable-line no-continue
-    }
-
-    // Check if the route has any data requirements, for example:
-    // { path: '/tasks/:id', data: { task: 'GET /api/tasks/$id' }, page: './pages/task' }
-    if (route.data) {
-      // Load page component and all required data in parallel
-      const keys = Object.keys(route.data);
-      return Promise.all([
-        route.load(),
-        ...keys.map((key) => {
-          const query = route.data[key];
-          const method = query.substring(0, query.indexOf(' ')); // GET
-          let url = query.substr(query.indexOf(' ') + 1);      // /api/tasks/$id
-          // TODO: Optimize
-          Object.keys(params).forEach((k) => {
-            url = url.replace(`${k}`, params[k]);
-          });
-          return fetch(url, { method }).then(resp => resp.json());
-        }),
-      ]).then(([Page, ...data]) => {
-        const props = keys.reduce((result, key, i) => ({ ...result, [key]: data[i] }), {});
-        return <Page route={{ ...route, params }} error={context.error} {...props} />;
-      });
-    }
-
-    return route.load().then(Page => <Page route={{ ...route, params }} error={context.error} />);
-  }
-
-  const error = new Error('Page not found');
-  error.status = 404;
-  return Promise.reject(error);
-}
-
-export default { resolve };
+export default new Router(routes, { resolveRoute });
