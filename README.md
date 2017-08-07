@@ -102,29 +102,8 @@ The unit tests are powered by [chai](http://chaijs.com/) and [mocha](http://moch
 
 ```bash
 $ yarn lint                        # Check JavaScript and CSS code for potential issues
-$ yarn test                        # Run unit tests. Or, `yarn run test:watch`
-```
-
-
-### How to Deploy
-
-Update `publish` script in the [`tools/publish.js`](tools/publish.js) file with your full Firebase
-project name as found in your [Firebase console](https://console.firebase.google.com/). Note that
-this may have an additional identifier suffix than the shorter name you've provided. Then run: 
-
-```bash
-$ yarn run publish                 # Builds and deployes the app to Firebase
-```
-
-The first time you publish, you will be prompted to authenticate with Google and generate an
-authentication token in order for the publish script to continue.
-
-![publish](https://koistya.github.io/files/react-static-boilerplate-publish.gif)
-
-If you need to build the project without publishing it, simply run:
-
-```bash
-$ yarn build                       # Compiles the app into the /public/dist folder
+$ yarn lint-fix                    # Fix potential issues in JavaScript and CSS code
+$ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 ```
 
 
@@ -139,6 +118,7 @@ git checkout master
 git fetch react-static-boilerplate
 git merge react-static-boilerplate/master
 yarn install
+yarn relay
 ```
 
 *NOTE: Try to merge as soon as the new changes land on the master branch in Node.js API Starter
