@@ -1,4 +1,4 @@
-# React Static Boilerplate &nbsp; <a href="https://travis-ci.org/kriasoft/react-static-boilerplate"><img src="http://img.shields.io/travis/kriasoft/react-static-boilerplate/master.svg?style=flat-square" height="20" /></a> <a href="https://github.com/kriasoft/react-static-boilerplate/stargazers"><img src="https://img.shields.io/github/stars/kriasoft/react-static-boilerplate.svg?style=social&label=Star&maxAge=3600" height="20"></a> <a href="https://twitter.com/ReactStatic"><img src="https://img.shields.io/twitter/follow/ReactStatic.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
+# React Static Boilerplate &nbsp; <a href="https://travis-ci.org/kriasoft/react-static-boilerplate"><img src="https://img.shields.io/circleci/project/github/kriasoft/react-static-boilerplate/master.svg?style=flat-square" height="20" /></a> <a href="https://github.com/kriasoft/react-static-boilerplate/stargazers"><img src="https://img.shields.io/github/stars/kriasoft/react-static-boilerplate.svg?style=social&label=Star&maxAge=3600" height="20"></a> <a href="https://twitter.com/ReactStatic"><img src="https://img.shields.io/twitter/follow/ReactStatic.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
 
 [**React Static Boilerplate**](https://github.com/kriasoft/react-static-boilerplate) (RSB) is a
 boilerplate and tooling for creating modern stand-alone web applications (aka
@@ -40,7 +40,7 @@ This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][
 
 * [Create React App][cra] for development and test infrastructure (see [user guide][cradocs])
 * [React][react] + [Relay Modern][relay] for UI and declarative data fetching
-* [Universal Router][router] + [history][history] for client-side navigation
+* [Universal Router][router] + [history][history] for declarative routing and client-side navigation
 * [CSS Modules][cssmodules] + [PostCSS][postcss] for component friendly CSS styles (similar to BEM)
 
 
@@ -58,13 +58,15 @@ This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][
 │   ├── About/                     # About page
 │   ├── App/                       # Application shell (layout) component
 │   ├── Button/                    # Button component
-│   ├── Link/                      # Link component to be used instead of <a>
 │   ├── ErrorPage/                 # Error page
 │   ├── Home/                      # Home page
+│   ├── Link/                      # Link component to be used instead of <a>
 │   ├── history.js                 # Client-side navigation manager
 │   ├── index.js                   # <== Application entry point (main) <===
-│   ├── pages.js                   # Application routes
 │   ├── registerServiceWokrer.json # This list of application routes
+│   ├── relay.js                   # Relay Modern client
+│   ├── router.js                  # Application routes
+│   ├── graphql.schema             # GraphQL schema obtained from a GraphQL API
 │   └── store.js                   # Application state manager (Redux)
 ├── test/                          # Unit and integration tests
 ├── package.json                   # The list of project dependencies + NPM scripts
@@ -98,8 +100,6 @@ The app should become available at [http://localhost:3000/](http://localhost:300
 
 ### How to Test
 
-The unit tests are powered by [chai](http://chaijs.com/) and [mocha](http://mochajs.org/).
-
 ```bash
 $ yarn lint                        # Check JavaScript and CSS code for potential issues
 $ yarn lint-fix                    # Fix potential issues in JavaScript and CSS code
@@ -121,7 +121,7 @@ yarn install
 yarn relay
 ```
 
-*NOTE: Try to merge as soon as the new changes land on the master branch in Node.js API Starter
+*NOTE: Try to merge as soon as the new changes land on the master branch in React Static Boilerplate
 repository, otherwise your project may diverse too much from the base/upstream repo.*
 
 
@@ -137,10 +137,10 @@ requests](CONTRIBUTING.md#pull-requests).
 
 ### Learn React.js and ES6
 
-:mortar_board: &nbsp; **[React for Beginners](https://reactforbeginners.com/friend/konstantin)** and **[ES6 Training Course](https://es6.io/friend/konstantin)** by Wes Bos<br>
-:green_book: &nbsp; **[React: Up & Running: Building Web Applications](http://amzn.to/2bBgqhl)** by Stoyan Stefanov (Aug, 2016)<br>
-:green_book: &nbsp; **[Getting Started with React](http://amzn.to/2bmwP5V)** by Doel Sengupta and Manu Singhal (Apr, 2016)<br>
-:green_book: &nbsp; **[You Don't Know JS: ES6 & Beyond](http://amzn.to/2bBfVnp)** by Kyle Simpson (Dec, 2015)<br>
+:mortar_board: &nbsp; [React for Beginners](https://reactforbeginners.com/friend/konstantin) and [ES6 Training Course](https://es6.io/friend/konstantin) by Wes Bos<br>
+:green_book: &nbsp; [React: Up & Running: Building Web Applications](http://amzn.to/2bBgqhl) by Stoyan Stefanov (Aug, 2016)<br>
+:green_book: &nbsp; [Getting Started with React](http://amzn.to/2bmwP5V) by Doel Sengupta and Manu Singhal (Apr, 2016)<br>
+:green_book: &nbsp; [You Don't Know JS: ES6 & Beyond](http://amzn.to/2bBfVnp) by Kyle Simpson (Dec, 2015)<br>
 
 
 ### Related Projects
