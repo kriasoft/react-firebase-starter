@@ -74,6 +74,7 @@ class App extends React.Component<any, any, State> {
       error={error}
       data={props}
       retry={retry}
+      query={this.state.query}
       location={this.state.location}
       params={this.state.params}
       components={this.state.components}

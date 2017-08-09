@@ -17,6 +17,7 @@ type Props = {
   error: ?Error,
   data: ?Object,
   retry: () => void,
+  query: Function,
   location: Location,
   params: Object,
   components: Array<React.Element<*>> | Promise<Array<React.Element<*>>>,
@@ -46,11 +47,13 @@ class AppRenderer extends React.Component<any, Props, State> {
     if (nextProps.error && this.props.error !== nextProps.error) {
       this.setState({ error: nextProps.error });
     } else if (
-      this.props.data !== nextProps.data ||
-      this.props.location !== nextProps.location ||
-      !isEqual(this.props.params, nextProps.params) ||
-      this.props.components !== nextProps.components ||
-      this.props.render !== nextProps.render
+      ((nextProps.query && nextProps.data) ||
+        (!nextProps.query && !nextProps.data)) &&
+      (this.props.data !== nextProps.data ||
+        this.props.location !== nextProps.location ||
+        !isEqual(this.props.params, nextProps.params) ||
+        this.props.components !== nextProps.components ||
+        this.props.render !== nextProps.render)
     ) {
       const promise = Promise.resolve(nextProps.components);
 
@@ -64,8 +67,8 @@ class AppRenderer extends React.Component<any, Props, State> {
               ...defaults,
               ...nextProps.render(
                 components,
-                this.props.data || {},
-                this.props.params || {},
+                this.props.data,
+                this.props.params,
               ),
             });
           }
@@ -75,8 +78,8 @@ class AppRenderer extends React.Component<any, Props, State> {
           ...defaults,
           ...nextProps.render(
             nextProps.components,
-            nextProps.data || {},
-            nextProps.params || {},
+            nextProps.data,
+            nextProps.params,
           ),
         });
       } else {

@@ -14,7 +14,7 @@ class AboutPage extends React.Component {
       <div className={s.root}>
         <h2>About Us</h2>
         <p>Coming soon.</p>
-        {Array.from({ length: 50 }).map(() => <br />)}
+        {Array.from({ length: 50 }).map((_, i) => <br key={i} />)}
       </div>
     );
   }
