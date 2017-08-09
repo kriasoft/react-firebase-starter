@@ -16,15 +16,30 @@ import { graphql } from 'relay-runtime';
 const routes = [
   {
     path: '/',
-    query: graphql`query routerHomeQuery { me { ...App_me } }`, // prettier-ignore
+    query: graphql`query routerHomeQuery {
+      me { ...App_me }
+      stories(first: 50) { ...Home_stories }
+    }`, // prettier-ignore
     components: () => [
       import(/* webpackChunkName: 'home' */ './Home'),
       import(/* webpackChunkName: 'home' */ './Home/Hero'),
     ],
-    render: ([Home, Hero]) => ({
+    render: ([Home, Hero], data) => ({
       title: 'Home page',
       hero: <Hero />,
-      body: <Home />,
+      body: <Home stories={data.stories} />,
+    }),
+  },
+  {
+    path: '/story-:id',
+    query: graphql`query routerStoryQuery($id: ID!) {
+      me { ...App_me }
+      story: node(id: $id) { ...Story_story }
+    }`, // prettier-ignore
+    components: () => [import(/* webpackChunkName: 'home' */ './Story')],
+    render: ([Story], data) => ({
+      title: data.title,
+      body: <Story story={data.story} />,
     }),
   },
   {

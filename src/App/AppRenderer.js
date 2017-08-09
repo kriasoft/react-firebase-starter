@@ -55,30 +55,28 @@ class AppRenderer extends React.Component<any, Props, State> {
       const promise = Promise.resolve(nextProps.components);
 
       if (nextProps.render && nextProps.components === promise) {
-        promise
-          .then(components => {
-            if (
-              this.props.components === nextProps.components &&
-              nextProps.render
-            ) {
-              this.setState({
-                ...defaults,
-                ...nextProps.render(
-                  components,
-                  this.props.data,
-                  this.props.params,
-                ),
-              });
-            }
-          })
-          .catch(error => this.setState({ error }));
+        promise.then(components => {
+          if (
+            this.props.components === nextProps.components &&
+            nextProps.render
+          ) {
+            this.setState({
+              ...defaults,
+              ...nextProps.render(
+                components,
+                this.props.data || {},
+                this.props.params || {},
+              ),
+            });
+          }
+        });
       } else if (nextProps.render) {
         this.setState({
           ...defaults,
           ...nextProps.render(
             nextProps.components,
-            nextProps.data,
-            nextProps.params,
+            nextProps.data || {},
+            nextProps.params || {},
           ),
         });
       } else {

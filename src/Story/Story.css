@@ -6,12 +6,3 @@
 .root {
   color: inherit;
 }
-
-.stories {
-  padding: 0;
-}
-
-.story {
-  padding-bottom: 0.5em;
-  list-style: none;
-}
