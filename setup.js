@@ -33,9 +33,7 @@ if (text.match(search)) {
 //
 // Inject CSS Modules into webpack.config.prod.js
 // -----------------------------------------------------------------------------
-file = path.resolve(
-  './node_modules/react-scripts/config/webpack.config.prod.js',
-);
+file = path.resolve('./node_modules/react-scripts/config/webpack.config.prod.js'); // prettier-ignore
 text = fs.readFileSync(file, 'utf8');
 search = /importLoaders: 1,\n\s{24}minimize: true,/;
 
