@@ -93,4 +93,13 @@ class App extends React.Component<any, any, State> {
   }
 }
 
+// A hook that makes it possible to pre-render the app during compilation.
+// Fore more information visit https://github.com/kriasoft/pre-render
+window.prerender = async path => {
+  history.push(path);
+  // TODO: Detect when client-side rendering is complete
+  await new Promise(resolve => setTimeout(resolve, 200));
+  return document.documentElement.outerHTML;
+};
+
 export default App;
