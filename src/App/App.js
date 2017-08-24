@@ -101,7 +101,7 @@ window.prerender = async path => {
   await new Promise(resolve => setTimeout(resolve, 500));
   return document.documentElement.outerHTML
     .replace(/<link type="text\/css" rel="stylesheet" href="blob:.*?>/g, '')
-    .replace(/<script .*?<\/head/g, '</head');
+    .replace(/<script .*?<\/head>/g, '</head>');
 };
 
 export default App;
