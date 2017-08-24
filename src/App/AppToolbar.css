@@ -18,8 +18,7 @@
   position: relative;
   display: flex;
   width: 100%;
-  height: auto;
-  min-height: 64px;
+  height: 64px;
   box-sizing: border-box;
   align-items: center;
 }
@@ -30,7 +29,7 @@
   min-width: 0;
   height: 100%;
   flex: 1;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 }
 

@@ -24,6 +24,7 @@
     "gh-pages": "^1.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.4",
+    "pre-render": "^0.1.0-preview.2",
     "prettier": "^1.5.3",
     "react-scripts": "1.0.11",
     "relay-compiler": "^1.2.0",
@@ -42,7 +43,7 @@
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . && stylelint \"src/**/*.css\"",
     "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix . & stylelint --fix \"src/**/*.css\"",
     "relay": "node ./setup --download-schema && relay-compiler --src ./src --schema ./src/schema.graphql",
-    "build": "node ./setup && react-scripts build",
+    "build": "node ./setup && react-scripts build && node ./render",
     "test": "node ./setup && react-scripts test --env=jsdom",
     "deploy": "node ./setup && react-scripts build && gh-pages -d build",
     "start": "node ./setup && react-scripts start"
