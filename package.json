@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
+    "glamor": "^2.20.40",
+    "glamorous": "^4.4.0",
     "history": "^4.7.2",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
