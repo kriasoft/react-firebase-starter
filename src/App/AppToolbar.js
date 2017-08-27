@@ -65,9 +65,7 @@ const TitleLink = Glamorous(Link)({
   whiteSpace: 'nowrap',
   alignSelf: 'center',
   alignItems: 'center',
-  ':hover': { color: '#00d8ff' },
-  ':active': { color: '#00d8ff' },
-  ':visited': { color: '#00d8ff' },
+  ':hover, :active, :visted': { color: '#00d8ff' },
   '@media (max-width: 599px)': { marginLeft: 16 },
 });
 
