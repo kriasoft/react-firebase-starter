@@ -9,8 +9,6 @@ import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 import type { Story_story } from './__generated__/Story_story.graphql';
 
-import s from './Story.css';
-
 class Story extends React.Component {
   props: {
     story: Story_story,
@@ -19,7 +17,7 @@ class Story extends React.Component {
   render() {
     const story = this.props.story || {};
     return (
-      <article className={s.root}>
+      <article>
         <h1>
           {story.title}
         </h1>

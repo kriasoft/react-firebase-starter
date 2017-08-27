@@ -9,45 +9,9 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-let file, text, search;
+const API_URL = 'https://graphql-demo.kriasoft.com/schema';
 
-//
-// Inject CSS Modules into webpack.config.dev.js
-// -----------------------------------------------------------------------------
-file = path.resolve('./node_modules/react-scripts/config/webpack.config.dev.js'); // prettier-ignore
-text = fs.readFileSync(file, 'utf8');
-search = /importLoaders: 1,\n\s{16}}/;
-
-if (text.match(search)) {
-  text = text.replace(
-    search,
-    `importLoaders: 1,
-                  modules: true,
-                  localIdentName: '[name]-[local]-[hash:base64:5]',
-                }`); // prettier-ignore
-  fs.writeFileSync(file, text, 'utf8');
-} else if (!text.indexOf('[name]-[local]-[hash:base64:5]') === -1) {
-  throw new Error(`Failed to inject CSS Modules into ${file}`);
-}
-
-//
-// Inject CSS Modules into webpack.config.prod.js
-// -----------------------------------------------------------------------------
-file = path.resolve('./node_modules/react-scripts/config/webpack.config.prod.js'); // prettier-ignore
-text = fs.readFileSync(file, 'utf8');
-search = /importLoaders: 1,\n\s{24}minimize: true,/;
-
-if (text.match(search)) {
-  text = text.replace(
-    search,
-    `importLoaders: 1,
-                        modules: true,
-                        localIdentName: '[hash:base64:5]',
-                        minimize: true,`); // prettier-ignore
-  fs.writeFileSync(file, text, 'utf8');
-} else if (!text.indexOf('[hash:base64:5]') === -1) {
-  throw new Error(`Failed to inject CSS Modules into ${file}`);
-}
+let file, text;
 
 //
 // Inject "babel-plugin-relay"
@@ -71,7 +35,7 @@ if (!text.includes('babel-plugin-relay')) {
 // -----------------------------------------------------------------------------
 if (process.argv.includes('--download-schema')) {
   file = fs.createWriteStream('./src/schema.graphql');
-  https.get('https://graphql-demo.kriasoft.com/schema', resp => {
+  https.get(API_URL, resp => {
     if (resp.statusCode === 200) {
       resp.pipe(file);
     } else {

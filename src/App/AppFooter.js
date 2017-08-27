@@ -21,12 +21,8 @@ const Container = Glamorous.div({
 const ExtLink = Glamorous.a({
   color: 'rgba(255, 255, 255, 0.6)',
   textDecoration: 'none',
-  ':active': { color: 'rgba(255, 255, 255, 0.6)' },
-  ':hover': { color: 'rgba(255, 255, 255, 0.6)' },
-  ':visited': {
-    color: 'rgba(255, 255, 255, 0.6)',
-    textDecoration: 'underline',
-  },
+  ':active, :hover, :visted': { color: 'rgba(255, 255, 255, 0.6)' },
+  ':visited': { textDecoration: 'underline' },
 });
 
 class AppFooter extends React.Component {
