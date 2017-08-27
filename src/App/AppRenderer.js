@@ -8,22 +8,10 @@
 import React from 'react';
 import Glamorous from 'glamorous';
 import isEqual from 'lodash/isEqual';
-import { css } from 'glamor';
 
 import AppToolbar from './AppToolbar';
 import AppFooter from './AppFooter';
 import ErrorPage from '../ErrorPage';
-
-css.insert(`
-  body, html, #root {
-    height: 100%;
-  }
-  body {
-    padding: 0;
-    margin: 0;
-    font-family: sans-serif;
-  }
-`);
 
 const Main = Glamorous.main({
   maxWidth: 600,
