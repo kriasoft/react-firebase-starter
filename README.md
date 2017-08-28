@@ -38,7 +38,7 @@ This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][
 * [Create React App][cra] for development and test infrastructure (see [user guide][cradocs])
 * [React][react] + [Relay Modern][relay] for UI and declarative data fetching
 * [Universal Router][router] + [history][history] for declarative routing and client-side navigation
-* [CSS Modules][cssmodules] + [PostCSS][postcss] for component friendly CSS styles (similar to BEM)
+* [Styled Components][sc] for component friendly CSS styles
 
 
 ### Directory Layout
@@ -166,8 +166,7 @@ and [contributors](https://github.com/kriasoft/react-static-boilerplate/graphs/c
 [relay]: https://facebook.github.io/relay/
 [router]: https://github.com/kriasoft/universal-router
 [history]: https://github.com/ReactTraining/history
-[cssmodules]: https://github.com/css-modules/css-modules
-[postcss]: http://postcss.org/
+[sc]: https://www.styled-components.com/
 [nodejs]: https://nodejs.org/
 [yarn]: https://yarnpkg.com/
 [brew]: https://brew.sh/

@@ -89,7 +89,9 @@ function resolveRoute({ route, fetch, next }, params) {
     params,
     query: route.query,
     variables:
-      typeof route.variables === 'function' ? route.variables(params) : params,
+      typeof route.variables === 'function'
+        ? route.variables(params)
+        : { ...params },
     components:
       typeof route.components === 'function'
         ? Promise.all(

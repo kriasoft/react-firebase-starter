@@ -12,10 +12,12 @@
     "react-dom": "^15.6.1",
     "react-relay": "^1.2.0",
     "relay-runtime": "^1.2.0",
+    "styled-components": "^2.1.2",
     "universal-router": "^3.2.0"
   },
   "devDependencies": {
     "babel-plugin-relay": "^1.2.0",
+    "babel-plugin-styled-components": "^1.1.7",
     "chai": "^4.1.1",
     "eslint-config-prettier": "^2.3.0",
     "eslint-plugin-flowtype": "^2.35.0",
@@ -26,7 +28,7 @@
     "lint-staged": "^4.0.4",
     "pre-render": "^0.1.0-preview.2",
     "prettier": "^1.5.3",
-    "react-scripts": "1.0.11",
+    "react-scripts": "1.0.12",
     "relay-compiler": "^1.2.0",
     "stylelint": "^8.0.0",
     "stylelint-config-primer": "^2.0.1",
