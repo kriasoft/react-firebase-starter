@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
+    "glamor": "^2.20.40",
+    "glamorous": "^4.5.0",
     "history": "^4.7.2",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
@@ -15,6 +17,7 @@
     "universal-router": "^3.2.0"
   },
   "devDependencies": {
+    "babel-plugin-glamorous-displayname": "^2.1.0",
     "babel-plugin-relay": "^1.2.0",
     "chai": "^4.1.1",
     "eslint-config-prettier": "^2.3.0",
@@ -23,25 +26,21 @@
     "flow-bin": "^0.53.1",
     "gh-pages": "^1.0.0",
     "husky": "^0.14.3",
+    "jest-glamor-react": "^3.1.0",
     "lint-staged": "^4.0.4",
     "pre-render": "^0.1.0-preview.2",
     "prettier": "^1.5.3",
-    "react-scripts": "1.0.11",
-    "relay-compiler": "^1.2.0",
-    "stylelint": "^8.0.0",
-    "stylelint-config-primer": "^2.0.1",
-    "stylelint-config-standard": "^17.0.0",
-    "stylelint-order": "^0.6.0"
+    "react-scripts": "1.0.12",
+    "relay-compiler": "^1.2.0"
   },
   "lint-staged": {
     "*.js": ["eslint --no-ignore --fix", "git add"],
-    "*.css": ["prettier --parser css --write", "stylelint --fix", "git add"],
     "*.json": ["prettier --parser json --write", "git add"]
   },
   "scripts": {
     "precommit": "lint-staged",
-    "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . && stylelint \"src/**/*.css\"",
-    "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix . & stylelint --fix \"src/**/*.css\"",
+    "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
+    "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
     "relay": "node ./setup --download-schema && relay-compiler --src ./src --schema ./src/schema.graphql",
     "build": "node ./setup && react-scripts build && node ./render",
     "test": "node ./setup && react-scripts test --env=jsdom",

@@ -6,12 +6,11 @@
 /* @flow */
 
 import React from 'react';
-import s from './About.css';
 
 class AboutPage extends React.Component {
   render() {
     return (
-      <div className={s.root}>
+      <div>
         <h2>About Us</h2>
         <p>Coming soon.</p>
         {Array.from({ length: 50 }).map((_, i) => <br key={i} />)}

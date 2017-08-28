@@ -6,12 +6,27 @@
 /* @flow */
 
 import React from 'react';
+import glamorous from 'glamorous';
 import isEqual from 'lodash/isEqual';
 
 import AppToolbar from './AppToolbar';
 import AppFooter from './AppFooter';
 import ErrorPage from '../ErrorPage';
-import s from './AppRenderer.css';
+
+const Main = glamorous.main({
+  maxWidth: 600,
+  padding: '1rem',
+  margin: '0 auto',
+  background: 'rgba(0, 0, 0, 0.1)',
+});
+
+const defaults = {
+  error: null,
+  title: 'React Static Boilerplate',
+  description: '',
+  hero: null,
+  body: null,
+};
 
 type Props = {
   error: ?Error,
@@ -30,14 +45,6 @@ type State = {
   description: ?string,
   hero: ?React.Element<*>,
   body: ?React.Element<*>,
-};
-
-const defaults = {
-  error: null,
-  title: 'React Static Boilerplate',
-  description: '',
-  hero: null,
-  body: null,
 };
 
 class AppRenderer extends React.Component<any, Props, State> {
@@ -103,9 +110,9 @@ class AppRenderer extends React.Component<any, Props, State> {
       ? <ErrorPage error={this.state.error} />
       : <div>
           <AppToolbar me={null} hero={this.state.hero} />
-          <main className={s.content}>
+          <Main>
             {this.state.body || <p>Loading...</p>}
-          </main>
+          </Main>
           <AppFooter />
         </div>;
   }
