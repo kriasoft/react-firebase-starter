@@ -6,19 +6,19 @@
 /* @flow */
 
 import React from 'react';
-import Glamorous, { Span } from 'glamorous';
+import glamorous, { Span } from 'glamorous';
 
 const KRIASOFT_URL = 'https://www.kriasoft.com/';
 const LICENSE_URL =
   'https://github.com/kriasoft/react-static-boilerplate/blob/master/LICENSE.txt';
 
-const Container = Glamorous.div({
+const Container = glamorous.div({
   padding: 24,
   color: 'rgba(255, 255, 255, 0.4)',
   backgroundColor: 'darkslategray',
 });
 
-const ExtLink = Glamorous.a({
+const ExtLink = glamorous.a({
   color: 'rgba(255, 255, 255, 0.6)',
   textDecoration: 'none',
   ':active, :hover, :visted': { color: 'rgba(255, 255, 255, 0.6)' },

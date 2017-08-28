@@ -6,14 +6,14 @@
 /* @flow */
 
 import React from 'react';
-import Glamorous from 'glamorous';
+import glamorous from 'glamorous';
 import isEqual from 'lodash/isEqual';
 
 import AppToolbar from './AppToolbar';
 import AppFooter from './AppFooter';
 import ErrorPage from '../ErrorPage';
 
-const Main = Glamorous.main({
+const Main = glamorous.main({
   maxWidth: 600,
   padding: '1rem',
   margin: '0 auto',

@@ -6,14 +6,14 @@
 /* @flow */
 
 import React from 'react';
-import Glamorous from 'glamorous';
+import glamorous from 'glamorous';
 
 import history from '../history';
 import Link from '../Link';
 
 const color = '#607d8b';
 
-const Container = Glamorous.div({
+const Container = glamorous.div({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -26,12 +26,12 @@ const Container = Glamorous.div({
   '@media only screen and (max-width: 280px)': { width: '95%' },
 });
 
-const Main = Glamorous.main({
+const Main = glamorous.main({
   paddingBottom: 80,
   '@media screen and (max-width: 1024px)': { padding: '0 16px' },
 });
 
-const ErrorCode = Glamorous.h1({
+const ErrorCode = glamorous.h1({
   margin: 0,
   fontSize: '15em',
   fontWeight: '300',
@@ -41,7 +41,7 @@ const ErrorCode = Glamorous.h1({
   '@media screen and (max-width: 1024px)': { fontSize: '10em' },
 });
 
-const Title = Glamorous.p({
+const Title = glamorous.p({
   paddingBottom: '0.5em',
   fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   fontSize: '2em',
@@ -56,7 +56,7 @@ const Title = Glamorous.p({
   '@media screen and (max-width: 1024px)': { fontSize: '1.5em' },
 });
 
-const Text = Glamorous.p({
+const Text = glamorous.p({
   paddingBottom: 0,
   fontSize: '1.125em',
   lineHeight: '1.5em',

@@ -6,7 +6,7 @@
 /* @flow */
 
 import React from 'react';
-import Glamorous from 'glamorous';
+import glamorous from 'glamorous';
 import { css } from 'glamor';
 import { graphql, createFragmentContainer } from 'react-relay';
 
@@ -14,7 +14,7 @@ import Link from '../Link';
 import AppLogo from './AppLogo';
 import type { AppToolbar_me } from './__generated__/AppToolbar_me.graphql';
 
-const Header = Glamorous.header({
+const Header = glamorous.header({
   position: 'relative',
   display: 'flex',
   width: '100%',
@@ -25,7 +25,7 @@ const Header = Glamorous.header({
   justifyContent: 'space-between',
 });
 
-const Row = Glamorous.div({
+const Row = glamorous.div({
   position: 'relative',
   display: 'flex',
   width: '100%',
@@ -36,7 +36,7 @@ const Row = Glamorous.div({
   '@media (max-width: 599px)': { minHeight: 56 },
 });
 
-const Section = Glamorous.section(props => ({
+const Section = glamorous.section(props => ({
   zIndex: '1',
   display: 'inline-flex',
   minWidth: 0,
@@ -48,7 +48,7 @@ const Section = Glamorous.section(props => ({
   ...(props.end && { justifyContent: 'flex-end', order: 1 }),
 }));
 
-const TitleLink = Glamorous(Link)({
+const TitleLink = glamorous(Link)({
   zIndex: 1,
   display: 'inline-flex',
   padding: '16px 0',
@@ -69,7 +69,7 @@ const TitleLink = Glamorous(Link)({
   '@media (max-width: 599px)': { marginLeft: 16 },
 });
 
-const NavLink = Glamorous(Link)({
+const NavLink = glamorous(Link)({
   paddingRight: '8px',
   paddingLeft: '8px',
   fontFamily: '"Roboto", sans-serif',
@@ -80,12 +80,12 @@ const NavLink = Glamorous(Link)({
   letterSpacing: '1px',
 });
 
-const LastNavLink = Glamorous(NavLink)({
+const LastNavLink = glamorous(NavLink)({
   marginRight: 24,
   '@media (max-width: 599px)': { marginRight: 16 },
 });
 
-const TitleLogo = Glamorous(AppLogo)({
+const TitleLogo = glamorous(AppLogo)({
   width: 48,
   height: 48,
   marginRight: 16,

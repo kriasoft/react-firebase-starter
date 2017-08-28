@@ -6,21 +6,21 @@
 /* @flow */
 
 import React from 'react';
-import Glamorous, { Div } from 'glamorous';
+import glamorous, { Div } from 'glamorous';
 
 import Link from '../Link';
 
-const Title = Glamorous.h2({
+const Title = glamorous.h2({
   fontFamily: '"Roboto Mono", monospace',
   letterSpacing: '1px',
 });
 
-const Description = Glamorous.p({
+const Description = glamorous.p({
   fontFamily: '"Roboto", sans-serif',
   letterSpacing: '1px',
 });
 
-const Button = Glamorous(Link)({
+const Button = glamorous(Link)({
   display: 'inline-block',
   padding: '0.5em 2em',
   marginTop: '1em',

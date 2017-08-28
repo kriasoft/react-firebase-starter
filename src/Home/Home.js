@@ -6,17 +6,17 @@
 /* @flow */
 
 import React from 'react';
-import Glamorous from 'glamorous';
+import glamorous from 'glamorous';
 import { graphql, createFragmentContainer } from 'react-relay';
 import type { Home_stories } from './__generated__/Home_stories.graphql';
 
 import Link from '../Link';
 
-const List = Glamorous.ul({
+const List = glamorous.ul({
   padding: 0,
 });
 
-const ListItem = Glamorous.li({
+const ListItem = glamorous.li({
   paddingBottom: '0.5em',
   listStyle: 'none',
 });

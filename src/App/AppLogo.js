@@ -6,11 +6,11 @@
 /* @flow */
 
 import React from 'react';
-import Glamorous from 'glamorous';
+import glamorous from 'glamorous';
 
 const color = '#00d8ff';
-const Circle = Glamorous('circle')({ fill: color });
-const Path = Glamorous('path')({
+const Circle = glamorous('circle')({ fill: color });
+const Path = glamorous('path')({
   fill: 'none',
   stroke: color,
   strokeWidth: '144.7456',
