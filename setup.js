@@ -31,6 +31,25 @@ if (!text.includes('babel-plugin-relay')) {
 }
 
 //
+// Inject "babel-plugin-glamorous-displayname"
+// -----------------------------------------------------------------------------
+file = path.resolve('./node_modules/babel-preset-react-app/index.js');
+text = fs.readFileSync(file, 'utf8');
+
+if (!text.includes('babel-plugin-glamorous-displayname')) {
+  if (text.includes('const plugins = [')) {
+    text = text.replace(
+      'const plugins = [',
+      "const plugins = [\n  require.resolve('babel-plugin-glamorous-displayname'),"); // prettier-ignore
+    fs.writeFileSync(file, text, 'utf8');
+  } else {
+    throw new Error(
+      `Failed to inject babel-plugin-glamorous-displayname in ${file}.`,
+    );
+  }
+}
+
+//
 // Download the GraphQL schema
 // -----------------------------------------------------------------------------
 if (process.argv.includes('--download-schema')) {
