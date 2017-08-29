@@ -25,6 +25,10 @@ module.exports = {
   ],
 
   rules: {
+    'at-rule-empty-line-before': null,
+    'block-opening-brace-space-after': null,
+    'block-closing-brace-space-before': null,
+
     // https://github.com/hudochenkov/stylelint-order/blob/master/rules/order/README.md
     'order/order': [
       'custom-properties',

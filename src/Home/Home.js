@@ -12,7 +12,9 @@ import type { Home_stories } from './__generated__/Home_stories.graphql';
 
 import Link from '../Link';
 
-const StoryList = styled.ul`padding: 0;`;
+const StoryList = styled.ul`
+  padding: 0;
+`; // prettier-ignore
 
 const Story = styled.li`
   padding-bottom: 0.5em;

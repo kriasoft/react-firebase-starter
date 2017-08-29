@@ -68,13 +68,15 @@ const TitleLink = styled(Link)`
   white-space: nowrap;
   align-self: center;
   align-items: center;
+
+  @media (max-width: 599px) {
+    margin-left: 16px;
+  }
+
   &.title:active,
   &.title:hover,
   &.title:visited {
     color: #00d8ff;
-  }
-  @media (max-width: 599px) {
-    margin-left: 16px;
   }
 `;
 

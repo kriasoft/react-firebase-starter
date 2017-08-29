@@ -18,7 +18,9 @@ const Footer = styled.div`
   background-color: darkslategray;
 `;
 
-const Copyright = styled.span`padding-right: 0.5em;`;
+const Copyright = styled.span`
+  padding-right: 0.5em;
+`; // prettier-ignore
 
 const Separator = styled.span`
   padding-right: 0.5em;
@@ -30,9 +32,10 @@ const ExtLink = styled.a`
   &:hover,
   &:active,
   &:visited {
-    text-decoration: none;
     color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
   }
+
   &:hover {
     text-decoration: underline;
   }

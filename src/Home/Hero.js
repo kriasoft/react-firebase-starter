@@ -10,7 +10,9 @@ import styled from 'styled-components';
 
 import Link from '../Link';
 
-const Container = styled.div`padding: 1em 1em 2em;`;
+const Container = styled.div`
+  padding: 1em 1em 2em;
+`; // prettier-ignore
 
 const Title = styled.h2`
   font-family: 'Roboto Mono', monospace;
@@ -33,6 +35,7 @@ const Button = styled(Link)`
   letter-spacing: 1px;
   background-color: #fff;
   border-radius: 2px;
+
   &:active,
   &:hover,
   &:visited {
