@@ -1,0 +1,81 @@
+{
+  "Styled": {
+    "prefix": "style",
+    "body": [
+      "const ${1:Component} = styled.${2:div}`",
+      "  ${3:styles}",
+      "`;",
+      ""
+    ],
+    "description": "Styled Component"
+  },
+  "React": {
+    "prefix": "react",
+    "body": [
+      "/* @flow */",
+      "",
+      "import React from 'react';",
+      "import styled from 'styled-components';",
+      "",
+      "const ${2:Container} = styled.${3:div}`",
+      "  ${4:styles}",
+      "`;",
+      "",
+      "type Props = {};",
+      "",
+      "class ${1:Component} extends React.Component<Props> {",
+      "  render() {",
+      "    return (",
+      "      <${2:Container}>",
+      "        ${5:markup}$0",
+      "      </${2:Container}>",
+      "    );",
+      "  }",
+      "}",
+      "",
+      "export default ${1:Component};",
+      ""
+    ],
+    "description": "React Component"
+  },
+  "Relay Fragment Container": {
+    "prefix": "relay",
+    "body": [
+      "/* @flow */",
+      "",
+      "import React from 'react';",
+      "import styled from 'styled-components';",
+      "import { graphql, createFragmentContainer } from 'react-relay';",
+      "import type { ${1:Component}_${2:field} } from './__generated__/${1:Component}_${2:field}.graphql';",
+      "",
+      "const ${3:Container} = styled.${4:div}`",
+      "  ${5:styles}",
+      "`;",
+      "",
+      "type Props = {",
+      "  ${2:field}: ${1:Component}_${2:field},",
+      "};",
+      "",
+      "class ${1:Component} extends React.Component<Props> {",
+      "  render() {",
+      "    return (",
+      "      <${3:Container}>",
+      "        ${6:markup}$0",
+      "      </${3:Container}>",
+      "    );",
+      "  }",
+      "}",
+      "",
+      "export default createFragmentContainer(",
+      "  ${1:Component},",
+      "  graphql`",
+      "    fragment ${1:Component}_${2:field} on ${1:Component} {",
+      "      ${7:fragment}",
+      "    }",
+      "  `,",
+      ");",
+      ""
+    ],
+    "description": "Relay Fragment Container"
+  }
+}
