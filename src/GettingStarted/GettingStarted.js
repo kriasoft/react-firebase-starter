@@ -6,12 +6,11 @@
 /* @flow */
 
 import React from 'react';
-import s from './GettingStarted.css';
 
 class GettingStarted extends React.Component {
   render() {
     return (
-      <div className={s.root}>
+      <div>
         <h2>Getting Started</h2>
         <p>Coming soon.</p>
         {Array.from({ length: 50 }).map((_, i) => <br key={i} />)}

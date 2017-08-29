@@ -6,11 +6,20 @@
 /* @flow */
 
 import React from 'react';
+import styled from 'styled-components';
 import { graphql, createFragmentContainer } from 'react-relay';
 import type { Home_stories } from './__generated__/Home_stories.graphql';
 
 import Link from '../Link';
-import s from './Home.css';
+
+const StoryList = styled.ul`
+  padding: 0;
+`; // prettier-ignore
+
+const Story = styled.li`
+  padding-bottom: 0.5em;
+  list-style: none;
+`;
 
 class Home extends React.Component {
   props: {
@@ -19,7 +28,7 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className={s.root}>
+      <div>
         <h2>Welcome to React Static Boilerplate</h2>
         <p>
           Below is the list of "stories" fetched from{' '}
@@ -28,16 +37,16 @@ class Home extends React.Component {
           </a>{' '}
           as an example:
         </p>
-        <ul className={s.stories}>
+        <StoryList>
           {this.props.stories &&
             this.props.stories.edges.map(({ node: story }) =>
-              <li key={story.id} className={s.story}>
+              <Story key={story.id}>
                 <Link href={`/story-${story.id}`}>
                   {story.title}
                 </Link>
-              </li>,
+              </Story>,
             )}
-        </ul>
+        </StoryList>
       </div>
     );
   }

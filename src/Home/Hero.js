@@ -6,29 +6,56 @@
 /* @flow */
 
 import React from 'react';
-import cx from 'classnames';
+import styled from 'styled-components';
+
 import Link from '../Link';
-import s from './Hero.css';
+
+const Container = styled.div`
+  padding: 1em 1em 2em;
+`; // prettier-ignore
+
+const Title = styled.h2`
+  font-family: 'Roboto Mono', monospace;
+  letter-spacing: 1px;
+`;
+
+const Description = styled.p`
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 1px;
+`;
+
+const Button = styled(Link)`
+  display: inline-block;
+  padding: 0.5em 2em;
+  margin-top: 1em;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: #fff;
+  border-radius: 2px;
+
+  &:active,
+  &:hover,
+  &:visited {
+    color: #333;
+  }
+`;
 
 class Hero extends React.Component {
-  static defaultProps = {
-    className: null,
-  };
-
   render() {
     return (
-      <div className={cx(s.root, this.props.className)}>
-        <h2 className={s.title}>Bootstrap a new React app in 5 minutes!</h2>
-        <p className={s.desc}>
+      <Container {...this.props}>
+        <Title>Bootstrap a new React app in 5 minutes!</Title>
+        <Description>
           <strong>React Static</strong> is a popular boilerplate for building
           single-page applications and static web sites with React.
-        </p>
+        </Description>
         <p>
-          <Link className={s.button} href="/getting-started">
-            Get Started
-          </Link>
+          <Button href="/getting-started">Get Started</Button>
         </p>
-      </div>
+      </Container>
     );
   }
 }

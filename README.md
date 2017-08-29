@@ -37,8 +37,8 @@ This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][
 
 * [Create React App][cra] for development and test infrastructure (see [user guide][cradocs])
 * [React][react] + [Relay Modern][relay] for UI and declarative data fetching
+* [Styled Components][sc] for component friendly CSS styles ([docs][scdocs])
 * [Universal Router][router] + [history][history] for declarative routing and client-side navigation
-* [CSS Modules][cssmodules] + [PostCSS][postcss] for component friendly CSS styles (similar to BEM)
 
 
 ### Directory Layout
@@ -77,7 +77,7 @@ This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][
   them via [Brew][brew]*)
 * [Watchman][wm] v4.7.0 or higher, required by the [Relay Compiler][relaycompiler]
 * [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
-  [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [stylelint][vcstylelint] plug-ins
+  [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
 
 
 ### Getting Started
@@ -99,8 +99,16 @@ The app should become available at [http://localhost:3000/](http://localhost:300
 
 ```bash
 $ yarn lint                        # Check JavaScript and CSS code for potential issues
-$ yarn lint-fix                    # Fix potential issues in JavaScript and CSS code
+$ yarn fix                         # Attempt to automatically fix ESLint warnings
 $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
+```
+
+
+### How to Deploy
+
+```bash
+$ yarn build -- --prerender       # Build the app for production and pre-render .html pages
+$ npx gh-pages -d ./build         # Push the contents of the ./build folder to GitHub Pages
 ```
 
 
@@ -166,8 +174,8 @@ and [contributors](https://github.com/kriasoft/react-static-boilerplate/graphs/c
 [relay]: https://facebook.github.io/relay/
 [router]: https://github.com/kriasoft/universal-router
 [history]: https://github.com/ReactTraining/history
-[cssmodules]: https://github.com/css-modules/css-modules
-[postcss]: http://postcss.org/
+[sc]: https://www.styled-components.com/
+[scdocs]: https://www.styled-components.com/docs
 [nodejs]: https://nodejs.org/
 [yarn]: https://yarnpkg.com/
 [brew]: https://brew.sh/
@@ -179,4 +187,4 @@ and [contributors](https://github.com/kriasoft/react-static-boilerplate/graphs/c
 [vceslint]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
 [vcflow]: https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode
 [vcprettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
-[vcstylelint]: https://marketplace.visualstudio.com/items?itemName=shinnn.stylelint
+[vcjs]: https://marketplace.visualstudio.com/items?itemName=mgmcdermott.vscode-language-babel
