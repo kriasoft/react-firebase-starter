@@ -18,9 +18,7 @@ const Footer = styled.div`
   background-color: darkslategray;
 `;
 
-const Copyright = styled.span`
-  padding-right: 0.5em;
-`; // prettier-ignore
+const Copyright = styled.span`padding-right: 0.5em;`;
 
 const Separator = styled.span`
   padding-right: 0.5em;

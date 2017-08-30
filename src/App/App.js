@@ -69,7 +69,7 @@ class App extends React.Component<any, any, State> {
       this.setState({ ...route, location, variables });
     });
 
-  renderState = ({ error, props, retry }: ReadyState) =>
+  renderState = ({ error, props, retry }: ReadyState) => (
     <AppRenderer
       error={error}
       data={props}
@@ -79,7 +79,8 @@ class App extends React.Component<any, any, State> {
       params={this.state.params}
       components={this.state.components}
       render={this.state.render}
-    />;
+    />
+  );
 
   render() {
     return (

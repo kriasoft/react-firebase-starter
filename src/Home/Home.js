@@ -12,9 +12,7 @@ import type { Home_stories } from './__generated__/Home_stories.graphql';
 
 import Link from '../Link';
 
-const StoryList = styled.ul`
-  padding: 0;
-`; // prettier-ignore
+const StoryList = styled.ul`padding: 0;`;
 
 const Story = styled.li`
   padding-bottom: 0.5em;
@@ -39,13 +37,11 @@ class Home extends React.Component {
         </p>
         <StoryList>
           {this.props.stories &&
-            this.props.stories.edges.map(({ node: story }) =>
+            this.props.stories.edges.map(({ node: story }) => (
               <Story key={story.id}>
-                <Link href={`/story-${story.id}`}>
-                  {story.title}
-                </Link>
-              </Story>,
-            )}
+                <Link href={`/story-${story.id}`}>{story.title}</Link>
+              </Story>
+            ))}
         </StoryList>
       </div>
     );

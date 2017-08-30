@@ -10,9 +10,7 @@ import styled from 'styled-components';
 
 const color = '#00d8ff';
 
-const Circle = styled('circle')`
-  fill: ${color};
-`;
+const Circle = styled('circle')`fill: ${color};`;
 
 const Path = styled('path')`
   fill: none;

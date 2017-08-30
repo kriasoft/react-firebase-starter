@@ -106,15 +106,15 @@ class AppRenderer extends React.Component<any, Props, State> {
   }
 
   render() {
-    return this.state.error
-      ? <ErrorPage error={this.state.error} />
-      : <div>
-          <AppToolbar me={null} hero={this.state.hero} />
-          <Main>
-            {this.state.body || <p>Loading...</p>}
-          </Main>
-          <AppFooter />
-        </div>;
+    return this.state.error ? (
+      <ErrorPage error={this.state.error} />
+    ) : (
+      <div>
+        <AppToolbar me={null} hero={this.state.hero} />
+        <Main>{this.state.body || <p>Loading...</p>}</Main>
+        <AppFooter />
+      </div>
+    );
   }
 }
 

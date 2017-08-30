@@ -10,9 +10,7 @@ import styled from 'styled-components';
 
 import Link from '../Link';
 
-const Container = styled.div`
-  padding: 1em 1em 2em;
-`; // prettier-ignore
+const Container = styled.div`padding: 1em 1em 2em;`;
 
 const Title = styled.h2`
   font-family: 'Roboto Mono', monospace;

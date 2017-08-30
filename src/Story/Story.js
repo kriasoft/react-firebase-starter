@@ -20,12 +20,8 @@ class Story extends React.Component {
     const story = this.props.story || {};
     return (
       <article className={s.root}>
-        <h1>
-          {story.title}
-        </h1>
-        <content>
-          {story.text}
-        </content>
+        <h1>{story.title}</h1>
+        <content>{story.text}</content>
       </article>
     );
   }

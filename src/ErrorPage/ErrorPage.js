@@ -104,17 +104,14 @@ class ErrorPage extends React.Component<any, Props, any> {
     return (
       <Container>
         <Main>
-          <ErrorCode>
-            {code}
-          </ErrorCode>
-          <Title>
-            {title}
-          </Title>
-          {code === '404' &&
+          <ErrorCode>{code}</ErrorCode>
+          <Title>{title}</Title>
+          {code === '404' && (
             <Text>
               The page you&apos;re looking for does not exist or an another
               error occurred.
-            </Text>}
+            </Text>
+          )}
           <Text>
             <a href="/" onClick={this.goBack}>
               Go back
