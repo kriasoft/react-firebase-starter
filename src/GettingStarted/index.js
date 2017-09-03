@@ -3,4 +3,4 @@
  * Copyright (c) 2015-present Kriasoft. All rights reserved.
  */
 
-export { default } from './GettingStarted';
+export default from './GettingStarted';
