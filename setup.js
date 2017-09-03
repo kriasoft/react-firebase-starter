@@ -41,9 +41,24 @@ if (!text.includes('babel-plugin-styled-components')) {
       "const plugins = [\n  require.resolve('babel-plugin-styled-components'),"); // prettier-ignore
     fs.writeFileSync(file, text, 'utf8');
   } else {
-    throw new Error(
-      `Failed to inject babel-plugin-styled-components in ${file}.` // prettier-ignore
-    );
+    throw new Error(`Failed to inject babel-plugin-styled-components in ${file}.`); // prettier-ignore
+  }
+}
+
+//
+// Inject "babel-plugin-transform-export-extensions"
+// -----------------------------------------------------------------------------
+file = path.resolve('./node_modules/babel-preset-react-app/index.js');
+text = fs.readFileSync(file, 'utf8');
+
+if (!text.includes('babel-plugin-transform-export-extensions')) {
+  if (text.includes('const plugins = [')) {
+    text = text.replace(
+      'const plugins = [',
+      "const plugins = [\n  require.resolve('babel-plugin-transform-export-extensions'),"); // prettier-ignore
+    fs.writeFileSync(file, text, 'utf8');
+  } else {
+    throw new Error(`Failed to inject babel-plugin-transform-export-extensions in ${file}.`); // prettier-ignore
   }
 }
 
