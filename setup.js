@@ -42,7 +42,7 @@ if (!text.includes('babel-plugin-styled-components')) {
     fs.writeFileSync(file, text, 'utf8');
   } else {
     throw new Error(
-      `Failed to inject babel-plugin-styled-components in ${file}.`,
+      `Failed to inject babel-plugin-styled-components in ${file}.` // prettier-ignore
     );
   }
 }
