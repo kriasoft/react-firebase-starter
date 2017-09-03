@@ -1,6 +1,6 @@
-{
-  "name": "home",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./Home.js"
-}
+/**
+ * React Static Boilerplate
+ * Copyright (c) 2015-present Kriasoft. All rights reserved.
+ */
+
+export { default } from './Home';

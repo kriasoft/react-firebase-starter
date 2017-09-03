@@ -1,6 +1,6 @@
-{
-  "name": "app",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./App.js"
-}
+/**
+ * React Static Boilerplate
+ * Copyright (c) 2015-present Kriasoft. All rights reserved.
+ */
+
+export { default } from './App';
