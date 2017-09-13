@@ -127,7 +127,7 @@ yarn relay
 ```
 
 *NOTE: Try to merge as soon as the new changes land on the master branch in React Static Boilerplate
-repository, otherwise your project may diverse too much from the base/upstream repo.*
+repository, otherwise your project may diverge too much from the base/upstream repo.*
 
 
 ### How to Contribute
