@@ -7,6 +7,7 @@
   "vsicons.presets.angular": false,
   "search.exclude": {
     "**/build": true,
-    "**/node_modules": true
+    "**/node_modules": true,
+    "**/__generated__": true
   }
 }
