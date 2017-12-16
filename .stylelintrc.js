@@ -1,6 +1,7 @@
 /**
- * React Static Boilerplate
- * Copyright (c) 2015-present Kriasoft. All rights reserved.
+ * React Starter Kit for Firebase and GraphQL
+ * https://github.com/kriasoft/react-firebase-starter
+ * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
 const primerConfig = require('stylelint-config-primer');
@@ -28,6 +29,7 @@ module.exports = {
     'at-rule-empty-line-before': null,
     'block-opening-brace-space-after': null,
     'block-closing-brace-space-before': null,
+    'declaration-colon-newline-after': null,
 
     // https://github.com/hudochenkov/stylelint-order/blob/master/rules/order/README.md
     'order/order': [
