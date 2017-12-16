@@ -50,7 +50,6 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 
 * [Node.js][nodejs] v8.2.1 or higher + [Yarn][yarn] v0.27.5 or higher &nbsp; (_HINT: On Mac install
   them via [Brew][brew]_)
-* [Watchman][wm] v4.7.0 or higher, required by the [Relay Compiler][relaycompiler]
 * [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
 
@@ -62,7 +61,6 @@ Just clone the repo and start hacking:
 $ git clone https://github.com/kriasoft/react-firebase-starter.git MyApp
 $ cd MyApp
 $ yarn install                     # Install project dependencies listed in package.json
-$ yarn relay                       # Pre-compile GraphQL queries with Relay Compiler
 $ yarn start                       # Compiles the app and opens it in a browser with "live reload"
 ```
 
@@ -81,8 +79,8 @@ $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 ### How to Deploy
 
 ```bash
-$ yarn build -- --prerender       # Build the app for production and pre-render .html pages
-$ npx gh-pages -d ./build         # Push the contents of the ./build folder to GitHub Pages
+$ yarn build                      # Build the app for production
+$ firebse deploy                  # Deploy to Firebase
 ```
 
 ### How to Update
@@ -99,14 +97,8 @@ yarn install
 yarn relay
 ```
 
-<<<<<<< HEAD
-*NOTE: Try to merge as soon as the new changes land on the master branch in React Static Boilerplate
-repository, otherwise your project may diverge too much from the base/upstream repo.*
-
-=======
-_NOTE: Try to merge as soon as the new changes land on the master branch in React Static Boilerplate
-repository, otherwise your project may diverse too much from the base/upstream repo._
->>>>>>> Refactor to integrate with Firebase
+_NOTE: Try to merge as soon as the new changes land on the master branch in Node.js API Starter
+repository, otherwise your project may differ too much from the base/upstream repo._
 
 ### How to Contribute
 
