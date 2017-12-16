@@ -6,19 +6,25 @@ version: 2
 jobs:
   build:
     docker:
-      - image: kriasoft/node-ci:8.2.1-alpine
-    working_directory: ~/repo
+      - image: circleci/node:8.9.3
     steps:
       - checkout
-      - setup_remote_docker
-      # Download and cache dependencies
       - restore_cache:
-          key: yarn-cache-{{ checksum "yarn.lock" }}
-      - run: yarn install --no-progress
+          key: yarn-v1-{{ checksum "yarn.lock" }}
+          key: yarn-v1-
+      - run:
+          name: Install NPM modules
+          command: yarn
       - save_cache:
-          key: yarn-cache-{{ checksum "yarn.lock" }}
+          key: yarn-v1-{{ checksum "yarn.lock" }}
           paths:
-            - node_modules
-      # Run unit tests
-      - run: yarn lint
-      - run: yarn test
+            - ~/.cache/yarn/v1
+      - run:
+          name: Test
+          command: |
+            yarn lint
+            yarn test --forceExit
+      - run:
+          name: Build
+          command: yarn build
+

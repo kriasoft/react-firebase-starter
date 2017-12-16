@@ -3,6 +3,7 @@
 
 # Dependencies
 /node_modules
+/functions/node_modules
 
 # Testing
 /coverage
@@ -21,6 +22,8 @@ __generated__
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+firebase-debug.log*
+firebase-error.log*
 
 # VS Code
 .vscode/*

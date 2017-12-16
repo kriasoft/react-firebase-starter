@@ -1,24 +1,8 @@
-# React Static Boilerplate &nbsp; <a href="https://travis-ci.org/kriasoft/react-static-boilerplate"><img src="https://img.shields.io/circleci/project/github/kriasoft/react-static-boilerplate/master.svg?style=flat-square" height="20" /></a> <a href="https://github.com/kriasoft/react-static-boilerplate/stargazers"><img src="https://img.shields.io/github/stars/kriasoft/react-static-boilerplate.svg?style=social&label=Star&maxAge=3600" height="20"></a> <a href="https://twitter.com/ReactStatic"><img src="https://img.shields.io/twitter/follow/ReactStatic.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
+# React Starter Kit for Firebase and GraphQL &nbsp; <a href="https://github.com/kriasoft/react-firebase-starter/stargazers"><img src="https://img.shields.io/github/stars/kriasoft/react-firebase-starter.svg?style=social&label=Star&maxAge=3600" height="20"></a> <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
 
-[**React Static Boilerplate**](https://github.com/kriasoft/react-static-boilerplate) (RSB) is a
-boilerplate and tooling for creating modern stand-alone web applications (aka
-[SPA](https://en.wikipedia.org/wiki/Single-page_application)s) for a serverless architecture. RSB
-significantly reduces cost by eliminating the need for servers such as EC2 instances because the
-entire site can be hosted directly from CDN ([Firebase](https://www.firebase.com/), [GitHub
-Pages](https://pages.github.com/), [Amazon S3](http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html),
-or other similar cloud storage). Sites built with RSB can be fully functional with REST API or
-GraphQL calls to micro-services such as [Amazon Lambda](https://aws.amazon.com/lambda/),
-[Azure Functions](https://azure.microsoft.com/services/functions/), or dynamic Docker endpoints
-hosted on [DigitalOcean](https://www.digitalocean.com/?refcode=eef302dbae9f&utm_source=github&utm_medium=oss_sponsorships&utm_campaign=opencollective).
-RSB demonstrates how to use component-based UI development approach with best of breed
-technologies including [React](http://facebook.github.io/react/), [Relay Modern](http://facebook.github.io/relay),
-[Babel](http://babeljs.io/), [Webpack](https://webpack.github.io/),
-[React Hot Loader](http://gaearon.github.io/react-hot-loader/), and more.
+[**React Firebase Starter**](https://github.com/kriasoft/react-firebase-starter) (RFS) is a popular project template (aka boilerplate) for creating single-page applications with React, Firebase and GraphQL.
 
-**View** [online demo](https://rsb.kriasoft.com) &nbsp;|&nbsp; **Follow us** on
-[Gitter](https://gitter.im/kriasoft/react-static-boilerplate), [Twitter](https://twitter.com/ReactStatic),
-or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbsp;|&nbsp;
-**Learn** [React.js and ES6](#learn-reactjs-and-es6) &nbsp;|&nbsp; **Visit our sponsors**:
+**View** [online demo](https://rfs.kriasoft.com) &nbsp;|&nbsp; **Follow us** on [Twitter](https://twitter.com/ReactStarter) &nbsp;|&nbsp; **Get Support** on [Telegram](https://t.me/ReactStarterKit) &nbsp;|&nbsp; **Visit our sponsors**:
 
 <p align="center">
   <a href="https://rollbar.com/?utm_source=reactstartkit(github)&utm_medium=link&utm_campaign=reactstartkit(github)" target="_blank">
@@ -31,69 +15,60 @@ or [ProductHunt](https://www.producthunt.com/tech/react-static-boilerplate) &nbs
 
 ---
 
-This project was bootstraped with [React Static Boilerplate][rsb] by [Kriasoft][kriasoft] ([support][gitter]).
+This project was bootstraped with [React Firebase Starter][rfs] by [Kriasoft][kriasoft] ([get support][support]).
 
 ### Tech Stack
 
 * [Create React App][cra] for development and test infrastructure (see [user guide][cradocs])
-* [React][react] + [Relay Modern][relay] for UI and declarative data fetching
+* [Material UI][mui] to reduce development time by integrating Google's [Material Design][material]
 * [Styled Components][sc] for component friendly CSS styles ([docs][scdocs])
+* [Firebase][firebase] for serverless architecture, authentication and free CDN hosting
 * [Universal Router][router] + [history][history] for declarative routing and client-side navigation
 
+Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([ES2015][es2015]) and [React](https://reactjs.org/docs/).
 
 ### Directory Layout
 
 ```bash
 ├── node_modules/                  # 3rd-party libraries and utilities
 ├── public/                        # Static files such as favicon.ico etc.
-│   ├── favicon.ico                # Application icon to be displayed in bookmarks
-│   ├── index.html                 # HTML template
-│   ├── robots.txt                 # Instructions for search engine crawlers
-│   ├── manifest.json              # Application meta data
-│   └── ...                        # etc.
 ├── src/                           # Application source code
-│   ├── About/                     # About page
-│   ├── App/                       # Application shell (layout) component
-│   ├── Button/                    # Button component
-│   ├── ErrorPage/                 # Error page
-│   ├── Home/                      # Home page
-│   ├── Link/                      # Link component to be used instead of <a>
+│   ├── components/                # Shared React components
+│   ├── routes/                    # Components for pages/screens + routing information
+│   ├── auth.js                    # Authentication manager
 │   ├── history.js                 # Client-side navigation manager
 │   ├── index.js                   # <== Application entry point (main) <===
 │   ├── registerServiceWokrer.json # This list of application routes
 │   ├── relay.js                   # Relay Modern client
-│   ├── router.js                  # Application routes
 │   ├── graphql.schema             # GraphQL schema obtained from a GraphQL API
-│   └── store.js                   # Application state manager (Redux)
-├── test/                          # Unit and integration tests
+│   └── theme.js                   # Overrides for Material UI default styles
 ├── package.json                   # The list of project dependencies + NPM scripts
 └── setup.js                       # Customizations for create-react-app
 ```
 
-
 ### Prerequisites
 
-* [Node.js][nodejs] v8.2.1 or higher + [Yarn][yarn] v0.27.5 or higher &nbsp; (*HINT: On Mac install
-  them via [Brew][brew]*)
+* [Node.js][nodejs] v8.2.1 or higher + [Yarn][yarn] v0.27.5 or higher &nbsp; (_HINT: On Mac install
+  them via [Brew][brew]_)
 * [Watchman][wm] v4.7.0 or higher, required by the [Relay Compiler][relaycompiler]
 * [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
-
 
 ### Getting Started
 
 Just clone the repo and start hacking:
 
 ```bash
-$ git clone https://github.com/kriasoft/react-static-boilerplate.git MyApp
+$ git clone https://github.com/kriasoft/react-firebase-starter.git MyApp
 $ cd MyApp
 $ yarn install                     # Install project dependencies listed in package.json
 $ yarn relay                       # Pre-compile GraphQL queries with Relay Compiler
 $ yarn start                       # Compiles the app and opens it in a browser with "live reload"
 ```
 
-The app should become available at [http://localhost:3000/](http://localhost:3000/).
+Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
 
+<p align='center'><img src='https://camo.githubusercontent.com/506a5a0a33aebed2bf0d24d3999af7f582b31808/687474703a2f2f692e696d6775722e636f6d2f616d794e66434e2e706e67' width='600' alt='npm start'></p>
 
 ### How to Test
 
@@ -103,7 +78,6 @@ $ yarn fix                         # Attempt to automatically fix ESLint warning
 $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 ```
 
-
 ### How to Deploy
 
 ```bash
@@ -111,34 +85,37 @@ $ yarn build -- --prerender       # Build the app for production and pre-render 
 $ npx gh-pages -d ./build         # Push the contents of the ./build folder to GitHub Pages
 ```
 
-
 ### How to Update
 
 If you keep the original Git history after cloning this repo, you can always fetch and merge
 the recent updates back into your project by running:
 
 ```bash
-git remote add react-static-boilerplate https://github.com/kriasoft/react-static-boilerplate.git
+git remote add react-firebase-starter https://github.com/kriasoft/react-firebase-starter.git
 git checkout master
-git fetch react-static-boilerplate
-git merge react-static-boilerplate/master
+git fetch react-firebase-starter
+git merge react-firebase-starter/master
 yarn install
 yarn relay
 ```
 
+<<<<<<< HEAD
 *NOTE: Try to merge as soon as the new changes land on the master branch in React Static Boilerplate
 repository, otherwise your project may diverge too much from the base/upstream repo.*
 
+=======
+_NOTE: Try to merge as soon as the new changes land on the master branch in React Static Boilerplate
+repository, otherwise your project may diverse too much from the base/upstream repo._
+>>>>>>> Refactor to integrate with Firebase
 
 ### How to Contribute
 
 Anyone and everyone is welcome to [contribute](CONTRIBUTING.md) to this project. The best way to
-start is by checking our [open issues](https://github.com/kriasoft/react-static-boilerplate/issues),
-[submit a new issues](https://github.com/kriasoft/react-static-boilerplate/issues/new?labels=bug) or
-[feature request](https://github.com/kriasoft/react-static-boilerplate/issues/new?labels=enhancement),
+start is by checking our [open issues](https://github.com/kriasoft/react-firebase-starter/issues),
+[submit a new issues](https://github.com/kriasoft/react-firebase-starter/issues/new?labels=bug) or
+[feature request](https://github.com/kriasoft/react-firebase-starter/issues/new?labels=enhancement),
 participate in discussions, upvote or downvote the issues you like or dislike, send [pull
 requests](CONTRIBUTING.md#pull-requests).
-
 
 ### Learn React.js and ES6
 
@@ -147,7 +124,6 @@ requests](CONTRIBUTING.md#pull-requests).
 :green_book: &nbsp; [Getting Started with React](http://amzn.to/2bmwP5V) by Doel Sengupta and Manu Singhal (Apr, 2016)<br>
 :green_book: &nbsp; [You Don't Know JS: ES6 & Beyond](http://amzn.to/2bBfVnp) by Kyle Simpson (Dec, 2015)<br>
 
-
 ### Related Projects
 
 * [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Boilerplate and tooling for
@@ -155,23 +131,30 @@ requests](CONTRIBUTING.md#pull-requests).
 * [Node.js API Starter Kit](https://github.com/kriasoft/nodejs-api-starter) — Boilerplate and
   tooling for building data APIs with Docker, Node.js and GraphQL
 
-
 ### License
 
 Copyright © 2015-present Kriasoft. This source code is licensed under the MIT license found in
-the [LICENSE.txt](https://github.com/kriasoft/react-static-boilerplate/blob/master/LICENSE.txt) file.
+the [LICENSE.txt](https://github.com/kriasoft/react-firebase-starter/blob/master/LICENSE.txt) file.
 
 ---
-Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya), [blog](https://medium.com/@tarkus))
-and [contributors](https://github.com/kriasoft/react-static-boilerplate/graphs/contributors)
 
-[rsb]: https://github.com/kriasoft/react-static-boilerplate
+Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya), [blog](https://medium.com/@tarkus))
+and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/contributors)
+
+[rfs]: https://github.com/kriasoft/react-firebase-starter
 [kriasoft]: https://www.kriasoft.com/
-[gitter]: https://gitter.im/kriasoft/react-static-boilerplate
+[support]: https://t.me/ReactStarterKit
 [cra]: https://github.com/facebookincubator/create-react-app
+[mui]: https://material-ui-next.com/
+[material]: https://material.io/
 [cradocs]: https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md
+[html]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[css]: https://developer.mozilla.org/en-US/docs/Web/CSS
+[js]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[es2015]: http://babeljs.io/learn-es2015/
 [react]: https://facebook.github.io/react/
 [relay]: https://facebook.github.io/relay/
+[firebase]: https://firebase.google.com/
 [router]: https://github.com/kriasoft/universal-router
 [history]: https://github.com/ReactTraining/history
 [sc]: https://www.styled-components.com/

@@ -1,0 +1,17 @@
+{
+  "extends": ["eslint-config-react-app", "prettier"],
+  "plugins": ["flowtype", "prettier"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 80,
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": true,
+        "singleQuote": true,
+        "trailingComma": "all"
+      }
+    ]
+  }
+}
