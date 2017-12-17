@@ -1,4 +1,4 @@
-# React Starter Kit for Firebase and GraphQL &nbsp; <a href="https://github.com/kriasoft/react-firebase-starter/stargazers"><img src="https://img.shields.io/github/stars/kriasoft/react-firebase-starter.svg?style=social&label=Star&maxAge=3600" height="20"></a> <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" height="20"></a>
+# React Starter Kit for Firebase and GraphQL &nbsp; <a href="https://circleci.com/gh/kriasoft/react-firebase-starter"><img src="https://circleci.com/gh/kriasoft/react-firebase-starter.svg?style=svg" alt="Build Status" height="18" /></a> <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" alt="Twitter" height="20"></a>
 
 [**React Firebase Starter**](https://github.com/kriasoft/react-firebase-starter) (RFS) is a popular project template (aka boilerplate) for creating single-page applications with React, Firebase and GraphQL.
 
@@ -22,7 +22,7 @@ This project was bootstraped with [React Firebase Starter][rfs] by [Kriasoft][kr
 * [Create React App][cra] for development and test infrastructure (see [user guide][cradocs])
 * [Material UI][mui] to reduce development time by integrating Google's [Material Design][material]
 * [Styled Components][sc] for component friendly CSS styles ([docs][scdocs])
-* [Firebase][firebase] for serverless architecture, authentication and free CDN hosting
+* [Firebase][firebase] for serverless architecture, authentication and free CDN hosting ([docs][fbdocs])
 * [Universal Router][router] + [history][history] for declarative routing and client-side navigation
 
 Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([ES2015][es2015]) and [React](https://reactjs.org/docs/).
@@ -48,7 +48,7 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 
 ### Prerequisites
 
-* [Node.js][nodejs] v8.2.1 or higher + [Yarn][yarn] v0.27.5 or higher &nbsp; (_HINT: On Mac install
+* [Node.js][nodejs] v8.9 or higher + [Yarn][yarn] v1.3 or higher &nbsp; (_HINT: On Mac install
   them via [Brew][brew]_)
 * [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
@@ -147,6 +147,7 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [react]: https://facebook.github.io/react/
 [relay]: https://facebook.github.io/relay/
 [firebase]: https://firebase.google.com/
+[fbdocs]: https://firebase.google.com/docs/web
 [router]: https://github.com/kriasoft/universal-router
 [history]: https://github.com/ReactTraining/history
 [sc]: https://www.styled-components.com/

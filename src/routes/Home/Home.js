@@ -35,7 +35,7 @@ class Home extends React.Component<{}> {
           </Typography>
           <Typography type="body1" paragraph>
             <a href="https://github.com/kriasoft/react-firebse-starter">
-              https://github.com/kriasoft/react-firebse-starter
+              https://github.com/kriasoft/react-firebase-starter
             </a>
           </Typography>
         </Content>
