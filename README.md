@@ -2,7 +2,7 @@
 
 [**React Firebase Starter**](https://github.com/kriasoft/react-firebase-starter) (RFS) is a popular project template (aka boilerplate) for creating single-page applications with React, Firebase and GraphQL.
 
-**View** [online demo](https://react-firebase.kriasoft.com) &nbsp;|&nbsp; **Follow us** on [Twitter](https://twitter.com/ReactStarter) &nbsp;|&nbsp; **Get Support** on [Telegram](https://t.me/ReactStarterKit) &nbsp;|&nbsp; **Visit our sponsors**:
+**View** [online demo](https://react-firebase.kriasoft.com) &nbsp;|&nbsp; **Follow us** on [Twitter](https://twitter.com/ReactStarter) &nbsp;|&nbsp; **Get Support** on [Telegram][telegram] &nbsp;|&nbsp; **Visit our sponsors**:
 
 <p align="center">
   <a href="https://rollbar.com/?utm_source=reactstartkit(github)&utm_medium=link&utm_campaign=reactstartkit(github)" target="_blank">
@@ -15,7 +15,7 @@
 
 ---
 
-This project was bootstraped with [React Firebase Starter][rfs] by [Kriasoft][kriasoft] ([get support][support]).
+This project was bootstraped with [React Firebase Starter][rfs] by [Kriasoft][kriasoft] (get support on [Telegram][telegram]).
 
 ### Tech Stack
 
@@ -135,7 +135,7 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 
 [rfs]: https://github.com/kriasoft/react-firebase-starter
 [kriasoft]: https://www.kriasoft.com/
-[support]: https://t.me/ReactStarterKit
+[telegram]: https://t.me/ReactStarter
 [cra]: https://github.com/facebookincubator/create-react-app
 [mui]: https://material-ui-next.com/
 [material]: https://material.io/
