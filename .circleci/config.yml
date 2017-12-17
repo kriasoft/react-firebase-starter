@@ -32,6 +32,6 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               yarn global add firebase-tools
-              firebase deploy --token=$FIREBASE_TOKEN
+              $(yarn global bin)/firebase deploy --token=$FIREBASE_TOKEN
             fi
 
