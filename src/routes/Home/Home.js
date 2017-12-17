@@ -34,7 +34,7 @@ class Home extends React.Component<{}> {
             This is a boilerplate project for creating React applications.
           </Typography>
           <Typography type="body1" paragraph>
-            <a href="https://github.com/kriasoft/react-firebse-starter">
+            <a href="https://github.com/kriasoft/react-firebase-starter">
               https://github.com/kriasoft/react-firebase-starter
             </a>
           </Typography>
