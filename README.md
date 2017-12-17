@@ -2,7 +2,7 @@
 
 [**React Firebase Starter**](https://github.com/kriasoft/react-firebase-starter) (RFS) is a popular project template (aka boilerplate) for creating single-page applications with React, Firebase and GraphQL.
 
-**View** [online demo](https://rfs.kriasoft.com) &nbsp;|&nbsp; **Follow us** on [Twitter](https://twitter.com/ReactStarter) &nbsp;|&nbsp; **Get Support** on [Telegram](https://t.me/ReactStarterKit) &nbsp;|&nbsp; **Visit our sponsors**:
+**View** [online demo](https://react-firebase.kriasoft.com) &nbsp;|&nbsp; **Follow us** on [Twitter](https://twitter.com/ReactStarter) &nbsp;|&nbsp; **Get Support** on [Telegram](https://t.me/ReactStarterKit) &nbsp;|&nbsp; **Visit our sponsors**:
 
 <p align="center">
   <a href="https://rollbar.com/?utm_source=reactstartkit(github)&utm_medium=link&utm_campaign=reactstartkit(github)" target="_blank">
