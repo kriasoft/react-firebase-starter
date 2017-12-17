@@ -21,14 +21,13 @@ firebase.initializeApp({
   authDomain: 'react-firebase-graphql.firebaseapp.com',
   databaseURL: 'https://react-firebase-graphql.firebaseio.com',
   projectId: 'react-firebase-graphql',
-  storageBucket: '',
+  storageBucket: 'react-firebase-graphql.appspot.com',
   messagingSenderId: '564620986275',
 });
 
 const render = props =>
   new Promise((resolve, reject) => {
     try {
-      console.log('props:', props);
       ReactDOM.render(
         <App {...props} />,
         document.getElementById('root'),

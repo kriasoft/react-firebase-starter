@@ -23,6 +23,14 @@ const routes = [
     }),
   },
   {
+    path: '/account',
+    components: () => [import(/* webpackChunkName: 'Account' */ './Account')],
+    render: ({ user, components: [Account] }) => ({
+      title: 'My Account • React Firebase Starter',
+      body: <Account user={user} />,
+    }),
+  },
+  {
     path: '/about',
     components: () => [import(/* webpackChunkName: 'about' */ './About')],
     render: ({ user, components: [About] }) => ({

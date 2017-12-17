@@ -57,7 +57,7 @@ class Toolbar extends React.Component<{}, {}> {
 
   render() {
     return (
-      <AppBar color="transparent" position="static">
+      <AppBar color="default" position="static">
         <MuiToolbar>
           <Title type="title" color="inherit" onClick={goHome}>
             My App
@@ -85,7 +85,7 @@ class Toolbar extends React.Component<{}, {}> {
         </MuiToolbar>
         <LoginDialog
           open={this.state.loginDialogOpen}
-          onRequestClose={this.hideLogin}
+          onClose={this.hideLogin}
         />
       </AppBar>
     );

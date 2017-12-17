@@ -33,9 +33,10 @@ class LoginDialog extends React.Component {
       .signIn()
       .then(() => {
         this.setState(defaultState);
-        this.props.onRequestClose(event);
+        this.props.onClose(event);
       })
       .catch(err => {
+        console.log(err);
         this.setState({ ...defaultState, error: err.messsage });
       });
   };
