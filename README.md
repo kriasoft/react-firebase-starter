@@ -38,7 +38,7 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   ├── auth.js                    # Authentication manager
 │   ├── history.js                 # Client-side navigation manager
 │   ├── index.js                   # <== Application entry point (main) <===
-│   ├── registerServiceWokrer.json # This list of application routes
+│   ├── registerServiceWorker.json # This list of application routes
 │   ├── relay.js                   # Relay Modern client
 │   ├── graphql.schema             # GraphQL schema obtained from a GraphQL API
 │   └── theme.js                   # Overrides for Material UI default styles
