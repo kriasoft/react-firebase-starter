@@ -80,7 +80,7 @@ $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 
 ```bash
 $ yarn build                      # Build the app for production
-$ firebse deploy                  # Deploy to Firebase
+$ firebase deploy                 # Deploy to Firebase
 ```
 
 ### How to Update
