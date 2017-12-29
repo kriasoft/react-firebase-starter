@@ -61,7 +61,7 @@ function resolveRoute(ctx) {
       location: ctx.location,
       route: route.render({
         user: ctx.user,
-        location: ctx.ocation,
+        location: ctx.location,
         components: components.map(x => x.default),
       }),
     }),
