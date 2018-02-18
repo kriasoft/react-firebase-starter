@@ -7,7 +7,7 @@
 /* @flow */
 
 import React from 'react';
-import UniversalRouter from 'universal-router/main.js';
+import UniversalRouter from 'universal-router';
 
 // The list of all application routes where each route contains a URL path string (pattern),
 // the list of components to load asynchroneously (chunks), data requirements (GraphQL query),
@@ -24,7 +24,7 @@ const routes = [
   },
   {
     path: '/account',
-    components: () => [import(/* webpackChunkName: 'Account' */ './Account')],
+    components: () => [import(/* webpackChunkName: 'account' */ './Account')],
     render: ({ user, components: [Account] }) => ({
       title: 'My Account • React Firebase Starter',
       body: <Account user={user} />,
