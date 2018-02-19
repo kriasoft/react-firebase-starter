@@ -11,11 +11,14 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import Html from './components/Html';
+import assets from './assets.json';
 
 const app = express();
 
 app.get('*', (req, res) => {
-  const html = ReactDOMServer.renderToStaticMarkup(<Html />);
+  const html = ReactDOMServer.renderToStaticMarkup(
+    <Html assets={[...assets.main, ...assets.home]} />,
+  );
   res.send(`<!DOCTYPE html>${html}`);
 });
 

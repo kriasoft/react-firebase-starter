@@ -8,18 +8,7 @@
 
 import React from 'react';
 
-// html,
-// body,
-// #root {
-//   height: 100%;
-// }
-// body {
-//   padding: 0;
-//   margin: 0;
-//   font-family: sans-serif;
-// }
-
-function Html({ title, body }) {
+function Html({ title, body, assets }) {
   return (
     <html lang="en">
       <head>
@@ -46,6 +35,7 @@ function Html({ title, body }) {
       <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root" dangerouslySetInnerHTML={{ __html: body }} />
+        {assets.filter(x => x.endsWith('.js')).map(x => <script src={x} />)}
       </body>
     </html>
   );

@@ -7,12 +7,25 @@
 /* @flow */
 
 import React from 'react';
-import styled from 'styled-components';
+import styled, { injectGlobal } from 'styled-components';
 import { MuiThemeProvider } from 'material-ui/styles';
 
 import theme from '../../theme';
 import Toolbar from './Toolbar';
 import Footer from './Footer';
+
+injectGlobal`
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+  }
+`;
 
 const Container = styled.div`
   height: 100vh;
