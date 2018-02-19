@@ -2,6 +2,7 @@
   "name": "app",
   "version": "0.0.0",
   "private": true,
+  "main": "build/server.js",
   "browserslist": {
     "development": [
       "last 2 chrome versions",
@@ -16,11 +17,14 @@
     ]
   },
   "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.40",
     "@firebase/app": "^0.1.9",
     "@firebase/auth": "^0.3.3",
     "@firebase/firestore": "^0.3.3",
     "classnames": "^2.2.5",
     "express": "^4.16.2",
+    "firebase-admin": "^5.9.0",
+    "firebase-functions": "^0.8.1",
     "history": "^4.7.2",
     "lodash": "^4.17.5",
     "material-ui": "1.0.0-beta.34",
@@ -38,20 +42,20 @@
     "babel-plugin-styled-components": "^1.5.0",
     "chai": "^4.1.2",
     "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-flowtype": "^2.44.0",
+    "eslint-plugin-flowtype": "^2.45.0",
     "eslint-plugin-prettier": "^2.6.0",
     "flow-bin": "^0.66.0",
     "gh-pages": "^1.1.0",
     "husky": "^0.15.0-rc.8",
     "lint-staged": "^6.1.1",
     "prettier": "^1.10.2",
-    "react-app-tools": "2.0.0-beta.2",
+    "react-app-tools": "^2.0.0-beta.6",
     "relay-compiler": "^1.5.0-rc.1",
     "stylelint": "^9.0.0",
     "stylelint-config-primer": "^2.2.4",
     "stylelint-config-standard": "^18.1.0",
     "stylelint-config-styled-components-processor": "^0.1.1",
-    "stylelint-order": "^0.8.0",
+    "stylelint-order": "^0.8.1",
     "stylelint-processor-styled-components": "^1.2.2"
   },
   "lint-staged": {

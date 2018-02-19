@@ -20,6 +20,7 @@ const routes = [
     render: ({ user, components: [Home] }) => ({
       title: 'React Starter Kit for Firebase and GraphQL',
       body: <Home user={user} />,
+      chunk: ['home'],
     }),
   },
   {
@@ -28,6 +29,7 @@ const routes = [
     render: ({ user, components: [Account] }) => ({
       title: 'My Account • React Firebase Starter',
       body: <Account user={user} />,
+      chunks: ['account'],
     }),
   },
   {
@@ -36,6 +38,7 @@ const routes = [
     render: ({ user, components: [About] }) => ({
       title: 'About Us • React Firebase Starter',
       body: <About user={user} />,
+      chunks: ['about'],
     }),
   },
   {
@@ -44,6 +47,7 @@ const routes = [
     render: ({ user, components: [Privacy] }) => ({
       title: 'Privacy Policy • React Firebase Starter',
       body: <Privacy user={user} />,
+      chunks: ['privacy'],
     }),
   },
 ];

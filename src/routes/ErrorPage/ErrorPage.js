@@ -7,9 +7,9 @@
 /* @flow */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import history from '../../history';
 import Link from '../../components/Link';
 
 const color = '#607d8b';
@@ -79,7 +79,11 @@ type Props = {
   error: ?Error,
 };
 
-class ErrorPage extends React.Component<any, Props, any> {
+class ErrorPage extends React.Component<{}, Props, {}> {
+  static contextTypes = {
+    history: PropTypes.instanceOf(Object).isRequired,
+  };
+
   componentDidMount() {
     document.title =
       this.props.error && this.props.error.status === 404
@@ -89,7 +93,7 @@ class ErrorPage extends React.Component<any, Props, any> {
 
   goBack = (event: MouseEvent) => {
     event.preventDefault();
-    history.goBack();
+    this.context.history.goBack();
   };
 
   render() {

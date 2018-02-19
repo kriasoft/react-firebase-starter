@@ -7,6 +7,7 @@
 /* @flow */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
 import { MuiThemeProvider } from 'material-ui/styles';
 
@@ -36,7 +37,21 @@ const Container = styled.div`
 
 //http://koistya.github.io/files/background-v1-1920x1080.jpg
 
-class App extends React.Component<{}> {
+type Props = {
+  history: any,
+  route: any,
+  user: any,
+};
+
+class App extends React.Component<Props> {
+  static childContextTypes = {
+    history: PropTypes.instanceOf(Object).isRequired,
+  };
+
+  getChildContext() {
+    return { history: this.props.history };
+  }
+
   componentDidMount() {
     window.document.title = this.props.route.title;
   }

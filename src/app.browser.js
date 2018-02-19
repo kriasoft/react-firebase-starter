@@ -9,10 +9,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from '@firebase/app';
+import createHistory from 'history/createBrowserHistory';
 
 import App from './components/App';
 import auth from './auth';
-import history from './history';
 import routes from './routes';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -25,11 +25,12 @@ firebase.initializeApp({
   messagingSenderId: '564620986275',
 });
 
+const history = createHistory();
 const render = props =>
   new Promise((resolve, reject) => {
     try {
       ReactDOM.render(
-        <App {...props} />,
+        <App {...props} history={history} />,
         document.getElementById('root'),
         resolve(props),
       );

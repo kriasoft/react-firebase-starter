@@ -9,8 +9,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import history from '../../history';
-
 function isLeftClickEvent(event) {
   return event.button === 0;
 }
@@ -28,14 +26,15 @@ class Link extends React.Component<Props> {
     onClick: PropTypes.func,
   };
 
-  _handleClick = (event: MouseEvent) => {
+  static contextTypes = {
+    history: PropTypes.instanceOf(Object).isRequired,
+  };
+
+  handleClick = (event: MouseEvent) => {
     if (this.props.onClick) {
       this.props.onClick(event);
     }
-    Link.handleClick(event);
-  };
 
-  static handleClick(event: MouseEvent) {
     if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
       return;
     }
@@ -45,12 +44,12 @@ class Link extends React.Component<Props> {
     }
 
     event.preventDefault();
-    history.push(event.currentTarget.getAttribute('href'));
-  }
+    this.context.history.push(event.currentTarget.getAttribute('href'));
+  };
 
   render() {
     // eslint-disable-next-line jsx-a11y/anchor-has-content
-    return <a {...this.props} onClick={this._handleClick} />;
+    return <a {...this.props} onClick={this.handleClick} />;
   }
 }
 

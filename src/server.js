@@ -6,6 +6,7 @@
 
 /* @flow */
 
+import { https } from 'firebase-functions';
 import app from './app.node';
 
-app.listen(process.env.PORT || 8080);
+export default https.onRequest(app);

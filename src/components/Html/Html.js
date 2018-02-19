@@ -8,7 +8,12 @@
 
 import React from 'react';
 
-function Html({ title, body, assets }) {
+type Props = {
+  title: string,
+  assets: [string],
+};
+
+function Html({ title, assets }: Props) {
   return (
     <html lang="en">
       <head>
@@ -34,7 +39,7 @@ function Html({ title, body, assets }) {
       </head>
       <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root" dangerouslySetInnerHTML={{ __html: body }} />
+        <div id="root" />
         {assets.filter(x => x.endsWith('.js')).map(x => <script src={x} />)}
       </body>
     </html>
