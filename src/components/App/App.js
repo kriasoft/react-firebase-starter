@@ -7,12 +7,27 @@
 /* @flow */
 
 import React from 'react';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import styled, { injectGlobal } from 'styled-components';
 import { MuiThemeProvider } from 'material-ui/styles';
 
 import theme from '../../theme';
 import Toolbar from './Toolbar';
 import Footer from './Footer';
+
+injectGlobal`
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+  }
+`;
 
 const Container = styled.div`
   height: 100vh;
@@ -21,9 +36,21 @@ const Container = styled.div`
   background-size: cover;
 `;
 
-//http://koistya.github.io/files/background-v1-1920x1080.jpg
+type Props = {
+  history: any,
+  route: any,
+  user: any,
+};
 
-class App extends React.Component<{}> {
+class App extends React.Component<Props> {
+  static childContextTypes = {
+    history: PropTypes.instanceOf(Object).isRequired,
+  };
+
+  getChildContext() {
+    return { history: this.props.history };
+  }
+
   componentDidMount() {
     window.document.title = this.props.route.title;
   }

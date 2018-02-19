@@ -22,7 +22,7 @@ const Content = styled(Card)`
   margin: 2em 0;
 `;
 
-class Home extends React.Component<{}> {
+class Privacy extends React.Component<{}> {
   render() {
     return (
       <Container>
@@ -47,4 +47,4 @@ class Home extends React.Component<{}> {
   }
 }
 
-export default Home;
+export default Privacy;

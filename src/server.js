@@ -4,9 +4,9 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-if (
-  process.argv.indexOf('--pre-render') !== -1 ||
-  process.argv.indexOf('--prerender') !== -1
-) {
-  require('pre-render')('./build', ['/', '/about']);
-}
+/* @flow */
+
+import { https } from 'firebase-functions';
+import app from './app.node';
+
+export default https.onRequest(app);

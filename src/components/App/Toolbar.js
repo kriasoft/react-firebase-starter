@@ -7,6 +7,7 @@
 /* @flow */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import AppBar from 'material-ui/AppBar';
 import MuiToolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -17,7 +18,6 @@ import Menu, { MenuItem } from 'material-ui/Menu';
 import styled from 'styled-components';
 
 import auth from '../../auth';
-import history from '../../history';
 import Link from '../../components/Link';
 import LoginDialog from './LoginDialog';
 
@@ -29,11 +29,11 @@ const Title = styled(Typography)`
   }
 `;
 
-function goHome() {
-  history.push('/');
-}
-
 class Toolbar extends React.Component<{}, {}> {
+  static contextTypes = {
+    history: PropTypes.instanceOf(Object).isRequired,
+  };
+
   state = {
     loginOpen: false,
     accountMenuOpen: false,
@@ -48,12 +48,16 @@ class Toolbar extends React.Component<{}, {}> {
     this.unlisten();
   }
 
+  goHome = () => {
+    this.context.history.push('/');
+  };
+
   showLoginDialog = event => {
-    this.setState({ loginDialogOpen: true });
+    this.setState({ loginOpen: true });
   };
 
   hideLogin = () => {
-    this.setState({ loginDialogOpen: false });
+    this.setState({ loginOpen: false });
   };
 
   handleAccountMenuOpen = event => {
@@ -66,7 +70,7 @@ class Toolbar extends React.Component<{}, {}> {
 
   goToAccount = () => {
     this.setState({ accountMenuAnchor: null });
-    history.push('/account');
+    this.context.history.push('/account');
   };
 
   render() {
@@ -75,7 +79,7 @@ class Toolbar extends React.Component<{}, {}> {
     return (
       <AppBar color="default" position="static">
         <MuiToolbar>
-          <Title type="title" color="inherit" onClick={goHome}>
+          <Title type="title" color="inherit" onClick={this.goHome}>
             My App
           </Title>
           {this.props.user && (
@@ -95,7 +99,7 @@ class Toolbar extends React.Component<{}, {}> {
           )}
           {this.props.user === null && (
             <React.Fragment>
-              <Button color="inherit" href="/about" onClick={Link.handleClick}>
+              <Button color="inherit" href="/about" component={Link}>
                 About Us
               </Button>
               <Button color="inherit" onClick={auth.showLoginDialog}>
@@ -104,10 +108,7 @@ class Toolbar extends React.Component<{}, {}> {
             </React.Fragment>
           )}
         </MuiToolbar>
-        <LoginDialog
-          open={this.state.loginDialogOpen}
-          onClose={this.hideLogin}
-        />
+        <LoginDialog open={this.state.loginOpen} onClose={this.hideLogin} />
       </AppBar>
     );
   }

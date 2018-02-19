@@ -30,17 +30,21 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 ### Directory Layout
 
 ```bash
+├── build/                         # Compiled output
 ├── node_modules/                  # 3rd-party libraries and utilities
 ├── public/                        # Static files such as favicon.ico etc.
 ├── src/                           # Application source code
 │   ├── components/                # Shared React components
 │   ├── routes/                    # Components for pages/screens + routing information
+│   ├── app.browser.js             # Client-side rendering, e.g. ReactDOM.render(<App />, container)
+│   ├── app.node.js                # Server-side rendering, e.g. ReactDOMServer.renderToString(<App />)
 │   ├── auth.js                    # Authentication manager
 │   ├── history.js                 # Client-side navigation manager
 │   ├── index.js                   # <== Application entry point (main) <===
 │   ├── registerServiceWorker.json # This list of application routes
 │   ├── relay.js                   # Relay Modern client
 │   ├── graphql.schema             # GraphQL schema obtained from a GraphQL API
+│   ├── server.js                  # Server-side entiry point, e.g. app.listen(process.env.PORT)
 │   └── theme.js                   # Overrides for Material UI default styles
 ├── package.json                   # The list of project dependencies + NPM scripts
 └── setup.js                       # Customizations for create-react-app
