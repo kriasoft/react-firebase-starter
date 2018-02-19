@@ -40,7 +40,9 @@ function Html({ title, assets }: Props) {
       <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root" />
-        {assets.filter(x => x.endsWith('.js')).map(x => <script src={x} />)}
+        {assets
+          .filter(x => x.endsWith('.js'))
+          .map(x => <script key={x} src={x} />)}
       </body>
     </html>
   );

@@ -47,7 +47,6 @@ class LoginDialog extends React.Component {
         <Title>Sign In</Title>
         <DialogContent>
           <Button
-            raised
             color="primary"
             disabled={this.state.loading}
             onClick={this.signInWithFacebook}

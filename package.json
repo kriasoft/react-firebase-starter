@@ -74,7 +74,7 @@
     "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
     "flow": "flow",
     "relay": "relay-compiler --src ./src --schema ./src/schema.graphql",
-    "test": "react-app test --env=jsdom",
+    "test": "react-scripts test --env=jsdom",
     "build": "react-app build",
     "start": "react-app start"
   }

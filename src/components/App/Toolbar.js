@@ -53,11 +53,11 @@ class Toolbar extends React.Component<{}, {}> {
   };
 
   showLoginDialog = event => {
-    this.setState({ loginDialogOpen: true });
+    this.setState({ loginOpen: true });
   };
 
   hideLogin = () => {
-    this.setState({ loginDialogOpen: false });
+    this.setState({ loginOpen: false });
   };
 
   handleAccountMenuOpen = event => {
@@ -108,10 +108,7 @@ class Toolbar extends React.Component<{}, {}> {
             </React.Fragment>
           )}
         </MuiToolbar>
-        <LoginDialog
-          open={this.state.loginDialogOpen}
-          onClose={this.hideLogin}
-        />
+        <LoginDialog open={this.state.loginOpen} onClose={this.hideLogin} />
       </AppBar>
     );
   }

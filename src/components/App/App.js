@@ -36,8 +36,6 @@ const Container = styled.div`
   background-size: cover;
 `;
 
-//http://koistya.github.io/files/background-v1-1920x1080.jpg
-
 type Props = {
   history: any,
   route: any,
