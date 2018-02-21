@@ -2,7 +2,7 @@ type Comment implements Node {
   # The ID of an object
   id: ID!
   story: Story!
-  parent: Comment!
+  parent: Comment
   author: User!
   comments: [Comment]
   text: String
@@ -11,22 +11,9 @@ type Comment implements Node {
   updatedAt: String!
 }
 
-input CreateCommentInput {
-  storyId: ID!
-  parentId: ID
-  text: String
-  clientMutationId: String
-}
-
-type CreateCommentPayload {
-  story: Comment
-  clientMutationId: String
-}
-
 input CreateStoryInput {
   title: String
   text: String
-  url: String
   clientMutationId: String
 }
 
@@ -35,16 +22,16 @@ type CreateStoryPayload {
   clientMutationId: String
 }
 
-type Email {
-  email: String!
-  verified: Boolean!
-}
-
 type Mutation {
+  # Authenticate user by using JWT token.
+  signIn(input: SignInInput!): SignInPayload
+
+  # Clear authentication cookie.
+  signOut(input: SignOutInput!): SignOutPayload
+
+  # Create a new story.
   createStory(input: CreateStoryInput!): CreateStoryPayload
   updateStory(input: UpdateStoryInput!): UpdateStoryPayload
-  createComment(input: CreateCommentInput!): CreateCommentPayload
-  updateComment(input: UpdateCommentInput!): UpdateCommentPayload
 }
 
 # An object with an ID
@@ -53,44 +40,38 @@ interface Node {
   id: ID!
 }
 
-# Information about pagination in a connection.
-type PageInfo {
-  # When paginating forwards, are there more items?
-  hasNextPage: Boolean!
-
-  # When paginating backwards, are there more items?
-  hasPreviousPage: Boolean!
-
-  # When paginating backwards, the cursor to continue.
-  startCursor: String
-
-  # When paginating forwards, the cursor to continue.
-  endCursor: String
+type Query {
+  me: User
+  story(slug: String!): Story
+  stories: [Story]
 }
 
-type Query {
-  # Fetches an object given its ID
-  node(
-    # The ID of an object
-    id: ID!
-  ): Node
+input SignInInput {
+  token: String!
+  clientMutationId: String
+}
 
-  # Fetches objects given their IDs
-  nodes(
-    # The IDs of objects
-    ids: [ID!]!
-  ): [Node]!
+type SignInPayload {
   me: User
-  stories(after: String, first: Int): StoryConnection
+  clientMutationId: String
+}
+
+input SignOutInput {
+  clientMutationId: String
+}
+
+type SignOutPayload {
+  clientMutationId: String
 }
 
 type Story implements Node {
   # The ID of an object
   id: ID!
   author: User!
+  slug: String!
   title: String!
-  url: String
-  text: String
+  text: String!
+  isURL: Boolean!
   comments: [Comment]
   pointsCount: Int!
   commentsCount: Int!
@@ -98,41 +79,10 @@ type Story implements Node {
   updatedAt: String!
 }
 
-# A connection to a list of items.
-type StoryConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # A list of edges.
-  edges: [StoryEdge]
-  totalCount: Int!
-}
-
-# An edge in a connection.
-type StoryEdge {
-  # The item at the end of the edge
-  node: Story
-
-  # A cursor for use in pagination
-  cursor: String!
-}
-
-input UpdateCommentInput {
-  id: ID!
-  text: ID
-  clientMutationId: String
-}
-
-type UpdateCommentPayload {
-  story: Comment
-  clientMutationId: String
-}
-
 input UpdateStoryInput {
   id: ID!
   title: String
   text: String
-  url: String
   clientMutationId: String
 }
 
@@ -145,6 +95,6 @@ type User implements Node {
   # The ID of an object
   id: ID!
   displayName: String
-  imageUrl: String
-  emails: [Email]
+  photoURL: String
+  email: String
 }

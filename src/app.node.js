@@ -1,5 +1,5 @@
 /**
- * React Starter Kit for Firebase and GraphQL
+ * React Starter Kit for Firebase
  * https://github.com/kriasoft/react-firebase-starter
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
@@ -7,48 +7,24 @@
 /* @flow */
 
 import express from 'express';
-import createHistory from 'history/createMemoryHistory';
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import firebase from 'firebase-admin';
 
-import Html from './components/Html';
-import routes from './routes';
-import assets from './assets.json';
+import api from './graphql';
+import ssr from './ssr';
+
+// JSON key with service account credentials
+// https://firebase.google.com/docs/admin/setup
+const credentials = JSON.parse(process.env.FIREBASE_CREDENTIALS);
+
+if (!firebase.apps.length) {
+  firebase.initializeApp({
+    credential: firebase.credential.cert(credentials),
+  });
+}
 
 const app = express();
 
-app.get('*', async (req, res, next) => {
-  try {
-    const history = createHistory({ initialEntries: [req.path] });
-
-    const render = props =>
-      new Promise((resolve, reject) => {
-        try {
-          const html = ReactDOMServer.renderToStaticMarkup(
-            <Html
-              title={props.route.title}
-              assets={(props.route.chunks || []).reduce(
-                (acc, x) => [...acc, ...assets[x]],
-                assets.main,
-              )}
-            />,
-          );
-          res.send(`<!DOCTYPE html>${html}`);
-          resolve(props);
-        } catch (err) {
-          reject(err);
-        }
-      });
-
-    await routes.resolve({
-      pathname: req.path,
-      location: history.location,
-      user: null, // TODO: Pass the current user object
-      render,
-    });
-  } catch (err) {
-    next(err);
-  }
-});
+app.use(api); // GraphQL API
+app.use(ssr); // Server-side rendering
 
 export default app;

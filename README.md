@@ -1,8 +1,12 @@
-# React Starter Kit &nbsp; <sup><samp>for Firebase and GraphQL</samp></sup> &nbsp; <a href="https://circleci.com/gh/kriasoft/react-firebase-starter"><img src="https://circleci.com/gh/kriasoft/react-firebase-starter.svg?style=svg" alt="Build Status" height="20" /></a> <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" alt="Twitter" height="20"></a>
+# React Starter Kit &nbsp; <sup><samp>for Firebase</samp></sup> &nbsp; <a href="https://circleci.com/gh/kriasoft/react-firebase-starter"><img src="https://circleci.com/gh/kriasoft/react-firebase-starter.svg?style=svg" alt="Build Status" height="20" /></a> <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" alt="Twitter" height="20"></a> <a href="https://t.me/ReactStarter"><img src="https://img.shields.io/badge/chat-Telegram-green.svg?style=social&maxAge=3600" height="20"></a>
 
-[**React Firebase Starter**](https://github.com/kriasoft/react-firebase-starter) (RFS) is a popular project template (aka boilerplate) for creating single-page applications with React, Firebase and GraphQL.
+**React Starter Kit** _for Firebase_ is a popular project template (aka, boilerplate) for building
+modern, scalable web applications with React.js, GraphQL, and GraphQL using serverless
+infrastructure provided by <a href="https://firebase.google.com/">Firebase</a> (Cloud Functions,
+hosting, CDN, authentication, etc.). It allows you to save time and build upon a solid foundation
+and design patterns.
 
-**View** [online demo](https://react-firebase.kriasoft.com) &nbsp;|&nbsp; **Follow us** on [Twitter](https://twitter.com/ReactStarter) &nbsp;|&nbsp; **Get Support** on [Telegram][telegram] &nbsp;|&nbsp; **Visit our sponsors**:
+<p align="center"><strong>View</strong> <a href="">online demo</a> &nbsp;|&nbsp; <strong>Follow us</strong> on <a href="https://twitter.com/ReactStarter">Twitter</a> &nbsp;|&nbsp; <strong>Get FREE support</strong> on <a href="https://t.me/ReactStarter">Telegram</a> &nbsp;|&nbsp; <strong>Visit our sponsors</strong>:</p>
 
 <p align="center">
   <a href="https://rollbar.com/?utm_source=reactstartkit(github)&utm_medium=link&utm_campaign=reactstartkit(github)" target="_blank">
@@ -15,11 +19,12 @@
 
 ---
 
-This project was bootstraped with [React Firebase Starter][rfs] by [Kriasoft][kriasoft] (get support on [Telegram][telegram]).
+This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kriasoft][kriasoft].
 
 ### Tech Stack
 
 * [Create React App][cra] for development and test infrastructure (see [user guide][cradocs])
+* [GraphQL][gqljs] and [Relay][relay] for declarative data fetching and maximum performance
 * [Material UI][mui] to reduce development time by integrating Google's [Material Design][material]
 * [Styled Components][sc] for component friendly CSS styles ([docs][scdocs])
 * [Firebase][firebase] for serverless architecture, authentication and free CDN hosting ([docs][fbdocs])
@@ -34,20 +39,27 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 ├── node_modules/                  # 3rd-party libraries and utilities
 ├── public/                        # Static files such as favicon.ico etc.
 ├── src/                           # Application source code
+│   ├── account/                   # User account (settings, profile, etc)
+│   ├── admin/                     # Admin dashboard
 │   ├── components/                # Shared React components
-│   ├── routes/                    # Components for pages/screens + routing information
+│   ├── graphql/                   # GraphQL API endpoint
+│   ├── news/                      # News section (example)
+│   ├── pages/                     # Static pages (landing, about, privacy etc.)
+│   ├── templates/                 # HTML templates for server-side rendering
 │   ├── app.browser.js             # Client-side rendering, e.g. ReactDOM.render(<App />, container)
 │   ├── app.node.js                # Server-side rendering, e.g. ReactDOMServer.renderToString(<App />)
 │   ├── auth.js                    # Authentication manager
-│   ├── history.js                 # Client-side navigation manager
-│   ├── index.js                   # <== Application entry point (main) <===
-│   ├── registerServiceWorker.json # This list of application routes
-│   ├── relay.js                   # Relay Modern client
-│   ├── graphql.schema             # GraphQL schema obtained from a GraphQL API
-│   ├── server.js                  # Server-side entiry point, e.g. app.listen(process.env.PORT)
+│   ├── createRelay.browser.js     # Relay factory method for browser envrironment
+│   ├── createRelay.node.js        # Relay factory method for Node.js envrironment
+│   ├── router.js                  # Universal application router
+│   ├── graphql.schema             # GraphQL schema (auto-generated, used by Relay)
+│   ├── server.json                # Node.js entry point
+│   ├── serviceWorker.js           # Service worker helper methods
+│   ├── ssr.js                     # Express.js middleware for server-side rendering
 │   └── theme.js                   # Overrides for Material UI default styles
-├── package.json                   # The list of project dependencies + NPM scripts
-└── setup.js                       # Customizations for create-react-app
+├── .env                           # Environment variables
+├── override.js                    # Configuration overrides for Babel and Webpack
+└── package.json                   # The list of project dependencies + NPM scripts
 ```
 
 ### Prerequisites
@@ -56,16 +68,18 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
   them via [Brew][brew]_)
 * [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
+* [Watchman][watchman] file watcher used by Relay Modern
 
 ### Getting Started
 
-Just clone the repo and start hacking:
+Just clone the repo, update environment variables in `.env`, and start hacking:
 
 ```bash
 $ git clone https://github.com/kriasoft/react-firebase-starter.git MyApp
 $ cd MyApp
 $ yarn install                     # Install project dependencies listed in package.json
-$ yarn start                       # Compiles the app and opens it in a browser with "live reload"
+$ yarn relay                       # Compile GraphQL queries
+$ yarn start                       # Compile the app and opens it in a browser with "live reload"
 ```
 
 Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
@@ -82,9 +96,11 @@ $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 
 ### How to Deploy
 
+Set Firebase project IDs for production and development environments in `.firebaserc` file, then:
+
 ```bash
-$ yarn build                      # Build the app for production
-$ firebase deploy                 # Deploy to Firebase
+$ yarn deploy                      # Build the app and deploy to development environment
+$ yarn deploy-prod                 # Build the app and deploy to production
 ```
 
 ### How to Update
@@ -122,6 +138,8 @@ requests](CONTRIBUTING.md#pull-requests).
 
 ### Related Projects
 
+* [React App SDK](https://github.com/kriasoft/react-app) — Create React App modification that
+  unlocks server-side rendering
 * [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Boilerplate and tooling for
   building isomorphic web apps with React and Relay
 * [Node.js API Starter Kit](https://github.com/kriasoft/nodejs-api-starter) — Boilerplate and
@@ -138,12 +156,14 @@ Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya), [bl
 and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/contributors)
 
 [rfs]: https://github.com/kriasoft/react-firebase-starter
-[kriasoft]: https://www.kriasoft.com/
+[kriasoft]: https://github.com/kriasoft
 [telegram]: https://t.me/ReactStarter
-[cra]: https://github.com/facebookincubator/create-react-app
+[cra]: https://github.com/facebook/create-react-app
+[cradocs]: https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md
+[gqljs]: http://graphql.org/graphql-js/
+[relay]: http://facebook.github.io/relay/
 [mui]: https://material-ui-next.com/
 [material]: https://material.io/
-[cradocs]: https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md
 [html]: https://developer.mozilla.org/en-US/docs/Web/HTML
 [css]: https://developer.mozilla.org/en-US/docs/Web/CSS
 [js]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
@@ -168,3 +188,4 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [vcflow]: https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode
 [vcprettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 [vcjs]: https://marketplace.visualstudio.com/items?itemName=mgmcdermott.vscode-language-babel
+[watchman]: https://github.com/facebook/watchman

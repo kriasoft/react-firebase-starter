@@ -1,0 +1,21 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title><%= title %></title>
+  <meta name="description" content="<%= description %>">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400|Roboto+Mono:100,400">
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+<% assets.filter(x => x.endsWith('.js')).forEach(url => { -%>
+  <script src="/<%= url %>"></script>
+<% }); -%>
+</body>
+</html>

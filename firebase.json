@@ -11,6 +11,10 @@
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
+        "source": "/graphql",
+        "function": "graphql"
+      },
+      {
         "source": "**",
         "function": "default"
       }

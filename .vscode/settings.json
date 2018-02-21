@@ -5,9 +5,12 @@
   "javascript.validate.enable": false,
   "prettier.eslintIntegration": true,
   "vsicons.presets.angular": false,
+  "[html]": {
+    "editor.formatOnSave": false
+  },
   "search.exclude": {
-    "**/build": true,
-    "**/node_modules": true,
-    "**/__generated__": true
+    "**/build/**": true,
+    "**/node_modules/**": true,
+    "**/__generated__/**": true
   }
 }

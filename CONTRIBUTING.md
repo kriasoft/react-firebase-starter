@@ -1,4 +1,4 @@
-# Contributing to React Starter Kit for Firebase and GraphQL
+# Contributing to React Starter Kit for Firebase
 
 ♥ **React Firebase Starter** and want to get involved? Thanks! There are plenty of ways you can
 help!
