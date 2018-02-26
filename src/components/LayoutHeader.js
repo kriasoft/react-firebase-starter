@@ -11,10 +11,10 @@ import styled from 'styled-components';
 
 const Root = styled.div`
   width: 100%;
+  padding: 2em 0 5em;
   background-color: #3f51b5;
   background-image: linear-gradient(-225deg, #3db0ef, #5e5bb7);
   flex-shrink: 0;
-  padding: 2em 0 5em;
 `;
 
 const Container = styled.div`
@@ -23,27 +23,23 @@ const Container = styled.div`
 `;
 
 const Title = styled.h1`
-  margin: 0 0 0.5em;
   padding: 0;
-  color: #fff;
-  font-family: 'Roboto Mono', Roboto;
+  margin: 0 1rem 0.5em;
+  font-family: 'Roboto Mono', Roboto, Arial, sans-serif;
   font-size: 2em;
   font-weight: 100;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  color: #fff;
 `;
 
 const Summary = styled.p`
-  color: #fff;
-  font-family: Roboto;
+  padding: 0;
+  margin: 0 1rem;
+  font-family: Roboto, Arial, sans-serif;
   font-size: 1em;
   font-weight: 100;
-  letter-spacing: 1px;
   line-height: 1.5em;
-  margin: 0;
-  padding: 0;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  color: #fff;
+  letter-spacing: 1px;
 
   && strong {
     font-weight: 300;

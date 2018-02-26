@@ -6,7 +6,7 @@ infrastructure provided by <a href="https://firebase.google.com/">Firebase</a> (
 hosting, CDN, authentication, etc.). It allows you to save time and build upon a solid foundation
 and design patterns.
 
-<p align="center"><strong>View</strong> <a href="">online demo</a> &nbsp;|&nbsp; <strong>Follow us</strong> on <a href="https://twitter.com/ReactStarter">Twitter</a> &nbsp;|&nbsp; <strong>Get FREE support</strong> on <a href="https://t.me/ReactStarter">Telegram</a> &nbsp;|&nbsp; <strong>Visit our sponsors</strong>:</p>
+<p align="center"><strong>View</strong> <a href="https://firebase.reactstarter.com">online demo</a> &nbsp;|&nbsp; <strong>Follow us</strong> on <a href="https://twitter.com/ReactStarter">Twitter</a> &nbsp;|&nbsp; <strong>Get FREE support</strong> on <a href="https://t.me/ReactStarter">Telegram</a> &nbsp;|&nbsp; <strong>Visit our sponsors</strong>:</p>
 
 <p align="center">
   <a href="https://rollbar.com/?utm_source=reactstartkit(github)&utm_medium=link&utm_campaign=reactstartkit(github)" target="_blank">

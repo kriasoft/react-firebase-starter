@@ -9,7 +9,7 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
-import { nodeInterface } from '../node';
+import { nodeInterface } from '../Node';
 import type Context from '../Context';
 
 export default new GraphQLObjectType({

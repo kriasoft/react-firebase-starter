@@ -17,7 +17,7 @@ import { globalIdField } from 'graphql-relay';
 
 import StoryType from '../story/StoryType';
 import UserType from '../user/UserType';
-import { nodeInterface } from '../node';
+import { nodeInterface } from '../Node';
 import type Context from '../Context';
 
 const CommentType = new GraphQLObjectType({

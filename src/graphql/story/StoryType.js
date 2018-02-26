@@ -18,7 +18,7 @@ import { globalIdField } from 'graphql-relay';
 
 import UserType from '../user/UserType';
 import CommentType from '../comment/CommentType';
-import { nodeInterface } from '../node';
+import { nodeInterface } from '../Node';
 import type Context from '../Context';
 
 export default new GraphQLObjectType({

@@ -39,6 +39,9 @@ router.get('*', async (request, response, next) => {
     if (route.redirect) {
       response.redirect(route.redirect, route.status || 301);
     } else {
+      if (process.env.NODE_ENV === 'production') {
+        response.set('Cache-Control', 'public, max-age=600, s-maxage=900');
+      }
       response.send(
         templates.ok({
           title: route.title,
