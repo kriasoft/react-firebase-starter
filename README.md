@@ -12,6 +12,7 @@ and design patterns.
   <a href="https://rollbar.com/?utm_source=reactstartkit(github)&utm_medium=link&utm_campaign=reactstartkit(github)" target="_blank">
     <img src="https://koistya.github.io/files/rollbar-384x64.png" width="192" height="32">
   </a>
+  <sup><a href="https://rollbar.com/jobs/?utm_source=reactstartkit(github)&utm_medium=link&utm_campaign=reactstartkit(github)">Hiring</a></sup> &nbsp;
   <a href="https://www.digitalocean.com/?refcode=eef302dbae9f&utm_source=github&utm_medium=oss_sponsorships&utm_campaign=opencollective" target="_blank">
     <img src="https://koistya.github.io/files/digital-ocean-393x64.png" width="196.5" height="32">
   </a>
