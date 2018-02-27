@@ -10,10 +10,10 @@ import fs from 'fs';
 import path from 'path';
 import cookie from 'cookie';
 import expressGraphQL from 'express-graphql';
+import { auth } from 'firebase-admin';
 import { Router } from 'express';
 import { printSchema } from 'graphql';
 
-import auth from './auth';
 import schema from './schema';
 import Context from './Context';
 
@@ -38,9 +38,9 @@ async function authentication(req, res, next) {
     const { __session: token } = req.headers.cookie
       ? cookie.parse(req.headers.cookie)
       : {};
-    req.user = token ? await auth.verifyIdToken(token) : null;
+    req.user = token ? await auth().verifyIdToken(token) : null;
     req.signIn = async token => {
-      const user = await auth.verifyIdToken(token);
+      const user = await auth().verifyIdToken(token);
       if (user) {
         res.cookie(sessionKey, token, sessionOptions);
       }

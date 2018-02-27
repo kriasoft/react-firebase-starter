@@ -17,7 +17,7 @@ import Avatar from 'material-ui/Avatar/Avatar';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import styled from 'styled-components';
 
-import auth from '../../auth';
+import auth from '../auth';
 import Link from './Link';
 import LoginDialog from './LoginDialog';
 

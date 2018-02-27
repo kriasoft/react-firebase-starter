@@ -24,6 +24,7 @@ This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kria
 ### Tech Stack
 
 * [Create React App][cra] for development and test infrastructure (see [user guide][cradocs])
+* [Firestore][firestore] and/or [Cloud SQL][cloudsql] (PostgreSQL) hosted database service
 * [GraphQL][gqljs] and [Relay][relay] for declarative data fetching and maximum performance
 * [Material UI][mui] to reduce development time by integrating Google's [Material Design][material]
 * [Styled Components][sc] for component friendly CSS styles ([docs][scdocs])
@@ -85,6 +86,14 @@ $ yarn start                       # Compile the app and opens it in a browser w
 Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
 
 <p align='center'><img src='https://camo.githubusercontent.com/506a5a0a33aebed2bf0d24d3999af7f582b31808/687474703a2f2f692e696d6775722e636f6d2f616d794e66434e2e706e67' width='600' alt='npm start'></p>
+
+### How to Migrate Database Schema
+
+```bash
+$ yarn db-change                   # Create a new database migration file
+$ yarn db-migrate                  # Migrate database to the latest version
+$ yarn db-rollback                 # Rollback the latest migration
+```
 
 ### How to Test
 
@@ -160,6 +169,8 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [telegram]: https://t.me/ReactStarter
 [cra]: https://github.com/facebook/create-react-app
 [cradocs]: https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md
+[firestore]: https://cloud.google.com/firestore/
+[cloudsql]: https://cloud.google.com/sql/
 [gqljs]: http://graphql.org/graphql-js/
 [relay]: http://facebook.github.io/relay/
 [mui]: https://material-ui-next.com/

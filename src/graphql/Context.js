@@ -6,11 +6,11 @@
 
 /* @flow */
 
-import DataLoader from './DataLoader';
-import type { Request } from 'express';
+import { auth } from 'firebase-admin';
 
-import auth from './auth';
+import DataLoader from './DataLoader';
 import { UnauthorizedError } from './errors';
+import type { Request } from 'express';
 
 class Context {
   constructor(req: Request) {
@@ -22,7 +22,7 @@ class Context {
   }
 
   userById = new DataLoader(keys =>
-    Promise.all(keys.map(key => auth.getUser(key))),
+    Promise.all(keys.map(key => auth().getUser(key))),
   );
 
   signIn(token) {

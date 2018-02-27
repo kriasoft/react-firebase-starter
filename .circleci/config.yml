@@ -1,17 +1,19 @@
 # Javascript Node CircleCI 2.0 configuration file
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+# Check https://circleci.com/docs/2.0/ for more details
 
 version: 2
 
 jobs:
   build:
+    # https://circleci.com/docs/2.0/configuration-reference/#docker
     docker:
       - image: circleci/node:8.9.3
     steps:
       - checkout
       - restore_cache:
-          key: yarn-v1-{{ checksum "yarn.lock" }}
-          key: yarn-v1-
+          keys:
+            - yarn-v1-{{ checksum "yarn.lock" }}
+            - yarn-v1-
       - run:
           name: Install NPM modules
           command: yarn
