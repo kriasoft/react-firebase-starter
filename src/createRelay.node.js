@@ -25,7 +25,7 @@ export default function createRelay(req: Request) {
       if (payload.errors) {
         throw new Error(payload.errors);
       }
-      return payload;
+      return (req.data = payload);
     });
   }
 

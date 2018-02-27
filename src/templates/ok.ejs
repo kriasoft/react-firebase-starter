@@ -14,6 +14,7 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+  <script>window.DATA=<%- data -%>;</script>
 <% assets.filter(x => x.endsWith('.js')).forEach(url => { -%>
   <script src="/<%= url %>"></script>
 <% }); -%>

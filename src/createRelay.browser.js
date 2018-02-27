@@ -10,6 +10,12 @@ import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 
 export default function createRelay() {
   function fetchQuery(operation, variables) {
+    if (typeof window.DATA !== 'undefined') {
+      const data = window.DATA;
+      delete window.DATA;
+      return Promise.resolve(data);
+    }
+
     return fetch('/graphql', {
       method: 'POST',
       headers: {

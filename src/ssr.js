@@ -6,6 +6,7 @@
 
 /* @flow */
 
+import serialize from 'serialize-javascript';
 import createHistory from 'history/createMemoryHistory';
 import { fetchQuery } from 'relay-runtime';
 import { Router } from 'express';
@@ -50,6 +51,7 @@ router.get('*', async (request, response, next) => {
             (chunks, name) => [...chunks, ...assets[name]],
             assets.main,
           ),
+          data: serialize(request.data, { isJSON: true }),
         }),
       );
     }
