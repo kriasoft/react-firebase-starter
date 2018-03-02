@@ -51,9 +51,10 @@ export const createStory = mutationWithClientMutationId({
     const story = await db
       .insert(data)
       .into('stories')
-      .returning(['id']);
+      .returning(['id'])
+      .then(rows => rows[0]);
 
-    return db.storyById.load(story.id).then(rows => rows[0]);
+    return ctx.storyById.load(story.id);
   },
 });
 

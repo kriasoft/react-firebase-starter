@@ -9,6 +9,7 @@
 import { GraphQLNonNull, GraphQLString } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
 
+import db from '../../db';
 import UserType from './UserType';
 import type Context from '../Context';
 
@@ -29,9 +30,27 @@ export const signIn = mutationWithClientMutationId({
   },
 
   async mutateAndGetPayload(input: any, ctx: Context) {
-    return {
-      me: await ctx.signIn(input.token),
-    };
+    const me = await ctx.signIn(input.token);
+
+    const user = await db
+      .select()
+      .from('users')
+      .then(rows => {
+        if (rows.length) return rows[0];
+
+        return db
+          .insert({
+            id: me.uid,
+            email: me.email,
+            email_verified: me.emailVerified,
+            display_name: me.displayName,
+            photo_url: me.photoURL,
+          })
+          .into('users')
+          .returning('*');
+      });
+
+    return { me: user };
   },
 });
 
