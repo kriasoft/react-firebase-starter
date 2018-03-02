@@ -30,7 +30,7 @@ export default new GraphQLObjectType({
     email: {
       type: GraphQLString,
       resolve(user, args, ctx: Context) {
-        return ctx.user && ctx.user.id === user.id ? user.email : null;
+        return ctx.user && ctx.user.uid === user.id ? user.email : null;
       },
     },
   },
