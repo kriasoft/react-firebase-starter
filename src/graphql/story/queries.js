@@ -6,18 +6,11 @@
 
 /* @flow */
 
-import { firestore } from 'firebase-admin';
 import { GraphQLList, GraphQLNonNull, GraphQLString } from 'graphql';
 
+import db from '../../db';
 import StoryType from './StoryType';
 import type Context from '../Context';
-
-function map(snapshot) {
-  return snapshot.docs.map(x => ({
-    id: x.id,
-    ...x.data(),
-  }));
-}
 
 export const story = {
   type: StoryType,
@@ -27,11 +20,7 @@ export const story = {
   },
 
   async resolve(_, { slug }, ctx: Context) {
-    const { docs: [story] } = await firestore()
-      .collection('stories')
-      .where('slug', '=', slug)
-      .get();
-    return { id: story.id, ...story.data() };
+    return ctx.storyBySlug.load(slug);
   },
 };
 
@@ -39,25 +28,15 @@ export const stories = {
   type: new GraphQLList(StoryType),
 
   resolve(_, args, ctx: Context) {
-    return Promise.all([
-      // Fetch stories pending approval created by the current user ...
-      ctx.user
-        ? firestore()
-            .collection('stories')
-            .where('approved', '=', false)
-            .where('authorId', '=', ctx.user.uid)
-            .limit(50)
-            .get()
-            .then(map)
-        : [],
-      // ... concatenate them with the top 50 approved stories.
-      firestore()
-        .collection('stories')
-        .where('approved', '=', true)
-        .orderBy('createdAt', 'desc')
-        .limit(50)
-        .get()
-        .then(map),
-    ]).then(([a, b]) => [...a, ...b]);
+    function queryStories() {
+      if (ctx.user) this.where({ author_id: ctx.user.uid });
+      this.orWhereNot({ approved_at: null });
+    }
+    return db
+      .select()
+      .from('stories')
+      .where(queryStories)
+      .orderBy('created_at', 'desc')
+      .limit(25);
   },
 };

@@ -39,7 +39,7 @@ export default function validate(input: any) {
     });
   } else {
     data.text = input.text.trim();
-    data.isURL = validator.isURL(data.text, {
+    data.is_url = validator.isURL(data.text, {
       protocols: ['http', 'https'],
     });
   }
