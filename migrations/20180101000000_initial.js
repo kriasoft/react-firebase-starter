@@ -11,6 +11,7 @@ exports.up = async db => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.string('display_name', 100);
     table.string('photo_url', 200);
+    table.string('email', 200);
     table.timestamps(false, true);
   });
 
@@ -18,8 +19,10 @@ exports.up = async db => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.uuid('author_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
     table.string('title', 80).notNullable();
-    table.string('url', 200);
+    table.string('slug', 80).notNullable();
     table.text('text');
+    table.boolean('is_url');
+    table.timestamp('approved_at');
     table.timestamps(false, true);
   });
 

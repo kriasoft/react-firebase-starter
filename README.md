@@ -25,7 +25,7 @@ This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kria
 ### Tech Stack
 
 * [Create React App][cra] for development and test infrastructure (see [user guide][cradocs])
-* [Firestore][firestore] and/or [Cloud SQL][cloudsql] (PostgreSQL) hosted database service
+* [Cloud SQL][cloudsql] (PostgreSQL) hosted database service
 * [GraphQL][gqljs] and [Relay][relay] for declarative data fetching and maximum performance
 * [Material UI][mui] to reduce development time by integrating Google's [Material Design][material]
 * [Styled Components][sc] for component friendly CSS styles ([docs][scdocs])
@@ -73,6 +73,13 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 * [Watchman][watchman] file watcher used by Relay Modern
 
 ### Getting Started
+
+For local development you need to have [postgresapp](https://postgresapp.com/) (macOS). Then run couple commands in you bash.
+
+```bash
+$ psql -U postgres -c "create database dev"
+$ psql -U postgres -c "create extension if not exists \"uuid-ossp\"";
+```
 
 Just clone the repo, update environment variables in `.env`, and start hacking:
 
@@ -170,7 +177,6 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [telegram]: https://t.me/ReactStarter
 [cra]: https://github.com/facebook/create-react-app
 [cradocs]: https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md
-[firestore]: https://cloud.google.com/firestore/
 [cloudsql]: https://cloud.google.com/sql/
 [gqljs]: http://graphql.org/graphql-js/
 [relay]: http://facebook.github.io/relay/

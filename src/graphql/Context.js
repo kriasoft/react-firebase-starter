@@ -8,6 +8,7 @@
 
 import { auth } from 'firebase-admin';
 
+import db from '../db';
 import DataLoader from './DataLoader';
 import { UnauthorizedError } from './errors';
 import type { Request } from 'express';
@@ -23,6 +24,13 @@ class Context {
 
   userById = new DataLoader(keys =>
     Promise.all(keys.map(key => auth().getUser(key))),
+  );
+
+  storyBySlug = new DataLoader(keys =>
+    db
+      .select()
+      .from('stories')
+      .whereIn('slug', keys),
   );
 
   signIn(token) {
