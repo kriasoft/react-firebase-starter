@@ -48,9 +48,9 @@ const Container = styled.div`
 
 const Body = styled(Paper)`
   max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
   margin-top: -48px;
+  margin-right: auto;
+  margin-left: auto;
 
   && {
     background: transparent;
@@ -78,8 +78,8 @@ const Separator = styled.span`
 
 const UserPhoto = styled(Avatar)`
   && {
-    height: 32px;
     width: 32px;
+    height: 32px;
     margin: 8px 10px;
     cursor: pointer;
   }

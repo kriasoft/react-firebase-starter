@@ -20,6 +20,7 @@ const StyledItem = styled(ListItemText)`
     color: #333;
     text-decoration: none;
   }
+
   && a:hover {
     text-decoration: underline;
   }

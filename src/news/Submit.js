@@ -91,7 +91,7 @@ class Submit extends React.Component<{}> {
               id="title"
               value={this.state.title}
               onChange={this.handleChange}
-              margin="normal"
+              margin="dense"
               required
             />
             {this.errorMessage('title')}
@@ -107,7 +107,7 @@ class Submit extends React.Component<{}> {
               label="Text or URL"
               value={this.state.text}
               onChange={this.handleChange}
-              margin="normal"
+              margin="dense"
               multiline
               required
             />
