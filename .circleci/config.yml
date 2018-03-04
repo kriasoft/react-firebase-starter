@@ -5,9 +5,8 @@ version: 2
 
 jobs:
   build:
-    # https://circleci.com/docs/2.0/configuration-reference/#docker
     docker:
-      - image: circleci/node:8.9.3
+      - image: kriasoft/node:9.6.1
     steps:
       - checkout
       - restore_cache:
@@ -22,18 +21,19 @@ jobs:
           paths:
             - ~/.cache/yarn/v1
       - run:
+          name: Build
+          command: |
+            yarn relay
+            yarn build
+      - run:
           name: Test
           command: |
             yarn lint
             yarn test --forceExit
       - run:
-          name: Build
-          command: yarn build
-      - run:
           name: Deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              yarn global add firebase-tools
-              $(yarn global bin)/firebase deploy --token=$FIREBASE_TOKEN
+              firebase deploy --token=$FIREBASE_TOKEN
             fi
 

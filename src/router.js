@@ -6,11 +6,13 @@
 
 /* @flow */
 
+import React from 'react';
 import UniversalRouter from 'universal-router';
 
 import pages from './pages';
 import account from './account';
 import news from './news';
+import ErrorPage from './pages/ErrorPage';
 
 const routes = [
   ...pages,
@@ -23,7 +25,7 @@ const routes = [
 ];
 
 function resolveRoute(ctx) {
-  const { route, params, fetchQuery, renderRoute, next } = ctx;
+  const { route, params, fetchQuery, next } = ctx;
 
   // Allow to load routes on demand
   if (typeof route.children === 'function') {
@@ -47,10 +49,10 @@ function resolveRoute(ctx) {
 
   return Promise.all([...componentsPromise, dataPromise]).then(components => {
     const data = components.pop();
-    return renderRoute({
+    return {
       ...route.render(components, data, ctx),
       data,
-    });
+    };
   });
 }
 
@@ -58,6 +60,7 @@ function errorHandler(error) {
   return {
     title: error.code === '404' ? 'Page not found' : 'System Error',
     status: error.code || 404,
+    component: <ErrorPage error={error} />,
   };
 }
 

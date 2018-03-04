@@ -10,7 +10,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Link from '../common/Link';
+import Link from '../components/Link';
 
 const color = '#607d8b';
 
@@ -122,8 +122,7 @@ class ErrorPage extends React.Component<{}, Props, {}> {
               Go back
             </a>
             , or head over to the&nbsp;
-            <Link href="/">home page</Link>
-            to choose a new direction.
+            <Link href="/">home page</Link> to choose a new direction.
           </Text>
         </Main>
       </Container>

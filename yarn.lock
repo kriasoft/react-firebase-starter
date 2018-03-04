@@ -9209,9 +9209,9 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-app-tools@2.0.0-beta.10:
-  version "2.0.0-beta.10"
-  resolved "https://registry.yarnpkg.com/react-app-tools/-/react-app-tools-2.0.0-beta.10.tgz#ab17c18e0ea98ccc211b994afc2e587b436e5745"
+react-app-tools@2.0.0-beta.11:
+  version "2.0.0-beta.11"
+  resolved "https://registry.yarnpkg.com/react-app-tools/-/react-app-tools-2.0.0-beta.11.tgz#9665f7a3c1d5048e8f810ae5bd029e8ae03e56af"
   dependencies:
     react-scripts "2.0.0-next.47d2d941"
     webpack-node-externals "^1.6.0"

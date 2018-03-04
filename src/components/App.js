@@ -11,21 +11,12 @@ import PropTypes from 'prop-types';
 import { QueryRenderer } from 'react-relay';
 
 import router from '../router';
-import Route from './Route';
+import AppRenderer from './AppRenderer';
 
 type Props = {
   history: any,
-  route: any,
-  user: any,
+  createRelay: () => any,
 };
-
-function renderRoute(route) {
-  return renderRoute.onRender(route);
-}
-
-function onRender(render) {
-  renderRoute.onRender = render;
-}
 
 class App extends React.Component<Props> {
   static childContextTypes = {
@@ -34,17 +25,19 @@ class App extends React.Component<Props> {
   };
 
   state = {
-    route: null,
     query: null,
     variables: null,
+    render: () => null,
     relay: this.props.createRelay(),
   };
 
+  childContext = {
+    history: this.props.history,
+    reset: () => this.setState({ relay: this.props.createRelay() }),
+  };
+
   getChildContext() {
-    return {
-      history: this.props.history,
-      reset: this.reset,
-    };
+    return this.childContext;
   }
 
   componentDidMount() {
@@ -67,44 +60,49 @@ class App extends React.Component<Props> {
       .resolve({
         pathname: location.pathname,
         fetchQuery: this.fetchQuery,
-        renderRoute,
       })
       .then(route => {
         if (route.redirect) {
           history.push(route.redirect);
+        } else {
+          this.renderRoute(route);
         }
       });
   };
 
   fetchQuery = (query, variables) => {
-    this.setState({ query, variables });
     return new Promise((resolve, reject) => {
-      this.resolveFetchQuery = resolve;
-      this.rejectFetchQuery = reject;
+      this.setState({
+        query,
+        variables,
+        render: ({ error, props }) => {
+          if (error) {
+            reject(error);
+          } else if (props !== null) {
+            resolve(props);
+          }
+          return <AppRenderer ref={this.rendererRef} />;
+        },
+      });
     });
   };
 
-  renderReadyState = ({ error, props }) => {
-    if (error && this.rejectFetchQuery) {
-      this.rejectFetchQuery(error);
-      this.rejectFetchQuery = null;
-    } else if (props && this.resolveFetchQuery) {
-      this.resolveFetchQuery(props);
-      this.resolveFetchQuery = null;
-    }
+  rendererRef = node => {
+    this.renderer = node;
+  };
 
-    return <Route onRender={onRender} />;
+  renderRoute = route => {
+    this.renderer.renderRoute(route);
   };
 
   render() {
-    const { relay, query, variables } = this.state;
-
+    const { relay, query, variables, render } = this.state;
     return (
       <QueryRenderer
         environment={relay}
         query={query}
         variables={variables || {}}
-        render={this.renderReadyState}
+        render={render}
       />
     );
   }
