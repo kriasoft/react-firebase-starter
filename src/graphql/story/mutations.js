@@ -7,10 +7,10 @@
 /* @flow */
 
 import slug from 'slug';
-import { firestore } from 'firebase-admin';
 import { GraphQLNonNull, GraphQLID, GraphQLString } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
 
+import db from '../../db';
 import validate from './validate';
 import StoryType from './StoryType';
 import { fromGlobalId } from '../utils';
@@ -35,64 +35,51 @@ const outputFields = {
 export const createStory = mutationWithClientMutationId({
   name: 'CreateStory',
   description: 'Create a new story.',
-
   inputFields,
   outputFields,
-
   async mutateAndGetPayload(input: any, ctx: Context) {
     ctx.ensureIsAuthenticated();
 
     const { data, errors } = validate(input);
 
-    if (errors.length) {
-      throw new ValidationError(errors);
-    }
+    if (errors.length) throw new ValidationError(errors);
 
-    const timestamp = firestore.FieldValue.serverTimestamp();
-
-    data.authorId = ctx.user.uid;
+    data.author_id = ctx.user.uid;
     data.slug = slug(data.title, { lowercase: true });
-    data.approved = ctx.user.admin ? true : false;
-    data.createdAt = timestamp;
-    data.updatedAt = timestamp;
+    data.approved_at = ctx.user.admin ? db.RAW('current_timestamp') : null;
 
-    const story = await firestore()
-      .collection('stories')
-      .add(data);
+    const story = await db
+      .insert(data)
+      .into('stories')
+      .returning(['id'])
+      .then(rows => rows[0]);
 
-    return { story };
+    return ctx.storyById.load(story.id);
   },
 });
 
 export const updateStory = mutationWithClientMutationId({
   name: 'UpdateStory',
-
   inputFields: {
     id: { type: new GraphQLNonNull(GraphQLID) },
     ...inputFields,
   },
   outputFields,
-
   async mutateAndGetPayload(input, ctx: Context) {
     ctx.ensureIsAuthenticated();
 
     const id = fromGlobalId(input.id, 'Story');
-    const db = firestore();
-
     const { data, errors } = validate(input);
 
-    if (errors.length) {
-      throw new ValidationError(errors);
-    }
+    if (errors.length) throw new ValidationError(errors);
 
     const story = await db
-      .collection('stories')
-      .doc(id)
-      .get();
+      .table('stories')
+      .where({ id })
+      .update(data);
 
-    // TODO: Update story
-    console.log('story:', story, data);
+    await db.storyById.clear(story.id);
 
-    return { story };
+    return db.storyById.load(story.id).then(rows => rows[0]);
   },
 });
