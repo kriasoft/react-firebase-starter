@@ -11,14 +11,15 @@ import firebase from 'firebase-admin';
 import request from 'request-promise-native';
 import config from './config';
 
+const { firebase: { apiKey } } = config;
+const tokenUrl = `https://securetoken.googleapis.com/v1/token?key=${apiKey}`;
+
 const sessKey = '__session';
 const sessOpt = {
   httpOnly: true,
   maxAge: 60 * 60 * 24 * 365 * 10 /* 10 years */,
   secure: !!process.env.GCP_PROJECT,
 };
-const { firebase: { apiKey } } = config;
-const tokenUrl = `https://securetoken.googleapis.com/v1/token?key=${apiKey}`;
 
 /**
  * Authentication middleware for Express.js
