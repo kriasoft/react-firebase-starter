@@ -72,6 +72,7 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 * [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
 * [Watchman][watchman] file watcher used by Relay Modern
+* [PostgreSQL][postgres] v9.6 or newer
 
 ### Getting Started
 
@@ -81,8 +82,7 @@ hacking:
 ```bash
 $ git clone https://github.com/kriasoft/react-firebase-starter.git MyApp
 $ cd MyApp
-$ yarn install                     # Install project dependencies listed in package.json
-$ yarn relay                       # Compile GraphQL queries. Alternatively, yarn relay --watch
+$ yarn setup                       # Installs dependencies; creates PostgreSQL database
 $ yarn start                       # Compile the app and opens it in a browser with "live reload"
 ```
 
@@ -102,7 +102,7 @@ $ yarn db-rollback                 # Rollback the latest migration
 
 ```bash
 $ yarn lint                        # Check JavaScript and CSS code for potential issues
-$ yarn fix                         # Attempt to automatically fix ESLint warnings
+$ yarn lint-fix                    # Attempt to automatically fix ESLint warnings
 $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 ```
 
@@ -202,3 +202,4 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [vcprettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 [vcjs]: https://marketplace.visualstudio.com/items?itemName=mgmcdermott.vscode-language-babel
 [watchman]: https://github.com/facebook/watchman
+[postgres]: https://www.postgresql.org/
