@@ -21,16 +21,18 @@ let status;
 
   // Check if database already exists
   const database = process.env.PGDATABASE;
-  delete process.env.PGDATABASE;
 
-  db = new knex(config);
+  db = knex({
+    ...config,
+    connection: { ...config.connection, database: 'postgres' },
+  });
 
   const { rowCount } = await db.raw(
     'SELECT 1 FROM pg_database WHERE datname = ?',
     [database],
   );
 
-  // If the database doesn't exist, create a new one
+  // Create a new database if it doesn't exist
   if (!rowCount) {
     console.log(`Creating a new database "${database}"...`);
     await db.raw('CREATE DATABASE ??', [database]);
@@ -39,7 +41,6 @@ let status;
   await db.destroy();
 
   db = knex(config);
-  process.env.PGDATABASE = database;
 
   // Make sure that the required PostgreSQL extensions are installed
   await db.raw('CREATE EXTENSION IF NOT EXISTS ??', ['uuid-ossp']);
