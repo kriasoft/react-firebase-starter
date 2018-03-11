@@ -21,33 +21,35 @@
     "@babel/runtime": "^7.0.0-beta.40",
     "@firebase/app": "^0.1.10",
     "@firebase/auth": "^0.3.4",
-    "@firebase/firestore": "^0.3.4",
     "body-parser": "^1.18.2",
     "cookie": "^0.3.1",
     "cookie-parser": "^1.4.3",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "express-graphql": "^0.6.12",
-    "firebase-admin": "^5.9.1",
+    "firebase-admin": "^5.10.0",
     "firebase-functions": "^0.8.1",
     "graphql": "^0.13.1",
     "graphql-relay": "^0.5.4",
     "history": "^4.7.2",
     "idx": "^2.2.0",
     "knex": "^0.14.4",
-    "material-ui": "1.0.0-beta.35",
+    "material-ui": "1.0.0-beta.36",
     "pg": "^7.4.1",
     "prop-types": "^15.6.1",
     "query-string": "^5.1.0",
-    "raw-loader": "^0.5.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-relay": "^1.5.0",
     "relay-runtime": "^1.5.0",
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5",
     "serialize-javascript": "^1.4.0",
     "slug": "^0.9.1",
-    "styled-components": "^3.1.6",
+    "shortid": "^2.2.8",
+    "styled-components": "^3.2.1",
     "universal-router": "^6.0.0",
+    "uuid": "^3.2.1",
     "validator": "^9.4.1"
   },
   "devDependencies": {
@@ -59,11 +61,12 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-flowtype": "^2.46.1",
     "eslint-plugin-prettier": "^2.6.0",
-    "flow-bin": "^0.66.0",
+    "flow-bin": "^0.67.1",
     "gh-pages": "^1.1.0",
     "husky": "^0.15.0-rc.8",
     "lint-staged": "^7.0.0",
     "prettier": "^1.11.1",
+    "raw-loader": "^1.0.0-beta.0",
     "react-app-tools": "2.0.0-beta.13",
     "relay-compiler": "^1.5.0",
     "stylelint": "^9.1.1",
@@ -71,7 +74,7 @@
     "stylelint-config-standard": "^18.2.0",
     "stylelint-config-styled-components-processor": "^0.1.1",
     "stylelint-order": "^0.8.1",
-    "stylelint-processor-styled-components": "^1.3.0"
+    "stylelint-processor-styled-components": "^1.3.1"
   },
   "lint-staged": {
     "*.js": [
@@ -83,18 +86,24 @@
       "git add --force"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "scripts": {
     "update-schema": "node ./scripts/update-schema",
     "relay": "relay-compiler --src ./src --schema ./src/schema.graphql --include \"**/*.js\"",
+    "setup": "node ./scripts/setup",
     "start": "react-app start",
     "build": "react-app build",
-    "test": "react-app test --env=jsdom",
+    "test": "react-scripts test --env=jsdom",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . && stylelint \"src/**/*.js\"",
-    "fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
-    "precommit": "lint-staged",
+    "lint-fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
     "db-change": "knex migrate:make",
     "db-migrate": "knex migrate:latest",
     "db-rollback": "knex migrate:rollback",
+    "db-seed": "knex seed:run",
     "deploy": "yarn install && yarn build && firebase use dev && firebase deploy",
     "deploy-prod": "yarn install && yarn build && firebase use prod && firebase deploy"
   }

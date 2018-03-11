@@ -12,11 +12,14 @@ import * as userQueries from './user/queries';
 import * as userMutations from './user/mutations';
 import * as storyQueries from './story/queries';
 import * as storyMutations from './story/mutations';
+import { nodeField, nodesField } from './Node';
 
 export default new GraphQLSchema({
   query: new GraphQLObjectType({
     name: 'Query',
     fields: {
+      node: nodeField,
+      nodes: nodesField,
       ...userQueries,
       ...storyQueries,
     },

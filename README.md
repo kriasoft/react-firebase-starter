@@ -25,8 +25,8 @@ This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kria
 ### Tech Stack
 
 * [Create React App][cra] for development and test infrastructure (see [user guide][cradocs])
-* [Firestore][firestore] and/or [Cloud SQL][cloudsql] (PostgreSQL) hosted database service
 * [GraphQL][gqljs] and [Relay][relay] for declarative data fetching and maximum performance
+* [Cloud SQL][cloudsql] (PostgreSQL edition) hosted database service
 * [Material UI][mui] to reduce development time by integrating Google's [Material Design][material]
 * [Styled Components][sc] for component friendly CSS styles ([docs][scdocs])
 * [Firebase][firebase] for serverless architecture, authentication and free CDN hosting ([docs][fbdocs])
@@ -51,6 +51,7 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   ├── app.browser.js             # Client-side rendering, e.g. ReactDOM.render(<App />, container)
 │   ├── app.node.js                # Server-side rendering, e.g. ReactDOMServer.renderToString(<App />)
 │   ├── auth.js                    # Authentication manager
+│   ├── authenticate.js            # Authentication middleware for Express.js
 │   ├── createRelay.browser.js     # Relay factory method for browser envrironment
 │   ├── createRelay.node.js        # Relay factory method for Node.js envrironment
 │   ├── router.js                  # Universal application router
@@ -71,16 +72,17 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 * [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
 * [Watchman][watchman] file watcher used by Relay Modern
+* [PostgreSQL][postgres] v9.6 or newer
 
 ### Getting Started
 
-Just clone the repo, update environment variables in `.env`, and start hacking:
+Just clone the repo, update environment variables in `.env` and/or `.env.local` file, and start
+hacking:
 
 ```bash
 $ git clone https://github.com/kriasoft/react-firebase-starter.git MyApp
 $ cd MyApp
-$ yarn install                     # Install project dependencies listed in package.json
-$ yarn relay                       # Compile GraphQL queries
+$ yarn setup                       # Installs dependencies; creates PostgreSQL database
 $ yarn start                       # Compile the app and opens it in a browser with "live reload"
 ```
 
@@ -100,7 +102,7 @@ $ yarn db-rollback                 # Rollback the latest migration
 
 ```bash
 $ yarn lint                        # Check JavaScript and CSS code for potential issues
-$ yarn fix                         # Attempt to automatically fix ESLint warnings
+$ yarn lint-fix                    # Attempt to automatically fix ESLint warnings
 $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 ```
 
@@ -127,8 +129,8 @@ yarn install
 yarn relay
 ```
 
-_NOTE: Try to merge as soon as the new changes land on the master branch in Node.js API Starter
-repository, otherwise your project may differ too much from the base/upstream repo._
+_NOTE: Try to merge as soon as the new changes land on the master branch in the upstream repository,
+otherwise your project may differ too much from the base/upstream repo._
 
 ### How to Contribute
 
@@ -170,7 +172,6 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [telegram]: https://t.me/ReactStarter
 [cra]: https://github.com/facebook/create-react-app
 [cradocs]: https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md
-[firestore]: https://cloud.google.com/firestore/
 [cloudsql]: https://cloud.google.com/sql/
 [gqljs]: http://graphql.org/graphql-js/
 [relay]: http://facebook.github.io/relay/
@@ -201,3 +202,4 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [vcprettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 [vcjs]: https://marketplace.visualstudio.com/items?itemName=mgmcdermott.vscode-language-babel
 [watchman]: https://github.com/facebook/watchman
+[postgres]: https://www.postgresql.org/

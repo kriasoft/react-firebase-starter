@@ -31,7 +31,7 @@ export default new GraphQLObjectType({
     author: {
       type: new GraphQLNonNull(UserType),
       resolve(story, args, ctx: Context) {
-        return ctx.userById.load(story.authorId);
+        return ctx.userById.load(story.author_id);
       },
     },
 
@@ -49,6 +49,7 @@ export default new GraphQLObjectType({
 
     isURL: {
       type: new GraphQLNonNull(GraphQLBoolean),
+      resolve: x => x.is_url,
     },
 
     comments: {
@@ -74,10 +75,12 @@ export default new GraphQLObjectType({
 
     createdAt: {
       type: new GraphQLNonNull(GraphQLString),
+      resolve: x => x.created_at,
     },
 
     updatedAt: {
       type: new GraphQLNonNull(GraphQLString),
+      resolve: x => x.updated_at,
     },
   },
 });

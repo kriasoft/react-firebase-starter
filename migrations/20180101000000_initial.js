@@ -9,17 +9,22 @@
 exports.up = async db => {
   await db.schema.createTable('users', table => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+    table.string('username', 50).notNullable().unique();
+    table.string('email', 100);
     table.string('display_name', 100);
-    table.string('photo_url', 200);
+    table.string('photo_url', 250);
+    table.boolean('is_admin').notNullable().defaultTo(false);
     table.timestamps(false, true);
   });
 
   await db.schema.createTable('stories', table => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.uuid('author_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+    table.string('slug', 80).notNullable();
     table.string('title', 80).notNullable();
-    table.string('url', 200);
-    table.text('text');
+    table.string('text', 2000);
+    table.boolean('is_url').notNullable().defaultTo(false);
+    table.boolean('approved').notNullable().defaultTo(false);
     table.timestamps(false, true);
   });
 

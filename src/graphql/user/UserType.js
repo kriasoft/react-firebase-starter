@@ -6,7 +6,12 @@
 
 /* @flow */
 
-import { GraphQLObjectType, GraphQLString } from 'graphql';
+import {
+  GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLString,
+  GraphQLBoolean,
+} from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
 import { nodeInterface } from '../Node';
@@ -17,21 +22,43 @@ export default new GraphQLObjectType({
   interfaces: [nodeInterface],
 
   fields: {
-    id: globalIdField('User', x => x.uid),
+    id: globalIdField(),
 
-    displayName: {
-      type: GraphQLString,
-    },
-
-    photoURL: {
-      type: GraphQLString,
+    username: {
+      type: new GraphQLNonNull(GraphQLString),
     },
 
     email: {
       type: GraphQLString,
       resolve(user, args, ctx: Context) {
-        return ctx.user && ctx.user.id === user.id ? user.email : null;
+        return ctx.user && (ctx.user.id === user.id || ctx.user.isAdmin)
+          ? user.email
+          : null;
       },
+    },
+
+    displayName: {
+      type: GraphQLString,
+      resolve(user) {
+        return user.display_name;
+      },
+    },
+
+    photoURL: {
+      type: GraphQLString,
+      resolve(user) {
+        return user.photo_url;
+      },
+    },
+
+    isAdmin: {
+      type: GraphQLBoolean,
+      resolve: x => x.is_admin,
+    },
+
+    createdAt: {
+      type: GraphQLString,
+      resolve: x => x.created_at,
     },
   },
 });

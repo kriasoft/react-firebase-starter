@@ -6,36 +6,96 @@
 
 /* @flow */
 
-import { auth } from 'firebase-admin';
-
-import DataLoader from './DataLoader';
-import { UnauthorizedError } from './errors';
 import type { Request } from 'express';
 
+import db from './db';
+import DataLoader from './DataLoader';
+import { mapTo } from './utils';
+import { UnauthorizedError, ValidationError } from './errors';
+
 class Context {
+  errors = [];
+
   constructor(req: Request) {
-    this._req = req;
+    this.user = userFromToken(req.user);
+    this.signIn = req.signIn;
+    this.signOut = req.signOut;
   }
 
-  get user() {
-    return userFromToken(this._req.user);
+  addError(key, message) {
+    this.errors.push({ key, message });
   }
+
+  /*
+   * Data loaders
+   * ------------------------------------------------------------------------ */
 
   userById = new DataLoader(keys =>
-    Promise.all(keys.map(key => auth().getUser(key))),
+    db
+      .table('users')
+      .whereIn('id', keys)
+      .select()
+      .then(rows => {
+        rows.forEach(x => this.userByUsername.prime(x.username, x));
+        return rows;
+      })
+      .then(mapTo(keys, x => x.id)),
   );
 
-  signIn(token) {
-    return this._req.signIn(token).then(userFromToken);
-  }
+  userByUsername = new DataLoader(keys =>
+    db
+      .table('users')
+      .whereIn('username', keys)
+      .select()
+      .then(rows => {
+        rows.forEach(x => this.userById.prime(x.id, x));
+        return rows;
+      })
+      .then(mapTo(keys, x => x.username)),
+  );
 
-  signOut() {
-    this._req.signOut();
-  }
+  storyById = new DataLoader(keys =>
+    db
+      .table('stories')
+      .whereIn('id', keys)
+      .select()
+      .then(rows => {
+        rows.forEach(x => this.storyBySlug.prime(x.slug, x));
+        return rows;
+      })
+      .then(mapTo(keys, x => x.id)),
+  );
+
+  storyBySlug = new DataLoader(keys =>
+    db
+      .table('stories')
+      .whereIn('slug', keys)
+      .select()
+      .then(rows => {
+        rows.forEach(x => this.storyById.prime(x.id, x));
+        return rows;
+      })
+      .then(mapTo(keys, x => x.slug)),
+  );
+
+  /*
+   * Authorization rules
+   * ------------------------------------------------------------------------ */
 
   ensureIsAuthenticated() {
     if (!this.user) {
       throw new UnauthorizedError();
+    }
+  }
+
+  ensureIsAdmin() {
+    this.ensureIsAuthenticated();
+    // TODO: Check if "admin" claim exists for the current user
+  }
+
+  ensureIsValid() {
+    if (this.errors.length) {
+      throw new ValidationError(this.errors);
     }
   }
 }
@@ -43,7 +103,7 @@ class Context {
 function userFromToken(token) {
   return token
     ? {
-        uid: token.uid,
+        id: token.uid,
         email: token.email,
         emailVerified: token.email_verified,
         displayName: token.name,

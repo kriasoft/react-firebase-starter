@@ -8,12 +8,11 @@
 
 import fs from 'fs';
 import path from 'path';
-import cookie from 'cookie';
 import expressGraphQL from 'express-graphql';
-import { auth } from 'firebase-admin';
 import { Router } from 'express';
 import { printSchema } from 'graphql';
 
+import authenticate from '../authenticate';
 import schema from './schema';
 import Context from './Context';
 
@@ -27,37 +26,9 @@ if (process.env.NODE_ENV !== 'production') {
   );
 }
 
-const sessionKey = '__session';
-const sessionOptions = {
-  httpOnly: true,
-  maxAge: 60 * 60 * 24 * 30 /* 1 month */,
-};
-
-async function authentication(req, res, next) {
-  try {
-    const { __session: token } = req.headers.cookie
-      ? cookie.parse(req.headers.cookie)
-      : {};
-    req.user = token ? await auth().verifyIdToken(token) : null;
-    req.signIn = async token => {
-      const user = await auth().verifyIdToken(token);
-      if (user) {
-        res.cookie(sessionKey, token, sessionOptions);
-      }
-      return (req.user = user);
-    };
-    req.signOut = () => {
-      res.clearCookie(sessionKey, sessionOptions);
-    };
-    next();
-  } catch (err) {
-    next(err);
-  }
-}
-
 router.use(
   '/graphql',
-  authentication,
+  authenticate,
   expressGraphQL(req => ({
     schema,
     context: new Context(req),
