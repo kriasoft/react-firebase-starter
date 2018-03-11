@@ -97,7 +97,7 @@
     "setup": "node ./scripts/setup",
     "start": "react-app start",
     "build": "react-app build",
-    "test": "react-app test --env=jsdom",
+    "test": "react-scripts test --env=jsdom",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . && stylelint \"src/**/*.js\"",
     "lint-fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
     "db-change": "knex migrate:make",
