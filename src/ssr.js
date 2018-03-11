@@ -11,39 +11,35 @@ import createHistory from 'history/createMemoryHistory';
 import { fetchQuery } from 'relay-runtime';
 import { Router } from 'express';
 
+import authenticate from './authenticate';
 import templates from './templates';
 import routes from './router';
 import createRelay from './createRelay.node';
+import config from './config';
 import assets from './assets.json';
 
 const router = new Router();
 
-router.get('*', async (request, response, next) => {
+router.get('*', authenticate, async (req, res, next) => {
   try {
-    const { path: pathname } = request;
+    const { path: pathname } = req;
     const history = createHistory({ initialEntries: [pathname] });
-    const relay = createRelay(request);
+    const relay = createRelay(req);
 
     // Find a matching route for the URL path
     const route = await routes.resolve({
       pathname,
       history,
-      fetchQuery(query, variables, cacheConfig) {
-        return fetchQuery(relay, query, variables, { ...cacheConfig, request });
-      },
-      renderRoute(data) {
-        // TODO: ReactDOMServer.renderToString(...);
-        return data;
-      },
+      fetchQuery: fetchQuery.bind(undefined, relay),
     });
 
     if (route.redirect) {
-      response.redirect(route.redirect, route.status || 301);
+      res.redirect(route.redirect, route.status || 301);
     } else {
-      if (process.env.NODE_ENV === 'production') {
-        response.set('Cache-Control', 'public, max-age=600, s-maxage=900');
+      if (process.env.GCP_PROJECT === 'react-firebase-graphql') {
+        res.set('Cache-Control', 'public, max-age=600, s-maxage=900');
       }
-      response.send(
+      res.send(
         templates.ok({
           title: route.title,
           description: route.description,
@@ -51,7 +47,8 @@ router.get('*', async (request, response, next) => {
             (chunks, name) => [...chunks, ...assets[name]],
             assets.main,
           ),
-          data: serialize(request.data, { isJSON: true }),
+          data: serialize(req.data, { isJSON: true }),
+          config: JSON.stringify(config),
         }),
       );
     }

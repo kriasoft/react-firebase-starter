@@ -23,10 +23,10 @@ type CreateStoryPayload {
 }
 
 type Mutation {
-  # Authenticate user by using JWT token.
+  # Authenticate a user with Firebase credentials.
   signIn(input: SignInInput!): SignInPayload
 
-  # Clear authentication cookie.
+  # Delete session cookie.
   signOut(input: SignOutInput!): SignOutPayload
 
   # Create a new story.
@@ -40,19 +40,48 @@ interface Node {
   id: ID!
 }
 
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
 type Query {
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+
+  # Fetches objects given their IDs
+  nodes(
+    # The IDs of objects
+    ids: [ID!]!
+  ): [Node]!
   me: User
+  user(username: String!): User
+  users(after: String, first: Int): UserConnection
   story(slug: String!): Story
   stories: [Story]
 }
 
 input SignInInput {
-  token: String!
+  idToken: String!
+  refreshToken: String!
   clientMutationId: String
 }
 
 type SignInPayload {
-  me: User
+  token: String
   clientMutationId: String
 }
 
@@ -94,7 +123,29 @@ type UpdateStoryPayload {
 type User implements Node {
   # The ID of an object
   id: ID!
+  username: String!
+  email: String
   displayName: String
   photoURL: String
-  email: String
+  isAdmin: Boolean
+  createdAt: String
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [UserEdge]
+  totalCount: Int!
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge
+  node: User
+
+  # A cursor for use in pagination
+  cursor: String!
 }

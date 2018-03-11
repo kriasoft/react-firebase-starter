@@ -13,7 +13,10 @@ import api from './graphql';
 import ssr from './ssr';
 
 if (!firebase.apps.length) {
-  firebase.initializeApp(config().firebase);
+  // https://firebase.google.com/docs/admin/setup
+  firebase.initializeApp({
+    credential: firebase.credential.cert(config().key),
+  });
 }
 
 export const graphql = https.onRequest(api);

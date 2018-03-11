@@ -7,42 +7,32 @@
 /* @flow */
 
 import validator from 'validator';
+import type Context from '../Context';
 
-export default function validate(input: any) {
+export default function validate(input: any, ctx: Context) {
   const data = {};
-  const errors = [];
 
   if (!input.title) {
-    errors.push({
-      key: 'title',
-      message: 'The title field cannot be empty.',
-    });
+    ctx.addError('title', 'The title field cannot be empty.');
   } else if (!validator.isLength(input.title.trim(), 5, 80)) {
-    errors.push({
-      key: 'title',
-      message: 'The title must be between 5 and 80 characets long.',
-    });
+    ctx.addError('title', 'The title must be between 5 and 80 characets long.');
   } else {
     data.title = input.title.trim();
   }
 
   if (!input.text) {
-    errors.push({
-      key: 'text',
-      message: 'The text or URL field cannot be empty.',
-    });
+    ctx.addError('text', 'The text or URL field cannot be empty.');
   } else if (!validator.isLength(input.text.trim(), 10, 1000)) {
-    errors.push({
-      key: 'text',
-      message:
-        'The text or URL field must be between 10 and 1000 characters long.',
-    });
+    ctx.addError(
+      'text',
+      'The text or URL field must be between 10 and 1000 characters long.',
+    );
   } else {
     data.text = input.text.trim();
-    data.isURL = validator.isURL(data.text, {
+    data.is_url = validator.isURL(data.text, {
       protocols: ['http', 'https'],
     });
   }
 
-  return { data, errors };
+  return data;
 }

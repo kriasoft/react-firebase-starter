@@ -24,7 +24,6 @@ import Link from './Link';
 import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
 import LoginDialog from './LoginDialog';
-import SignInMutation from './SignInMutation';
 import SignOutMutation from './SignOutMutation';
 
 injectGlobal`
@@ -105,17 +104,9 @@ class Layout extends React.Component {
   };
 
   componentDidMount() {
-    const { reset, relay: { environment } } = this.context;
     this.unlisten = auth.onShowLoginDialog(() =>
       this.setState({ loginDialogOpen: true }),
     );
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        user.getIdToken(true).then(token => {
-          SignInMutation.commit(environment, { token }).then(reset);
-        });
-      }
-    });
   }
 
   componentWillUnmount() {

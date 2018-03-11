@@ -10,9 +10,9 @@ import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 
 export default function createRelay() {
   function fetchQuery(operation, variables) {
-    if (typeof window.DATA !== 'undefined') {
-      const data = window.DATA;
-      delete window.DATA;
+    if (typeof window.data !== 'undefined') {
+      const data = window.data;
+      delete window.data;
       return Promise.resolve(data);
     }
 

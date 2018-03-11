@@ -8,7 +8,6 @@
 /* eslint-disable global-require */
 
 import { nodeDefinitions, fromGlobalId } from 'graphql-relay';
-
 import { assignType, getType } from './utils';
 
 export const { nodeInterface, nodeField, nodesField } = nodeDefinitions(

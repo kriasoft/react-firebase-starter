@@ -15,7 +15,9 @@ jobs:
             - yarn-v1-
       - run:
           name: Install NPM modules
-          command: yarn
+          command: |
+            yarn install
+            yarn add firebase-tools --dev
       - save_cache:
           key: yarn-v1-{{ checksum "yarn.lock" }}
           paths:
@@ -34,6 +36,6 @@ jobs:
           name: Deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              firebase deploy --token=$FIREBASE_TOKEN
+              ./node_modules/firebase-tools/bin/firebase deploy --token=$FIREBASE_TOKEN
             fi
 

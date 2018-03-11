@@ -7,14 +7,13 @@
 /* @flow */
 
 import slug from 'slug';
-import { firestore } from 'firebase-admin';
 import { GraphQLNonNull, GraphQLID, GraphQLString } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
 
+import db from '../db';
 import validate from './validate';
 import StoryType from './StoryType';
 import { fromGlobalId } from '../utils';
-import { ValidationError } from '../errors';
 import type Context from '../Context';
 
 const inputFields = {
@@ -41,24 +40,19 @@ export const createStory = mutationWithClientMutationId({
 
   async mutateAndGetPayload(input: any, ctx: Context) {
     ctx.ensureIsAuthenticated();
+    const data = validate(input, ctx);
+    ctx.ensureIsValid();
 
-    const { data, errors } = validate(input);
-
-    if (errors.length) {
-      throw new ValidationError(errors);
-    }
-
-    const timestamp = firestore.FieldValue.serverTimestamp();
-
-    data.authorId = ctx.user.uid;
+    data.author_id = ctx.user.id;
     data.slug = slug(data.title, { lowercase: true });
-    data.approved = ctx.user.admin ? true : false;
-    data.createdAt = timestamp;
-    data.updatedAt = timestamp;
+    data.approved = ctx.user.isAdmin ? true : false;
 
-    const story = await firestore()
-      .collection('stories')
-      .add(data);
+    const [story] = await db
+      .table('stories')
+      .insert(data)
+      .returning('*');
+
+    console.log(story);
 
     return { story };
   },
@@ -71,28 +65,22 @@ export const updateStory = mutationWithClientMutationId({
     id: { type: new GraphQLNonNull(GraphQLID) },
     ...inputFields,
   },
+
   outputFields,
 
   async mutateAndGetPayload(input, ctx: Context) {
     ctx.ensureIsAuthenticated();
 
     const id = fromGlobalId(input.id, 'Story');
-    const db = firestore();
+    const data = validate(input, ctx);
 
-    const { data, errors } = validate(input);
+    ctx.ensureIsValid();
 
-    if (errors.length) {
-      throw new ValidationError(errors);
-    }
+    await db
+      .table('stories')
+      .where({ id })
+      .update(data);
 
-    const story = await db
-      .collection('stories')
-      .doc(id)
-      .get();
-
-    // TODO: Update story
-    console.log('story:', story, data);
-
-    return { story };
+    return ctx.storyById.load(id).then(story => ({ story }));
   },
 });

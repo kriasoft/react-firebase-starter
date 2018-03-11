@@ -15,7 +15,8 @@ import App from './components/App';
 import createRelay from './createRelay.browser';
 import * as serviceWorker from './serviceWorker';
 
-firebase.initializeApp(JSON.parse(process.env.REACT_APP_FIREBASE));
+firebase.initializeApp(window.config.firebase);
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
 ReactDOM.render(
   <App history={createHistory()} createRelay={createRelay} />,

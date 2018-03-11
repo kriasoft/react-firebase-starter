@@ -1,6 +1,7 @@
 {
   "functions": {
-    "source": "."
+    "source": ".",
+    "ignore": ["**", "!build/**", "!ssl/**", "!package.json", "build/public/**"]
   },
   "firestore": {
     "rules": "firestore.rules",
@@ -8,7 +9,6 @@
   },
   "hosting": {
     "public": "build/public",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "/graphql",
