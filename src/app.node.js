@@ -12,14 +12,19 @@ import firebase from 'firebase-admin';
 import api from './graphql';
 import ssr from './ssr';
 
-const firebaseKey = JSON.parse(process.env.FIREBASE_KEY || null);
-if (!firebaseKey) new Error('Please provide FIREBASE_KEY');
+if (!process.env.FIREBASE_KEY) {
+  throw new Error('The FIREBASE_KEY environment variable is missing.');
+}
 
+if (!process.env.FIREBASE_CONFIG) {
+  throw new Error('The FIREBASE_CONFIG environment variable is missing.');
+}
+
+// JSON key with service account credentials
+// https://firebase.google.com/docs/admin/setup
 if (!firebase.apps.length) {
-  // JSON key with service account credentials
-  // https://firebase.google.com/docs/admin/setup
   firebase.initializeApp({
-    credential: firebase.credential.cert(firebaseKey),
+    credential: firebase.credential.cert(JSON.parse(process.env.FIREBASE_KEY)),
   });
 }
 

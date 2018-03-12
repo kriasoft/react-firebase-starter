@@ -12,8 +12,9 @@ import { https, config } from 'firebase-functions';
 import api from './graphql';
 import ssr from './ssr';
 
+// JSON key with service account credentials
+// https://firebase.google.com/docs/admin/setup
 if (!firebase.apps.length) {
-  // https://firebase.google.com/docs/admin/setup
   firebase.initializeApp({
     credential: firebase.credential.cert(config().key),
   });
