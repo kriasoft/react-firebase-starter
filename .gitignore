@@ -10,7 +10,7 @@
 
 # Production
 /build
-runtimes
+/secrets
 
 # Misc
 __generated__
