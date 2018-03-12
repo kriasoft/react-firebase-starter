@@ -11,8 +11,7 @@ import firebase from 'firebase-admin';
 import request from 'request-promise-native';
 import { config } from 'firebase-functions';
 
-const { apiKey } =
-  JSON.parse(process.env.FIREBASE_CONFIG || null) || config().config;
+const apiKey = process.env.FIREBASE_API_KEY || config().api.key;
 const tokenUrl = `https://securetoken.googleapis.com/v1/token?key=${apiKey}`;
 
 const sessKey = '__session';

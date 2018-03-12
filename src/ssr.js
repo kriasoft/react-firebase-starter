@@ -49,9 +49,13 @@ router.get('*', authenticate, async (req, res, next) => {
           ),
           data: serialize(req.data, { isJSON: true }),
           config: JSON.stringify({
-            firebase:
-              JSON.parse(process.env.FIREBASE_CONFIG || null) ||
-              config().config,
+            firebase: {
+              projectId:
+                process.env.FIREBASE_PROJECT_ID || process.env.GCP_PROJECT,
+              authDomain:
+                process.env.FIREBASE_AUTH_DOMAIN || config().auth.domain,
+              apiKey: process.env.FIREBASE_API_KEY || config().api.key,
+            },
           }),
         }),
       );

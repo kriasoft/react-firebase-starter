@@ -108,7 +108,14 @@ $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 
 ### How to Deploy
 
-Set Firebase project IDs for production and development environments in `.firebaserc` file, then:
+1.  Create a new **Google Cloud** project and **Cloud SQL** database.
+2.  Open your Google Cloud project in **Firebase** dashboard and configure Facebook authentication.
+3.  Update Firebase project IDs for production and development environments in `.firebaserc` file.
+4.  Save Firebase API key, authentication domain and GPC service key in Firebase Functions
+    environment. For example `firebase functions:config:set api.key="..." auth.domain="..."`
+5.  Update database host/user/password in either `.env` or `.env.local` file and migrate your
+    Cloud SQL database schema to the latest version by running `yarn db-migrate`.
+6.  Finally, deploy your application by running:
 
 ```bash
 $ yarn deploy                      # Build the app and deploy to development environment

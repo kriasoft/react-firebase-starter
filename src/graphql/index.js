@@ -32,8 +32,8 @@ router.use(
   expressGraphQL(req => ({
     schema,
     context: new Context(req),
-    graphiql: process.env.REACT_APP_ENV !== 'production',
-    pretty: process.env.REACT_APP_ENV !== 'production',
+    graphiql: true, // process.env.GCP_PROJECT !== '<name>',
+    pretty: false,
     formatError: err => {
       console.error(err.originalError || err);
       return {
