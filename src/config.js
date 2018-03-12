@@ -8,9 +8,10 @@
 
 import { config } from 'firebase-functions';
 
-const firebaseClient =
-  config().client || JSON.parse(process.env.REACT_APP_FIREBASE);
+const firebaseConfig =
+  (process.env.FIREBASE_CONFIG && JSON.parse(process.env.FIREBASE_CONFIG)) ||
+  config().client;
 
-if (!firebaseClient) new Error('Please provide REACT_APP_FIREBASE key');
+if (!firebaseConfig) new Error('Please provide FIREBASE_CONFIG');
 
-export default { firebase: firebaseClient };
+export default { firebase: firebaseConfig };
