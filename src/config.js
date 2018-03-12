@@ -9,7 +9,7 @@
 import { config } from 'firebase-functions';
 
 const firebaseClient =
-  JSON.parse(process.env.REACT_APP_FIREBASE) || config().client;
+  config().client || JSON.parse(process.env.REACT_APP_FIREBASE);
 
 if (!firebaseClient) new Error('Please provide REACT_APP_FIREBASE key');
 
