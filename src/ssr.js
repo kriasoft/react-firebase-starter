@@ -51,7 +51,7 @@ router.get('*', authenticate, async (req, res, next) => {
           config: JSON.stringify({
             firebase:
               JSON.parse(process.env.FIREBASE_CONFIG || null) ||
-              JSON.stringify(config().config),
+              config().config,
           }),
         }),
       );
