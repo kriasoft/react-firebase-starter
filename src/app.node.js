@@ -12,14 +12,14 @@ import firebase from 'firebase-admin';
 import api from './graphql';
 import ssr from './ssr';
 
-const firebaseKey = process.env.FIREBASE_KEY;
+const firebaseKey = JSON.parse(process.env.FIREBASE_KEY || null);
 if (!firebaseKey) new Error('Please provide FIREBASE_KEY');
 
 if (!firebase.apps.length) {
   // JSON key with service account credentials
   // https://firebase.google.com/docs/admin/setup
   firebase.initializeApp({
-    credential: firebase.credential.cert(JSON.parse(firebaseKey)),
+    credential: firebase.credential.cert(firebaseKey),
   });
 }
 
