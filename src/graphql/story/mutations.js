@@ -52,8 +52,6 @@ export const createStory = mutationWithClientMutationId({
       .insert(data)
       .returning('*');
 
-    console.log(story);
-
     return { story };
   },
 });

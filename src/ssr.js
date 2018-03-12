@@ -8,6 +8,7 @@
 
 import serialize from 'serialize-javascript';
 import createHistory from 'history/createMemoryHistory';
+import { config } from 'firebase-functions';
 import { fetchQuery } from 'relay-runtime';
 import { Router } from 'express';
 
@@ -15,7 +16,6 @@ import authenticate from './authenticate';
 import templates from './templates';
 import routes from './router';
 import createRelay from './createRelay.node';
-import config from './config';
 import assets from './assets.json';
 
 const router = new Router();
@@ -48,7 +48,11 @@ router.get('*', authenticate, async (req, res, next) => {
             assets.main,
           ),
           data: serialize(req.data, { isJSON: true }),
-          config: JSON.stringify(config),
+          config: JSON.stringify({
+            firebase:
+              JSON.parse(process.env.FIREBASE_CONFIG || null) ||
+              config().config,
+          }),
         }),
       );
     }

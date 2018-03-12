@@ -10,6 +10,7 @@
 
 # Production
 /build
+/secrets
 
 # Misc
 __generated__

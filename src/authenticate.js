@@ -9,7 +9,11 @@
 import cookie from 'cookie';
 import firebase from 'firebase-admin';
 import request from 'request-promise-native';
-import config from './config';
+import { config } from 'firebase-functions';
+
+const { apiKey } =
+  JSON.parse(process.env.FIREBASE_CONFIG || null) || config().config;
+const tokenUrl = `https://securetoken.googleapis.com/v1/token?key=${apiKey}`;
 
 const sessKey = '__session';
 const sessOpt = {
@@ -17,8 +21,6 @@ const sessOpt = {
   maxAge: 60 * 60 * 24 * 365 * 10 /* 10 years */,
   secure: !!process.env.GCP_PROJECT,
 };
-const { firebase: { apiKey } } = config;
-const tokenUrl = `https://securetoken.googleapis.com/v1/token?key=${apiKey}`;
 
 /**
  * Authentication middleware for Express.js
