@@ -10,7 +10,6 @@
 
 # Production
 /build
-ssl
 runtimes
 
 # Misc
