@@ -10,7 +10,7 @@ import { config } from 'firebase-functions';
 
 const firebaseConfig =
   (process.env.FIREBASE_CONFIG && JSON.parse(process.env.FIREBASE_CONFIG)) ||
-  config().client;
+  config().config;
 
 if (!firebaseConfig) new Error('Please provide FIREBASE_CONFIG');
 
