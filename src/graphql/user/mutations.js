@@ -51,16 +51,9 @@ export const signIn = mutationWithClientMutationId({
       let id = uuid();
       [token] = await Promise.all([
         auth.createCustomToken(id),
-        auth.createUser({ ...user, uid: id }),
-        db.table('users').insert({
-          id,
-          username: shortid.generate(),
-          email: user.email,
-          display_name: user.displayName,
-          photo_url: user.photoURL,
-        }),
         auth.deleteUser(uid),
       ]);
+      await auth.createUser({ ...user, uid: id });
     } else {
       const [{ count }] = await db
         .table('users')
