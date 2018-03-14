@@ -14,11 +14,21 @@ type Comment implements Node {
 input CreateStoryInput {
   title: String
   text: String
+  validateOnly: Boolean
   clientMutationId: String
 }
 
 type CreateStoryPayload {
   story: Story
+  clientMutationId: String
+}
+
+input DeleteUserInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteUserPayload {
   clientMutationId: String
 }
 
@@ -28,6 +38,12 @@ type Mutation {
 
   # Delete session cookie.
   signOut(input: SignOutInput!): SignOutPayload
+
+  # Update user.
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
+
+  # Delete user.
+  deleteUser(input: DeleteUserInput!): DeleteUserPayload
 
   # Create a new story.
   createStory(input: CreateStoryInput!): CreateStoryPayload
@@ -112,11 +128,29 @@ input UpdateStoryInput {
   id: ID!
   title: String
   text: String
+  approved: Boolean
+  validateOnly: Boolean
   clientMutationId: String
 }
 
 type UpdateStoryPayload {
   story: Story
+  clientMutationId: String
+}
+
+input UpdateUserInput {
+  id: ID!
+  username: String
+  email: String
+  displayName: String
+  photoURL: String
+  isAdmin: Boolean
+  validateOnly: Boolean
+  clientMutationId: String
+}
+
+type UpdateUserPayload {
+  user: User
   clientMutationId: String
 }
 
@@ -129,6 +163,7 @@ type User implements Node {
   photoURL: String
   isAdmin: Boolean
   createdAt: String
+  updatedAt: String
 }
 
 # A connection to a list of items.

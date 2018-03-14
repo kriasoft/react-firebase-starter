@@ -10,8 +10,9 @@ import type { Request } from 'express';
 
 import db from './db';
 import DataLoader from './DataLoader';
+import Validator from './Validator';
 import { mapTo } from './utils';
-import { UnauthorizedError, ValidationError } from './errors';
+import { UnauthorizedError, ForbiddenError, ValidationError } from './errors';
 
 class Context {
   errors = [];
@@ -79,24 +80,32 @@ class Context {
   );
 
   /*
-   * Authorization rules
+   * Authorization
    * ------------------------------------------------------------------------ */
 
-  ensureIsAuthenticated() {
+  ensureIsAuthorized(check) {
     if (!this.user) {
       throw new UnauthorizedError();
     }
-  }
 
-  ensureIsAdmin() {
-    this.ensureIsAuthenticated();
-    // TODO: Check if "admin" claim exists for the current user
-  }
-
-  ensureIsValid() {
-    if (this.errors.length) {
-      throw new ValidationError(this.errors);
+    if (check && !check(this.user)) {
+      throw new ForbiddenError();
     }
+  }
+
+  /*
+   * Validation
+   * ------------------------------------------------------------------------ */
+
+  validate(input) {
+    const validator = new Validator(input, errors => {
+      throw new ValidationError(errors);
+    });
+
+    return transform => {
+      transform(validator);
+      return validator.validate();
+    };
   }
 }
 
@@ -108,6 +117,7 @@ function userFromToken(token) {
         emailVerified: token.email_verified,
         displayName: token.name,
         photoURL: token.picture,
+        isAdmin: (token.customClaims || {}).is_admin,
       }
     : null;
 }
