@@ -9,10 +9,17 @@
 import uuid from 'uuid/v4';
 import shortid from 'shortid';
 import firebase from 'firebase-admin';
-import { GraphQLNonNull, GraphQLString } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
+import {
+  GraphQLNonNull,
+  GraphQLID,
+  GraphQLString,
+  GraphQLBoolean,
+} from 'graphql';
 
 import db from '../db';
+import UserType from './UserType';
+import { fromGlobalId } from '../utils';
 import type Context from '../Context';
 
 const UUID_V4_REGEX = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
@@ -86,6 +93,113 @@ export const signOut = mutationWithClientMutationId({
   outputFields: {},
 
   async mutateAndGetPayload(input: any, ctx: Context) {
+    ctx.signOut();
+    return {};
+  },
+});
+
+export const updateUser = mutationWithClientMutationId({
+  name: 'UpdateUser',
+  description: 'Update user.',
+
+  inputFields: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+    username: { type: GraphQLString },
+    email: { type: GraphQLString },
+    displayName: { type: GraphQLString },
+    photoURL: { type: GraphQLString },
+    isAdmin: { type: GraphQLBoolean },
+    validateOnly: { type: GraphQLBoolean },
+  },
+
+  outputFields: {
+    user: { type: UserType },
+  },
+
+  async mutateAndGetPayload(input: any, ctx: Context) {
+    const id = fromGlobalId(input.id, 'User');
+
+    // Only the account owner or an admin can edit a user
+    ctx.ensureIsAuthorized(user => user.id === id || user.isAdmin);
+
+    function usernameAvailable(username) {
+      return db
+        .table('users')
+        .where({ username })
+        .whereNot({ id })
+        .select(1)
+        .then(x => !x.length);
+    }
+
+    // Validate and sanitize user input
+    const data = await ctx.validate(input)(x =>
+      x
+        .field('username', { trim: true })
+        .isLength({ min: 1, max: 50 })
+        .is(usernameAvailable, 'That username is taken. Try another.')
+
+        .field('email')
+        .isLength({ max: 100 })
+        .isEmail()
+
+        .field('displayName', { as: 'display_name', trim: true })
+        .isLength({ min: 1, max: 100 })
+
+        .field('photoURL', { as: 'photo_url' })
+        .isLength({ max: 250 })
+        .isURL()
+
+        .field('isAdmin', { as: 'is_admin' })
+        .is(() => ctx.user.isAdmin, 'Only admins can change this field.'),
+    );
+
+    if (input.validateOnly) {
+      return { user: null };
+    }
+
+    if (Object.keys(data).length) {
+      await db
+        .table('users')
+        .where({ id })
+        .update({ ...data, updated_at: db.fn.now() });
+
+      if ('is_admin' in data) {
+        await firebase.auth().setCustomUserClaims(id, {
+          is_admin: data.is_admin,
+        });
+      }
+    }
+
+    const user = await db
+      .table('users')
+      .where({ id })
+      .first();
+
+    return { user };
+  },
+});
+
+export const deleteUser = mutationWithClientMutationId({
+  name: 'DeleteUser',
+  description: 'Delete user.',
+
+  inputFields: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+  },
+  outputFields: {},
+
+  async mutateAndGetPayload(input: any, ctx: Context) {
+    // Only an admin can delete a user
+    ctx.ensureIsAuthorized(user => user.isAdmin);
+    const id = fromGlobalId(input.id, 'User');
+
+    await db
+      .table('users')
+      .where({ id })
+      .del();
+
+    await firebase.auth().deleteUser(id);
+
     ctx.signOut();
     return {};
   },

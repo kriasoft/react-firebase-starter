@@ -7,44 +7,83 @@
 /* @flow */
 
 import slug from 'slug';
-import { GraphQLNonNull, GraphQLID, GraphQLString } from 'graphql';
+import validator from 'validator';
 import { mutationWithClientMutationId } from 'graphql-relay';
+import {
+  GraphQLNonNull,
+  GraphQLID,
+  GraphQLString,
+  GraphQLBoolean,
+} from 'graphql';
 
 import db from '../db';
-import validate from './validate';
 import StoryType from './StoryType';
 import { fromGlobalId } from '../utils';
 import type Context from '../Context';
 
-const inputFields = {
-  title: {
-    type: GraphQLString,
-  },
-  text: {
-    type: GraphQLString,
-  },
-};
+function validate(input, ctx: Context, id) {
+  function unique(slug) {
+    return db
+      .table('stories')
+      .where({ slug })
+      .whereNot(id ? { id } : {})
+      .select(1)
+      .then(x => !x.length);
+  }
 
-const outputFields = {
-  story: {
-    type: StoryType,
-  },
-};
+  return ctx.validate(input)(x =>
+    x
+      .field('title', { trim: true })
+      .isRequired(input.validateOnly)
+      .isLength({ min: 5, max: 80 })
+
+      .field('title', {
+        trim: true,
+        as: 'slug',
+        transform: x => slug(x, { lowercase: true }).toLowerCase(),
+      })
+      .is(unique, 'A story with that title already exists.')
+
+      .field('text', { alias: 'URL or text', trim: true })
+      .isRequired(input.validateOnly)
+      .isLength({ min: 10, max: 1000 })
+
+      .field('text', {
+        trim: true,
+        as: 'is_url',
+        transform: x => validator.isURL(x, { protocols: ['http', 'https'] }),
+      })
+
+      .field('approved')
+      .is(() => ctx.user.isAdmin, 'Only admins can approve a story.'),
+  );
+}
 
 export const createStory = mutationWithClientMutationId({
   name: 'CreateStory',
   description: 'Create a new story.',
 
-  inputFields,
-  outputFields,
+  inputFields: {
+    title: { type: GraphQLString },
+    text: { type: GraphQLString },
+    validateOnly: { type: GraphQLBoolean },
+  },
+
+  outputFields: {
+    story: { type: StoryType },
+  },
 
   async mutateAndGetPayload(input: any, ctx: Context) {
-    ctx.ensureIsAuthenticated();
-    const data = validate(input, ctx);
-    ctx.ensureIsValid();
+    ctx.ensureIsAuthorized();
+
+    // Validate and sanitize user input
+    const data = await validate(input, ctx);
+
+    if (input.validateOnly) {
+      return { story: null };
+    }
 
     data.author_id = ctx.user.id;
-    data.slug = slug(data.title, { lowercase: true });
     data.approved = ctx.user.isAdmin ? true : false;
 
     const [story] = await db
@@ -61,24 +100,41 @@ export const updateStory = mutationWithClientMutationId({
 
   inputFields: {
     id: { type: new GraphQLNonNull(GraphQLID) },
-    ...inputFields,
+    title: { type: GraphQLString },
+    text: { type: GraphQLString },
+    approved: { type: GraphQLBoolean },
+    validateOnly: { type: GraphQLBoolean },
   },
 
-  outputFields,
+  outputFields: {
+    story: { type: StoryType },
+  },
 
   async mutateAndGetPayload(input, ctx: Context) {
-    ctx.ensureIsAuthenticated();
-
     const id = fromGlobalId(input.id, 'Story');
-    const data = validate(input, ctx);
-
-    ctx.ensureIsValid();
-
-    await db
+    let story = await db
       .table('stories')
       .where({ id })
-      .update(data);
+      .first();
 
-    return ctx.storyById.load(id).then(story => ({ story }));
+    // Only the author of the story or an admin can edit a story
+    ctx.ensureIsAuthorized(user => user.isAdmin || story.author_id === user.id);
+
+    // Validate and sanitize user input
+    const data = await validate(input, ctx, id);
+
+    if (Object.keys(data).length) {
+      await db
+        .table('stories')
+        .where({ id })
+        .update(data);
+    }
+
+    story = await db
+      .table('stories')
+      .where({ id })
+      .first();
+
+    return { story };
   },
 });

@@ -60,5 +60,10 @@ export default new GraphQLObjectType({
       type: GraphQLString,
       resolve: x => x.created_at,
     },
+
+    updatedAt: {
+      type: GraphQLString,
+      resolve: x => x.updated_at,
+    },
   },
 });

@@ -50,7 +50,8 @@ export const users = {
   args: forwardConnectionArgs,
 
   async resolve(root, args, ctx: Context) {
-    ctx.ensureIsAdmin();
+    // Only admins allowed to fetch the list of users
+    ctx.ensureIsAuthorized(user => user.isAdmin);
 
     const limit = typeof args.first === 'undefined' ? '100' : args.first;
     const offset = args.after ? cursorToOffset(args.after) + 1 : 0;
