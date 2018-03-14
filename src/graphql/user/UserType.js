@@ -53,7 +53,11 @@ export default new GraphQLObjectType({
 
     isAdmin: {
       type: GraphQLBoolean,
-      resolve: x => x.is_admin,
+      resolve(user, args, ctx: Context) {
+        return ctx.user && ctx.user.id === user.id
+          ? ctx.user.isAdmin
+          : user.isAdmin;
+      },
     },
 
     createdAt: {

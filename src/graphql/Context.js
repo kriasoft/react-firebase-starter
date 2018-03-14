@@ -117,7 +117,7 @@ function userFromToken(token) {
         emailVerified: token.email_verified,
         displayName: token.name,
         photoURL: token.picture,
-        isAdmin: (token.customClaims || {}).is_admin,
+        isAdmin: token.is_admin,
       }
     : null;
 }
