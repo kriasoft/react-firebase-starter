@@ -56,7 +56,6 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   ├── createRelay.node.js        # Relay factory method for Node.js envrironment
 │   ├── router.js                  # Universal application router
 │   ├── graphql.schema             # GraphQL schema (auto-generated, used by Relay)
-│   ├── server.json                # Node.js entry point
 │   ├── serviceWorker.js           # Service worker helper methods
 │   ├── ssr.js                     # Express.js middleware for server-side rendering
 │   └── theme.js                   # Overrides for Material UI default styles
@@ -96,6 +95,8 @@ Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
 $ yarn db-change                   # Create a new database migration file
 $ yarn db-migrate                  # Migrate database to the latest version
 $ yarn db-rollback                 # Rollback the latest migration
+$ yarn db-save                     # Save data from database to JSON files
+$ yarn db-seed                     # Seed database with previously saved data
 ```
 
 ### How to Test
