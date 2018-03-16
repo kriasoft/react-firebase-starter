@@ -33,4 +33,5 @@ module.exports = {
           }
         : undefined,
   },
+  tables: ['users', 'stories', 'story_points', 'comments', 'comment_points'],
 };

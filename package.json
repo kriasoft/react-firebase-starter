@@ -100,6 +100,7 @@
     "test": "react-app test --env=jsdom",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . && stylelint \"src/**/*.js\"",
     "lint-fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix .",
+    "db-save": "node ./scripts/db-save",
     "db-change": "knex migrate:make",
     "db-migrate": "knex migrate:latest",
     "db-rollback": "knex migrate:rollback",
