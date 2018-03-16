@@ -1,3 +1,17 @@
+type Account {
+  # The ID of an object
+  id: ID!
+  provider: AccountProvider
+  uid: String!
+  email: String
+  displayName: String
+  photoURL: String
+}
+
+enum AccountProvider {
+  FACEBOOK
+}
+
 type Comment implements Node {
   # The ID of an object
   id: ID!
@@ -161,6 +175,7 @@ type User implements Node {
   email: String
   displayName: String
   photoURL: String
+  accounts: [Account]
   isAdmin: Boolean
   createdAt: String
   updatedAt: String

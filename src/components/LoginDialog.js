@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import RelayPropTypes from 'react-relay/lib/RelayPropTypes';
 import Button from 'material-ui/Button';
 import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
-import Typography from 'material-ui/Typography';
+import { FormControl, FormHelperText } from 'material-ui/Form';
 import styled from 'styled-components';
 import firebase from '@firebase/app';
 
@@ -70,29 +70,34 @@ class LoginDialog extends React.Component {
       this.props.onClose(event);
       reset();
     } catch (err) {
-      console.error(err);
-      this.setState({ ...defaultState, error: err.messsage });
+      this.setState({ ...defaultState, error: err.message });
     }
   };
 
   render() {
+    const { error } = this.state;
     return (
       <Dialog {...this.props}>
         <Title>Sign In</Title>
-        {this.state.error && (
-          <Typography variant="display1" gutterBottom>
-            {this.state.error}
-          </Typography>
-        )}
         <DialogContent>
-          <Button
-            color="primary"
-            variant="raised"
-            disabled={this.state.loading}
-            onClick={this.signInWithFacebook}
+          <FormControl
+            aria-describedby={error && 'login-error'}
+            error={!!error}
           >
-            Sign in with Facebook
-          </Button>
+            <Button
+              color="primary"
+              variant="raised"
+              disabled={this.state.loading}
+              onClick={this.signInWithFacebook}
+            >
+              Sign in with Facebook
+            </Button>
+            {this.state.error && (
+              <FormHelperText id="login-error">
+                {this.state.error}
+              </FormHelperText>
+            )}
+          </FormControl>
         </DialogContent>
       </Dialog>
     );
