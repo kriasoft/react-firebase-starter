@@ -73,6 +73,7 @@ export const signIn = mutationWithClientMutationId({
           email: user.email,
           display_name: user.displayName,
           photo_url: user.photoURL,
+          accounts: JSON.stringify(user.providerData),
         });
       }
     }

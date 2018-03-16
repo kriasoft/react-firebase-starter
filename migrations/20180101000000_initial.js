@@ -13,6 +13,7 @@ exports.up = async db => {
     table.string('email', 100);
     table.string('display_name', 100);
     table.string('photo_url', 250);
+    table.jsonb('accounts').notNullable().defaultTo('[]');
     table.boolean('is_admin').notNullable().defaultTo(false);
     table.timestamps(false, true);
   });

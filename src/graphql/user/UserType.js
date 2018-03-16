@@ -8,12 +8,14 @@
 
 import {
   GraphQLObjectType,
+  GraphQLList,
   GraphQLNonNull,
   GraphQLString,
   GraphQLBoolean,
 } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
+import AccountType from './AccountType';
 import { nodeInterface } from '../Node';
 import type Context from '../Context';
 
@@ -49,6 +51,10 @@ export default new GraphQLObjectType({
       resolve(user) {
         return user.photo_url;
       },
+    },
+
+    accounts: {
+      type: new GraphQLList(AccountType),
     },
 
     isAdmin: {
