@@ -44,7 +44,7 @@ export default async function authenticate(req, res, next) {
             },
             json: true,
             headers: {
-              Referer: req.protocol + '://' + req.get('host') + req.originalUrl,
+              Referer: `${req.protocol}://${req.get('host')}${req.originalUrl}`,
             },
           });
           req.user = await firebase.auth().verifyIdToken(idToken);
