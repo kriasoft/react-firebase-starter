@@ -43,6 +43,9 @@ export default async function authenticate(req, res, next) {
               refresh_token: tokens[1],
             },
             json: true,
+            headers: {
+              Referer: `${req.protocol}://${req.get('host')}${req.originalUrl}`,
+            },
           });
           req.user = await firebase.auth().verifyIdToken(idToken);
           res.cookie(sessKey, `${idToken}:${tokens[1]}`, sessOpt);
