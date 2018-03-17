@@ -6,6 +6,7 @@
 
 /* @flow */
 
+import https from 'https';
 import cookie from 'cookie';
 import firebase from 'firebase-admin';
 import request from 'request-promise-native';
@@ -42,6 +43,7 @@ export default async function authenticate(req, res, next) {
               grant_type: 'refresh_token',
               refresh_token: tokens[1],
             },
+            agent: https.Agent({ keepAlive: true }),
             json: true,
           });
           req.user = await firebase.auth().verifyIdToken(idToken);
