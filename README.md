@@ -114,7 +114,7 @@ $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 2.  Open your Google Cloud project in **Firebase** dashboard and configure Facebook authentication.
 3.  Update Firebase project IDs for production and development environments in `.firebaserc` file.
 4.  Save Firebase API key, authentication domain and GPC service key in Firebase Functions
-    environment. For example `firebase functions:config:set api.browserkey="..." auth.domain="..."`
+    environment. For example `firebase functions:config:set api.browserkey="..." api.serverkey="..." auth.domain="..."`
 5.  Update database host/user/password in either `.env` or `.env.local` file and migrate your
     Cloud SQL database schema to the latest version by running `yarn db-migrate`.
 6.  Finally, deploy your application by running:

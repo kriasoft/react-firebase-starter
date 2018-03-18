@@ -21,6 +21,7 @@ class Context {
     this.user = userFromToken(req.user);
     this.signIn = req.signIn;
     this.signOut = req.signOut;
+    this.referer = req.referer;
   }
 
   addError(key, message) {
