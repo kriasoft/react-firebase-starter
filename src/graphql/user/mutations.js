@@ -6,8 +6,7 @@
 
 /* @flow */
 
-import uuid from 'uuid/v4';
-import shortid from 'shortid';
+import uuid from 'uuid-base62';
 import firebase from 'firebase-admin';
 import { mutationWithClientMutationId } from 'graphql-relay';
 import {
@@ -18,11 +17,12 @@ import {
 } from 'graphql';
 
 import db from '../db';
+import token from '../../token';
 import UserType from './UserType';
 import { fromGlobalId } from '../utils';
 import type Context from '../Context';
 
-const UUID_V4_REGEX = /^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i;
+const UUID_REGEXP = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
 
 export const signIn = mutationWithClientMutationId({
   name: 'SignIn',
@@ -45,44 +45,77 @@ export const signIn = mutationWithClientMutationId({
 
   async mutateAndGetPayload(input, ctx: Context) {
     const auth = firebase.auth();
-    const { idToken, refreshToken } = input;
-    let token;
+
+    let { idToken, refreshToken } = input;
+    let id, user, account;
 
     // Verify the provided Firebase ID token (JWT)
     const { uid } = await auth.verifyIdToken(idToken, true);
-    const user = await auth.getUser(uid);
 
-    // If the user's UID is not in UUID v4 format, drop this
-    // user account and create a new one.
-    if (!UUID_V4_REGEX.test(uid)) {
-      let id = uuid();
-      [token] = await Promise.all([
-        auth.createCustomToken(id),
-        auth.deleteUser(uid),
-      ]);
-      await auth.createUser({ ...user, uid: id });
-    } else {
-      const [{ count }] = await db
-        .table('users')
-        .where({ id: user.uid })
-        .select(db.raw('count(*)'));
-      if (parseInt(count, 10) === 0) {
-        await db.table('users').insert({
-          id: user.uid,
-          username: shortid.generate(),
-          email: user.email,
-          display_name: user.displayName,
-          photo_url: user.photoURL,
-          accounts: JSON.stringify(user.providerData),
-        });
-      }
+    // Convert Firebase UID into a UUID format
+    try {
+      id = UUID_REGEXP.test(uid) ? uid : uuid.decode(uid).match(UUID_REGEXP)[0];
+    } catch (err) {
+      console.error(err);
+      throw new Error(`Failed to convert Firebase UID into a UUID format.`);
     }
 
-    // Save both Firebase ID token and refresh token
-    // into a session cookie which is required by SSR
+    [user, account] = await Promise.all([
+      db
+        .table('users')
+        .where({ id })
+        .first(),
+      auth.getUser(uid),
+    ]);
+
+    // Keep user's metadata up to date with Firebase
+    const customClaims = account.customClaims || {};
+    const metadata = {
+      accounts: JSON.stringify(account.providerData),
+      is_admin: customClaims.is_admin,
+      created_at: account.metadata.creationTime,
+      updated_at: db.fn.now(),
+      last_signin_at: account.metadata.lastSignInTime,
+    };
+
+    if (!user) {
+      [user] = await db
+        .table('users')
+        .insert({
+          id,
+          uid,
+          username: uid,
+          email: account.email,
+          display_name: account.displayName,
+          photo_url: account.photoURL,
+          ...metadata,
+        })
+        .returning('*');
+    } else {
+      await db
+        .table('users')
+        .where({ id })
+        .update({
+          ...(!user.uid && { uid }),
+          ...(!user.username && { username: uid }),
+          ...(!user.email && { email: account.email }),
+          ...(!user.display_name && { display_name: account.displayName }),
+          ...(!user.photo_url && { photo_url: account.photoURL }),
+          ...metadata,
+        });
+    }
+
+    // Save database user ID in the Firebase account
+    if (!customClaims.id) {
+      await auth.setCustomUserClaims(uid, { id, ...customClaims });
+      ({ id_token: idToken } = await token.renew(refreshToken));
+    }
+
+    // Save both Firebase ID token and refresh token in a session cookie
+    // which is required by SSR. See src/authentication.js
     ctx.signIn(idToken, refreshToken);
 
-    return { token };
+    return { user };
   },
 });
 

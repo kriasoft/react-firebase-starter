@@ -8,17 +8,13 @@
 
 import cookie from 'cookie';
 import firebase from 'firebase-admin';
-import request from 'request-promise-native';
-import { config } from 'firebase-functions';
-
-const apiKey = process.env.FIREBASE_API_KEY || config().api.key;
-const tokenUrl = `https://securetoken.googleapis.com/v1/token?key=${apiKey}`;
+import token from './token';
 
 const sessKey = '__session';
 const sessOpt = {
   httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
   maxAge: 60 * 60 * 24 * 365 * 10 /* 10 years */,
-  secure: !!process.env.GCP_PROJECT,
 };
 
 /**
@@ -36,21 +32,11 @@ export default async function authenticate(req, res, next) {
     } catch (err) {
       if (err.message.includes('auth/id-token-expired') && tokens[1]) {
         try {
-          const { id_token: idToken } = await request.post({
-            url: tokenUrl,
-            form: {
-              grant_type: 'refresh_token',
-              refresh_token: tokens[1],
-            },
-            json: true,
-            headers: {
-              Referer: `${req.protocol}://${req.get('host')}${req.originalUrl}`,
-            },
-          });
+          const { id_token: idToken } = await token.renew(tokens[1]);
           req.user = await firebase.auth().verifyIdToken(idToken);
           res.cookie(sessKey, `${idToken}:${tokens[1]}`, sessOpt);
-        } catch (e) {
-          console.error(e);
+        } catch (renewError) {
+          console.error(renewError);
         }
       } else {
         console.error(err);

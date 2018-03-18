@@ -58,7 +58,8 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   ├── graphql.schema             # GraphQL schema (auto-generated, used by Relay)
 │   ├── serviceWorker.js           # Service worker helper methods
 │   ├── ssr.js                     # Express.js middleware for server-side rendering
-│   └── theme.js                   # Overrides for Material UI default styles
+│   ├── theme.js                   # Overrides for Material UI default styles
+│   └── token.js                   # Utility for renewing authentication tokens
 ├── .env                           # Environment variables
 ├── override.js                    # Configuration overrides for Babel and Webpack
 └── package.json                   # The list of project dependencies + NPM scripts
@@ -113,7 +114,7 @@ $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 2.  Open your Google Cloud project in **Firebase** dashboard and configure Facebook authentication.
 3.  Update Firebase project IDs for production and development environments in `.firebaserc` file.
 4.  Save Firebase API key, authentication domain and GPC service key in Firebase Functions
-    environment. For example `firebase functions:config:set api.key="..." auth.domain="..."`
+    environment. For example `firebase functions:config:set api.browserkey="..." auth.domain="..."`
 5.  Update database host/user/password in either `.env` or `.env.local` file and migrate your
     Cloud SQL database schema to the latest version by running `yarn db-migrate`.
 6.  Finally, deploy your application by running:
