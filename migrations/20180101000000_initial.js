@@ -9,13 +9,15 @@
 exports.up = async db => {
   await db.schema.createTable('users', table => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
-    table.string('username', 50).notNullable().unique();
+    table.string('uid', 50).unique(); // Firebase UID
+    table.string('username', 50).unique();
     table.string('email', 100);
     table.string('display_name', 100);
     table.string('photo_url', 250);
     table.jsonb('accounts').notNullable().defaultTo('[]');
     table.boolean('is_admin').notNullable().defaultTo(false);
     table.timestamps(false, true);
+    table.timestamp('last_signin_at');
   });
 
   await db.schema.createTable('stories', table => {

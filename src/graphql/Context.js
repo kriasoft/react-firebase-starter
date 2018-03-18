@@ -36,10 +36,12 @@ class Context {
       .table('users')
       .whereIn('id', keys)
       .select()
-      .then(rows => {
-        rows.forEach(x => this.userByUsername.prime(x.username, x));
-        return rows;
-      })
+      .then(rows =>
+        rows.map(x => {
+          this.userByUsername.prime(x.username, x);
+          return x;
+        }),
+      )
       .then(mapTo(keys, x => x.id)),
   );
 
@@ -48,10 +50,12 @@ class Context {
       .table('users')
       .whereIn('username', keys)
       .select()
-      .then(rows => {
-        rows.forEach(x => this.userById.prime(x.id, x));
-        return rows;
-      })
+      .then(rows =>
+        rows.map(x => {
+          this.userById.prime(x.id, x);
+          return x;
+        }),
+      )
       .then(mapTo(keys, x => x.username)),
   );
 
@@ -112,7 +116,8 @@ class Context {
 function userFromToken(token) {
   return token
     ? {
-        id: token.uid,
+        id: token.id,
+        uid: token.uid,
         email: token.email,
         emailVerified: token.email_verified,
         displayName: token.name,

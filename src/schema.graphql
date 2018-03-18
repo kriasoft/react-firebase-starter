@@ -179,6 +179,7 @@ type User implements Node {
   isAdmin: Boolean
   createdAt: String
   updatedAt: String
+  lastSignInAt: String
 }
 
 # A connection to a list of items.

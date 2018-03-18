@@ -75,5 +75,10 @@ export default new GraphQLObjectType({
       type: GraphQLString,
       resolve: x => x.updated_at,
     },
+
+    lastSignInAt: {
+      type: GraphQLString,
+      resolve: x => x.last_signin_at,
+    },
   },
 });

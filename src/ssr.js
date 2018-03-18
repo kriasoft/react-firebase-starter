@@ -54,7 +54,8 @@ router.get('*', authenticate, async (req, res, next) => {
                 process.env.FIREBASE_PROJECT_ID || process.env.GCP_PROJECT,
               authDomain:
                 process.env.FIREBASE_AUTH_DOMAIN || config().auth.domain,
-              apiKey: process.env.FIREBASE_API_KEY || config().api.key,
+              apiKey:
+                process.env.FIREBASE_API_BROWSER_KEY || config().api.browserkey,
             },
           }),
         }),

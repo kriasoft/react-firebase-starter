@@ -41,30 +41,16 @@ class LoginDialog extends React.Component {
     this.setState({ ...defaultState, loading: true });
 
     try {
-      const { user, credential } = await firebase
+      const { user } = await firebase
         .auth()
         .signInWithPopup(new firebase.auth.FacebookAuthProvider());
+
       const idToken = await user.getIdToken();
 
-      const { token } = await SignInMutation.commit(environment, {
+      await SignInMutation.commit(environment, {
         idToken,
         refreshToken: user.refreshToken,
       });
-
-      if (token) {
-        const newUser = await firebase.auth().signInWithCustomToken(token);
-        await newUser.linkWithCredential(credential).catch(err => {
-          if (err.code === 'auth/email-already-exists') {
-            return newUser.linkWithCredential(err.credential);
-          } else {
-            return Promise.reject(err);
-          }
-        });
-        await SignInMutation.commit(environment, {
-          idToken: await newUser.getIdToken(),
-          refreshToken: newUser.refreshToken,
-        });
-      }
 
       this.setState({ ...defaultState });
       this.props.onClose(event);
