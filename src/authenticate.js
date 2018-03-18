@@ -24,6 +24,9 @@ export default async function authenticate(req, res, next) {
   // Try to obtain Firebase ID and refresh tokens from the session cookie
   const cookies = req.headers.cookie || '';
   const tokens = (cookie.parse(cookies)[sessKey] || '').split(':');
+  const referer = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+
+  req.referer = referer;
 
   // Check if the provided Firebase ID token is valid
   if (tokens[0]) {
@@ -33,7 +36,7 @@ export default async function authenticate(req, res, next) {
     } catch (err) {
       if (err.message.includes('auth/id-token-expired') && tokens[1]) {
         try {
-          const { id_token: idToken } = await token.renew(tokens[1]);
+          const { id_token: idToken } = await token.renew(tokens[1], referer);
           req.user = await firebase.auth().verifyIdToken(idToken);
           res.cookie(sessKey, `${idToken}:${tokens[1]}`, sessOpt);
         } catch (renewError) {

@@ -12,7 +12,7 @@ import { config } from 'firebase-functions';
 const apiKey = process.env.FIREBASE_API_SERVER_KEY || config().api.serverkey;
 
 export default {
-  renew(refreshToken) {
+  renew(refreshToken, referer) {
     return request.post({
       url: `https://securetoken.googleapis.com/v1/token?key=${apiKey}`,
       form: {
@@ -20,6 +20,7 @@ export default {
         refresh_token: refreshToken,
       },
       json: true,
+      headers: { referer },
     });
   },
 };

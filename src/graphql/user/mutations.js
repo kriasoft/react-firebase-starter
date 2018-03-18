@@ -108,7 +108,7 @@ export const signIn = mutationWithClientMutationId({
     // Save database user ID in the Firebase account
     if (!customClaims.id) {
       await auth.setCustomUserClaims(uid, { id, ...customClaims });
-      ({ id_token: idToken } = await token.renew(refreshToken));
+      ({ id_token: idToken } = await token.renew(refreshToken, ctx.referer));
     }
 
     // Save both Firebase ID token and refresh token in a session cookie
