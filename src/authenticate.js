@@ -29,6 +29,7 @@ export default async function authenticate(req, res, next) {
   if (tokens[0]) {
     try {
       req.user = await firebase.auth().verifyIdToken(tokens[0]);
+      if (!req.user.id) req.user = null;
     } catch (err) {
       if (err.message.includes('auth/id-token-expired') && tokens[1]) {
         try {
