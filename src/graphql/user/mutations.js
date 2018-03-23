@@ -16,7 +16,7 @@ import {
   GraphQLBoolean,
 } from 'graphql';
 
-import db from '../db';
+import db from '../../db';
 import token from '../../token';
 import UserType from './UserType';
 import { fromGlobalId } from '../utils';

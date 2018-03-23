@@ -29,7 +29,10 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   // Local/dev environment
   const app = express();
-  const db = require('./graphql/db').default;
+  const db = require('./db').default;
+  const passport = require('./passport').default;
+  app.use(passport.initialize());
+  passport.routes.forEach(route => app.get(...route));
   app.use(require('./graphql').default);
   app.use(require('./ssr').default);
   module.exports.default = app;

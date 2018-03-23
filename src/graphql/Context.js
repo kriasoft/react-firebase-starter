@@ -8,7 +8,7 @@
 
 import type { Request } from 'express';
 
-import db from './db';
+import db from '../db';
 import DataLoader from './DataLoader';
 import Validator from './Validator';
 import { mapTo } from './utils';
@@ -18,13 +18,50 @@ class Context {
   errors = [];
 
   constructor(req: Request) {
-    this.user = userFromToken(req.user);
+    this.user = req.user && {
+      id: req.user.id,
+      username: req.user.username,
+      email: req.user.email,
+      emailVerified: req.user.email_verified,
+      displayName: req.user.display_name,
+      photoURL: req.user.photo_url,
+      isAdmin: req.user.is_admin,
+    };
     this.signIn = req.signIn;
     this.signOut = req.signOut;
   }
 
+  /*
+   * Authorization
+   * ------------------------------------------------------------------------ */
+
+  ensureIsAuthorized(check) {
+    if (!this.user) {
+      throw new UnauthorizedError();
+    }
+
+    if (check && !check(this.user)) {
+      throw new ForbiddenError();
+    }
+  }
+
+  /*
+   * Validation
+   * ------------------------------------------------------------------------ */
+
   addError(key, message) {
     this.errors.push({ key, message });
+  }
+
+  validate(input) {
+    const validator = new Validator(input, errors => {
+      throw new ValidationError(errors);
+    });
+
+    return transform => {
+      transform(validator);
+      return validator.validate();
+    };
   }
 
   /*
@@ -82,49 +119,6 @@ class Context {
       })
       .then(mapTo(keys, x => x.slug)),
   );
-
-  /*
-   * Authorization
-   * ------------------------------------------------------------------------ */
-
-  ensureIsAuthorized(check) {
-    if (!this.user) {
-      throw new UnauthorizedError();
-    }
-
-    if (check && !check(this.user)) {
-      throw new ForbiddenError();
-    }
-  }
-
-  /*
-   * Validation
-   * ------------------------------------------------------------------------ */
-
-  validate(input) {
-    const validator = new Validator(input, errors => {
-      throw new ValidationError(errors);
-    });
-
-    return transform => {
-      transform(validator);
-      return validator.validate();
-    };
-  }
-}
-
-function userFromToken(token) {
-  return token
-    ? {
-        id: token.id,
-        uid: token.uid,
-        email: token.email,
-        emailVerified: token.email_verified,
-        displayName: token.name,
-        photoURL: token.picture,
-        isAdmin: token.is_admin,
-      }
-    : null;
 }
 
 export default Context;
