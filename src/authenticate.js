@@ -24,15 +24,6 @@ const sessOpt = {
   maxAge: 60 * 60 * 24 * 365 * 10 /* 10 years */,
 };
 
-function convertToCamelCase(obj) {
-  return obj
-    ? Object.keys(obj).reduce((acc, key) => {
-        acc[key.replace(/_\w/g, x => x[1].toUpperCase())] = acc[key];
-        return acc;
-      }, obj)
-    : null;
-}
-
 /**
  * Authentication middleware for Express.js. Note that users must be kept
  * authenticated as long as possible. Ideally, forever. It is possible to force
@@ -53,11 +44,10 @@ export default async function authenticate(req, res, next) {
       // If the user is authenticated, make it available to the
       // rest of the app via `req.user` context variable.
       req.user = id
-        ? await db
+        ? (await db
             .table('users')
             .where({ id })
-            .first()
-            .then(convertToCamelCase)
+            .first()) || null
         : null;
     } catch (err) {
       req.user = null;

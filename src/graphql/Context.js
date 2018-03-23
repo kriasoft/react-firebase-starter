@@ -18,13 +18,23 @@ class Context {
   errors = [];
 
   constructor(req: Request) {
-    this.user = req.user;
+    if (req.user) {
+      // Add user object to the cache
+      this.userById.prime(req.user.id, req.user);
+      this.userByUsername.prime(req.user.username, req.user);
+
+      // Convert snake_case fields to camelCase for convinience
+      this.user = Object.keys(req.user).reduce((acc, key) => {
+        acc[key.replace(/_\w/g, x => x.toUpperCase())] = req.user[key];
+        return acc;
+      }, {});
+    } else {
+      this.user = null;
+    }
+
+    // Some GraphQL mutations may need to sign in / sign out a user
     this.signIn = req.signIn;
     this.signOut = req.signOut;
-
-    if (req.user) {
-      this.userById.prime(req.user.id, req.user);
-    }
   }
 
   /*
