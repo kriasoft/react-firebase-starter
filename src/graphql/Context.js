@@ -18,17 +18,13 @@ class Context {
   errors = [];
 
   constructor(req: Request) {
-    this.user = req.user && {
-      id: req.user.id,
-      username: req.user.username,
-      email: req.user.email,
-      emailVerified: req.user.email_verified,
-      displayName: req.user.display_name,
-      photoURL: req.user.photo_url,
-      isAdmin: req.user.is_admin,
-    };
+    this.user = req.user;
     this.signIn = req.signIn;
     this.signOut = req.signOut;
+
+    if (req.user) {
+      this.userById.prime(req.user.id, req.user);
+    }
   }
 
   /*

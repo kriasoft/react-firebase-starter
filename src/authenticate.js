@@ -6,12 +6,17 @@
 
 /* @flow */
 
-import idx from 'idx';
 import cookie from 'cookie';
 import jwt from 'jsonwebtoken';
+import { config } from 'firebase-functions';
 
 import db from './db';
 
+const jwtSecret = process.env.JWT_SECRET || config().jwt.secret;
+
+// Using "__session" as the name of the session cookie will automatically make
+// it a part of the cache key in Firebase CDN hosting.
+// https://firebase.google.com/docs/hosting/functions
 const sessKey = '__session';
 const sessOpt = {
   httpOnly: true,
@@ -19,68 +24,57 @@ const sessOpt = {
   maxAge: 60 * 60 * 24 * 365 * 10 /* 10 years */,
 };
 
-function createTokens(user) {
-  const idToken = jwt.sign(
-    {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      email_verified: user.email_verified,
-      display_name: user.display_name,
-      photo_url: user.photo_url,
-      is_admin: user.is_admin,
-    },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: '1 hour',
-    },
-  );
-
-  const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-    expiresIn: '365 days',
-  });
-
-  return `${idToken}:${refreshToken}`;
+function convertToCamelCase(obj) {
+  return obj
+    ? Object.keys(obj).reduce((acc, key) => {
+        acc[key.replace(/_\w/g, x => x[1].toUpperCase())] = acc[key];
+        return acc;
+      }, obj)
+    : null;
 }
 
 /**
- * Authentication middleware for Express.js
+ * Authentication middleware for Express.js. Note that users must be kept
+ * authenticated as long as possible. Ideally, forever. It is possible to force
+ * a user to sign in or revoke access by checking user's ID token and the
+ * corresponding user record in the database (e.g. check the last sign in
+ * date/time and the IP address used at sign in).
  */
 export default async function authenticate(req, res, next) {
   // Try to obtain an ID token from the session cookie
-  const [idToken, refreshToken] =
-    idx(req, x => cookie.parse(x.headers.cookie)[sessKey].split(':')) || [];
+  const token = cookie.parse(req.headers.cookie || '')[sessKey];
 
   // Check if the provided ID token is valid
-  if (idToken) {
+  if (token) {
     try {
-      req.user = jwt.verify(idToken, process.env.JWT_SECRET);
+      // Try to obtain the user's ID from the token
+      const { sub: id } = jwt.verify(token, jwtSecret) || {};
+
+      // If the user is authenticated, make it available to the
+      // rest of the app via `req.user` context variable.
+      req.user = id
+        ? await db
+            .table('users')
+            .where({ id })
+            .first()
+            .then(convertToCamelCase)
+        : null;
     } catch (err) {
-      if (err.name === 'TokenExpiredError' && refreshToken) {
-        try {
-          const { id } = jwt.verify(refreshToken, process.env.JWT_SECRET) || {};
-          const user =
-            id &&
-            (await db
-              .table('users')
-              .where({ id })
-              .first());
-          if (user) {
-            res.cookie(sessKey, createTokens(user), sessOpt);
-          }
-        } catch (renewError) {
-          console.error(renewError);
-        }
-      } else {
-        console.error(err);
-      }
+      req.user = null;
+      console.error(err);
     }
   }
 
-  req.user = req.user || null;
-
   req.signIn = user => {
-    res.cookie(sessKey, createTokens(user), sessOpt);
+    res.cookie(
+      sessKey,
+      jwt.sign({ login_ip: req.ip }, jwtSecret, {
+        issuer: 'https://firebase.reactstarter.com',
+        subject: user.id,
+        expiresIn: '10 years',
+      }),
+      sessOpt,
+    );
   };
 
   req.signOut = () => {
