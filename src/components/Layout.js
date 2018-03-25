@@ -99,13 +99,13 @@ class Layout extends React.Component {
   };
 
   componentDidMount() {
-    this.unlisten = auth.onShowLoginDialog(() => {
-      this.context.history.push('/login');
-    });
+    // this.unlisten = auth.onShowLoginDialog(() => {
+    //   this.context.history.push('/login');
+    // });
   }
 
   componentWillUnmount() {
-    this.unlisten();
+    // this.unlisten();
   }
 
   openUserMenu = event => {
@@ -172,7 +172,7 @@ class Layout extends React.Component {
                   </Menu>
                 </>
               ) : (
-                <SignInButton onClick={auth.showLoginDialog}>
+                <SignInButton onClick={auth.openLoginPage}>
                   Sign In
                 </SignInButton>
               )}

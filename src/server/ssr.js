@@ -15,7 +15,7 @@ import { Router } from 'express';
 import passport from './passport';
 import templates from '../templates';
 import routes from '../router';
-import createRelay from '../createRelay';
+import createRelay from './createRelay';
 import assets from './assets.json';
 
 const router = new Router();

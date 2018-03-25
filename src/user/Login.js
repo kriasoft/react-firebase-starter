@@ -42,6 +42,14 @@ const Title = styled(Typography)`
   }
 `;
 
+const ErrorContainer = styled(Typography)`
+  && {
+    margin-bottom: 1rem;
+    text-align: center;
+    color: red;
+  }
+`;
+
 const StyledButton = styled(Button)`
   && {
     margin-bottom: 1rem;
@@ -90,6 +98,21 @@ const TwitterIcon = () => (
 );
 
 class Login extends React.Component<{}> {
+  state = { error: null };
+
+  componentDidMount() {
+    const { location: { search, origin }, top, opener } = window;
+
+    if (search.includes('success') && top) {
+      opener.postMessage({ result: 'awesome' }, origin);
+    } else if (search.includes('error')) {
+      const params = search.slice(1).split('=');
+      const error = params[params.indexOf('error') + 1];
+
+      this.setState({ error });
+    }
+  }
+
   render() {
     return (
       <Container>
@@ -112,6 +135,8 @@ class Login extends React.Component<{}> {
           <TwitterIcon />
           Continue with <strong>Twitter</strong>
         </StyledButton>
+
+        <ErrorContainer>{this.state.error}</ErrorContainer>
       </Container>
     );
   }

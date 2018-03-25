@@ -19,8 +19,8 @@ router.get('/login/:provider(facebook)', (req, res, next) => {
 
 router.get('/login/:provider(facebook)/return', (req, res, next) => {
   passport.authenticate('facebook', {
-    successRedirect: '/',
-    failureRedirect: '/login',
+    successRedirect: '/login?success',
+    failureRedirect: '/login?error=something+went+wrong',
   })(req, res, next);
 });
 

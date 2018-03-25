@@ -6857,9 +6857,9 @@ jws@^3.0.0, jws@^3.1.4:
     jwa "^1.1.4"
     safe-buffer "^5.0.1"
 
-jwt-passport@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/jwt-passport/-/jwt-passport-0.0.2.tgz#137319e7fa22d63962fee1688fe8b924fb241707"
+jwt-passport@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/jwt-passport/-/jwt-passport-0.0.4.tgz#040d0a822dd8f56214c1add0c5ba9bf6168bc6f0"
   dependencies:
     cookie "^0.3.1"
     jsonwebtoken "^8.2.0"

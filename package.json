@@ -34,7 +34,7 @@
     "history": "^4.7.2",
     "idx": "^2.2.0",
     "jsonwebtoken": "^8.2.0",
-    "jwt-passport": "^0.0.2",
+    "jwt-passport": "^0.0.4",
     "knex": "^0.14.4",
     "material-ui": "1.0.0-beta.36",
     "passport": "^0.4.0",
