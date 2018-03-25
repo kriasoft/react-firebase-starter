@@ -14,6 +14,7 @@ import createHistory from 'history/createBrowserHistory';
 import App from './components/App';
 import createRelay from './createRelay';
 import * as serviceWorker from './serviceWorker';
+import 'typeface-roboto';
 
 firebase.initializeApp(window.config.firebase);
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
