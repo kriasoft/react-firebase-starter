@@ -9,10 +9,11 @@
 import uuid from 'uuid';
 import passport from 'passport';
 import jwt from 'jwt-passport';
+import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { config } from 'firebase-functions';
 
-import db from '../db';
-import facebookStrategy from './strategy/facebook';
+import db from './db';
+import logIn from './utils/logIn';
 
 passport.framework(
   jwt({
@@ -42,6 +43,39 @@ passport.framework(
   }),
 );
 
-passport.use(facebookStrategy);
+passport.use(
+  new FacebookStrategy(
+    {
+      clientID: process.env.FACEBOOK_APP_ID,
+      clientSecret: process.env.FACEBOOK_APP_SECRET,
+      callbackURL: '/login/facebook/return',
+      profileFields: [
+        'id',
+        'cover',
+        'name',
+        'displayName',
+        'age_range',
+        'link',
+        'gender',
+        'locale',
+        'picture',
+        'timezone',
+        'updated_time',
+        'verified',
+        'email',
+      ],
+      passReqToCallback: true,
+    },
+    async (req, accessToken, refreshToken, profile, cb) => {
+      try {
+        const credentials = { accessToken, refreshToken };
+        const user = await logIn(req, profile, credentials);
+        cb(null, user);
+      } catch (err) {
+        cb(err);
+      }
+    },
+  ),
+);
 
 export default passport;
