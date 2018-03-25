@@ -8986,9 +8986,9 @@ primer-support@4.5.2:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/primer-support/-/primer-support-4.5.2.tgz#daab9a48881b6953e8e6ca01865a2f415bf777c5"
 
-primer-utilities@4.8.5:
-  version "4.8.5"
-  resolved "https://registry.yarnpkg.com/primer-utilities/-/primer-utilities-4.8.5.tgz#9f3b1be8eefacec1e0eaa275ea4c8e29dc683ceb"
+primer-utilities@4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/primer-utilities/-/primer-utilities-4.9.0.tgz#288f6db98eefb02fe914711e8ece1d93acb4ef29"
   dependencies:
     primer-support "4.5.2"
 
@@ -10745,14 +10745,14 @@ stylehacks@^2.3.2:
     text-table "^0.2.0"
     write-file-stdout "0.0.2"
 
-stylelint-config-primer@^2.2.4:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/stylelint-config-primer/-/stylelint-config-primer-2.2.4.tgz#d21adfe0c5d0f43f49a996897d8e857e0ada2302"
+stylelint-config-primer@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/stylelint-config-primer/-/stylelint-config-primer-2.2.5.tgz#fa3848c07dc140269285ab4bacf789416e13a981"
   dependencies:
     stylelint-no-unsupported-browser-features "^1.0.0"
     stylelint-order "^0.4.4"
     stylelint-scss "^1.4.1"
-    stylelint-selector-no-utility "1.8.4"
+    stylelint-selector-no-utility "1.8.5"
 
 stylelint-config-recommended@^2.1.0:
   version "2.1.0"
@@ -10812,11 +10812,11 @@ stylelint-scss@^1.4.1:
     postcss-value-parser "^3.3.0"
     stylelint "^7.0.3"
 
-stylelint-selector-no-utility@1.8.4:
-  version "1.8.4"
-  resolved "https://registry.yarnpkg.com/stylelint-selector-no-utility/-/stylelint-selector-no-utility-1.8.4.tgz#617f33f817b8cfecb8a98210febfb012aedeccd3"
+stylelint-selector-no-utility@1.8.5:
+  version "1.8.5"
+  resolved "https://registry.yarnpkg.com/stylelint-selector-no-utility/-/stylelint-selector-no-utility-1.8.5.tgz#aba12fa0e892d4538afc52ca645263653ca89fde"
   dependencies:
-    primer-utilities "4.8.5"
+    primer-utilities "4.9.0"
     stylelint "^7.13.0"
 
 stylelint@>=5.0.0:

@@ -55,6 +55,7 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   │   ├── user/                  # User related schema, queries, and mutations
 │   │   ├── api.js                 # GraphQL API middleware
 │   │   ├── Context.js             # GraphQL context wrapper
+│   │   ├── createRelay.js         # Relay factory method for Node.js envrironment
 │   │   ├── login.js               # Authentication middleware, login pages
 │   │   └── ssr.js                 # Server-side rendering middleware
 │   ├── templates/                 # HTML templates for server-side rendering
