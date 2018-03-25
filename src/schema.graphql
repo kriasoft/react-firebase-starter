@@ -1,14 +1,6 @@
-type Account {
-  # The ID of an object
-  id: ID!
-  provider: AccountProvider
-  uid: String!
-  email: String
-  displayName: String
-  photoURL: String
-}
-
-enum AccountProvider {
+enum AuthenticationProvider {
+  GOOGLE
+  TWITTER
   FACEBOOK
 }
 
@@ -46,13 +38,17 @@ type DeleteUserPayload {
   clientMutationId: String
 }
 
+type Identity {
+  # The ID of an object
+  id: ID!
+  provider: AuthenticationProvider
+  providerId: String
+  email: String
+  displayName: String
+  photoURL: String
+}
+
 type Mutation {
-  # Authenticate a user with Firebase credentials.
-  signIn(input: SignInInput!): SignInPayload
-
-  # Delete session cookie.
-  signOut(input: SignOutInput!): SignOutPayload
-
   # Update user.
   updateUser(input: UpdateUserInput!): UpdateUserPayload
 
@@ -102,25 +98,6 @@ type Query {
   users(after: String, first: Int): UserConnection
   story(slug: String!): Story
   stories: [Story]
-}
-
-input SignInInput {
-  idToken: String!
-  refreshToken: String!
-  clientMutationId: String
-}
-
-type SignInPayload {
-  token: String
-  clientMutationId: String
-}
-
-input SignOutInput {
-  clientMutationId: String
-}
-
-type SignOutPayload {
-  clientMutationId: String
 }
 
 type Story implements Node {
@@ -175,7 +152,7 @@ type User implements Node {
   email: String
   displayName: String
   photoURL: String
-  accounts: [Account]
+  identities: [Identity]
   isAdmin: Boolean
   createdAt: String
   updatedAt: String

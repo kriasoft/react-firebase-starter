@@ -11,20 +11,63 @@ import type { Request } from 'express';
 import db from './db';
 import DataLoader from './DataLoader';
 import Validator from './Validator';
-import { mapTo } from './utils';
+import { mapTo, mapToMany } from './utils';
 import { UnauthorizedError, ForbiddenError, ValidationError } from './errors';
 
 class Context {
   errors = [];
 
   constructor(req: Request) {
-    this.user = userFromToken(req.user);
-    this.signIn = req.signIn;
-    this.signOut = req.signOut;
+    if (req.user) {
+      // Add user object to the cache
+      this.userById.prime(req.user.id, req.user);
+      this.userByUsername.prime(req.user.username, req.user);
+
+      // Convert snake_case fields to camelCase for convinience
+      this.user = Object.keys(req.user).reduce((acc, key) => {
+        acc[key.replace(/_\w/g, x => x.toUpperCase())] = req.user[key];
+        return acc;
+      }, {});
+    } else {
+      this.user = null;
+    }
+
+    // Some GraphQL mutations may need to sign in / sign out a user
+    this.logIn = req.logIn;
+    this.logOut = req.logOut;
   }
+
+  /*
+   * Authorization
+   * ------------------------------------------------------------------------ */
+
+  ensureIsAuthorized(check) {
+    if (!this.user) {
+      throw new UnauthorizedError();
+    }
+
+    if (check && !check(this.user)) {
+      throw new ForbiddenError();
+    }
+  }
+
+  /*
+   * Validation
+   * ------------------------------------------------------------------------ */
 
   addError(key, message) {
     this.errors.push({ key, message });
+  }
+
+  validate(input) {
+    const validator = new Validator(input, errors => {
+      throw new ValidationError(errors);
+    });
+
+    return transform => {
+      transform(validator);
+      return validator.validate();
+    };
   }
 
   /*
@@ -59,6 +102,14 @@ class Context {
       .then(mapTo(keys, x => x.username)),
   );
 
+  identitiesByUserId = new DataLoader(keys =>
+    db
+      .table('user_identities')
+      .whereIn('user_id', keys)
+      .select()
+      .then(mapToMany(keys, x => x.user_id)),
+  );
+
   storyById = new DataLoader(keys =>
     db
       .table('stories')
@@ -82,49 +133,6 @@ class Context {
       })
       .then(mapTo(keys, x => x.slug)),
   );
-
-  /*
-   * Authorization
-   * ------------------------------------------------------------------------ */
-
-  ensureIsAuthorized(check) {
-    if (!this.user) {
-      throw new UnauthorizedError();
-    }
-
-    if (check && !check(this.user)) {
-      throw new ForbiddenError();
-    }
-  }
-
-  /*
-   * Validation
-   * ------------------------------------------------------------------------ */
-
-  validate(input) {
-    const validator = new Validator(input, errors => {
-      throw new ValidationError(errors);
-    });
-
-    return transform => {
-      transform(validator);
-      return validator.validate();
-    };
-  }
-}
-
-function userFromToken(token) {
-  return token
-    ? {
-        id: token.id,
-        uid: token.uid,
-        email: token.email,
-        emailVerified: token.email_verified,
-        displayName: token.name,
-        photoURL: token.picture,
-        isAdmin: token.is_admin,
-      }
-    : null;
 }
 
 export default Context;

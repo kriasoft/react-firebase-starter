@@ -43,9 +43,12 @@ class Home extends React.Component<{}> {
 export default createFragmentContainer(
   Home,
   graphql`
-    fragment AccountFragment on Query {
+    fragment Account on Query {
       me {
         id
+        username
+        displayName
+        photoURL
       }
     }
   `,

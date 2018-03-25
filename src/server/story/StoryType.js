@@ -17,7 +17,7 @@ import {
 import { globalIdField } from 'graphql-relay';
 
 import UserType from '../user/UserType';
-import CommentType from '../comment/CommentType';
+import CommentType from './CommentType';
 import { nodeInterface } from '../Node';
 import type Context from '../Context';
 
@@ -30,8 +30,8 @@ export default new GraphQLObjectType({
 
     author: {
       type: new GraphQLNonNull(UserType),
-      resolve(story, args, ctx: Context) {
-        return ctx.userById.load(story.author_id);
+      resolve(self, args, ctx: Context) {
+        return ctx.userById.load(self.author_id);
       },
     },
 
@@ -49,38 +49,44 @@ export default new GraphQLObjectType({
 
     isURL: {
       type: new GraphQLNonNull(GraphQLBoolean),
-      resolve: x => x.is_url,
+      resolve(self) {
+        return self.is_url;
+      },
     },
 
     comments: {
       type: new GraphQLList(CommentType),
-      resolve(story, args, ctx: Context) {
-        return ctx.commentsByStoryId.load(story.id);
+      resolve(self, args, ctx: Context) {
+        return ctx.commentsByStoryId.load(self.id);
       },
     },
 
     pointsCount: {
       type: new GraphQLNonNull(GraphQLInt),
-      resolve(story, args, ctx: Context) {
-        return ctx.storyPointsCount.load(story.id);
+      resolve(self, args, ctx: Context) {
+        return ctx.storyPointsCount.load(self.id);
       },
     },
 
     commentsCount: {
       type: new GraphQLNonNull(GraphQLInt),
-      resolve(story, args, ctx: Context) {
-        return ctx.storyCommentsCount.load(story.id);
+      resolve(self, args, ctx: Context) {
+        return ctx.storyCommentsCount.load(self.id);
       },
     },
 
     createdAt: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: x => x.created_at,
+      resolve(self) {
+        return self.created_at;
+      },
     },
 
     updatedAt: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve: x => x.updated_at,
+      resolve(self) {
+        return self.updated_at;
+      },
     },
   },
 });

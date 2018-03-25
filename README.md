@@ -1,10 +1,13 @@
-# React Starter Kit &nbsp; <sup><samp>for Firebase</samp></sup> &nbsp; <a href="https://circleci.com/gh/kriasoft/react-firebase-starter"><img src="https://circleci.com/gh/kriasoft/react-firebase-starter.svg?style=svg" alt="Build Status" height="20" /></a> <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" alt="Twitter" height="20"></a> <a href="https://t.me/ReactStarter"><img src="https://img.shields.io/badge/chat-Telegram-green.svg?style=social&maxAge=3600" height="20"></a>
+<h1>
+  React Starter Kit for Firebase &nbsp; <sup><i>a.k.a. Serveless Edition</i></sup><br>
+  <a href="https://circleci.com/gh/kriasoft/react-firebase-starter"><img src="https://circleci.com/gh/kriasoft/react-firebase-starter.svg?style=svg" alt="Build Status" height="20" /></a> <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" alt="Twitter" height="20"></a> <a href="https://t.me/ReactStarter"><img src="https://img.shields.io/badge/chat-Telegram-green.svg?style=social&maxAge=3600" height="20"></a>
+</h1>
 
 **React Starter Kit** _for Firebase_ is a popular project template (aka, boilerplate) for building
-modern, scalable web applications with React.js, GraphQL, and GraphQL using serverless
-infrastructure provided by <a href="https://firebase.google.com/">Firebase</a> (Cloud Functions,
-hosting, CDN, authentication, etc.). It allows you to save time and build upon a solid foundation
-and design patterns.
+modern, scalable web applications with React, Relay, and GraphQL using serverless infrastructure
+provided by <a href="https://firebase.google.com/">Firebase</a> (Cloud SQL, Cloud Functions, CDN
+hosting, and file storage). It allows you to save time and build upon a solid foundation and
+design patterns.
 
 <p align="center"><strong>View</strong> <a href="https://firebase.reactstarter.com">online demo</a> &nbsp;|&nbsp; <strong>Follow us</strong> on <a href="https://twitter.com/ReactStarter">Twitter</a> &nbsp;|&nbsp; <strong>Get FREE support</strong> on <a href="https://t.me/ReactStarter">Telegram</a> &nbsp;|&nbsp; <strong>Visit our sponsors</strong>:</p>
 
@@ -24,13 +27,14 @@ This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kria
 
 ### Tech Stack
 
-* [Create React App][cra] for development and test infrastructure (see [user guide][cradocs])
-* [GraphQL][gqljs] and [Relay][relay] for declarative data fetching and maximum performance
-* [Cloud SQL][cloudsql] (PostgreSQL edition) hosted database service
-* [Material UI][mui] to reduce development time by integrating Google's [Material Design][material]
-* [Styled Components][sc] for component friendly CSS styles ([docs][scdocs])
-* [Firebase][firebase] for serverless architecture, authentication and free CDN hosting ([docs][fbdocs])
-* [Universal Router][router] + [history][history] for declarative routing and client-side navigation
+* [Create React App][cra] (★ 46k) for development and test infrastructure (see [user guide][cradocs])
+* [Material UI][mui] (★ 34k) to reduce development time by integrating Google's [Material Design][material]
+* [Styled Components][sc] (★ 15k) for component friendly CSS styles with a great DX ([docs][scdocs])
+* [Passport.js][passport] (★ 13k) for authentication configured with stateless JWT tokens for sessions
+* [GraphQL.js][gqljs] (★ 10k) and [Relay][relay] (★ 11k) for declarative data fetching and efficient client stage management
+* [Universal Router][router] (★ 1k) + [history][history] (★ 3k) for declarative routing and client-side navigation optimized for [Relay][relay]
+* [PostgreSQL][psql] database pre-configured with a query builder and migrations using [Knex.js][knex] (★ 6k)
+* [Firebase][firebase] for serverless architecture - Cloud SQL, Cloud Functions, CDN hosting, and file storage ([docs][fbdocs])
 
 Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([ES2015][es2015]) and [React](https://reactjs.org/docs/).
 
@@ -41,27 +45,31 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 ├── node_modules/                  # 3rd-party libraries and utilities
 ├── public/                        # Static files such as favicon.ico etc.
 ├── src/                           # Application source code
-│   ├── account/                   # User account (settings, profile, etc)
 │   ├── admin/                     # Admin dashboard
 │   ├── components/                # Shared React components
-│   ├── graphql/                   # GraphQL API endpoint
 │   ├── news/                      # News section (example)
-│   ├── pages/                     # Static pages (landing, about, privacy etc.)
+│   ├── pages/                     # Static pages (landing, about, privacy, etc.)
+│   ├── server/                    # Server-side code (API, authentication, etc.)
+│   │   ├── db/                    # Database client
+│   │   ├── story/                 # Story related schema, queries, and mutations
+│   │   ├── user/                  # User related schema, queries, and mutations
+│   │   ├── api.js                 # GraphQL API middleware
+│   │   ├── Context.js             # GraphQL context wrapper
+│   │   ├── createRelay.js         # Relay factory method for Node.js envrironment
+│   │   ├── login.js               # Authentication middleware, login pages
+│   │   └── ssr.js                 # Server-side rendering middleware
 │   ├── templates/                 # HTML templates for server-side rendering
+│   ├── user/                      # User pages (login, my account, profile, etc)
 │   ├── app.browser.js             # Client-side rendering, e.g. ReactDOM.render(<App />, container)
 │   ├── app.node.js                # Server-side rendering, e.g. ReactDOMServer.renderToString(<App />)
-│   ├── auth.js                    # Authentication manager
-│   ├── authenticate.js            # Authentication middleware for Express.js
-│   ├── createRelay.browser.js     # Relay factory method for browser envrironment
-│   ├── createRelay.node.js        # Relay factory method for Node.js envrironment
+│   ├── auth.js                    # Client-side authentication manager
+│   ├── createRelay.js             # Relay factory method for browser envrironment
 │   ├── router.js                  # Universal application router
 │   ├── graphql.schema             # GraphQL schema (auto-generated, used by Relay)
 │   ├── serviceWorker.js           # Service worker helper methods
-│   ├── ssr.js                     # Express.js middleware for server-side rendering
-│   ├── theme.js                   # Overrides for Material UI default styles
-│   └── token.js                   # Utility for renewing authentication tokens
+│   └── theme.js                   # Overrides for Material UI default styles
 ├── .env                           # Environment variables
-├── override.js                    # Configuration overrides for Babel and Webpack
+├── config-overrides.js            # Configuration overrides for Babel and Webpack
 └── package.json                   # The list of project dependencies + NPM scripts
 ```
 
@@ -72,7 +80,7 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 * [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
 * [Watchman][watchman] file watcher used by Relay Modern
-* [PostgreSQL][postgres] v9.6 or newer
+* [PostgreSQL][postgres] v9.6 or newer, only if you're planning to use a local db for development
 
 ### Getting Started
 
@@ -181,11 +189,14 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [telegram]: https://t.me/ReactStarter
 [cra]: https://github.com/facebook/create-react-app
 [cradocs]: https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md
+[psql]: https://www.postgresql.org/
 [cloudsql]: https://cloud.google.com/sql/
+[knex]: http://knexjs.org/
 [gqljs]: http://graphql.org/graphql-js/
 [relay]: http://facebook.github.io/relay/
 [mui]: https://material-ui-next.com/
 [material]: https://material.io/
+[passport]: http://www.passportjs.org/
 [html]: https://developer.mozilla.org/en-US/docs/Web/HTML
 [css]: https://developer.mozilla.org/en-US/docs/Web/CSS
 [js]: https://developer.mozilla.org/en-US/docs/Web/JavaScript

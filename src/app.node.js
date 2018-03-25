@@ -24,14 +24,16 @@ if (!firebase.apps.length) {
 
 if (process.env.NODE_ENV === 'production') {
   // Server environment
-  exports.graphql = functions.https.onRequest(require('./graphql').default);
-  exports.default = functions.https.onRequest(require('./ssr').default);
+  exports.login = functions.https.onRequest(require('./server/login').default);
+  exports.graphql = functions.https.onRequest(require('./server/api').default);
+  exports.default = functions.https.onRequest(require('./server/ssr').default);
 } else {
   // Local/dev environment
   const app = express();
-  const db = require('./graphql/db').default;
-  app.use(require('./graphql').default);
-  app.use(require('./ssr').default);
+  const db = require('./server/db').default;
+  app.use(require('./server/login').default);
+  app.use(require('./server/api').default);
+  app.use(require('./server/ssr').default);
   module.exports.default = app;
   module.exports.dispose = () => db.destroy();
 }

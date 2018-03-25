@@ -8,7 +8,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import RelayPropTypes from 'react-relay/lib/RelayPropTypes';
 import styled, { injectGlobal } from 'styled-components';
 import Avatar from 'material-ui/Avatar';
 import Paper from 'material-ui/Paper';
@@ -23,8 +22,6 @@ import theme from '../theme';
 import Link from './Link';
 import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
-import LoginDialog from './LoginDialog';
-import SignOutMutation from './SignOutMutation';
 
 injectGlobal`
   html,
@@ -93,39 +90,36 @@ const SignInButton = styled(Button)`
 
 class Layout extends React.Component {
   static contextTypes = {
-    relay: RelayPropTypes.Relay,
     history: PropTypes.object.isRequired,
     reset: PropTypes.func.isRequired,
   };
 
   state = {
-    loginDialogOpen: false,
     userMenuEl: null,
   };
 
   componentDidMount() {
-    this.unlisten = auth.onShowLoginDialog(() =>
-      this.setState({ loginDialogOpen: true }),
-    );
+    // this.unlisten = auth.onShowLoginDialog(() => {
+    //   this.context.history.push('/login');
+    // });
   }
 
   componentWillUnmount() {
-    this.unlisten();
+    // this.unlisten();
   }
-
-  closeLoginDialog = () => this.setState({ loginDialogOpen: false });
 
   openUserMenu = event => {
     this.setState({ userMenuEl: event.currentTarget });
   };
 
   closeUserMenu = event => {
-    const { reset, relay: { environment } } = this.context;
+    const { reset } = this.context;
     this.setState({ userMenuEl: null });
     if (event.currentTarget.id === 'user-menu-signout') {
-      Promise.all([auth.signOut(), SignOutMutation.commit(environment)]).then(
-        reset,
-      );
+      Promise.all([
+        auth.signOut(),
+        fetch('/login/clear', { method: 'POST', credentials: 'include' }),
+      ]).then(reset);
     }
   };
 
@@ -178,7 +172,7 @@ class Layout extends React.Component {
                   </Menu>
                 </>
               ) : (
-                <SignInButton onClick={auth.showLoginDialog}>
+                <SignInButton onClick={auth.openLoginPage}>
                   Sign In
                 </SignInButton>
               )}
@@ -186,10 +180,6 @@ class Layout extends React.Component {
             <Content>{this.props.children}</Content>
           </Body>
           <LayoutFooter />
-          <LoginDialog
-            open={this.state.loginDialogOpen}
-            onClose={this.closeLoginDialog}
-          />
         </Container>
       </MuiThemeProvider>
     );

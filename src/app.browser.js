@@ -12,7 +12,7 @@ import firebase from '@firebase/app';
 import createHistory from 'history/createBrowserHistory';
 
 import App from './components/App';
-import createRelay from './createRelay.browser';
+import createRelay from './createRelay';
 import * as serviceWorker from './serviceWorker';
 
 firebase.initializeApp(window.config.firebase);

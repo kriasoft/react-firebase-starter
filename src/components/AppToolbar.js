@@ -19,7 +19,6 @@ import styled from 'styled-components';
 
 import auth from '../auth';
 import Link from './Link';
-import LoginDialog from './LoginDialog';
 
 const Title = styled(Typography)`
   && {
@@ -41,7 +40,9 @@ class AppToolbar extends React.Component<{}, {}> {
   };
 
   componentDidMount() {
-    this.unlisten = auth.onShowLoginDialog(this.showLoginDialog);
+    this.unlisten = auth.onShowLoginDialog(() => {
+      this.context.history.push('/login');
+    });
   }
 
   componentWillUnmount() {
@@ -50,14 +51,6 @@ class AppToolbar extends React.Component<{}, {}> {
 
   goHome = () => {
     this.context.history.push('/');
-  };
-
-  showLoginDialog = event => {
-    this.setState({ loginOpen: true });
-  };
-
-  hideLogin = () => {
-    this.setState({ loginOpen: false });
   };
 
   handleAccountMenuOpen = event => {
@@ -108,7 +101,6 @@ class AppToolbar extends React.Component<{}, {}> {
             </React.Fragment>
           )}
         </MuiToolbar>
-        <LoginDialog open={this.state.loginOpen} onClose={this.hideLogin} />
       </AppBar>
     );
   }

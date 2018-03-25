@@ -10,13 +10,13 @@ import React from 'react';
 import UniversalRouter from 'universal-router';
 
 import pages from './pages';
-import account from './account';
+import user from './user';
 import news from './news';
 import ErrorPage from './pages/ErrorPage';
 
 const routes = [
   ...pages,
-  ...account,
+  ...user,
   ...news,
   {
     path: '/admin',
@@ -40,7 +40,7 @@ function resolveRoute(ctx) {
   }
 
   // Start fetching data from GraphQL API
-  const dataPromise = route.query ? fetchQuery(route.query, params) : null;
+  const dataPromise = fetchQuery(route.query, params);
 
   // Start downloading missing JavaScript chunks
   const componentsPromise = route.components

@@ -32,7 +32,7 @@ export const { nodeInterface, nodeField, nodesField } = nodeDefinitions(
       case 'Story':
         return require('./story/StoryType').default;
       case 'Comment':
-        return require('./comment/CommentType').default;
+        return require('./story/CommentType').default;
       default:
         return null;
     }

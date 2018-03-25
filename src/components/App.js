@@ -13,6 +13,8 @@ import { QueryRenderer } from 'react-relay';
 import router from '../router';
 import AppRenderer from './AppRenderer';
 
+import auth from '../auth';
+
 type Props = {
   history: any,
   createRelay: () => any,
@@ -44,10 +46,14 @@ class App extends React.Component<Props> {
     const { history } = this.props;
     this.unlisten = history.listen(this.renderLocation);
     this.renderLocation(history.location);
+    this.authUnlisten = auth.onAuthStateChanged(() => {
+      this.reset();
+    });
   }
 
   componentWillUnmount() {
     this.unlisten();
+    this.authUnlisten();
   }
 
   reset = () => {

@@ -15,7 +15,7 @@ import {
 } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
-import StoryType from '../story/StoryType';
+import StoryType from './StoryType';
 import UserType from '../user/UserType';
 import { nodeInterface } from '../Node';
 import type Context from '../Context';
@@ -29,29 +29,29 @@ const CommentType = new GraphQLObjectType({
 
     story: {
       type: new GraphQLNonNull(StoryType),
-      resolve(parent, args, ctx: Context) {
-        return ctx.storyById.load(parent.story_id);
+      resolve(self, args, ctx: Context) {
+        return ctx.storyById.load(self.story_id);
       },
     },
 
     parent: {
       type: CommentType,
-      resolve(parent, args, ctx: Context) {
-        return parent.parent_id && ctx.commentById.load(parent.parent_id);
+      resolve(self, args, ctx: Context) {
+        return self.parent_id && ctx.commentById.load(self.parent_id);
       },
     },
 
     author: {
       type: new GraphQLNonNull(UserType),
-      resolve(parent, args, ctx: Context) {
-        return ctx.userById.load(parent.author_id);
+      resolve(self, args, ctx: Context) {
+        return ctx.userById.load(self.author_id);
       },
     },
 
     comments: {
       type: new GraphQLList(CommentType),
-      resolve(parent, args, ctx: Context) {
-        return ctx.commentsByParentId.load(parent.id);
+      resolve(self, args, ctx: Context) {
+        return ctx.commentsByParentId.load(self.id);
       },
     },
 
@@ -61,22 +61,22 @@ const CommentType = new GraphQLObjectType({
 
     pointsCount: {
       type: new GraphQLNonNull(GraphQLInt),
-      resolve(parent, args, ctx: Context) {
-        return ctx.commentPointsCount.load(parent.id);
+      resolve(self, args, ctx: Context) {
+        return ctx.commentPointsCount.load(self.id);
       },
     },
 
     createdAt: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve(parent) {
-        return parent.created_at;
+      resolve(self) {
+        return self.created_at;
       },
     },
 
     updatedAt: {
       type: new GraphQLNonNull(GraphQLString),
-      resolve(parent) {
-        return parent.updated_at;
+      resolve(self) {
+        return self.updated_at;
       },
     },
   }),

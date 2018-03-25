@@ -12,11 +12,14 @@ import expressGraphQL from 'express-graphql';
 import { Router } from 'express';
 import { printSchema } from 'graphql';
 
-import authenticate from '../authenticate';
+import passport from './passport';
 import schema from './schema';
 import Context from './Context';
 
 const router = new Router();
+
+router.use(passport.initialize());
+router.use(passport.session());
 
 if (process.env.NODE_ENV !== 'production') {
   fs.writeFileSync(
@@ -28,7 +31,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 router.use(
   '/graphql',
-  authenticate,
   expressGraphQL(req => ({
     schema,
     context: new Context(req),

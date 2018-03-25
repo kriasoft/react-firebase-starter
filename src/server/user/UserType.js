@@ -15,7 +15,7 @@ import {
 } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
-import AccountType from './AccountType';
+import IdentityType from './IdentityType';
 import { nodeInterface } from '../Node';
 import type Context from '../Context';
 
@@ -32,53 +32,62 @@ export default new GraphQLObjectType({
 
     email: {
       type: GraphQLString,
-      resolve(user, args, ctx: Context) {
-        return ctx.user && (ctx.user.id === user.id || ctx.user.isAdmin)
-          ? user.email
+      resolve(self, args, ctx: Context) {
+        return ctx.user && (ctx.user.id === self.id || ctx.user.isAdmin)
+          ? self.email
           : null;
       },
     },
 
     displayName: {
       type: GraphQLString,
-      resolve(user) {
-        return user.display_name;
+      resolve(self) {
+        return self.display_name;
       },
     },
 
     photoURL: {
       type: GraphQLString,
-      resolve(user) {
-        return user.photo_url;
+      resolve(self) {
+        return self.photo_url;
       },
     },
 
-    accounts: {
-      type: new GraphQLList(AccountType),
+    identities: {
+      type: new GraphQLList(IdentityType),
+      resolve(self, args, ctx) {
+        return ctx.identitiesByUserId.load(self.id);
+      },
     },
 
     isAdmin: {
       type: GraphQLBoolean,
-      resolve(user, args, ctx: Context) {
-        return ctx.user && ctx.user.id === user.id
+      resolve(self, args, ctx: Context) {
+        return ctx.user && ctx.user.id === self.id
           ? ctx.user.isAdmin || false
-          : user.is_admin;
+          : self.is_admin;
       },
     },
 
     createdAt: {
       type: GraphQLString,
-      resolve: x => x.created_at,
+      resolve(self) {
+        return self.created_at;
+      },
     },
 
     updatedAt: {
       type: GraphQLString,
-      resolve: x => x.updated_at,
+      resolve(self) {
+        return self.updated_at;
+      },
     },
 
     lastSignInAt: {
       type: GraphQLString,
-      resolve: x => x.last_signin_at,
+      resolve(self) {
+        return self.last_signin_at;
+      },
     },
   },
 });

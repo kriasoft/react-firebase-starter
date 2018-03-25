@@ -12,15 +12,18 @@ import { config } from 'firebase-functions';
 import { fetchQuery } from 'relay-runtime';
 import { Router } from 'express';
 
-import authenticate from './authenticate';
-import templates from './templates';
-import routes from './router';
-import createRelay from './createRelay.node';
+import passport from './passport';
+import templates from '../templates';
+import routes from '../router';
+import createRelay from './createRelay';
 import assets from './assets.json';
 
 const router = new Router();
 
-router.get('*', authenticate, async (req, res, next) => {
+router.use(passport.initialize());
+router.use(passport.session());
+
+router.get('*', async (req, res, next) => {
   try {
     const { path: pathname } = req;
     const history = createHistory({ initialEntries: [pathname] });

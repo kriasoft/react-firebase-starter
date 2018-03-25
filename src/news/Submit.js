@@ -17,8 +17,7 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import { graphql, createFragmentContainer } from 'react-relay';
 
-import auth from '../auth';
-import CreateStoryMutation from './CreateStoryMutation';
+import CreateStoryMutation from './mutations/CreateStoryMutation';
 
 const StyledFormControl = styled(FormControl)`
   && {
@@ -69,7 +68,7 @@ class Submit extends React.Component<{}> {
 
   signIn = event => {
     event.preventDefault();
-    auth.showLoginDialog();
+    this.context.history.push('/login');
   };
 
   render() {

@@ -9,15 +9,30 @@
 exports.up = async db => {
   await db.schema.createTable('users', table => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
-    table.string('uid', 50).unique(); // Firebase UID
     table.string('username', 50).unique();
     table.string('email', 100);
+    table.boolean('email_verified').notNullable().defaultTo(false);
     table.string('display_name', 100);
     table.string('photo_url', 250);
-    table.jsonb('accounts').notNullable().defaultTo('[]');
     table.boolean('is_admin').notNullable().defaultTo(false);
     table.timestamps(false, true);
-    table.timestamp('last_signin_at');
+    table.timestamp('last_signin_at').notNullable().defaultTo(db.fn.now());
+  });
+
+  await db.schema.createTable('user_tokens', table => {
+    table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+    table.uuid('token_id').notNullable().primary();
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+  });
+
+  await db.schema.createTable('user_identities', table => {
+    table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+    table.string('provider', 16).notNullable();
+    table.string('provider_id', 36).notNullable();
+    table.jsonb('profile').notNullable();
+    table.jsonb('credentials').notNullable();
+    table.timestamps(false, true);
+    table.primary(['provider', 'provider_id']);
   });
 
   await db.schema.createTable('stories', table => {
@@ -58,5 +73,7 @@ exports.down = async db => {
   await db.schema.dropTableIfExists('comments');
   await db.schema.dropTableIfExists('story_points');
   await db.schema.dropTableIfExists('stories');
+  await db.schema.dropTableIfExists('user_identities');
+  await db.schema.dropTableIfExists('user_tokens');
   await db.schema.dropTableIfExists('users');
 };

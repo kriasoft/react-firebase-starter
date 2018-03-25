@@ -8,20 +8,25 @@
 
 import React from 'react';
 import { graphql } from 'relay-runtime';
-
 import Layout from '../components/Layout';
 
-// The list of all application routes where each route contains a URL path string (pattern),
-// the list of components to load asynchroneously (chunks), data requirements (GraphQL query),
-// and a render() function which shapes the result to be passed into the top-level (App) component.
-// For more information visit https://github.com/kriasoft/universal-router
 export default [
+  {
+    path: '/login',
+    components: () => [import(/* webpackChunkName: 'login' */ './Login')],
+    render: ([Login]) => ({
+      title: 'Sign In • React Starter Kit for Firebase',
+      component: <Login />,
+      chunks: ['login'],
+    }),
+  },
   {
     path: '/account',
     components: () => [import(/* webpackChunkName: 'account' */ './Account')],
     query: graphql`
-      query accountQuery {
+      query userQuery {
         ...Layout
+        ...Account
       }
     `,
     render: ([Account], data) => ({
