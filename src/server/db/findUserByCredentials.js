@@ -31,7 +31,7 @@ export function generateUsername() {
 export default async function findUserByCredentials(profile, credentials) {
   const identityKeys = {
     'user_identities.provider': profile.provider,
-    'user_identities.id': profile.id,
+    'user_identities.provider_id': profile.id,
   };
 
   const email = idx(profile, x => x.emails[0].value);
@@ -80,7 +80,7 @@ export default async function findUserByCredentials(profile, credentials) {
     await db.table('user_identities').insert({
       user_id: user.id,
       provider: profile.provider,
-      id: profile.id,
+      provider_id: profile.id,
       profile: JSON.stringify(profile._json),
       credentials: JSON.stringify(credentials),
     });

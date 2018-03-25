@@ -1,14 +1,6 @@
-type Account {
-  # The ID of an object
-  id: ID!
-  provider: AccountProvider
-  uid: String!
-  email: String
-  displayName: String
-  photoURL: String
-}
-
-enum AccountProvider {
+enum AuthenticationProvider {
+  GOOGLE
+  TWITTER
   FACEBOOK
 }
 
@@ -150,7 +142,7 @@ type User implements Node {
   email: String
   displayName: String
   photoURL: String
-  accounts: [Account]
+  identities: [UserIdentity]
   isAdmin: Boolean
   createdAt: String
   updatedAt: String
@@ -174,4 +166,14 @@ type UserEdge {
 
   # A cursor for use in pagination
   cursor: String!
+}
+
+type UserIdentity {
+  # The ID of an object
+  id: ID!
+  provider: AuthenticationProvider
+  providerId: String
+  email: String
+  displayName: String
+  photoURL: String
 }

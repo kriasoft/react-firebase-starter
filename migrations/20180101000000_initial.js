@@ -28,11 +28,11 @@ exports.up = async db => {
   await db.schema.createTable('user_identities', table => {
     table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
     table.string('provider', 16).notNullable();
-    table.string('id', 36).notNullable();
+    table.string('provider_id', 36).notNullable();
     table.jsonb('profile').notNullable();
     table.jsonb('credentials').notNullable();
     table.timestamps(false, true);
-    table.primary(['provider', 'id']);
+    table.primary(['provider', 'provider_id']);
   });
 
   await db.schema.createTable('stories', table => {

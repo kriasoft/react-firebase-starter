@@ -11,7 +11,7 @@ import type { Request } from 'express';
 import db from '../db';
 import DataLoader from './DataLoader';
 import Validator from './Validator';
-import { mapTo } from './utils';
+import { mapTo, mapToMany } from './utils';
 import { UnauthorizedError, ForbiddenError, ValidationError } from './errors';
 
 class Context {
@@ -100,6 +100,14 @@ class Context {
         }),
       )
       .then(mapTo(keys, x => x.username)),
+  );
+
+  identitiesByUserId = new DataLoader(keys =>
+    db
+      .table('user_identities')
+      .whereIn('user_id', keys)
+      .select()
+      .then(mapToMany(keys, x => x.user_id)),
   );
 
   storyById = new DataLoader(keys =>
