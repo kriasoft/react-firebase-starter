@@ -45,8 +45,9 @@ passport.framework(
 passport.use(
   new FacebookStrategy(
     {
-      clientID: process.env.FACEBOOK_APP_ID,
-      clientSecret: process.env.FACEBOOK_APP_SECRET,
+      clientID: process.env.FACEBOOK_APP_ID || config().facebook.app_id,
+      clientSecret:
+        process.env.FACEBOOK_APP_SECRET || config().facebook.app_secret,
       callbackURL: '/login/facebook/return',
       profileFields: [
         'id',
