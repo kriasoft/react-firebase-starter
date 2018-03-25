@@ -7,7 +7,7 @@
 /* @flow */
 
 import idx from 'idx';
-import db from '../db';
+import db from './';
 
 /**
  * Generates a random username for new users.

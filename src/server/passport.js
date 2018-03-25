@@ -12,8 +12,7 @@ import jwt from 'jwt-passport';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { config } from 'firebase-functions';
 
-import db from './db';
-import findUserByCredentials from './data/findUserByCredentials';
+import db, { findUserByCredentials } from './db';
 
 passport.framework(
   jwt({

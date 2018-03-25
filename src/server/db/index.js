@@ -16,6 +16,8 @@ function read(file) {
   return fs.readFileSync(filename, 'utf8');
 }
 
+export { default as findUserByCredentials } from './findUserByCredentials';
+
 export default knex(
   process.env.GCP_PROJECT
     ? // Firebase environment
