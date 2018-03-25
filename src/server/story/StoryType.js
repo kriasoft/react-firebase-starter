@@ -17,7 +17,7 @@ import {
 import { globalIdField } from 'graphql-relay';
 
 import UserType from '../user/UserType';
-import CommentType from '../comment/CommentType';
+import CommentType from './CommentType';
 import { nodeInterface } from '../Node';
 import type Context from '../Context';
 

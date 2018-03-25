@@ -41,27 +41,30 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 ├── node_modules/                  # 3rd-party libraries and utilities
 ├── public/                        # Static files such as favicon.ico etc.
 ├── src/                           # Application source code
-│   ├── account/                   # User account (settings, profile, etc)
 │   ├── admin/                     # Admin dashboard
 │   ├── components/                # Shared React components
-│   ├── graphql/                   # GraphQL API endpoint
 │   ├── news/                      # News section (example)
-│   ├── pages/                     # Static pages (landing, about, privacy etc.)
+│   ├── pages/                     # Static pages (landing, about, privacy, etc.)
+│   ├── server/                    # Server-side code (API, authentication, etc.)
+│   │   ├── db/                    # Database client
+│   │   ├── story/                 # Story related schema, queries, and mutations
+│   │   ├── user/                  # User related schema, queries, and mutations
+│   │   ├── api.js                 # GraphQL API middleware
+│   │   ├── Context.js             # GraphQL context wrapper
+│   │   ├── login.js               # Authentication middleware, login pages
+│   │   └── ssr.js                 # Server-side rendering middleware
 │   ├── templates/                 # HTML templates for server-side rendering
+│   ├── user/                      # User pages (login, my account, profile, etc)
 │   ├── app.browser.js             # Client-side rendering, e.g. ReactDOM.render(<App />, container)
 │   ├── app.node.js                # Server-side rendering, e.g. ReactDOMServer.renderToString(<App />)
-│   ├── auth.js                    # Authentication manager
-│   ├── authenticate.js            # Authentication middleware for Express.js
-│   ├── createRelay.browser.js     # Relay factory method for browser envrironment
-│   ├── createRelay.node.js        # Relay factory method for Node.js envrironment
+│   ├── auth.js                    # Client-side authentication manager
+│   ├── createRelay.js             # Relay factory method for browser envrironment
 │   ├── router.js                  # Universal application router
 │   ├── graphql.schema             # GraphQL schema (auto-generated, used by Relay)
 │   ├── serviceWorker.js           # Service worker helper methods
-│   ├── ssr.js                     # Express.js middleware for server-side rendering
-│   ├── theme.js                   # Overrides for Material UI default styles
-│   └── token.js                   # Utility for renewing authentication tokens
+│   └── theme.js                   # Overrides for Material UI default styles
 ├── .env                           # Environment variables
-├── override.js                    # Configuration overrides for Babel and Webpack
+├── config-overrides.js            # Configuration overrides for Babel and Webpack
 └── package.json                   # The list of project dependencies + NPM scripts
 ```
 

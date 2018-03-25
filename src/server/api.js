@@ -13,8 +13,8 @@ import { Router } from 'express';
 import { printSchema } from 'graphql';
 
 import passport from './passport';
-import schema from './graphql/schema';
-import Context from './graphql/Context';
+import schema from './schema';
+import Context from './Context';
 
 const router = new Router();
 

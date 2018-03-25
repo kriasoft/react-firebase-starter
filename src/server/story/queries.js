@@ -8,7 +8,7 @@
 
 import { GraphQLList, GraphQLNonNull, GraphQLString } from 'graphql';
 
-import db from '../../db';
+import db from '../db';
 import StoryType from './StoryType';
 import type Context from '../Context';
 

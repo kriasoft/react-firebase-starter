@@ -15,7 +15,7 @@ import {
 } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
-import StoryType from '../story/StoryType';
+import StoryType from './StoryType';
 import UserType from '../user/UserType';
 import { nodeInterface } from '../Node';
 import type Context from '../Context';

@@ -11,11 +11,11 @@ import { GraphQLObjectType, GraphQLEnumType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
 export default new GraphQLObjectType({
-  name: 'UserIdentity',
+  name: 'Identity',
 
   fields: {
     id: globalIdField(
-      'UserIdentity',
+      'Identity',
       self => `${self.provider}:${self.provider_id}`,
     ),
 

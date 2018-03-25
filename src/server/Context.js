@@ -8,7 +8,7 @@
 
 import type { Request } from 'express';
 
-import db from '../db';
+import db from './db';
 import DataLoader from './DataLoader';
 import Validator from './Validator';
 import { mapTo, mapToMany } from './utils';

@@ -14,7 +14,7 @@ import {
   cursorToOffset,
 } from 'graphql-relay';
 
-import db from '../../db';
+import db from '../db';
 import UserType from './UserType';
 import type Context from '../Context';
 

@@ -15,7 +15,7 @@ import {
 } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
-import UserIdentityType from './UserIdentityType';
+import IdentityType from './IdentityType';
 import { nodeInterface } from '../Node';
 import type Context from '../Context';
 
@@ -54,7 +54,7 @@ export default new GraphQLObjectType({
     },
 
     identities: {
-      type: new GraphQLList(UserIdentityType),
+      type: new GraphQLList(IdentityType),
       resolve(self, args, ctx) {
         return ctx.identitiesByUserId.load(self.id);
       },
