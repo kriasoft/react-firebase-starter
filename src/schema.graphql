@@ -47,12 +47,6 @@ type DeleteUserPayload {
 }
 
 type Mutation {
-  # Authenticate a user with Firebase credentials.
-  signIn(input: SignInInput!): SignInPayload
-
-  # Delete session cookie.
-  signOut(input: SignOutInput!): SignOutPayload
-
   # Update user.
   updateUser(input: UpdateUserInput!): UpdateUserPayload
 
@@ -102,25 +96,6 @@ type Query {
   users(after: String, first: Int): UserConnection
   story(slug: String!): Story
   stories: [Story]
-}
-
-input SignInInput {
-  idToken: String!
-  refreshToken: String!
-  clientMutationId: String
-}
-
-type SignInPayload {
-  token: String
-  clientMutationId: String
-}
-
-input SignOutInput {
-  clientMutationId: String
-}
-
-type SignOutPayload {
-  clientMutationId: String
 }
 
 type Story implements Node {

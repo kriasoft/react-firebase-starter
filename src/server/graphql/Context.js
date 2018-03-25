@@ -33,8 +33,8 @@ class Context {
     }
 
     // Some GraphQL mutations may need to sign in / sign out a user
-    this.signIn = req.signIn;
-    this.signOut = req.signOut;
+    this.logIn = req.logIn;
+    this.logOut = req.logOut;
   }
 
   /*

@@ -7,6 +7,10 @@
     "public": "build/public",
     "rewrites": [
       {
+        "source": "/login/**",
+        "function": "login"
+      },
+      {
         "source": "/graphql",
         "function": "graphql"
       },

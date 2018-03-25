@@ -34,6 +34,7 @@
     "history": "^4.7.2",
     "idx": "^2.2.0",
     "jsonwebtoken": "^8.2.0",
+    "jwt-passport": "^0.0.2",
     "knex": "^0.14.4",
     "material-ui": "1.0.0-beta.36",
     "passport": "^0.4.0",
@@ -52,7 +53,7 @@
     "slug": "^0.9.1",
     "styled-components": "^3.2.3",
     "universal-router": "^6.0.0",
-    "uuid-base62": "^0.1.0",
+    "uuid": "^3.2.1",
     "validator": "^9.4.1"
   },
   "devDependencies": {

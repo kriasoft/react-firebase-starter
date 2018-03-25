@@ -19,7 +19,13 @@ exports.up = async db => {
     table.timestamp('last_signin_at').notNullable().defaultTo(db.fn.now());
   });
 
-  await db.schema.createTable('identities', table => {
+  await db.schema.createTable('user_tokens', table => {
+    table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
+    table.uuid('token_id').notNullable().primary();
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+  });
+
+  await db.schema.createTable('user_identities', table => {
     table.uuid('user_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
     table.string('provider', 16).notNullable();
     table.string('id', 36).notNullable();
@@ -67,6 +73,7 @@ exports.down = async db => {
   await db.schema.dropTableIfExists('comments');
   await db.schema.dropTableIfExists('story_points');
   await db.schema.dropTableIfExists('stories');
-  await db.schema.dropTableIfExists('identities');
+  await db.schema.dropTableIfExists('user_identities');
+  await db.schema.dropTableIfExists('user_tokens');
   await db.schema.dropTableIfExists('users');
 };

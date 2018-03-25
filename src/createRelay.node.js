@@ -10,8 +10,8 @@ import { graphql } from 'graphql';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import type { Request } from 'express';
 
-import schema from './graphql/schema';
-import Context from './graphql/Context';
+import schema from './server/graphql/schema';
+import Context from './server/graphql/Context';
 
 export default function createRelay(req: Request) {
   function fetchQuery(operation, variables) {

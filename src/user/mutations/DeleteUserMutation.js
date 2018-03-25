@@ -9,8 +9,8 @@
 import { graphql, commitMutation } from 'react-relay';
 
 const mutation = graphql`
-  mutation SignInMutation($input: SignInInput!) {
-    signIn(input: $input) {
+  mutation DeleteUserMutation($input: DeleteUserInput!) {
+    deleteUser(input: $input) {
       clientMutationId
     }
   }
@@ -21,11 +21,11 @@ function commit(environment, input) {
     commitMutation(environment, {
       mutation,
       variables: { input },
-      onCompleted({ signIn }, errors) {
+      onCompleted(response, errors) {
         if (errors) {
           reject(errors[0]);
         } else {
-          resolve(signIn);
+          resolve();
         }
       },
       onError: reject,
