@@ -9,6 +9,9 @@
 import idx from 'idx';
 import db from '../db';
 
+/**
+ * Generates a random username for new users.
+ */
 export function generateUsername() {
   let text = '';
   const possible =
@@ -21,7 +24,11 @@ export function generateUsername() {
   return text;
 }
 
-export default async function logIn(req, profile, credentials) {
+/**
+ * Finds a user matching the provided Passport.js credentials. If user not
+ * found, it atempts to create a new user account.
+ */
+export default async function findUserByCredentials(profile, credentials) {
   const identityKeys = {
     'user_identities.provider': profile.provider,
     'user_identities.id': profile.id,

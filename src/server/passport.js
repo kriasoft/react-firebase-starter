@@ -13,7 +13,7 @@ import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { config } from 'firebase-functions';
 
 import db from './db';
-import logIn from './utils/logIn';
+import findUserByCredentials from './data/findUserByCredentials';
 
 passport.framework(
   jwt({
@@ -66,14 +66,11 @@ passport.use(
       ],
       passReqToCallback: true,
     },
-    async (req, accessToken, refreshToken, profile, cb) => {
-      try {
-        const credentials = { accessToken, refreshToken };
-        const user = await logIn(req, profile, credentials);
-        cb(null, user);
-      } catch (err) {
-        cb(err);
-      }
+    (req, accessToken, refreshToken, profile, cb) => {
+      const credentials = { accessToken, refreshToken };
+      findUserByCredentials(profile, credentials)
+        .then(user => cb(null, user))
+        .catch(err => cb(err));
     },
   ),
 );
