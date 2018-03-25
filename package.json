@@ -82,7 +82,8 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --no-ignore --fix",
+      "yarn run eslint --no-ignore --fix --max-warnings=0",
+      "yarn run prettier --write",
       "git add --force"
     ],
     "*.json": [
