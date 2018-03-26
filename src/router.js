@@ -40,7 +40,7 @@ function resolveRoute(ctx) {
   }
 
   // Start fetching data from GraphQL API
-  const dataPromise = fetchQuery(route.query, params);
+  const dataPromise = route.query ? fetchQuery(route.query, params) : null;
 
   // Start downloading missing JavaScript chunks
   const componentsPromise = route.components

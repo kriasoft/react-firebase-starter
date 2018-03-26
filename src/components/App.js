@@ -29,7 +29,7 @@ class App extends React.Component<Props> {
   state = {
     query: null,
     variables: null,
-    render: () => null,
+    render: () => <AppRenderer ref={this.rendererRef} />,
     relay: this.props.createRelay(),
   };
 

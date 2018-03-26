@@ -35,6 +35,7 @@ input DeleteUserInput {
 }
 
 type DeleteUserPayload {
+  deletedUserId: String
   clientMutationId: String
 }
 

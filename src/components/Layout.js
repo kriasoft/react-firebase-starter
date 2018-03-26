@@ -116,10 +116,7 @@ class Layout extends React.Component {
     const { reset } = this.context;
     this.setState({ userMenuEl: null });
     if (event.currentTarget.id === 'user-menu-signout') {
-      Promise.all([
-        auth.signOut(),
-        fetch('/login/clear', { method: 'POST', credentials: 'include' }),
-      ]).then(reset);
+      auth.signOut().then(reset);
     }
   };
 
@@ -172,7 +169,7 @@ class Layout extends React.Component {
                   </Menu>
                 </>
               ) : (
-                <SignInButton onClick={auth.openLoginPage}>
+                <SignInButton onClick={auth.showLoginDialog}>
                   Sign In
                 </SignInButton>
               )}

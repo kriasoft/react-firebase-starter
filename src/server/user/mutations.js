@@ -6,7 +6,6 @@
 
 /* @flow */
 
-import firebase from 'firebase-admin';
 import { mutationWithClientMutationId } from 'graphql-relay';
 import {
   GraphQLNonNull,
@@ -84,12 +83,6 @@ export const updateUser = mutationWithClientMutationId({
         .table('users')
         .where({ id })
         .update({ ...data, updated_at: db.fn.now() });
-
-      if ('is_admin' in data) {
-        await firebase.auth().setCustomUserClaims(id, {
-          is_admin: data.is_admin,
-        });
-      }
     }
 
     const user = await db
@@ -108,7 +101,11 @@ export const deleteUser = mutationWithClientMutationId({
   inputFields: {
     id: { type: new GraphQLNonNull(GraphQLID) },
   },
-  outputFields: {},
+  outputFields: {
+    deletedUserId: {
+      type: GraphQLString,
+    },
+  },
 
   async mutateAndGetPayload(input: any, ctx: Context) {
     // Only an admin can delete a user
@@ -120,9 +117,6 @@ export const deleteUser = mutationWithClientMutationId({
       .where({ id })
       .del();
 
-    await firebase.auth().deleteUser(id);
-
-    ctx.signOut();
-    return {};
+    return { deletedUserId: input.id };
   },
 });
