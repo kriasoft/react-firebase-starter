@@ -9,10 +9,13 @@
 import uuid from 'uuid';
 import passport from 'passport';
 import jwt from 'jwt-passport';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import { config } from 'firebase-functions';
 
 import db, { findUserByCredentials } from './db';
+
+const origin = process.env.GCP_PROJECT ? config().app.origin : '';
 
 passport.framework(
   jwt({
@@ -42,13 +45,32 @@ passport.framework(
   }),
 );
 
+// https://github.com/jaredhanson/passport-google-oauth2
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: `${origin}/login/google/return`,
+      passReqToCallback: true,
+    },
+    (req, accessToken, refreshToken, profile, cb) => {
+      const credentials = { accessToken, refreshToken };
+      findUserByCredentials(profile, credentials)
+        .then(user => cb(null, user))
+        .catch(err => cb(err));
+    },
+  ),
+);
+
+// https://github.com/jaredhanson/passport-facebook
 passport.use(
   new FacebookStrategy(
     {
       clientID: process.env.FACEBOOK_APP_ID || config().facebook.app_id,
       clientSecret:
         process.env.FACEBOOK_APP_SECRET || config().facebook.app_secret,
-      callbackURL: '/login/facebook/return',
+      callbackURL: `${origin}/login/facebook/return`,
       profileFields: [
         'id',
         'cover',

@@ -39,7 +39,7 @@
     "material-ui-icons": "^1.0.0-beta.36",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
-    "passport-twitter": "^1.0.4",
+    "passport-google-oauth20": "^1.0.0",
     "pg": "^7.4.1",
     "prop-types": "^15.6.1",
     "query-string": "^6.0.0",

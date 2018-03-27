@@ -13,16 +13,33 @@ const router = new Router();
 
 router.use(passport.initialize());
 
-router.get('/login/:provider(facebook)', (req, res, next) => {
-  passport.authenticate(req.params.provider)(req, res, next);
-});
+router.get(
+  '/login/google',
+  passport.authenticate('google', { scope: ['email'] }),
+);
 
-router.get('/login/:provider(facebook)/return', (req, res, next) => {
+router.get(
+  '/login/google/return',
+  passport.authenticate('google', {
+    successRedirect: '/login?success',
+    failureRedirect: '/login?error=something+went+wrong',
+  }),
+);
+
+router.get(
+  '/login/facebook',
+  passport.authenticate('facebook', {
+    scope: ['public_profile', 'email'],
+  }),
+);
+
+router.get(
+  '/login/facebook/return',
   passport.authenticate('facebook', {
     successRedirect: '/login?success',
     failureRedirect: '/login?error=something+went+wrong',
-  })(req, res, next);
-});
+  }),
+);
 
 router.post('/login/clear', (req, res) => {
   req.logOut();
