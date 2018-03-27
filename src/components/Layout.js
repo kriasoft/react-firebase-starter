@@ -124,7 +124,14 @@ class Layout extends React.Component {
     const { data: { me } } = this.props;
     const { userMenuEl } = this.state;
     const { history: { location: { pathname: path } } } = this.context;
-    const index = path === '/' ? 0 : path.startsWith('/news') ? 1 : 2;
+    let index = -1;
+    if (path === '/') {
+      index = 0;
+    } else if (path.startsWith('/news')) {
+      index = 1;
+    } else if (path.startsWith('/submit')) {
+      index = 2;
+    }
 
     return (
       <MuiThemeProvider theme={theme}>

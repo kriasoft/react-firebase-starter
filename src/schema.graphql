@@ -49,6 +49,16 @@ type Identity {
   photoURL: String
 }
 
+input LikeStoryInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type LikeStoryPayload {
+  story: Story
+  clientMutationId: String
+}
+
 type Mutation {
   # Update user.
   updateUser(input: UpdateUserInput!): UpdateUserPayload
@@ -59,6 +69,7 @@ type Mutation {
   # Create a new story.
   createStory(input: CreateStoryInput!): CreateStoryPayload
   updateStory(input: UpdateStoryInput!): UpdateStoryPayload
+  likeStory(input: LikeStoryInput!): LikeStoryPayload
 }
 
 # An object with an ID
@@ -111,6 +122,7 @@ type Story implements Node {
   isURL: Boolean!
   comments: [Comment]
   pointsCount: Int!
+  pointGiven: Boolean!
   commentsCount: Int!
   createdAt: String!
   updatedAt: String!

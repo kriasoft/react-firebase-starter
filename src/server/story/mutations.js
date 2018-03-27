@@ -138,3 +138,42 @@ export const updateStory = mutationWithClientMutationId({
     return { story };
   },
 });
+
+export const likeStory = mutationWithClientMutationId({
+  name: 'LikeStory',
+
+  inputFields: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+  },
+
+  outputFields: {
+    story: { type: StoryType },
+  },
+
+  async mutateAndGetPayload(input, ctx: Context) {
+    ctx.ensureIsAuthorized();
+    const id = fromGlobalId(input.id, 'Story');
+    const keys = { story_id: id, user_id: ctx.user.id };
+
+    const points = await db
+      .table('story_points')
+      .where(keys)
+      .select(1);
+
+    if (points.length) {
+      await db
+        .table('story_points')
+        .where(keys)
+        .del();
+    } else {
+      await db.table('story_points').insert(keys);
+    }
+
+    const story = db
+      .table('stories')
+      .where({ id })
+      .first();
+
+    return { story };
+  },
+});

@@ -68,6 +68,13 @@ export default new GraphQLObjectType({
       },
     },
 
+    pointGiven: {
+      type: new GraphQLNonNull(GraphQLBoolean),
+      resolve(self, args, ctx: Context) {
+        return ctx.user ? ctx.storyPointGiven.load(self.id) : false;
+      },
+    },
+
     commentsCount: {
       type: new GraphQLNonNull(GraphQLInt),
       resolve(self, args, ctx: Context) {

@@ -11,7 +11,7 @@ import type { Request } from 'express';
 import db from './db';
 import DataLoader from './DataLoader';
 import Validator from './Validator';
-import { mapTo, mapToMany } from './utils';
+import { mapTo, mapToMany, mapToValues } from './utils';
 import { UnauthorizedError, ForbiddenError, ValidationError } from './errors';
 
 class Context {
@@ -134,6 +134,35 @@ class Context {
       })
       .then(mapTo(keys, x => x.slug)),
   );
+
+  storyPointsCount = new DataLoader(keys =>
+    db
+      .table('stories')
+      .leftJoin('story_points', 'story_points.story_id', 'stories.id')
+      .whereIn('stories.id', keys)
+      .groupBy('stories.id')
+      .select('stories.id', db.raw('count(story_points.user_id)::int'))
+      .then(mapToValues(keys, x => x.id, x => parseInt(x.count, 10))),
+  );
+
+  storyPointGiven = new DataLoader(keys => {
+    const userId = this.user.id;
+    console.log('userId', userId);
+    return db
+      .table('stories')
+      .leftJoin('story_points', function join() {
+        this.on('story_points.story_id', 'stories.id').andOn(
+          'story_points.user_id',
+          db.raw('?', [userId]),
+        );
+      })
+      .whereIn('stories.id', keys)
+      .select(
+        'stories.id',
+        db.raw('(story_points.user_id IS NOT NULL) AS given'),
+      )
+      .then(mapToValues(keys, x => x.id, x => x.given));
+  });
 }
 
 export default Context;
