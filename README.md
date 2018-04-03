@@ -1,6 +1,9 @@
 <h1>
   React Starter Kit for Firebase &nbsp; <sup><i>a.k.a. Serveless Edition</i></sup><br>
-  <a href="https://circleci.com/gh/kriasoft/react-firebase-starter"><img src="https://circleci.com/gh/kriasoft/react-firebase-starter.svg?style=svg" alt="Build Status" height="20" /></a> <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&label=Follow&maxAge=3600" alt="Twitter" height="20"></a> <a href="https://t.me/ReactStarter"><img src="https://img.shields.io/badge/chat-Telegram-green.svg?style=social&maxAge=3600" height="20"></a>
+  <a href="https://circleci.com/gh/kriasoft/react-firebase-starter"><img src="https://circleci.com/gh/kriasoft/react-firebase-starter.svg?style=svg" alt="Build Status" height="20" /></a>
+  <a href="https://opencollective.com/react-firebase-starter"><img src="https://opencollective.com/react-firebase-starter/backers/badge.svg?maxAge=3600" height="20"></a>
+  <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&amp;label=Follow&amp;maxAge=3600" alt="Twitter" height="20"></a>
+  <a href="https://t.me/ReactStarter"><img src="https://img.shields.io/badge/chat-Telegram-green.svg?style=social&amp;maxAge=3600" height="20"></a>
 </h1>
 
 **React Starter Kit** _for Firebase_ is a popular project template (aka, boilerplate) for building
@@ -9,7 +12,7 @@ provided by <a href="https://firebase.google.com/">Firebase</a> (Cloud SQL, Clou
 hosting, and file storage). It allows you to save time and build upon a solid foundation and
 design patterns.
 
-<p align="center"><strong>View</strong> <a href="https://firebase.reactstarter.com">online demo</a> &nbsp;|&nbsp; <strong>Follow us</strong> on <a href="https://twitter.com/ReactStarter">Twitter</a> &nbsp;|&nbsp; <strong>Get FREE support</strong> on <a href="https://t.me/ReactStarter">Telegram</a> &nbsp;|&nbsp; <strong>Visit our sponsors</strong>:</p>
+<p align="center"><strong>View</strong> <a href="https://firebase.reactstarter.com">online demo</a> (<a href="https://firebase.reactstarter.com/graphql">API</a>, <a href="https://firebase.reactstarter.com/graphql/model">data model</a>) &nbsp;|&nbsp; <strong>Follow us</strong> on <a href="https://twitter.com/ReactStarter">Twitter</a> &nbsp;|&nbsp; <strong>Get FREE support</strong> on <a href="https://t.me/ReactStarter">Telegram</a> &nbsp;|&nbsp; <strong>Visit our sponsors</strong>:</p>
 
 <p align="center">
   <a href="https://rollbar.com/?utm_source=reactstartkit(github)&utm_medium=link&utm_campaign=reactstartkit(github)" target="_blank">
@@ -28,7 +31,7 @@ This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kria
 ### Tech Stack
 
 * [Create React App][cra] (★ 46k) for development and test infrastructure (see [user guide][cradocs])
-* [Material UI][mui] (★ 34k) to reduce development time by integrating Google's [Material Design][material]
+* [Material UI][mui] (★ 35k) to reduce development time by integrating Google's [Material Design][material]
 * [Styled Components][sc] (★ 15k) for component friendly CSS styles with a great DX ([docs][scdocs])
 * [Passport.js][passport] (★ 13k) for authentication configured with stateless JWT tokens for sessions
 * [GraphQL.js][gqljs] (★ 10k) and [Relay][relay] (★ 11k) for declarative data fetching and efficient client stage management
@@ -42,24 +45,28 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 
 ```bash
 ├── build/                         # Compiled output
+├── migrations/                    # Database schema migration files
 ├── node_modules/                  # 3rd-party libraries and utilities
 ├── public/                        # Static files such as favicon.ico etc.
+├── scripts/                       # Automation scripts (yarn update-schema etc.)
+├── seeds/                         # Reference and seed data for the database
 ├── src/                           # Application source code
-│   ├── admin/                     # Admin dashboard
+│   ├── admin/                     # Admin section (Dashboard, User Management etc.)
 │   ├── components/                # Shared React components
 │   ├── news/                      # News section (example)
 │   ├── pages/                     # Static pages (landing, about, privacy, etc.)
 │   ├── server/                    # Server-side code (API, authentication, etc.)
 │   │   ├── db/                    # Database client
 │   │   ├── story/                 # Story related schema, queries, and mutations
+│   │   ├── templates/             # HTML templates for server-side rendering
 │   │   ├── user/                  # User related schema, queries, and mutations
 │   │   ├── api.js                 # GraphQL API middleware
 │   │   ├── Context.js             # GraphQL context wrapper
 │   │   ├── createRelay.js         # Relay factory method for Node.js envrironment
-│   │   ├── login.js               # Authentication middleware, login pages
+│   │   ├── login.js               # Authentication middleware (e.g. /login/facebook)
+│   │   ├── schema.js              # GraphQL schema
 │   │   └── ssr.js                 # Server-side rendering middleware
-│   ├── templates/                 # HTML templates for server-side rendering
-│   ├── user/                      # User pages (login, my account, profile, etc)
+│   ├── user/                      # User pages (login, account settings, user profile, etc)
 │   ├── app.browser.js             # Client-side rendering, e.g. ReactDOM.render(<App />, container)
 │   ├── app.node.js                # Server-side rendering, e.g. ReactDOMServer.renderToString(<App />)
 │   ├── auth.js                    # Client-side authentication manager

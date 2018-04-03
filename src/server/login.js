@@ -15,7 +15,7 @@ router.use(passport.initialize());
 
 router.get(
   '/login/google',
-  passport.authenticate('google', { scope: ['email'] }),
+  passport.authenticate('google', { scope: ['profile', 'email'] }),
 );
 
 router.get(

@@ -57,7 +57,7 @@ export default async function findUserByCredentials(profile, credentials) {
       db
         .table('users')
         .where({ id: user.id })
-        .update({ last_signin_at: db.fn.now() }),
+        .update({ last_login_at: db.fn.now() }),
     ]);
   } else {
     user = await db

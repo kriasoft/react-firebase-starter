@@ -117,7 +117,13 @@ class News extends React.Component<{}> {
                 }
                 secondary={
                   <>
-                    <span>{x.author.displayName}</span>
+                    <span>
+                      by{' '}
+                      <Link href={`/@${x.author.username}`}>
+                        {x.author.displayName}
+                      </Link>{' '}
+                      | {x.createdAt}
+                    </span>
                     <Link href={`/news/${x.slug}`}>
                       <ChatBubbleOutlineIcon /> (0)
                     </Link>
@@ -147,10 +153,11 @@ export default createFragmentContainer(
         title
         text
         isURL
-        createdAt
+        createdAt(format: "MMM Do, YYYY")
         author {
-          photoURL
+          username
           displayName
+          photoURL
         }
         pointsCount
         pointGiven

@@ -19,6 +19,7 @@ const origin = process.env.GCP_PROJECT ? config().app.origin : '';
 
 passport.framework(
   jwt({
+    name: process.env.NODE_ENV === 'production' ? '__session' : '__session_rsk',
     secret: process.env.JWT_SECRET || config().jwt.secret,
     issuer: 'https://firebase.reactstarter.com',
     createToken: req => ({
@@ -49,8 +50,9 @@ passport.framework(
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientID: process.env.GOOGLE_CLIENT_ID || config().google.client_id,
+      clientSecret:
+        process.env.GOOGLE_CLIENT_SECRET || config().google.client_secret,
       callbackURL: `${origin}/login/google/return`,
       passReqToCallback: true,
     },

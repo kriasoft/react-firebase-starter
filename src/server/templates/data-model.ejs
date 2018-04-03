@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Data Model • React Starter Kit for Firebase</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/graphql-voyager/dist/voyager.css">
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script crossorigin src="https://cdn.jsdelivr.net/npm/graphql-voyager/dist/voyager.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    html, body, #root {
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+    <div id="root">Loading...</div>
+    <script>
+      GraphQLVoyager.init(document.getElementById('root'), {
+        introspection: query =>
+          fetch('/graphql', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+            },
+            body: JSON.stringify({ query }),
+            credentials: 'include',
+          }).then(x => x.json()),
+      })
+    </script>
+</body>
+</html>

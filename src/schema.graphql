@@ -13,8 +13,8 @@ type Comment implements Node {
   comments: [Comment]
   text: String
   pointsCount: Int!
-  createdAt: String!
-  updatedAt: String!
+  createdAt(format: String): String
+  updatedAt(format: String): String
 }
 
 input CreateStoryInput {
@@ -47,6 +47,7 @@ type Identity {
   email: String
   displayName: String
   photoURL: String
+  profileURL: String
 }
 
 input LikeStoryInput {
@@ -118,14 +119,14 @@ type Story implements Node {
   author: User!
   slug: String!
   title: String!
-  text: String!
+  text(truncate: Int): String!
   isURL: Boolean!
   comments: [Comment]
   pointsCount: Int!
   pointGiven: Boolean!
   commentsCount: Int!
-  createdAt: String!
-  updatedAt: String!
+  createdAt(format: String): String
+  updatedAt(format: String): String
 }
 
 input UpdateStoryInput {
@@ -167,9 +168,9 @@ type User implements Node {
   photoURL: String
   identities: [Identity]
   isAdmin: Boolean
-  createdAt: String
-  updatedAt: String
-  lastSignInAt: String
+  createdAt(format: String): String
+  updatedAt(format: String): String
+  lastLoginAt(format: String): String
 }
 
 # A connection to a list of items.
