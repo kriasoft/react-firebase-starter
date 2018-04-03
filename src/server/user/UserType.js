@@ -6,6 +6,8 @@
 
 /* @flow */
 
+import moment from 'moment';
+import { globalIdField } from 'graphql-relay';
 import {
   GraphQLObjectType,
   GraphQLList,
@@ -13,7 +15,6 @@ import {
   GraphQLString,
   GraphQLBoolean,
 } from 'graphql';
-import { globalIdField } from 'graphql-relay';
 
 import IdentityType from './IdentityType';
 import { nodeInterface } from '../Node';
@@ -71,22 +72,37 @@ export default new GraphQLObjectType({
 
     createdAt: {
       type: GraphQLString,
-      resolve(self) {
-        return self.created_at;
+      args: {
+        format: { type: GraphQLString },
+      },
+      resolve(self, args) {
+        return args.format
+          ? moment(self.created_at).format(args.format)
+          : self.created_at.toISOString();
       },
     },
 
     updatedAt: {
       type: GraphQLString,
-      resolve(self) {
-        return self.updated_at;
+      args: {
+        format: { type: GraphQLString },
+      },
+      resolve(self, args) {
+        return args.format
+          ? moment(self.updated_at).format(args.format)
+          : self.updated_at.toISOString();
       },
     },
 
-    lastSignInAt: {
+    lastLoginAt: {
       type: GraphQLString,
-      resolve(self) {
-        return self.last_signin_at;
+      args: {
+        format: { type: GraphQLString },
+      },
+      resolve(self, args) {
+        return args.format
+          ? moment(self.last_login_at).format(args.format)
+          : self.last_login_at.toISOString();
       },
     },
   },

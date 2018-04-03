@@ -16,7 +16,21 @@ const db = knex(config);
 
 (async () => {
   for (const table of config.tables) {
-    const rows = await db.table(table).select();
+    let rows;
+
+    try {
+      rows = await db
+        .table(table)
+        .orderBy('created_at')
+        .select();
+    } catch (err) {
+      if (err.routine === 'errorMissingColumn') {
+        rows = await db.table(table).select();
+      } else {
+        throw err;
+      }
+    }
+
     fs.writeFileSync(
       path.join(__dirname, `../seeds/${table}.json`),
       prettier.format(JSON.stringify(rows), { parser: 'json' }),

@@ -17,6 +17,12 @@ module.exports.seed = async db => {
   for (const table of config.tables) {
     console.log(`Seeding data into the ${table} table.`);
     const data = require(`./${table}.json`);
+    if (table === 'user_identities') {
+      data.forEach(x => {
+        x.profile = JSON.stringify(x.profile);
+        x.credentials = JSON.stringify(x.credentials);
+      });
+    }
     await db.table(table).insert(data);
   }
 };

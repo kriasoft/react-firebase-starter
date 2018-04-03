@@ -16,7 +16,7 @@ exports.up = async db => {
     table.string('photo_url', 250);
     table.boolean('is_admin').notNullable().defaultTo(false);
     table.timestamps(false, true);
-    table.timestamp('last_signin_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('last_login_at').notNullable().defaultTo(db.fn.now());
   });
 
   await db.schema.createTable('user_tokens', table => {

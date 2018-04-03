@@ -6,6 +6,9 @@
 
 /* @flow */
 
+import _ from 'lodash';
+import moment from 'moment';
+import { globalIdField } from 'graphql-relay';
 import {
   GraphQLObjectType,
   GraphQLList,
@@ -14,7 +17,6 @@ import {
   GraphQLInt,
   GraphQLString,
 } from 'graphql';
-import { globalIdField } from 'graphql-relay';
 
 import UserType from '../user/UserType';
 import CommentType from './CommentType';
@@ -45,6 +47,14 @@ export default new GraphQLObjectType({
 
     text: {
       type: new GraphQLNonNull(GraphQLString),
+      args: {
+        truncate: { type: GraphQLInt },
+      },
+      resolve(self, args) {
+        return args.truncate
+          ? _.truncate(self.text, { length: args.truncate })
+          : self.text;
+      },
     },
 
     isURL: {
@@ -83,16 +93,26 @@ export default new GraphQLObjectType({
     },
 
     createdAt: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve(self) {
-        return self.created_at;
+      type: GraphQLString,
+      args: {
+        format: { type: GraphQLString },
+      },
+      resolve(self, args) {
+        return args.format
+          ? moment(self.created_at).format(args.format)
+          : self.created_at.toISOString();
       },
     },
 
     updatedAt: {
-      type: new GraphQLNonNull(GraphQLString),
-      resolve(self) {
-        return self.updated_at;
+      type: GraphQLString,
+      args: {
+        format: { type: GraphQLString },
+      },
+      resolve(self, args) {
+        return args.format
+          ? moment(self.updated_at).format(args.format)
+          : self.updated_at.toISOString();
       },
     },
   },

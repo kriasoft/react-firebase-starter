@@ -4,17 +4,15 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-const relayPlugin = require.resolve('babel-plugin-relay');
-
 module.exports = {
   babel(config, { target }) {
     return {
       ...config,
       plugins: [
         ...config.plugins,
-        !config.plugins.some(x => x === relayPlugin) &&
-          require.resolve('babel-plugin-relay'),
-      ].filter(Boolean),
+        require.resolve('babel-plugin-relay'),
+        require.resolve('babel-plugin-lodash'),
+      ],
     };
   },
 

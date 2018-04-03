@@ -13,7 +13,7 @@ import { fetchQuery } from 'relay-runtime';
 import { Router } from 'express';
 
 import passport from './passport';
-import templates from '../templates';
+import templates from './templates';
 import routes from '../router';
 import createRelay from './createRelay';
 import assets from './assets.json';

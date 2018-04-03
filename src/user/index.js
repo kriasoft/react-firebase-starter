@@ -21,6 +21,30 @@ export default [
     }),
   },
   {
+    path: '/@:username',
+    components: () => [
+      import(/* webpackChunkName: 'user-profile' */ './UserProfile'),
+    ],
+    query: graphql`
+      query userProfileQuery($username: String!) {
+        ...Layout
+        user(username: $username) {
+          displayName
+          ...UserProfile
+        }
+      }
+    `,
+    render: ([UserProfile], data) => ({
+      title: `${data.user.displayName} • React Starter Kit for Firebase`,
+      component: (
+        <Layout data={data}>
+          <UserProfile data={data.user} />
+        </Layout>
+      ),
+      chunks: ['user-profile'],
+    }),
+  },
+  {
     path: '/account',
     components: () => [import(/* webpackChunkName: 'account' */ './Account')],
     query: graphql`

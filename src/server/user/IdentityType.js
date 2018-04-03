@@ -70,8 +70,24 @@ export default new GraphQLObjectType({
       type: GraphQLString,
       resolve(self) {
         switch (self.provider) {
+          case 'google':
+            return idx(self, x => x.profile.image.url);
           case 'facebook':
             return idx(self, x => x.profile.picture.data.url);
+          default:
+            return null;
+        }
+      },
+    },
+
+    profileURL: {
+      type: GraphQLString,
+      resolve(self) {
+        switch (self.provider) {
+          case 'google':
+            return idx(self, x => x.profile.url);
+          case 'facebook':
+            return idx(self, x => x.profile.link);
           default:
             return null;
         }

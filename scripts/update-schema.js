@@ -16,8 +16,8 @@ require('@babel/register')({
 const fs = require('fs');
 const path = require('path');
 const graphql = require('graphql');
-const schema = require('../src/graphql/schema').default;
-const db = require('../src/graphql/db').default;
+const schema = require('../src/server/schema').default;
+const db = require('../src/server/db').default;
 
 fs.writeFileSync(
   path.resolve(__dirname, '../src/schema.graphql'),

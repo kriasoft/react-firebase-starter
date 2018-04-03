@@ -14,6 +14,7 @@ import { printSchema } from 'graphql';
 
 import passport from './passport';
 import schema from './schema';
+import templates from './templates';
 import Context from './Context';
 
 const router = new Router();
@@ -28,6 +29,10 @@ if (process.env.NODE_ENV !== 'production') {
     'utf8',
   );
 }
+
+router.get('/graphql/model', (req, res) => {
+  res.send(templates.dataModel());
+});
 
 router.use(
   '/graphql',
