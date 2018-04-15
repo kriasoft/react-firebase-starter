@@ -62,7 +62,7 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   │   ├── user/                  # User related schema, queries, and mutations
 │   │   ├── api.js                 # GraphQL API middleware
 │   │   ├── Context.js             # GraphQL context wrapper
-│   │   ├── createRelay.js         # Relay factory method for Node.js envrironment
+│   │   ├── createRelay.js         # Relay factory method for Node.js environment
 │   │   ├── login.js               # Authentication middleware (e.g. /login/facebook)
 │   │   ├── schema.js              # GraphQL schema
 │   │   └── ssr.js                 # Server-side rendering middleware
