@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Install NPM modules
           command: |
-            yarn install
+            yarn install --frozen-lockfile
             yarn add firebase-tools@3.17.7 --dev
       - save_cache:
           key: yarn-v1-{{ checksum "yarn.lock" }}
