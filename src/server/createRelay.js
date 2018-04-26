@@ -22,10 +22,17 @@ export default function createRelay(req: Request) {
       variableValues: variables,
       operationName: operation.name,
     }).then(payload => {
-      if (payload.errors) {
-        throw new Error(payload.errors);
+      req.data = payload;
+
+      const error = (payload.errors || []).find(x =>
+        [401, 403].includes(x.originalError && x.originalError.code),
+      );
+
+      if (error) {
+        throw error.originalError;
       }
-      return (req.data = payload);
+
+      return payload;
     });
   }
 

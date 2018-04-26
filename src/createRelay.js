@@ -26,7 +26,19 @@ export default function createRelay() {
         variables,
       }),
       credentials: 'include',
-    }).then(res => res.json());
+    })
+      .then(res => res.json())
+      .then(payload => {
+        const error = (payload.errors || []).find(x =>
+          [401, 403].includes(x.code),
+        );
+
+        if (error) {
+          throw error;
+        }
+
+        return payload;
+      });
   }
 
   const recordSource = new RecordSource();

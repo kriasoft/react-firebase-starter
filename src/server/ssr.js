@@ -37,7 +37,7 @@ router.get('*', async (req, res, next) => {
     });
 
     if (route.redirect) {
-      res.redirect(route.redirect, route.status || 301);
+      res.redirect(route.status || 302, route.redirect);
     } else {
       if (process.env.GCP_PROJECT === 'react-firebase-graphql') {
         res.set('Cache-Control', 'public, max-age=600, s-maxage=900');

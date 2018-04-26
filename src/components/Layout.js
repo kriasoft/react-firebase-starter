@@ -98,16 +98,6 @@ class Layout extends React.Component {
     userMenuEl: null,
   };
 
-  componentDidMount() {
-    // this.unlisten = auth.onShowLoginDialog(() => {
-    //   this.context.history.push('/login');
-    // });
-  }
-
-  componentWillUnmount() {
-    // this.unlisten();
-  }
-
   openUserMenu = event => {
     this.setState({ userMenuEl: event.currentTarget });
   };
@@ -121,9 +111,15 @@ class Layout extends React.Component {
   };
 
   render() {
-    const { data: { me } } = this.props;
+    const {
+      data: { me },
+    } = this.props;
     const { userMenuEl } = this.state;
-    const { history: { location: { pathname: path } } } = this.context;
+    const {
+      history: {
+        location: { pathname: path },
+      },
+    } = this.context;
     let index = -1;
     if (path === '/') {
       index = 0;

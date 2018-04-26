@@ -7,6 +7,7 @@
 /* @flow */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
@@ -19,9 +20,6 @@ injectGlobal`
 
   #root {
     display: flex;
-    height: 100%;
-    padding: 20px;
-    overflow: auto;
     flex-direction: column;
     justify-content: center;
     resize: vertical;
@@ -94,16 +92,28 @@ const FacebookIcon = () => (
 );
 
 class Login extends React.Component<{}> {
+  static contextTypes = {
+    history: PropTypes.object.isRequired,
+  };
+
   state = { error: null };
 
   componentDidMount() {
-    const { location: { search, origin }, top, opener } = window;
+    const {
+      location: { search, origin },
+      top,
+      opener,
+    } = window;
 
     if (search.includes('success') && top) {
-      opener.postMessage({ result: 'awesome' }, origin);
+      if (opener) {
+        opener.postMessage({ result: 'awesome' }, origin);
+      } else {
+        this.context.history.push('/');
+      }
     } else if (search.includes('error')) {
       const params = search.slice(1).split('=');
-      const error = params[params.indexOf('error') + 1];
+      const error = decodeURI(params[params.indexOf('error') + 1]);
 
       this.setState({ error });
     }
