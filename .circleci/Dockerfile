@@ -1,4 +1,4 @@
-FROM circleci/node:9.6.1
+FROM circleci/node:10.0.0
 
 ENV WATCHMAN_VERSION 4.9.0
 ENV PATH=$PATH:/home/circleci/.config/yarn/global/node_modules/.bin

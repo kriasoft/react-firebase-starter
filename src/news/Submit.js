@@ -43,7 +43,10 @@ class Submit extends React.Component<{}> {
   };
 
   handleSubmit = event => {
-    const { history, relay: { environment } } = this.context;
+    const {
+      history,
+      relay: { environment },
+    } = this.context;
     event.preventDefault();
 
     if (this.state.error) {
@@ -73,8 +76,12 @@ class Submit extends React.Component<{}> {
   };
 
   render() {
-    const { history: { location } } = this.context;
-    const { data: { me } } = this.props;
+    const {
+      history: { location },
+    } = this.context;
+    const {
+      data: { me },
+    } = this.props;
     return (
       <>
         <Typography variant="body1">

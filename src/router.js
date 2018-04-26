@@ -40,7 +40,8 @@ function resolveRoute(ctx) {
   }
 
   // Start fetching data from GraphQL API
-  const dataPromise = route.query ? fetchQuery(route.query, params) : null;
+  const variables = route.variables ? route.variables(params, ctx) : params;
+  const dataPromise = route.query ? fetchQuery(route.query, variables) : null;
 
   // Start downloading missing JavaScript chunks
   const componentsPromise = route.components
@@ -50,13 +51,17 @@ function resolveRoute(ctx) {
   return Promise.all([...componentsPromise, dataPromise]).then(components => {
     const data = components.pop();
     return {
-      ...route.render(components, data, ctx),
+      ...route.render(components, data, { ...ctx, variables }),
       data,
     };
   });
 }
 
 function errorHandler(error) {
+  if ([401, 403].includes(error.code)) {
+    return { redirect: `/login?error=${error.message}` };
+  }
+
   return {
     title: error.code === '404' ? 'Page not found' : 'System Error',
     status: error.code || 404,

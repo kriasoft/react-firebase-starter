@@ -12,10 +12,10 @@ import Typography from 'material-ui/Typography';
 import Avatar from 'material-ui/Avatar';
 import Snakbar from 'material-ui/Snackbar';
 import List, { ListItem, ListItemAvatar, ListItemText } from 'material-ui/List';
-import ChatBubbleOutlineIcon from 'material-ui-icons/ChatBubbleOutline';
-import FavoriteIcon from 'material-ui-icons/Favorite';
-import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
-import OpenInNewIcon from 'material-ui-icons/OpenInNew';
+import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { graphql, createFragmentContainer } from 'react-relay';
 
 import auth from '../auth';
@@ -89,7 +89,9 @@ class News extends React.Component<{}> {
   reset = () => this.setState({ error: null });
 
   render() {
-    const { data: { stories } } = this.props;
+    const {
+      data: { stories },
+    } = this.props;
     const { error } = this.state;
     return (
       <>

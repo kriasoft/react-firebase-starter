@@ -14,7 +14,6 @@ import { graphql, createFragmentContainer } from 'react-relay';
 class UserProfile extends React.Component<{}> {
   render() {
     const { data: user } = this.props;
-    console.log(this.props);
     return (
       <>
         <Typography

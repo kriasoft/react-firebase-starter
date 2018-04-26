@@ -10,6 +10,7 @@ import isEmail from 'validator/lib/isEmail';
 import isLength from 'validator/lib/isLength';
 import isURL from 'validator/lib/isURL';
 import textTrim from 'validator/lib/trim';
+import { fromGlobalId } from 'graphql-relay';
 
 function isEmpty(value) {
   return typeof value === 'undefined' || value === null;
@@ -28,12 +29,13 @@ export default class Validator {
   constructor(input, onError) {
     this.input = input;
     this.onError = onError;
+    this.mode = input.id ? 'edit' : 'create';
   }
 
   /**
    * Initialized a new state for the field.
    */
-  field(key, { as, alias, trim, transform } = {}) {
+  field(key, { as, alias, trim, transform, type } = {}) {
     const name = alias || key;
     let value = this.input[key];
 
@@ -43,6 +45,18 @@ export default class Validator {
 
     if (value && transform) {
       value = transform(value);
+    }
+
+    if (value && type) {
+      const globalId = fromGlobalId(value);
+
+      if (globalId.type !== type) {
+        throw new Error(
+          `Expected an ID of type '${type}' but got '${globalId.type}'.`,
+        );
+      }
+
+      value = globalId.id;
     }
 
     this.state = {
@@ -61,9 +75,16 @@ export default class Validator {
     return this;
   }
 
-  isRequired(validateOnly) {
-    if (!validateOnly && !this.state.value) {
-      this.state.addError(`The ${this.state.name} field cannot be empty.`);
+  isRequired(message) {
+    if (
+      (((this.input.validateOnly === true || this.mode === 'edit') &&
+        typeof this.state.value !== 'undefined') ||
+        this.mode === 'create') &&
+      !this.state.value
+    ) {
+      this.state.addError(
+        message || `The ${this.state.name} field cannot be empty.`,
+      );
     }
     return this;
   }

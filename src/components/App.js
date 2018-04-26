@@ -83,7 +83,9 @@ class App extends React.Component<Props> {
         variables,
         render: ({ error, props }) => {
           if (error) {
-            reject(error);
+            const err = new Error(error.message);
+            err.code = error.code;
+            reject(err);
           } else if (props !== null) {
             resolve(props);
           }
