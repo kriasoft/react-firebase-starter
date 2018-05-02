@@ -101,7 +101,7 @@
   },
   "scripts": {
     "update-schema": "node ./scripts/update-schema",
-    "relay": "relay-compiler --src ./src --schema ./src/schema.graphql --include \"**/*.js\"",
+    "relay": "relay-compiler --src ./ --schema ./src/schema.graphql --include \"**/*.js\"",
     "setup": "node ./scripts/setup",
     "start": "react-app start",
     "build": "react-app build",
