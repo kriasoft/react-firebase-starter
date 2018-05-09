@@ -1,5 +1,5 @@
 <h1>
-  React Starter Kit for Firebase &nbsp; <sup><i>a.k.a. Serveless Edition</i></sup><br>
+  React Starter Kit for Firebase &nbsp; <sup><i>a.k.a. Serverless Edition</i></sup><br>
   <a href="https://circleci.com/gh/kriasoft/react-firebase-starter"><img src="https://circleci.com/gh/kriasoft/react-firebase-starter.svg?style=svg" alt="Build Status" height="20" /></a>
   <a href="https://opencollective.com/react-firebase-starter"><img src="https://opencollective.com/react-firebase-starter/backers/badge.svg?maxAge=3600" height="20"></a>
   <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&amp;label=Follow&amp;maxAge=3600" alt="Twitter" height="20"></a>
