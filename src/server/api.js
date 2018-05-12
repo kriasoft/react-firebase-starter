@@ -24,7 +24,7 @@ router.use(passport.session());
 
 if (process.env.NODE_ENV !== 'production') {
   fs.writeFileSync(
-    path.join(process.cwd(), 'src/schema.graphql'),
+    path.join(process.cwd(), 'schema.graphql'),
     printSchema(schema, { commentDescriptions: true }),
     'utf8',
   );

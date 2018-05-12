@@ -17,11 +17,11 @@ import Menu, { MenuItem } from 'material-ui/Menu';
 import { MuiThemeProvider } from 'material-ui/styles';
 import { graphql, createFragmentContainer } from 'react-relay';
 
-import auth from '../auth';
 import theme from '../theme';
 import Link from './Link';
 import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
+import withAuth from '../utils/withAuth';
 
 injectGlobal`
   html,
@@ -91,7 +91,6 @@ const SignInButton = styled(Button)`
 class Layout extends React.Component {
   static contextTypes = {
     history: PropTypes.object.isRequired,
-    reset: PropTypes.func.isRequired,
   };
 
   state = {
@@ -102,25 +101,29 @@ class Layout extends React.Component {
     this.setState({ userMenuEl: event.currentTarget });
   };
 
-  closeUserMenu = event => {
-    const { reset } = this.context;
+  closeUserMenu = () => {
     this.setState({ userMenuEl: null });
-    if (event.currentTarget.id === 'user-menu-signout') {
-      auth.signOut().then(reset);
-    }
+  };
+
+  logOut = () => {
+    this.props.logOut().then(this.closeUserMenu);
   };
 
   render() {
     const {
       data: { me },
     } = this.props;
+
     const { userMenuEl } = this.state;
+
     const {
       history: {
         location: { pathname: path },
       },
     } = this.context;
-    let index = -1;
+
+    let index = false;
+
     if (path === '/') {
       index = 0;
     } else if (path.startsWith('/news')) {
@@ -164,17 +167,19 @@ class Layout extends React.Component {
                     }}
                   >
                     <MenuItem
-                      id="user-menu-signout"
+                      component={Link}
+                      href={`/@${me.username}`}
                       onClick={this.closeUserMenu}
                     >
+                      My Profile
+                    </MenuItem>
+                    <MenuItem id="user-menu-signout" onClick={this.logOut}>
                       Sign Out
                     </MenuItem>
                   </Menu>
                 </>
               ) : (
-                <SignInButton onClick={auth.showLoginDialog}>
-                  Sign In
-                </SignInButton>
+                <SignInButton onClick={this.props.logIn}>Sign In</SignInButton>
               )}
             </StyledTabs>
             <Content>{this.props.children}</Content>
@@ -186,15 +191,18 @@ class Layout extends React.Component {
   }
 }
 
-export default createFragmentContainer(
-  Layout,
-  graphql`
-    fragment Layout on Query {
-      me {
-        id
-        displayName
-        photoURL
+export default withAuth()(
+  createFragmentContainer(
+    Layout,
+    graphql`
+      fragment Layout on Query {
+        me {
+          id
+          username
+          displayName
+          photoURL
+        }
       }
-    }
-  `,
+    `,
+  ),
 );

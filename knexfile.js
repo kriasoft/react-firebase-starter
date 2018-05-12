@@ -4,11 +4,9 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-require('dotenv').config({ path: '.env.local' });
-require('dotenv').config({ path: '.env' });
-
 const fs = require('fs');
 const path = require('path');
+require('./scripts/env');
 
 function read(file) {
   const filename = path.resolve(__dirname, `ssl/${file}`);
@@ -27,9 +25,9 @@ module.exports = {
       (process.env.PGSSLMODE || 'disable') !== 'disable'
         ? {
             rejectUnauthorized: false,
-            ca: read('server-ca.pem'),
-            key: read('client-key.pem'),
-            cert: read('client-cert.pem'),
+            cert: read(process.env.PGSSLCERT),
+            key: read(process.env.PGSSLKEY),
+            ca: read(process.env.PGSSLROOTCERT),
           }
         : undefined,
   },

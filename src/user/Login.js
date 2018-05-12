@@ -107,7 +107,7 @@ class Login extends React.Component<{}> {
 
     if (search.includes('success') && top) {
       if (opener) {
-        opener.postMessage({ result: 'awesome' }, origin);
+        opener.postMessage('login:success', origin);
       } else {
         this.context.history.push('/');
       }

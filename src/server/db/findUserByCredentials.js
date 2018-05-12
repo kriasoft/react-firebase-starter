@@ -58,6 +58,19 @@ export default async function findUserByCredentials(profile, credentials) {
         .table('users')
         .where({ id: user.id })
         .update({ last_login_at: db.fn.now() }),
+      photo &&
+        db
+          .table('users')
+          .where({ id: user.id })
+          .andWhere(x =>
+            x
+              .where('photo_url', 'like', '%googleusercontent.com/%')
+              .orWhere('photo_url', 'like', '%facebook.com/%')
+              .orWhere('photo_url', 'like', '%fbcdn.net/%'),
+          )
+          .update({
+            photo_url: photo,
+          }),
     ]);
   } else {
     user = await db

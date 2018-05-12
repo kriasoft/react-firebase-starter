@@ -28,10 +28,10 @@ class Home extends React.Component<{}> {
     return (
       <Container>
         <Content>
-          <Typography type="headline" gutterBottom>
+          <Typography variant="headline" gutterBottom>
             My Account
           </Typography>
-          <Typography type="body1" paragraph>
+          <Typography variant="body1" paragraph>
             Welcome, {this.props.user && this.props.user.displayName}!
           </Typography>
         </Content>

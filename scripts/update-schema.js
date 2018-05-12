@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-'use script';
-
 process.env.NODE_ENV = 'test';
 
 require('@babel/register')({
@@ -20,7 +18,7 @@ const schema = require('../src/server/schema').default;
 const db = require('../src/server/db').default;
 
 fs.writeFileSync(
-  path.resolve(__dirname, '../src/schema.graphql'),
+  path.resolve(__dirname, '../schema.graphql'),
   graphql.printSchema(schema, { commentDescriptions: true }),
   'utf8',
 );

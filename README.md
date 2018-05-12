@@ -72,11 +72,11 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   ├── auth.js                    # Client-side authentication manager
 │   ├── createRelay.js             # Relay factory method for browser envrironment
 │   ├── router.js                  # Universal application router
-│   ├── graphql.schema             # GraphQL schema (auto-generated, used by Relay)
 │   ├── serviceWorker.js           # Service worker helper methods
 │   └── theme.js                   # Overrides for Material UI default styles
 ├── .env                           # Environment variables
 ├── config-overrides.js            # Configuration overrides for Babel and Webpack
+├── graphql.schema                 # GraphQL schema (auto-generated, used by Relay)
 └── package.json                   # The list of project dependencies + NPM scripts
 ```
 
@@ -113,6 +113,7 @@ $ yarn db-migrate                  # Migrate database to the latest version
 $ yarn db-rollback                 # Rollback the latest migration
 $ yarn db-save                     # Save data from database to JSON files
 $ yarn db-seed                     # Seed database with previously saved data
+$ yarn db                          # Opens PostgreSQL shell (for testing/debugging)
 ```
 
 ### How to Test

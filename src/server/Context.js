@@ -146,8 +146,8 @@ class Context {
   );
 
   storyPointGiven = new DataLoader(keys => {
-    const userId = this.user.id;
-    console.log('userId', userId);
+    const { id: userId } = this.user;
+
     return db
       .table('stories')
       .leftJoin('story_points', function join() {

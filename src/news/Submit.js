@@ -17,7 +17,7 @@ import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import { graphql, createFragmentContainer } from 'react-relay';
 
-import auth from '../auth';
+import withAuth from '../utils/withAuth';
 import CreateStoryMutation from './mutations/CreateStory';
 
 const StyledFormControl = styled(FormControl)`
@@ -70,18 +70,20 @@ class Submit extends React.Component<{}> {
     ) : null;
   };
 
-  signIn = event => {
+  logIn = event => {
     event.preventDefault();
-    auth.showLoginDialog();
+    this.props.logIn();
   };
 
   render() {
     const {
       history: { location },
     } = this.context;
+
     const {
       data: { me },
     } = this.props;
+
     return (
       <>
         <Typography variant="body1">
@@ -132,7 +134,7 @@ class Submit extends React.Component<{}> {
             {!me && (
               <FormHelperText>
                 Before posting a story you need to{' '}
-                <a href={location.pathname} onClick={this.signIn}>
+                <a href={location.pathname} onClick={this.logIn}>
                   sign in
                 </a>.
               </FormHelperText>
@@ -146,13 +148,15 @@ class Submit extends React.Component<{}> {
   }
 }
 
-export default createFragmentContainer(
-  Submit,
-  graphql`
-    fragment Submit on Query {
-      me {
-        id
+export default withAuth()(
+  createFragmentContainer(
+    Submit,
+    graphql`
+      fragment Submit on Query {
+        me {
+          id
+        }
       }
-    }
-  `,
+    `,
+  ),
 );
