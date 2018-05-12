@@ -4,7 +4,9 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-if (process.argv.includes('--prod') || process.argv.includes('--production')) {
+const argv = require('miminist')(process.argv.slice(2));
+
+if (argv.env === 'prod' || argv.env === 'production') {
   require('dotenv').config({ path: '.env.production.local' });
   require('dotenv').config({ path: '.env.production' });
 }

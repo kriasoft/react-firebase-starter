@@ -12,8 +12,7 @@ import knex from 'knex';
 import { config } from 'firebase-functions';
 
 function read(file) {
-  const filename = path.join(__dirname, `../ssl/${file}`);
-  return fs.readFileSync(filename, 'utf8');
+  return fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
 }
 
 export { default as findUserByCredentials } from './findUserByCredentials';
@@ -37,9 +36,9 @@ export default knex(
             (process.env.PGSSLMODE || 'disable') !== 'disable'
               ? {
                   rejectUnauthorized: false,
-                  ca: read('server-ca.pem'),
-                  key: read('client-key.pem'),
-                  cert: read('client-cert.pem'),
+                  cert: read(process.env.PGSSLCERT),
+                  key: read(process.env.PGSSLKEY),
+                  ca: read(process.env.PGSSLROOTCERT),
                 }
               : undefined,
         },

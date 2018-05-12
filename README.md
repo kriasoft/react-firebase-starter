@@ -74,7 +74,9 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   ├── router.js                  # Universal application router
 │   ├── serviceWorker.js           # Service worker helper methods
 │   └── theme.js                   # Overrides for Material UI default styles
+├── ssl/                           # SSL certificates for connecting to Cloud SQL instance
 ├── .env                           # Environment variables
+├── .env.local                     # Local (development) overrides
 ├── config-overrides.js            # Configuration overrides for Babel and Webpack
 ├── graphql.schema                 # GraphQL schema (auto-generated, used by Relay)
 └── package.json                   # The list of project dependencies + NPM scripts
@@ -113,8 +115,11 @@ $ yarn db-migrate                  # Migrate database to the latest version
 $ yarn db-rollback                 # Rollback the latest migration
 $ yarn db-save                     # Save data from database to JSON files
 $ yarn db-seed                     # Seed database with previously saved data
-$ yarn db                          # Opens PostgreSQL shell (for testing/debugging)
+$ yarn db                          # Open PostgreSQL shell (for testing/debugging)
 ```
+
+**Note**: Appending `--env=production` flag to any of the commands above will force it to use
+database connection settings from `.env.production` and/or `.env.production.local` file(s).
 
 ### How to Test
 
@@ -159,12 +164,12 @@ otherwise your project may differ too much from the base/upstream repo._
 
 ### How to Contribute
 
-Anyone and everyone is welcome to [contribute](CONTRIBUTING.md) to this project. The best way to
+Anyone and everyone is welcome to [contribute](https://github.com/kriasoft/react-firebase-starter/wiki/Contributing) to this project. The best way to
 start is by checking our [open issues](https://github.com/kriasoft/react-firebase-starter/issues),
 [submit a new issues](https://github.com/kriasoft/react-firebase-starter/issues/new?labels=bug) or
 [feature request](https://github.com/kriasoft/react-firebase-starter/issues/new?labels=enhancement),
 participate in discussions, upvote or downvote the issues you like or dislike, send [pull
-requests](CONTRIBUTING.md#pull-requests).
+requests](https://github.com/kriasoft/react-firebase-starter/wiki/Contributing#pull-requests).
 
 ### Learn React.js and ES6
 

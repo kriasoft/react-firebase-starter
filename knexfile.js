@@ -9,8 +9,7 @@ const path = require('path');
 require('./scripts/env');
 
 function read(file) {
-  const filename = path.resolve(__dirname, `ssl/${file}`);
-  return fs.readFileSync(filename, 'utf8');
+  return fs.readFileSync(path.resolve(__dirname, file), 'utf8');
 }
 
 // Knex configuration
