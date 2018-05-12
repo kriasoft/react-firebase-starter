@@ -111,7 +111,7 @@
     "build": "react-app build",
     "test": "react-app test --env=jsdom",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" . && stylelint \"src/**/*.js\"",
-    "lint-fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix . && yarn run prettier --write \"src/**/*.{js,json}\"",
+    "lint-fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix . && yarn run prettier --write \"**/*.{js,json}\"",
     "db": "node ./scripts/db",
     "db-save": "node ./scripts/db-save",
     "db-change": "knex migrate:make",
