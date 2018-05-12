@@ -18,8 +18,8 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { graphql, createFragmentContainer } from 'react-relay';
 
-import auth from '../auth';
 import Link from '../components/Link';
+import withAuth from '../utils/withAuth';
 import LikeStoryMutation from './mutations/LikeStory';
 
 const StyledListItem = styled(ListItem)`
@@ -79,7 +79,7 @@ class News extends React.Component<{}> {
     const { environment } = this.props.relay;
     LikeStoryMutation.commit(environment, { id }).catch(err => {
       if (err.code === 401) {
-        auth.showLoginDialog();
+        this.props.logIn();
       } else {
         this.setState({ error: err.message });
       }
@@ -145,25 +145,27 @@ class News extends React.Component<{}> {
   }
 }
 
-export default createFragmentContainer(
-  News,
-  graphql`
-    fragment News on Query {
-      stories {
-        id
-        slug
-        title
-        text
-        isURL
-        createdAt(format: "MMM Do, YYYY")
-        author {
-          username
-          displayName
-          photoURL
+export default withAuth()(
+  createFragmentContainer(
+    News,
+    graphql`
+      fragment News on Query {
+        stories {
+          id
+          slug
+          title
+          text
+          isURL
+          createdAt(format: "MMM Do, YYYY")
+          author {
+            username
+            displayName
+            photoURL
+          }
+          pointsCount
+          pointGiven
         }
-        pointsCount
-        pointGiven
       }
-    }
-  `,
+    `,
+  ),
 );

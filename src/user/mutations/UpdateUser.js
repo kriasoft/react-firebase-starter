@@ -25,7 +25,7 @@ function commit(environment, input) {
         if (errors) {
           reject(errors[0]);
         } else {
-          resolve(updateUser);
+          resolve(updateUser.user);
         }
       },
       onError: reject,

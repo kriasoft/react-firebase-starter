@@ -1,7 +1,26 @@
 {
   "functions": {
     "source": ".",
-    "ignore": ["**", "!build/**", "!ssl/**", "!package.json", "build/public/**"]
+    "ignore": [
+      ".circleci",
+      ".vscode",
+      "build/public/**",
+      "coverage",
+      "migrations",
+      "node_modules",
+      "public",
+      "scripts",
+      "seeds",
+      "src",
+      ".*",
+      "config-overrides.js",
+      "knexfile.js",
+      "LICENSE.txt",
+      "README.md",
+      "schema.graphql",
+      "storage.rules",
+      "*.log"
+    ]
   },
   "hosting": {
     "public": "build/public",

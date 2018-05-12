@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-'use script';
-
 const config = require('../knexfile');
 
 module.exports.seed = async db => {

@@ -13,8 +13,6 @@ import { QueryRenderer } from 'react-relay';
 import router from '../router';
 import AppRenderer from './AppRenderer';
 
-import auth from '../auth';
-
 type Props = {
   history: any,
   createRelay: () => any,
@@ -35,7 +33,10 @@ class App extends React.Component<Props> {
 
   childContext = {
     history: this.props.history,
-    reset: () => this.setState({ relay: this.props.createRelay() }),
+    reset: () =>
+      new Promise(resolve => {
+        this.setState({ relay: this.props.createRelay() }, resolve);
+      }),
   };
 
   getChildContext() {
@@ -46,19 +47,11 @@ class App extends React.Component<Props> {
     const { history } = this.props;
     this.unlisten = history.listen(this.renderLocation);
     this.renderLocation(history.location);
-    this.authUnlisten = auth.onAuthStateChanged(() => {
-      this.reset();
-    });
   }
 
   componentWillUnmount() {
     this.unlisten();
-    this.authUnlisten();
   }
-
-  reset = () => {
-    this.setState({ relay: this.props.createRelay() });
-  };
 
   renderLocation = location => {
     const { history } = this.props;
@@ -105,6 +98,7 @@ class App extends React.Component<Props> {
 
   render() {
     const { relay, query, variables, render } = this.state;
+
     return (
       <QueryRenderer
         environment={relay}

@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-'use script';
-
 const fs = require('fs');
 const path = require('path');
 const knex = require('knex');

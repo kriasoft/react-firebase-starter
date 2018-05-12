@@ -3,7 +3,6 @@
 
 # Dependencies
 /node_modules
-/functions/node_modules
 
 # Testing
 /coverage

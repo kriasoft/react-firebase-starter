@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-'use script';
-
 const cp = require('child_process');
 
 let db;

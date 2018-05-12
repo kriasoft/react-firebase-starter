@@ -1,2 +1,4 @@
+build
 node_modules
+__generated__
 package.json

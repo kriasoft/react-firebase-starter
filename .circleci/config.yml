@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: kriasoft/node:9.6.1
+      - image: kriasoft/node:10.1.0
     steps:
       - checkout
       - restore_cache:
