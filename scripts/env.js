@@ -4,7 +4,7 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-const argv = require('miminist')(process.argv.slice(2));
+const argv = require('minimist')(process.argv.slice(2));
 
 if (argv.env === 'prod' || argv.env === 'production') {
   require('dotenv').config({ path: '.env.production.local' });
