@@ -34,8 +34,16 @@ class AppRenderer extends Component<{}, State> {
     this.setState({ ...defaults, error });
   }
 
-  renderRoute = route => {
-    this.setState({ ...defaults, ...route });
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.state.component !== nextState.component ||
+      this.state.error !== nextState.error ||
+      this.state.title !== nextState.title
+    );
+  }
+
+  renderRoute = (route, cb) => {
+    this.setState({ ...defaults, ...route }, cb);
   };
 
   render() {

@@ -7,8 +7,8 @@
 /* @flow */
 
 import React from 'react';
-import Avatar from 'material-ui/Avatar';
-import Typography from 'material-ui/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 import { graphql, createFragmentContainer } from 'react-relay';
 
 class UserProfile extends React.Component<{}> {

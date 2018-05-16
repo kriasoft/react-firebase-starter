@@ -6,8 +6,8 @@
 
 /* @flow */
 
-import { createMuiTheme } from 'material-ui/styles';
-import { indigo } from 'material-ui/colors';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { indigo } from '@material-ui/core/colors';
 
 // https://material-ui-next.com/customization/themes/
 // https://material-ui-next.com/style/color/

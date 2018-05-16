@@ -36,6 +36,7 @@ function openWindow(uri, { onPostMessage, ...options } = {}) {
 
   const onResolve = data => {
     window.removeEventListener('message', onPostMessageWrapper);
+
     if (executor) {
       win.close();
       executor.resolve(data);

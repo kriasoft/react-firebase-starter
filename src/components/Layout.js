@@ -9,12 +9,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
-import Avatar from 'material-ui/Avatar';
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Menu, { MenuItem } from 'material-ui/Menu';
-import { MuiThemeProvider } from 'material-ui/styles';
+import Avatar from '@material-ui/core/Avatar';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import { graphql, createFragmentContainer } from 'react-relay';
 
 import theme from '../theme';
@@ -106,7 +108,8 @@ class Layout extends React.Component {
   };
 
   logOut = () => {
-    this.props.logOut().then(this.closeUserMenu);
+    this.setState({ userMenuEl: null });
+    this.props.logOut();
   };
 
   render() {

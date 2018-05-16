@@ -11,10 +11,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import RelayPropTypes from 'react-relay/lib/RelayPropTypes';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import { graphql, createFragmentContainer } from 'react-relay';
 
 import withAuth from '../utils/withAuth';

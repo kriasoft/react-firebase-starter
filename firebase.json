@@ -19,6 +19,7 @@
       "README.md",
       "schema.graphql",
       "storage.rules",
+      "stylelint.config.js",
       "*.log"
     ]
   },
