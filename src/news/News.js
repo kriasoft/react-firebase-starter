@@ -8,10 +8,13 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import Typography from 'material-ui/Typography';
-import Avatar from 'material-ui/Avatar';
-import Snakbar from 'material-ui/Snackbar';
-import List, { ListItem, ListItemAvatar, ListItemText } from 'material-ui/List';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import Snakbar from '@material-ui/core/Snackbar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';

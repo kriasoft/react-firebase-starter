@@ -7,13 +7,13 @@
 /* @flow */
 
 import React from 'react';
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 
 class Privacy extends React.Component<{}> {
   render() {
     return (
       <>
-        <Typography variant="title" gutterBottom>
+        <Typography variant="headline" gutterBottom>
           Privacy Policy
         </Typography>
         <Typography variant="body1" paragraph>

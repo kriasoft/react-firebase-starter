@@ -33,11 +33,16 @@ class App extends React.Component<Props> {
 
   childContext = {
     history: this.props.history,
-    reset: () =>
-      new Promise(resolve => {
-        this.setState({ relay: this.props.createRelay() }, resolve);
-      }),
+    reset: () => {
+      this.setState({ relay: this.props.createRelay() });
+      this.props.history.replace(this.props.history.location);
+      return new Promise(resolve => {
+        this.onRenderComplete = resolve;
+      });
+    },
   };
+
+  rendererRef = React.createRef();
 
   getChildContext() {
     return this.childContext;
@@ -88,12 +93,8 @@ class App extends React.Component<Props> {
     });
   };
 
-  rendererRef = node => {
-    this.renderer = node;
-  };
-
   renderRoute = route => {
-    this.renderer.renderRoute(route);
+    this.rendererRef.current.renderRoute(route, this.onRenderComplete);
   };
 
   render() {

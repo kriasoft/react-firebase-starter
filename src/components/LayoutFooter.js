@@ -8,7 +8,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 
 import Link from './Link';
 
@@ -66,6 +66,8 @@ class LayoutFooter extends React.Component<{}> {
         <Text variant="body1">
           <Copyright css="padding-right: 0.5em">&copy; 2015-present</Copyright>
           <ExtLink href="https://github.com/kriasoft">Kriasoft</ExtLink>
+          <Separator>|</Separator>
+          <StyledLink href="/about">About Us</StyledLink>
           <Separator>|</Separator>
           <StyledLink href="/privacy">Privacy</StyledLink>
         </Text>

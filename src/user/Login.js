@@ -9,8 +9,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 injectGlobal`
   body {
