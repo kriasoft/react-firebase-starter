@@ -21,8 +21,8 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 import { graphql, createFragmentContainer } from 'react-relay';
 
-import Link from '../components/Link';
-import withAuth from '../utils/withAuth';
+import Link from '../common/Link';
+import withAuth from '../common/withAuth';
 import LikeStoryMutation from './mutations/LikeStory';
 
 const StyledListItem = styled(ListItem)`

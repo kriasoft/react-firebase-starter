@@ -92,6 +92,7 @@
     "*.js": [
       "yarn run eslint --no-ignore --fix --max-warnings=0",
       "yarn run prettier --write",
+      "yarn run stylelint",
       "git add --force"
     ],
     "*.json": [

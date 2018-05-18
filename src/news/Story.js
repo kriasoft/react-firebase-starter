@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { graphql, createFragmentContainer } from 'react-relay';
 
-import Link from '../components/Link';
+import Link from '../common/Link';
 
 class Story extends React.Component<{}> {
   render() {

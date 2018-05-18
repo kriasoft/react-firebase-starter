@@ -52,7 +52,8 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 ├── seeds/                         # Reference and seed data for the database
 ├── src/                           # Application source code
 │   ├── admin/                     # Admin section (Dashboard, User Management etc.)
-│   ├── components/                # Shared React components
+│   ├── common/                    # Shared React components and HOCs
+│   ├── icons/                     # Icon components
 │   ├── news/                      # News section (example)
 │   ├── pages/                     # Static pages (landing, about, privacy, etc.)
 │   ├── server/                    # Server-side code (API, authentication, etc.)
