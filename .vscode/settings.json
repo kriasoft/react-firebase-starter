@@ -3,7 +3,6 @@
   "flow.useNPMPackagedFlow": true,
   "javascript.format.enable": false,
   "javascript.validate.enable": false,
-  "prettier.eslintIntegration": true,
   "vsicons.presets.angular": false,
   "[html]": {
     "editor.formatOnSave": false
