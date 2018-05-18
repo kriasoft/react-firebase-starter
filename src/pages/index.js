@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { graphql } from 'relay-runtime';
-import Layout from '../components/Layout';
+import Layout from '../common/Layout';
 
 export default [
   {

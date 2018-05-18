@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import styled, { injectGlobal } from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 
-import LoginButton from '../components/LoginButton';
+import LoginButton from '../common/LoginButton';
 
 injectGlobal`
   body {

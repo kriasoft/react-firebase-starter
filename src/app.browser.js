@@ -10,7 +10,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
 
-import App from './components/App';
+import App from './common/App';
 import createRelay from './createRelay';
 import * as serviceWorker from './serviceWorker';
 

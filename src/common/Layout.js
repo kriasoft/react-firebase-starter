@@ -23,7 +23,7 @@ import theme from '../theme';
 import Link from './Link';
 import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
-import withAuth from '../utils/withAuth';
+import withAuth from '../common/withAuth';
 
 injectGlobal`
   html,

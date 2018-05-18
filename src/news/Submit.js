@@ -19,7 +19,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { graphql, createFragmentContainer } from 'react-relay';
 
-import withAuth from '../utils/withAuth';
+import withAuth from '../common/withAuth';
 import CreateStoryMutation from './mutations/CreateStory';
 
 const StyledFormControl = styled(FormControl)`
