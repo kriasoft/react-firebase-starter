@@ -50,10 +50,8 @@ function resolveRoute(ctx) {
 
   return Promise.all([...componentsPromise, dataPromise]).then(components => {
     const data = components.pop();
-    return {
-      ...route.render(components, data, { ...ctx, variables }),
-      data,
-    };
+    const result = route.render(components, data, { ...ctx, variables });
+    return result ? { ...result, data } : next();
   });
 }
 

@@ -8,8 +8,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import wrapDisplayName from 'recompose/wrapDisplayName';
 import hoistNonReactStatics from 'hoist-non-react-statics';
+import { wrapDisplayName } from 'recompose';
 
 import openWindow from './openWindow';
 
@@ -19,9 +19,9 @@ const withAuth = () => Component => {
       reset: PropTypes.func.isRequired,
     };
 
-    logIn = () => {
+    logIn = (options = {}) => {
       const { reset } = this.context;
-      return openWindow('/login', {
+      return openWindow(options.url || '/login', {
         onPostMessage(event) {
           if (event.data === 'login:success') return reset();
         },
