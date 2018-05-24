@@ -103,7 +103,8 @@ tasks.set('publish', () => {
       project: config.project,
       cwd: __dirname,
     }))
-    .then(() => { setTimeout(() => process.exit()); });
+    .then(() => { setTimeout(() => process.exit()); })
+    .catch(e => console.error(e.message));
 });
 
 //

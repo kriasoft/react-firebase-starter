@@ -99,7 +99,7 @@ const config = {
         loader: `babel-loader?${JSON.stringify(babelConfig)}`,
       },
       {
-        test: /\.css$/,
+        test: /\.css/,
         loaders: [
           'style-loader',
           `css-loader?${JSON.stringify({
