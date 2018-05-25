@@ -16,10 +16,8 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { MuiThemeProvider } from '@material-ui/core/styles';
 import { graphql, createFragmentContainer } from 'react-relay';
 
-import theme from '../theme';
 import Link from './Link';
 import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
@@ -136,60 +134,58 @@ class Layout extends React.Component {
     }
 
     return (
-      <MuiThemeProvider theme={theme}>
-        <Container>
-          <LayoutHeader />
-          <Body>
-            <StyledTabs value={index} onChange={this.handleChange}>
-              <StyledTab label="Home" component={Link} href="/" />
-              <StyledTab label="News" component={Link} href="/news" />
-              <StyledTab label="Submit" component={Link} href="/submit" />
-              <Separator />
-              {me ? (
-                <>
-                  <UserPhoto
-                    src={me.photoURL}
-                    alt={me.displayName}
-                    onClick={this.openUserMenu}
-                    aria-owns={userMenuEl ? 'user-menu' : null}
-                    aria-haspopup="true"
-                  />
-                  <Menu
-                    id="user-menu"
-                    role="menu"
-                    anchorEl={userMenuEl}
-                    open={Boolean(userMenuEl)}
-                    onClose={this.closeUserMenu}
-                    anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
-                    }}
-                    transformOrigin={{
-                      vertical: -56,
-                      horizontal: 82,
-                    }}
+      <Container>
+        <LayoutHeader />
+        <Body>
+          <StyledTabs value={index} onChange={this.handleChange}>
+            <StyledTab label="Home" component={Link} href="/" />
+            <StyledTab label="News" component={Link} href="/news" />
+            <StyledTab label="Submit" component={Link} href="/submit" />
+            <Separator />
+            {me ? (
+              <>
+                <UserPhoto
+                  src={me.photoURL}
+                  alt={me.displayName}
+                  onClick={this.openUserMenu}
+                  aria-owns={userMenuEl ? 'user-menu' : null}
+                  aria-haspopup="true"
+                />
+                <Menu
+                  id="user-menu"
+                  role="menu"
+                  anchorEl={userMenuEl}
+                  open={Boolean(userMenuEl)}
+                  onClose={this.closeUserMenu}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: -56,
+                    horizontal: 82,
+                  }}
+                >
+                  <MenuItem
+                    component={Link}
+                    href={`/@${me.username}`}
+                    onClick={this.closeUserMenu}
                   >
-                    <MenuItem
-                      component={Link}
-                      href={`/@${me.username}`}
-                      onClick={this.closeUserMenu}
-                    >
-                      My Profile
-                    </MenuItem>
-                    <MenuItem id="user-menu-signout" onClick={this.logOut}>
-                      Sign Out
-                    </MenuItem>
-                  </Menu>
-                </>
-              ) : (
-                <SignInButton onClick={this.props.logIn}>Sign In</SignInButton>
-              )}
-            </StyledTabs>
-            <Content>{this.props.children}</Content>
-          </Body>
-          <LayoutFooter />
-        </Container>
-      </MuiThemeProvider>
+                    My Profile
+                  </MenuItem>
+                  <MenuItem id="user-menu-signout" onClick={this.logOut}>
+                    Sign Out
+                  </MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <SignInButton onClick={this.props.logIn}>Sign In</SignInButton>
+            )}
+          </StyledTabs>
+          <Content>{this.props.children}</Content>
+        </Body>
+        <LayoutFooter />
+      </Container>
     );
   }
 }

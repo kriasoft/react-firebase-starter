@@ -9,7 +9,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { QueryRenderer } from 'react-relay';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
+import theme from '../theme';
 import router from '../router';
 import AppRenderer from './AppRenderer';
 
@@ -101,12 +103,14 @@ class App extends React.Component<Props> {
     const { relay, query, variables, render } = this.state;
 
     return (
-      <QueryRenderer
-        environment={relay}
-        query={query}
-        variables={variables || {}}
-        render={render}
-      />
+      <MuiThemeProvider theme={theme}>
+        <QueryRenderer
+          environment={relay}
+          query={query}
+          variables={variables || {}}
+          render={render}
+        />
+      </MuiThemeProvider>
     );
   }
 }
