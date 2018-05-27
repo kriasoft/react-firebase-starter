@@ -14,6 +14,7 @@ exports.up = async db => {
     table.boolean('email_verified').notNullable().defaultTo(false);
     table.string('display_name', 100);
     table.string('photo_url', 250);
+    table.string('time_zone', 50);
     table.boolean('is_admin').notNullable().defaultTo(false);
     table.timestamps(false, true);
     table.timestamp('last_login_at').notNullable().defaultTo(db.fn.now());
@@ -38,8 +39,8 @@ exports.up = async db => {
   await db.schema.createTable('stories', table => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.uuid('author_id').notNullable().references('id').inTable('users').onDelete('CASCADE').onUpdate('CASCADE');
-    table.string('slug', 80).notNullable();
-    table.string('title', 80).notNullable();
+    table.string('slug', 100).notNullable();
+    table.string('title', 100).notNullable();
     table.string('text', 2000);
     table.boolean('is_url').notNullable().defaultTo(false);
     table.boolean('approved').notNullable().defaultTo(false);

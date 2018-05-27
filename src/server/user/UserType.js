@@ -6,7 +6,6 @@
 
 /* @flow */
 
-import moment from 'moment';
 import { globalIdField } from 'graphql-relay';
 import {
   GraphQLObjectType,
@@ -18,6 +17,7 @@ import {
 
 import IdentityType from './IdentityType';
 import { nodeInterface } from '../Node';
+import { dateField } from '../utils';
 import type Context from '../Context';
 
 export default new GraphQLObjectType({
@@ -54,6 +54,13 @@ export default new GraphQLObjectType({
       },
     },
 
+    timeZone: {
+      type: GraphQLString,
+      resolve(self) {
+        return self.time_zone;
+      },
+    },
+
     identities: {
       type: new GraphQLList(IdentityType),
       resolve(self, args, ctx) {
@@ -70,40 +77,8 @@ export default new GraphQLObjectType({
       },
     },
 
-    createdAt: {
-      type: GraphQLString,
-      args: {
-        format: { type: GraphQLString },
-      },
-      resolve(self, args) {
-        return args.format
-          ? moment(self.created_at).format(args.format)
-          : self.created_at.toISOString();
-      },
-    },
-
-    updatedAt: {
-      type: GraphQLString,
-      args: {
-        format: { type: GraphQLString },
-      },
-      resolve(self, args) {
-        return args.format
-          ? moment(self.updated_at).format(args.format)
-          : self.updated_at.toISOString();
-      },
-    },
-
-    lastLoginAt: {
-      type: GraphQLString,
-      args: {
-        format: { type: GraphQLString },
-      },
-      resolve(self, args) {
-        return args.format
-          ? moment(self.last_login_at).format(args.format)
-          : self.last_login_at.toISOString();
-      },
-    },
+    createdAt: dateField(x => x.created_at),
+    updatedAt: dateField(x => x.updated_at),
+    lastLoginAt: dateField(x => x.last_login_at),
   },
 });

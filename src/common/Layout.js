@@ -21,6 +21,7 @@ import { graphql, createFragmentContainer } from 'react-relay';
 import Link from './Link';
 import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
+import AutoUpdater from './AutoUpdater';
 import withAuth from '../common/withAuth';
 
 injectGlobal`
@@ -185,6 +186,7 @@ class Layout extends React.Component {
           <Content>{this.props.children}</Content>
         </Body>
         <LayoutFooter />
+        <AutoUpdater user={me} />
       </Container>
     );
   }
@@ -196,6 +198,7 @@ export default withAuth()(
     graphql`
       fragment Layout on Query {
         me {
+          ...AutoUpdater_user
           id
           username
           displayName
