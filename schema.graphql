@@ -149,6 +149,7 @@ input UpdateUserInput {
   email: String
   displayName: String
   photoURL: String
+  timeZone: String
   isAdmin: Boolean
   validateOnly: Boolean
   clientMutationId: String
@@ -166,6 +167,7 @@ type User implements Node {
   email: String
   displayName: String
   photoURL: String
+  timeZone: String
   identities: [Identity]
   isAdmin: Boolean
   createdAt(format: String): String

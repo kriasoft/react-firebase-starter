@@ -29,6 +29,7 @@ export const updateUser = mutationWithClientMutationId({
     email: { type: GraphQLString },
     displayName: { type: GraphQLString },
     photoURL: { type: GraphQLString },
+    timeZone: { type: GraphQLString },
     isAdmin: { type: GraphQLBoolean },
     validateOnly: { type: GraphQLBoolean },
   },
@@ -69,6 +70,9 @@ export const updateUser = mutationWithClientMutationId({
         .field('photoURL', { as: 'photo_url' })
         .isLength({ max: 250 })
         .isURL()
+
+        .field('timeZone', { as: 'time_zone' })
+        .isLength({ max: 50 })
 
         .field('isAdmin', { as: 'is_admin' })
         .is(() => ctx.user.isAdmin, 'Only admins can change this field.'),

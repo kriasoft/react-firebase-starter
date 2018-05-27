@@ -6,7 +6,12 @@
 
 /* @flow */
 
+import moment from 'moment-timezone';
+import { GraphQLString } from 'graphql';
 import { fromGlobalId as parse } from 'graphql-relay';
+import type { GraphQLFieldConfig } from 'graphql';
+
+import type Context from './Context';
 
 export function fromGlobalId(globalId, expectedType) {
   const { id, type } = parse(globalId);
@@ -64,5 +69,39 @@ export function mapToValues(
     const group = new Map(keys.map(key => [key, null]));
     rows.forEach(row => group.set(keyFn(row), valueFn(row)));
     return Array.from(group.values());
+  };
+}
+
+const dateFieldArgs = {
+  format: { type: GraphQLString },
+};
+
+const dateFieldResolve = (resolve, self, args, ctx: Context) => {
+  let date = resolve(self);
+
+  if (!date) {
+    return null;
+  }
+
+  const timeZone = ctx.user && ctx.user.timeZone;
+
+  if (timeZone) {
+    date = moment(date).tz(timeZone);
+  } else {
+    date = moment(date);
+  }
+
+  return date.format(args.format);
+};
+
+/**
+ * Creates the configuration for a date/time field with support of format and time
+ * zone.
+ */
+export function dateField(resolve: any => ?Date): GraphQLFieldConfig<*, *> {
+  return {
+    type: GraphQLString,
+    args: dateFieldArgs,
+    resolve: dateFieldResolve.bind(undefined, resolve),
   };
 }

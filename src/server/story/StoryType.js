@@ -7,7 +7,6 @@
 /* @flow */
 
 import _ from 'lodash';
-import moment from 'moment';
 import { globalIdField } from 'graphql-relay';
 import {
   GraphQLObjectType,
@@ -21,6 +20,7 @@ import {
 import UserType from '../user/UserType';
 import CommentType from './CommentType';
 import { nodeInterface } from '../Node';
+import { dateField } from '../utils';
 import type Context from '../Context';
 
 export default new GraphQLObjectType({
@@ -92,28 +92,7 @@ export default new GraphQLObjectType({
       },
     },
 
-    createdAt: {
-      type: GraphQLString,
-      args: {
-        format: { type: GraphQLString },
-      },
-      resolve(self, args) {
-        return args.format
-          ? moment(self.created_at).format(args.format)
-          : self.created_at.toISOString();
-      },
-    },
-
-    updatedAt: {
-      type: GraphQLString,
-      args: {
-        format: { type: GraphQLString },
-      },
-      resolve(self, args) {
-        return args.format
-          ? moment(self.updated_at).format(args.format)
-          : self.updated_at.toISOString();
-      },
-    },
+    createdAt: dateField(self => self.created_at),
+    updatedAt: dateField(self => self.updated_at),
   },
 });
