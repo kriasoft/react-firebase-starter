@@ -8,7 +8,7 @@
 
 **React Starter Kit** _for Firebase_ is a popular project template (aka, boilerplate) for building
 modern, scalable web applications with React, Relay, and GraphQL using serverless infrastructure
-provided by <a href="https://firebase.google.com/">Firebase</a> (Cloud SQL, Cloud Functions, CDN
+provided by <a href="https://cloud.google.com/">Google Cloud</a> (Cloud SQL, Cloud Functions, CDN
 hosting, and file storage). It allows you to save time and build upon a solid foundation and
 design patterns.
 
@@ -30,14 +30,14 @@ This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kria
 
 ### Tech Stack
 
-* [Create React App][cra] (★ 46k) for development and test infrastructure (see [user guide][cradocs])
-* [Material UI][mui] (★ 35k) to reduce development time by integrating Google's [Material Design][material]
-* [Styled Components][sc] (★ 15k) for component friendly CSS styles with a great DX ([docs][scdocs])
-* [Passport.js][passport] (★ 13k) for authentication configured with stateless JWT tokens for sessions
-* [GraphQL.js][gqljs] (★ 10k) and [Relay][relay] (★ 11k) for declarative data fetching and efficient client stage management
-* [Universal Router][router] (★ 1k) + [history][history] (★ 3k) for declarative routing and client-side navigation optimized for [Relay][relay]
-* [PostgreSQL][psql] database pre-configured with a query builder and migrations using [Knex.js][knex] (★ 6k)
-* [Firebase][firebase] for serverless architecture - Cloud SQL, Cloud Functions, CDN hosting, and file storage ([docs][fbdocs])
+- [Create React App][cra] (★ 55k) for development and test infrastructure (see [user guide][cradocs])
+- [Material UI][mui] (★ 40k) to reduce development time by integrating Google's [Material Design][material]
+- [Styled Components][sc] (★ 18k) for component friendly CSS styles with a great DX ([docs][scdocs])
+- [Passport.js][passport] (★ 14k) for authentication configured with stateless JWT tokens for sessions
+- [GraphQL.js][gqljs] (★ 11k) and [Relay][relay] (★ 11k) for declarative data fetching and efficient client stage management
+- [Universal Router][router] (★ 1k) + [history][history] (★ 3k) for declarative routing and client-side navigation optimized for [Relay][relay]
+- [PostgreSQL][psql] database pre-configured with a query builder and migrations using [Knex.js][knex] (★ 6k)
+- [Google Cloud][gcp] & [Firebase][firebase] for serverless architecture - Cloud SQL, Cloud Functions, CDN hosting, file storage ([docs][fbdocs])
 
 Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([ES2015][es2015]) and [React](https://reactjs.org/docs/).
 
@@ -64,33 +64,31 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   │   ├── api.js                 # GraphQL API middleware
 │   │   ├── Context.js             # GraphQL context wrapper
 │   │   ├── createRelay.js         # Relay factory method for Node.js environment
+│   │   ├── index.js               # Node.js app entry point
 │   │   ├── login.js               # Authentication middleware (e.g. /login/facebook)
 │   │   ├── schema.js              # GraphQL schema
-│   │   └── ssr.js                 # Server-side rendering middleware
+│   │   └── ssr.js                 # Server-side rendering, e.g. ReactDOMServer.renderToString(<App />)
 │   ├── user/                      # User pages (login, account settings, user profile, etc)
-│   ├── app.browser.js             # Client-side rendering, e.g. ReactDOM.render(<App />, container)
-│   ├── app.node.js                # Server-side rendering, e.g. ReactDOMServer.renderToString(<App />)
-│   ├── auth.js                    # Client-side authentication manager
 │   ├── createRelay.js             # Relay factory method for browser envrironment
+│   ├── index.js                   # Client-side entry point, e.g. ReactDOM.render(<App />, container)
 │   ├── router.js                  # Universal application router
 │   ├── serviceWorker.js           # Service worker helper methods
 │   └── theme.js                   # Overrides for Material UI default styles
 ├── ssl/                           # SSL certificates for connecting to Cloud SQL instance
 ├── .env                           # Environment variables
 ├── .env.local                     # Local (development) overrides
-├── config-overrides.js            # Configuration overrides for Babel and Webpack
 ├── graphql.schema                 # GraphQL schema (auto-generated, used by Relay)
 └── package.json                   # The list of project dependencies + NPM scripts
 ```
 
 ### Prerequisites
 
-* [Node.js][nodejs] v8.9 or higher + [Yarn][yarn] v1.3 or higher &nbsp; (_HINT: On Mac install
+- [Node.js][nodejs] v8.11 or higher + [Yarn][yarn] v1.6 or higher &nbsp; (_HINT: On Mac install
   them via [Brew][brew]_)
-* [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
+- [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
-* [Watchman][watchman] file watcher used by Relay Modern
-* [PostgreSQL][postgres] v9.6 or newer, only if you're planning to use a local db for development
+- [Watchman][watchman] file watcher used by Relay Modern
+- [PostgreSQL][postgres] v9.6 or newer, only if you're planning to use a local db for development
 
 ### Getting Started
 
@@ -181,11 +179,11 @@ requests](https://github.com/kriasoft/react-firebase-starter/wiki/Contributing#p
 
 ### Related Projects
 
-* [React App SDK](https://github.com/kriasoft/react-app) — Create React App modification that
+- [React App SDK](https://github.com/kriasoft/react-app) — Create React App modification that
   unlocks server-side rendering
-* [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Boilerplate and tooling for
+- [React Starter Kit](https://github.com/kriasoft/react-starter-kit) — Boilerplate and tooling for
   building isomorphic web apps with React and Relay
-* [Node.js API Starter Kit](https://github.com/kriasoft/nodejs-api-starter) — Boilerplate and
+- [Node.js API Starter Kit](https://github.com/kriasoft/nodejs-api-starter) — Boilerplate and
   tooling for building data APIs with Docker, Node.js and GraphQL
 
 ### License
@@ -196,7 +194,8 @@ the [LICENSE.txt](https://github.com/kriasoft/react-firebase-starter/blob/master
 ---
 
 Made with ♥ by Konstantin Tarkus ([@koistya](https://twitter.com/koistya), [blog](https://medium.com/@tarkus))
-and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/contributors)
+and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/contributors) :wave:
+[Get in touch!](https://twitter.com/messages/compose?recipient_id=16394396)
 
 [rfs]: https://github.com/kriasoft/react-firebase-starter
 [kriasoft]: https://github.com/kriasoft
@@ -217,6 +216,7 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [es2015]: http://babeljs.io/learn-es2015/
 [react]: https://facebook.github.io/react/
 [relay]: https://facebook.github.io/relay/
+[gcp]: https://cloud.google.com/
 [firebase]: https://firebase.google.com/
 [fbdocs]: https://firebase.google.com/docs/web
 [router]: https://github.com/kriasoft/universal-router

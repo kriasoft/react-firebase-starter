@@ -46,10 +46,12 @@ router.get('*', async (req, res, next) => {
         templates.ok({
           title: route.title,
           description: route.description,
-          assets: (route.chunks || []).reduce(
-            (chunks, name) => [...chunks, ...assets[name]],
-            assets.main,
-          ),
+          assets: (route.chunks || [])
+            .reduce((chunks, name) => [...chunks, ...assets[name]], [
+              ...assets.vendors,
+              ...assets.main,
+            ])
+            .concat(assets['runtime~main']),
           data: serialize(req.data, { isJSON: true }),
           config: JSON.stringify({
             firebase: {
