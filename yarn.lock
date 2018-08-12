@@ -9757,9 +9757,9 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-app-tools@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/react-app-tools/-/react-app-tools-3.0.3.tgz#a6d8e5a883667a79889d8dc2c2632dae0cacdb26"
+react-app-tools@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/react-app-tools/-/react-app-tools-3.0.4.tgz#c9e9a9717c060c37c1b3bd24a3130ef6eca79f83"
   dependencies:
     "@babel/core" "7.0.0-beta.46"
     "@babel/plugin-proposal-class-properties" "7.0.0-beta.46"
