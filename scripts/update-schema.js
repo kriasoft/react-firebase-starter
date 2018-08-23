@@ -8,7 +8,7 @@ process.env.NODE_ENV = 'test';
 
 require('@babel/register')({
   babelrc: false,
-  presets: [require.resolve('babel-preset-react-app')],
+  presets: [require.resolve('react-app-tools/config/babel')],
 });
 
 const fs = require('fs');
