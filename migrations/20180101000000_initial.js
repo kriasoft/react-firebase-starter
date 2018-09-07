@@ -7,6 +7,9 @@
 /* prettier-ignore */
 
 exports.up = async db => {
+  await db.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
+  await db.raw('CREATE EXTENSION IF NOT EXISTS "hstore"');
+
   await db.schema.createTable('users', table => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.string('username', 50).unique();

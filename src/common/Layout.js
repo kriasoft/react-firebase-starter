@@ -8,7 +8,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { injectGlobal } from 'styled-components';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
@@ -16,7 +15,9 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { withStyles } from '@material-ui/core/styles';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { compose } from 'recompose';
 
 import Link from './Link';
 import LayoutHeader from './LayoutHeader';
@@ -24,70 +25,56 @@ import LayoutFooter from './LayoutFooter';
 import AutoUpdater from './AutoUpdater';
 import withAuth from '../common/withAuth';
 
-injectGlobal`
-  html,
-  body,
-  #root {
-    height: 100%;
-  }
+const styles = theme => ({
+  '@global': {
+    'html, body, #root': {
+      height: '100%',
+    },
+    body: {
+      padding: 0,
+      margin: 0,
+      fontFamily: 'sans-serif',
+    },
+  },
+  container: {
+    height: '100vh',
+    background: '#f9f9f9',
+  },
+  body: {
+    maxWidth: 640,
+    marginTop: -48,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    '&&': {
+      background: 'transparent',
+    },
+  },
+  toolbar: {
+    display: 'flex',
+    background: 'rgba(255, 255, 255, 0.9)',
+  },
+  content: {
+    padding: theme.spacing.unit * 2,
+    background: theme.palette.common.white,
+  },
+  tab: {
+    minWidth: 'inherit',
+  },
+  separator: {
+    flexGrow: 1,
+  },
 
-  body {
-    padding: 0;
-    margin: 0;
-    font-family: sans-serif;
-  }
-`;
-
-const Container = styled.div`
-  height: 100vh;
-  background: #f9f9f9;
-`;
-
-const Body = styled(Paper)`
-  max-width: 640px;
-  margin-top: -48px;
-  margin-right: auto;
-  margin-left: auto;
-
-  && {
-    background: transparent;
-  }
-`;
-
-const Content = styled.div`
-  padding: 1em;
-  background: #fff;
-`;
-
-const StyledTabs = styled(Tabs)`
-  background: rgba(255, 255, 255, 0.9);
-`;
-
-const StyledTab = styled(Tab)`
-  && {
-    min-width: inherit;
-  }
-`;
-
-const Separator = styled.span`
-  flex-grow: 1;
-`;
-
-const UserPhoto = styled(Avatar)`
-  && {
-    width: 32px;
-    height: 32px;
-    margin: 8px 10px;
-    cursor: pointer;
-  }
-`;
-
-const SignInButton = styled(Button)`
-  && {
-    text-transform: none;
-    border-radius: 0;
-  }
-`;
+  avatar: {
+    width: 32,
+    height: 32,
+    margin: '8px 10px',
+    cursor: 'pointer',
+  },
+  login: {
+    textTransform: 'none',
+    borderRadius: 0,
+  },
+});
 
 class Layout extends React.Component {
   static contextTypes = {
@@ -113,6 +100,7 @@ class Layout extends React.Component {
 
   render() {
     const {
+      classes: s,
       data: { me },
     } = this.props;
 
@@ -135,17 +123,30 @@ class Layout extends React.Component {
     }
 
     return (
-      <Container>
+      <div className={s.container}>
         <LayoutHeader />
-        <Body>
-          <StyledTabs value={index} onChange={this.handleChange}>
-            <StyledTab label="Home" component={Link} href="/" />
-            <StyledTab label="News" component={Link} href="/news" />
-            <StyledTab label="Submit" component={Link} href="/submit" />
-            <Separator />
+        <Paper className={s.body}>
+          <div className={s.toolbar}>
+            <Tabs value={index} onChange={this.handleChange}>
+              <Tab className={s.tab} label="Home" component={Link} href="/" />
+              <Tab
+                className={s.tab}
+                label="News"
+                component={Link}
+                href="/news"
+              />
+              <Tab
+                className={s.tab}
+                label="Submit"
+                component={Link}
+                href="/submit"
+              />
+            </Tabs>
+            <span className={s.separator} />
             {me ? (
               <>
-                <UserPhoto
+                <Avatar
+                  className={s.avatar}
                   src={me.photoURL}
                   alt={me.displayName}
                   onClick={this.openUserMenu}
@@ -180,19 +181,24 @@ class Layout extends React.Component {
                 </Menu>
               </>
             ) : (
-              <SignInButton onClick={this.props.logIn}>Sign In</SignInButton>
+              <Button className={s.login} onClick={this.props.logIn}>
+                Sign In
+              </Button>
             )}
-          </StyledTabs>
-          <Content>{this.props.children}</Content>
-        </Body>
+          </div>
+          <div className={s.content}>{this.props.children}</div>
+        </Paper>
         <LayoutFooter />
         <AutoUpdater user={me} />
-      </Container>
+      </div>
     );
   }
 }
 
-export default withAuth()(
+export default compose(
+  withAuth(),
+  withStyles(styles, { withTheme: true }),
+)(
   createFragmentContainer(
     Layout,
     graphql`

@@ -8,52 +8,46 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { injectGlobal } from 'styled-components';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
 import LoginButton from '../common/LoginButton';
 
-injectGlobal`
-  body {
-    margin: 0;
-    background: rgb(250, 250, 250);
-  }
-
-  #root {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    resize: vertical;
-  }
-`;
-
-const Container = styled.div`
-  display: flex;
-  padding-bottom: 20vh;
-  margin: 0 auto;
-  flex-direction: column;
-`;
-
-const Title = styled(Typography)`
-  && {
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-`;
-
-const ErrorContainer = styled(Typography)`
-  && {
-    margin-bottom: 1rem;
-    color: red;
-    text-align: center;
-  }
-`;
-
-const StyledLoginButton = styled(LoginButton)`
-  && {
-    margin-bottom: 1rem;
-  }
-`;
+const styles = theme => ({
+  '@global html': {
+    height: '100%',
+  },
+  '@global body': {
+    height: '100%',
+    margin: 0,
+    background: 'rgb(250, 250, 250)',
+  },
+  '@global #root': {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    resize: 'vertical',
+  },
+  container: {
+    display: 'flex',
+    paddingBottom: '20vh',
+    margin: '0 auto',
+    flexDirection: 'column',
+  },
+  title: {
+    marginBottom: theme.spacing.unit * 2,
+    textAlign: 'center',
+  },
+  error: {
+    marginBottom: theme.spacing.unit * 2,
+    color: theme.palette.error.main,
+    textAlign: 'center',
+  },
+  login: {
+    marginBottom: theme.spacing.unit * 2,
+  },
+});
 
 class Login extends React.Component<{}> {
   static contextTypes = {
@@ -84,15 +78,18 @@ class Login extends React.Component<{}> {
   }
 
   render() {
+    const { classes: s } = this.props;
     return (
-      <Container>
-        <Title variant="headline">Sign In</Title>
-        <StyledLoginButton provider="google" />
-        <StyledLoginButton provider="facebook" />
-        <ErrorContainer>{this.state.error}</ErrorContainer>
-      </Container>
+      <div className={s.container}>
+        <Typography className={s.title} variant="headline">
+          Sign In
+        </Typography>
+        <LoginButton className={s.login} provider="google" />
+        <LoginButton className={s.login} provider="facebook" />
+        <Typography className={s.error}>{this.state.error}</Typography>
+      </div>
     );
   }
 }
 
-export default Login;
+export default withStyles(styles, { withTheme: true })(Login);

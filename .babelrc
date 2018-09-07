@@ -2,7 +2,6 @@
   "presets": ["react-app-tools/config/babel"],
   "plugins": [
     ["babel-plugin-lodash", { "id": ["lodash", "recompose"] }],
-    "babel-plugin-relay",
-    "babel-plugin-styled-components"
+    "babel-plugin-relay"
   ]
 }

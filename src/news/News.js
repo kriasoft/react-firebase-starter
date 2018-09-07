@@ -7,7 +7,6 @@
 /* @flow */
 
 import React from 'react';
-import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Snakbar from '@material-ui/core/Snackbar';
@@ -19,58 +18,49 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
+import { withStyles } from '@material-ui/core/styles';
 import { graphql, createFragmentContainer } from 'react-relay';
 
 import Link from '../common/Link';
 import withAuth from '../common/withAuth';
 import LikeStoryMutation from './mutations/LikeStory';
 
-const StyledListItem = styled(ListItem)`
-  && {
-    padding-right: 0;
-    padding-left: 0;
-  }
-`;
-
-const StyledListItemText = styled(ListItemText)`
-  && {
-    padding-right: 0;
-  }
-
-  && a {
-    color: rgba(0, 0, 0, 0.8);
-    text-decoration: none;
-  }
-
-  && > p > a {
-    padding-left: 1em;
-    color: rgba(0, 0, 0, 0.54);
-  }
-
-  && a:hover {
-    text-decoration: underline;
-  }
-
-  && > p > a:hover {
-    color: rgba(0, 0, 0, 0.8);
-    text-decoration: none;
-  }
-
-  && > p {
-    display: flex;
-  }
-
-  && > p > span:first-child {
-    flex-grow: 1;
-  }
-
-  && > p svg {
-    width: 18px;
-    height: 18px;
-    margin-right: 4px;
-    vertical-align: bottom;
-  }
-`;
+const styles = theme => ({
+  listItem: {
+    paddingRight: 0,
+    paddingLeft: 0,
+  },
+  listItemText: {
+    paddingRight: 0,
+    '&& a': {
+      color: 'rgba(0, 0, 0, 0.8)',
+      textDecoration: 'none',
+    },
+    '&& > p > a': {
+      paddingLeft: '1em',
+      textDecoration: 'none',
+    },
+    '&& a:hover': {
+      textDecoration: 'underline',
+    },
+    '&& > p > a:hover': {
+      color: 'rgba(0, 0, 0, 0.8)',
+      textDecoration: 'none',
+    },
+    '&& > p': {
+      display: 'flex',
+    },
+    '&& > p > span:first-child': {
+      flexGrow: 1,
+    },
+    '&& > p svg': {
+      width: 18,
+      height: 18,
+      marginRight: 4,
+      verticalAlign: 'bottom',
+    },
+  },
+});
 
 class News extends React.Component<{}> {
   state = { error: null };
@@ -93,6 +83,7 @@ class News extends React.Component<{}> {
 
   render() {
     const {
+      classes: s,
       data: { stories },
     } = this.props;
     const { error } = this.state;
@@ -103,11 +94,16 @@ class News extends React.Component<{}> {
         </Typography>
         <List>
           {(stories || []).map(x => (
-            <StyledListItem key={x.id} style={{ paddingLeft: 0 }}>
+            <ListItem
+              className={s.listItem}
+              key={x.id}
+              style={{ paddingLeft: 0 }}
+            >
               <ListItemAvatar>
                 <Avatar src={x.author.photoURL} alt={x.author.displayName} />
               </ListItemAvatar>
-              <StyledListItemText
+              <ListItemText
+                className={s.listItemText}
                 primary={
                   x.isURL ? (
                     <a href={x.text}>
@@ -139,7 +135,7 @@ class News extends React.Component<{}> {
                   </>
                 }
               />
-            </StyledListItem>
+            </ListItem>
           ))}
         </List>
         <Snakbar open={!!error} message={error} onClose={this.reset} />
@@ -148,27 +144,29 @@ class News extends React.Component<{}> {
   }
 }
 
-export default withAuth()(
-  createFragmentContainer(
-    News,
-    graphql`
-      fragment News on Query {
-        stories {
-          id
-          slug
-          title
-          text
-          isURL
-          createdAt(format: "MMM Do, YYYY")
-          author {
-            username
-            displayName
-            photoURL
+export default withStyles(styles)(
+  withAuth()(
+    createFragmentContainer(
+      News,
+      graphql`
+        fragment News on Query {
+          stories {
+            id
+            slug
+            title
+            text
+            isURL
+            createdAt(format: "MMM Do, YYYY")
+            author {
+              username
+              displayName
+              photoURL
+            }
+            pointsCount
+            pointGiven
           }
-          pointsCount
-          pointGiven
         }
-      }
-    `,
+      `,
+    ),
   ),
 );

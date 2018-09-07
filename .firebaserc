@@ -1,6 +1,5 @@
 {
   "projects": {
-    "prod": "react-firebase-graphql",
-    "dev": "react-firebase-dev"
+    "default": "react-firebase-graphql"
   }
 }

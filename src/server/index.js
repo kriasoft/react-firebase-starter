@@ -6,20 +6,27 @@
 
 /* @flow */
 
+const dotenv = require('dotenv');
 const express = require('express');
 const firebase = require('firebase-admin');
 const functions = require('firebase-functions');
 
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env' });
+
 // Configure Firebase Admin SDK
 // https://firebase.google.com/docs/admin/setup
 if (!firebase.apps.length) {
-  firebase.initializeApp({
-    credential: firebase.credential.cert(
-      process.env.FIREBASE_SERVICE_KEY
-        ? JSON.parse(process.env.FIREBASE_SERVICE_KEY)
-        : functions.config().key,
-    ),
-  });
+  if (process.env.GCP_SERVICE_KEY) {
+    firebase.initializeApp({
+      credential: firebase.credential.cert(
+        JSON.parse(process.env.GCP_SERVICE_KEY),
+      ),
+    });
+  } else {
+    firebase.initializeApp();
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {

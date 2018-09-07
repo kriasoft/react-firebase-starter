@@ -12,15 +12,22 @@
       "scripts",
       "seeds",
       "src",
-      ".*",
-      "config-overrides.js",
+      ".babelrc",
+      ".editorconfig",
+      ".eslintrc",
+      ".firebserc",
+      ".flowconfig",
+      ".gitattributes",
+      ".gitignore",
+      ".prettierignore",
+      ".prettierrc",
       "knexfile.js",
       "LICENSE.txt",
       "README.md",
       "schema.graphql",
       "storage.rules",
-      "stylelint.config.js",
-      "*.log"
+      "yarn-debug.log*",
+      "yarn-error.log*"
     ]
   },
   "hosting": {

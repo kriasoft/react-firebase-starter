@@ -7,61 +7,62 @@
 /* @flow */
 
 import React from 'react';
-import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
 
-const Root = styled.div`
-  width: 100%;
-  padding: 2em 0 5em;
-  background-color: #3f51b5;
-  background-image: linear-gradient(-225deg, #3db0ef, #5e5bb7);
-  flex-shrink: 0;
-`;
-
-const Container = styled.div`
-  max-width: 640px;
-  margin: 0 auto;
-`;
-
-const Title = styled.h1`
-  padding: 0;
-  margin: 0 1rem 0.5em;
-  font-family: 'Roboto Mono', Roboto, Arial, sans-serif;
-  font-size: 2em;
-  font-weight: 100;
-  color: #fff;
-`;
-
-const Summary = styled.p`
-  padding: 0;
-  margin: 0 1rem;
-  font-family: Roboto, Arial, sans-serif;
-  font-size: 1em;
-  font-weight: 100;
-  line-height: 1.5em;
-  color: #fff;
-  letter-spacing: 1px;
-
-  && strong {
-    font-weight: 300;
-  }
-`;
+const styles = {
+  root: {
+    width: '100%',
+    padding: '2em 0 5em',
+    backgroundColor: '#3f51b5',
+    backgroundImage: 'linear-gradient(-225deg, #3db0ef, #5e5bb7)',
+    flexShrink: 0,
+  },
+  container: {
+    maxWidth: 640,
+    margin: '0 auto',
+  },
+  title: {
+    padding: 0,
+    margin: '0 1rem 0.5em',
+    fontFamily: "'Roboto Mono', Roboto, Arial, sans-serif",
+    fontSize: '2em',
+    fontWeight: 100,
+    color: '#fff',
+  },
+  summary: {
+    padding: 0,
+    margin: '0 1rem',
+    fontFamily: 'Roboto, Arial, sans-serif',
+    fontSize: '1em',
+    fontWeight: 100,
+    lineHeight: '1.5em',
+    color: '#fff',
+    letterSpacing: 1,
+    '&& strong': {
+      fontWeight: 300,
+    },
+  },
+};
 
 class LayoutHeader extends React.Component {
   render() {
+    const { classes: s } = this.props;
     return (
-      <Root>
-        <Container>
-          <Title>React Starter Kit</Title>
-          <Summary>
+      <div className={s.root}>
+        <div className={s.container}>
+          <h1 className={s.title}>React Starter Kit</h1>
+          <p className={s.summary}>
             Bootstrap new <strong>React.js</strong> + <strong>Firebase</strong>{' '}
-            application projects<br />
-            in minutes, using modern mainstream libraries and tooling<br />
+            application projects
+            <br />
+            in minutes, using modern mainstream libraries and tooling
+            <br />
             with zero dependency on 3rd party frameworks.
-          </Summary>
-        </Container>
-      </Root>
+          </p>
+        </div>
+      </div>
     );
   }
 }
 
-export default LayoutHeader;
+export default withStyles(styles)(LayoutHeader);

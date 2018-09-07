@@ -11,17 +11,19 @@ import passport from 'passport';
 import jwt from 'jwt-passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
-import { config } from 'firebase-functions';
 
 import db, { findUserByCredentials } from './db';
 
-const origin = process.env.GCP_PROJECT ? config().app.origin : '';
+const origin =
+  process.env.NODE_ENV === 'production'
+    ? `https://${process.env.FIREBASE_AUTH_DOMAIN}`
+    : '';
 
 passport.framework(
   jwt({
-    name: process.env.NODE_ENV === 'production' ? '__session' : '__session_rsk',
-    secret: process.env.JWT_SECRET || config().jwt.secret,
-    issuer: 'https://firebase.reactstarter.com',
+    name: process.env.JWT_NAME,
+    secret: process.env.JWT_SECRET,
+    issuer: `https://${process.env.FIREBASE_AUTH_DOMAIN}`,
     createToken: req => ({
       sub: req.user.id,
       jti: uuid.v4(),
@@ -50,9 +52,8 @@ passport.framework(
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID || config().google.client_id,
-      clientSecret:
-        process.env.GOOGLE_CLIENT_SECRET || config().google.client_secret,
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: `${origin}/login/google/return`,
       passReqToCallback: true,
     },
@@ -69,9 +70,8 @@ passport.use(
 passport.use(
   new FacebookStrategy(
     {
-      clientID: process.env.FACEBOOK_APP_ID || config().facebook.app_id,
-      clientSecret:
-        process.env.FACEBOOK_APP_SECRET || config().facebook.app_secret,
+      clientID: process.env.FACEBOOK_APP_ID,
+      clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL: `${origin}/login/facebook/return`,
       profileFields: [
         'id',

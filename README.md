@@ -32,7 +32,6 @@ This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kria
 
 - [Create React App][cra] (★ 55k) for development and test infrastructure (see [user guide][cradocs])
 - [Material UI][mui] (★ 40k) to reduce development time by integrating Google's [Material Design][material]
-- [Styled Components][sc] (★ 18k) for component friendly CSS styles with a great DX ([docs][scdocs])
 - [Passport.js][passport] (★ 14k) for authentication configured with stateless JWT tokens for sessions
 - [GraphQL.js][gqljs] (★ 11k) and [Relay][relay] (★ 11k) for declarative data fetching and efficient client stage management
 - [Universal Router][router] (★ 1k) + [history][history] (★ 3k) for declarative routing and client-side navigation optimized for [Relay][relay]
@@ -131,18 +130,11 @@ $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 ### How to Deploy
 
 1.  Create a new **Google Cloud** project and **Cloud SQL** database.
-2.  Open your Google Cloud project in **Firebase** dashboard and configure Facebook authentication.
-3.  Update Firebase project IDs for production and development environments in `.firebaserc` file.
-4.  Save Firebase API key, authentication domain and GPC service key in Firebase Functions
-    environment. For example `firebase functions:config:set api.browserkey="..." auth.domain="..."`
-5.  Update database host/user/password in either `.env` or `.env.local` file and migrate your
-    Cloud SQL database schema to the latest version by running `yarn db-migrate`.
-6.  Finally, deploy your application by running:
-
-```bash
-$ yarn deploy                      # Build the app and deploy to development environment
-$ yarn deploy-prod                 # Build the app and deploy to production
-```
+2.  Configure authentication in **Firebase** dashboard.
+3.  Set Firebase project ID in `.firebaserc` file.
+4.  Set API keys, secrets and other settings in `.env.production` file.
+5.  Migrate the database by running `NODE_ENV=production yarn db-migrate`.
+6.  Finally, deploy your application by running `yarn deploy`.
 
 ### How to Update
 
@@ -221,8 +213,6 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [fbdocs]: https://firebase.google.com/docs/web
 [router]: https://github.com/kriasoft/universal-router
 [history]: https://github.com/ReactTraining/history
-[sc]: https://www.styled-components.com/
-[scdocs]: https://www.styled-components.com/docs
 [nodejs]: https://nodejs.org/
 [yarn]: https://yarnpkg.com/
 [brew]: https://brew.sh/

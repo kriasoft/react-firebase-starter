@@ -9,7 +9,6 @@
 import idx from 'idx';
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import RelayPropTypes from 'react-relay/lib/RelayPropTypes';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -17,16 +16,18 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import { withStyles } from '@material-ui/core/styles';
 import { graphql, createFragmentContainer } from 'react-relay';
+import { compose } from 'recompose';
 
 import withAuth from '../common/withAuth';
 import CreateStoryMutation from './mutations/CreateStory';
 
-const StyledFormControl = styled(FormControl)`
-  && {
-    margin-top: 1em;
-  }
-`;
+const styles = {
+  control: {
+    marginTop: '1em',
+  },
+};
 
 class Submit extends React.Component<{}> {
   static contextTypes = {
@@ -83,6 +84,7 @@ class Submit extends React.Component<{}> {
     } = this.context;
 
     const {
+      classes: s,
       data: { me },
     } = this.props;
 
@@ -92,7 +94,8 @@ class Submit extends React.Component<{}> {
           Do you have something cool to share?
         </Typography>
         <form onSubmit={this.handleSubmit}>
-          <StyledFormControl
+          <FormControl
+            className={s.control}
             fullWidth
             error={idx(this.state, x => x.error.state['title'])}
             aria-describedby="title-text"
@@ -106,8 +109,9 @@ class Submit extends React.Component<{}> {
               required
             />
             {this.errorMessage('title')}
-          </StyledFormControl>
-          <StyledFormControl
+          </FormControl>
+          <FormControl
+            className={s.control}
             fullWidth
             error={idx(this.state, x => x.error.state['text'])}
             aria-describedby="text-text"
@@ -123,8 +127,8 @@ class Submit extends React.Component<{}> {
               required
             />
             {this.errorMessage('text')}
-          </StyledFormControl>
-          <StyledFormControl>
+          </FormControl>
+          <FormControl className={s.control}>
             <Button
               variant="raised"
               color="primary"
@@ -138,10 +142,11 @@ class Submit extends React.Component<{}> {
                 Before posting a story you need to{' '}
                 <a href={location.pathname} onClick={this.logIn}>
                   sign in
-                </a>.
+                </a>
+                .
               </FormHelperText>
             )}
-          </StyledFormControl>
+          </FormControl>
           <br />
           <br />
         </form>
@@ -150,7 +155,10 @@ class Submit extends React.Component<{}> {
   }
 }
 
-export default withAuth()(
+export default compose(
+  withStyles(styles),
+  withAuth(),
+)(
   createFragmentContainer(
     Submit,
     graphql`

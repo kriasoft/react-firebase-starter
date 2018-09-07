@@ -8,7 +8,6 @@
 
 import serialize from 'serialize-javascript';
 import createHistory from 'history/createMemoryHistory';
-import { config } from 'firebase-functions';
 import { fetchQuery } from 'relay-runtime';
 import { Router } from 'express';
 
@@ -39,7 +38,7 @@ router.get('*', async (req, res, next) => {
     if (route.redirect) {
       res.redirect(route.status || 302, route.redirect);
     } else {
-      if (process.env.GCP_PROJECT === 'react-firebase-graphql') {
+      if (process.env.NODE_ENV === 'production') {
         res.set('Cache-Control', 'public, max-age=600, s-maxage=900');
       }
       res.send(
@@ -55,12 +54,9 @@ router.get('*', async (req, res, next) => {
           data: serialize(req.data, { isJSON: true }),
           config: JSON.stringify({
             firebase: {
-              projectId:
-                process.env.FIREBASE_PROJECT_ID || process.env.GCP_PROJECT,
-              authDomain:
-                process.env.FIREBASE_AUTH_DOMAIN || config().auth.domain,
-              apiKey:
-                process.env.FIREBASE_API_BROWSER_KEY || config().api.browserkey,
+              projectId: process.env.GCP_PROJECT,
+              authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+              apiKey: process.env.GCP_BROWSER_KEY,
             },
           }),
         }),
