@@ -37,8 +37,7 @@ class Home extends React.Component<{}> {
           <strong>
             <a href="https://twitter.com/ReactStarter">Twitter</a>
           </strong>{' '}
-          | Visit our
-          <strong>sponsors</strong>:
+          | Visit our <strong>sponsors</strong>:
         </Typography>
         <Typography
           variant="body1"

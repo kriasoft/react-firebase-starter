@@ -18,8 +18,8 @@ jobs:
           command: |
             yarn cache dir
             yarn install --frozen-lockfile
-            yarn global add firebase-tools
-            firebase --version
+            yarn add firebase-tools
+            yarn run firebase --version
       - save_cache:
           key: yarn-v1-{{ checksum "yarn.lock" }}
           paths:
@@ -38,7 +38,7 @@ jobs:
       #     name: Deploy
       #     command: |
       #       if [ "${CIRCLE_BRANCH}" == "master" ]; then
-      #         firebase use dev
-      #         firebase deploy --token=$FIREBASE_TOKEN
+      #         yarn run firebase use dev
+      #         yarn run firebase deploy --token=$FIREBASE_TOKEN
       #       fi
 

@@ -5,31 +5,32 @@
  */
 
 const fs = require('fs');
-const path = require('path');
 require('./scripts/env');
 
-function read(file) {
-  return fs.readFileSync(path.resolve(__dirname, file), 'utf8');
+const connection = {};
+
+if (process.env.NODE_ENV === 'production') {
+  // Database connection pool must be set to max 1
+  // when running in serverless environment.
+  connection.max = 1;
+}
+
+// https://github.com/tgriesser/knex/issues/852
+if (!(!process.env.PGSSLMODE || process.env.PGSSLMODE === 'disabled')) {
+  connection.ssl = {
+    rejectUnauthorized: false,
+    ca: fs.readFileSync(process.env.PGSSLROOTCERT).toString(),
+    key: fs.readFileSync(process.env.PGSSLKEY).toString(),
+    cert: fs.readFileSync(process.env.PGSSLCERT).toString(),
+  };
 }
 
 // Knex configuration
 // http://knexjs.org/#knexfile
 module.exports = {
   client: 'pg',
-  migrations: {
-    tableName: 'migrations',
-  },
-  connection: {
-    ssl:
-      (process.env.PGSSLMODE || 'disable') !== 'disable'
-        ? {
-            rejectUnauthorized: false,
-            cert: read(process.env.PGSSLCERT),
-            key: read(process.env.PGSSLKEY),
-            ca: read(process.env.PGSSLROOTCERT),
-          }
-        : undefined,
-  },
+  connection,
+  migrations: { tableName: 'migrations' },
   // The order in which data is being saved or restored
   // when you run `yarn db-save` or `yarn db-seed`.
   tables: [
