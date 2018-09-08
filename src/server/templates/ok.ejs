@@ -19,8 +19,8 @@
     window.config=<%- config -%>;
     window.dataLayer=window.dataLayer||[];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '<%- env.GA_TRACKING_ID %>');
+    gtag('js',new Date());
+    gtag('config','<%- env.GA_TRACKING_ID %>',{'send_page_view':false});
   </script>
 <% assets.filter(x => x.endsWith('.js')).forEach(url => { -%>
   <script src="/<%= url %>"></script>

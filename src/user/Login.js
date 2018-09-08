@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 import LoginButton from '../common/LoginButton';
+import gtag from '../utils/gtag';
 
 const styles = theme => ({
   '@global html': {
@@ -64,6 +65,7 @@ class Login extends React.Component<{}> {
     } = window;
 
     if (search.includes('success') && top) {
+      gtag('event', 'login');
       if (opener) {
         opener.postMessage('login:success', origin);
       } else {
@@ -72,7 +74,7 @@ class Login extends React.Component<{}> {
     } else if (search.includes('error')) {
       const params = search.slice(1).split('=');
       const error = decodeURI(params[params.indexOf('error') + 1]);
-
+      gtag('event', 'exception', { description: error, fatal: false });
       this.setState({ error });
     }
   }
