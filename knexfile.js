@@ -5,7 +5,11 @@
  */
 
 const fs = require('fs');
-require('./scripts/env');
+const dotenv = require('dotenv');
+
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env' });
 
 const connection = {};
 

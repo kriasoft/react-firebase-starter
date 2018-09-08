@@ -4,13 +4,15 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-const { spawn } = require('child_process');
-require('./env');
+const dotenv = require('dotenv');
+const cp = require('child_process');
 
-const opts = { stdio: 'inherit' };
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+dotenv.config({ path: '.env.local' });
+dotenv.config({ path: '.env' });
 
 if (process.env.PGSSLKEY) {
-  spawn('chmod', ['0600', process.env.PGSSLKEY], opts);
+  cp.spawnSync('chmod', ['0600', process.env.PGSSLKEY], { stdio: 'inherit' });
 }
 
-spawn('psql', opts);
+cp.spawn('psql', { stdio: 'inherit' });
