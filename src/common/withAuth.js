@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { wrapDisplayName } from 'recompose';
 
-import openWindow from '../utils/openWindow';
+import { openWindow } from '../utils';
 
 const withAuth = () => Component => {
   class WithAuth extends React.Component {

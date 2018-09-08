@@ -50,7 +50,7 @@ class Home extends React.Component<{}> {
             rel="noopener noreferrer"
           >
             <img
-              src="https://koistya.github.io/files/rollbar-384x64.png"
+              src="https://files.tarkus.me/rollbar-384x64.png"
               width="192"
               height="32"
               alt="Rollbar"
@@ -68,7 +68,7 @@ class Home extends React.Component<{}> {
             rel="noopener noreferrer"
           >
             <img
-              src="https://koistya.github.io/files/digital-ocean-393x64.png"
+              src="https://files.tarkus.me/digital-ocean-393x64.png"
               width="196.5"
               height="32"
               alt="DigitalOcean"

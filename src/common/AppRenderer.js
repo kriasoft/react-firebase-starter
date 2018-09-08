@@ -7,8 +7,9 @@
 /* @flow */
 
 import React, { Component, ComponentType } from 'react';
+
 import ErrorPage from '../pages/ErrorPage';
-import gtag from '../utils/gtag';
+import { gtag } from '../utils';
 
 const defaults = {
   title: null,

@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 import LoginButton from '../common/LoginButton';
-import gtag from '../utils/gtag';
+import { gtag } from '../utils';
 
 const styles = theme => ({
   '@global html': {

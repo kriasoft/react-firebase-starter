@@ -6,8 +6,5 @@
 
 /* @flow */
 
-export function gtag() {
-  if (window !== undefined && window.config.gaTrackingId) {
-    window.dataLayer.push(arguments);
-  }
-}
+export * from './gtag';
+export * from './openWindow';

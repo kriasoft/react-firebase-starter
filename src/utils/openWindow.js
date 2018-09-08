@@ -29,7 +29,7 @@ function getWindowFeataures(options = {}) {
     .join(',');
 }
 
-function openWindow(uri, { onPostMessage, ...options } = {}) {
+export function openWindow(uri, { onPostMessage, ...options } = {}) {
   const win = window.open(uri, null, getWindowFeataures(options));
 
   let executor;
@@ -57,5 +57,3 @@ function openWindow(uri, { onPostMessage, ...options } = {}) {
     executor = { resolve };
   });
 }
-
-export default openWindow;
