@@ -58,7 +58,9 @@ router.get('*', async (req, res, next) => {
               authDomain: process.env.FIREBASE_AUTH_DOMAIN,
               apiKey: process.env.GCP_BROWSER_KEY,
             },
+            gaTrackingId: process.env.GA_TRACKING_ID,
           }),
+          env: process.env,
         }),
       );
     }

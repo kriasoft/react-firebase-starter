@@ -14,9 +14,19 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
-  <script>window.data=<%- data -%>;window.config=<%- config -%></script>
+  <script>
+    window.data=<%- data -%>;
+    window.config=<%- config -%>;
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '<%- env.GA_TRACKING_ID %>');
+  </script>
 <% assets.filter(x => x.endsWith('.js')).forEach(url => { -%>
   <script src="/<%= url %>"></script>
 <% }); -%>
+<% if (env.GA_TRACKING_ID) { -%>
+  <script src="https://www.googletagmanager.com/gtag/js?id=<%- env.GA_TRACKING_ID -%>" async defer></script>
+<% } -%>
 </body>
 </html>

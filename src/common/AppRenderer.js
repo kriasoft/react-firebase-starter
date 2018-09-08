@@ -28,6 +28,9 @@ class AppRenderer extends Component<{}, State> {
     if (this.state.title) {
       window.document.title = this.state.title;
     }
+    if (window.gtag && window.config.gaTrackingId) {
+      window.gtag('config', window.config.gaTrackingId);
+    }
   }
 
   componentDidCatch(error) {
