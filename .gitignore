@@ -12,6 +12,7 @@
 /secrets
 
 # Misc
+.firebase/*
 __generated__
 .DS_Store
 .env.local
