@@ -115,6 +115,7 @@
     "db-migrate": "knex migrate:latest",
     "db-rollback": "knex migrate:rollback",
     "db-seed": "knex seed:run",
+    "db-version": "knex migrate:currentVersion",
     "deploy": "yarn install && yarn relay && yarn build && firebase deploy"
   }
 }

@@ -6,10 +6,10 @@
 
 /* @flow */
 
+import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import cx from 'classnames';
 import { darken } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 

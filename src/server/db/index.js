@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // https://github.com/tgriesser/knex/issues/852
-if (!(!process.env.PGSSLMODE || process.env.PGSSLMODE === 'disabled')) {
+if (process.env.PGSSLMODE && process.env.PGSSLMODE !== 'disable') {
   connection.ssl = {
     rejectUnauthorized: false,
     ca: fs.readFileSync(process.env.PGSSLROOTCERT).toString(),
