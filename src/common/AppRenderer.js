@@ -6,10 +6,13 @@
 
 /* @flow */
 
-import React, { Component, ComponentType } from 'react';
+import * as React from 'react';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
+import theme from '../theme';
 import ErrorPage from '../pages/ErrorPage';
 import { gtag } from '../utils';
+import { HistoryContext, ResetContext } from '../hooks';
 
 const defaults = {
   title: null,
@@ -19,11 +22,11 @@ const defaults = {
 
 type State = {
   title: ?string,
-  component: ?ComponentType,
+  component: ?React.ComponentType<any>,
   error: ?Error,
 };
 
-class AppRenderer extends Component<{}, State> {
+class AppRenderer extends React.Component<{}, State> {
   state = { ...defaults };
 
   componentDidUpdate() {
@@ -37,12 +40,12 @@ class AppRenderer extends Component<{}, State> {
     });
   }
 
-  componentDidCatch(error) {
+  componentDidCatch(error: any) {
     gtag('event', 'exception', { description: error.message, fatal: false });
     this.setState({ ...defaults, error });
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps: {}, nextState: State) {
     return (
       this.state.component !== nextState.component ||
       this.state.error !== nextState.error ||
@@ -50,16 +53,24 @@ class AppRenderer extends Component<{}, State> {
     );
   }
 
-  renderRoute = (route, cb) => {
+  renderRoute = (route: any, cb: () => any) => {
     this.setState({ ...defaults, ...route }, cb);
   };
 
   render() {
-    return this.state.error ? (
-      <ErrorPage error={this.state.error} />
-    ) : this.state.component ? (
-      this.state.component
-    ) : null;
+    return (
+      <MuiThemeProvider theme={theme}>
+        <HistoryContext.Provider value={this.props.history}>
+          <ResetContext.Provider value={this.props.reset}>
+            {this.state.error ? (
+              <ErrorPage error={this.state.error} />
+            ) : this.state.component ? (
+              this.state.component
+            ) : null}
+          </ResetContext.Provider>
+        </HistoryContext.Provider>
+      </MuiThemeProvider>
+    );
   }
 }
 

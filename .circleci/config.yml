@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Build
           command: |
-            yarn relay
+            yarn relay --watchman=false
             yarn build
       - run:
           name: Test
@@ -41,4 +41,3 @@ jobs:
       #         yarn run firebase use dev
       #         yarn run firebase deploy --token=$FIREBASE_TOKEN
       #       fi
-

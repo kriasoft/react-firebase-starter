@@ -24,27 +24,24 @@ const styles = {
   },
 };
 
-class Home extends React.Component<{}> {
-  render() {
-    const { classes: s } = this.props;
-    return (
-      <div className={s.container}>
-        <Card className={s.content}>
-          <Typography variant="headline" gutterBottom>
-            My Account
-          </Typography>
-          <Typography variant="body1" paragraph>
-            Welcome, {this.props.user && this.props.user.displayName}!
-          </Typography>
-        </Card>
-      </div>
-    );
-  }
+function Account({ classes: s, ...props }) {
+  return (
+    <div className={s.container}>
+      <Card className={s.content}>
+        <Typography variant="h5" gutterBottom>
+          My Account
+        </Typography>
+        <Typography paragraph>
+          Welcome, {props.user && props.user.displayName}!
+        </Typography>
+      </Card>
+    </div>
+  );
 }
 
 export default withStyles(styles)(
   createFragmentContainer(
-    Home,
+    Account,
     graphql`
       fragment Account on Query {
         me {

@@ -37,28 +37,25 @@ const styles = theme => ({
   },
 });
 
-class LayoutFooter extends React.Component<{}> {
-  render() {
-    const { classes: s } = this.props;
-    return (
-      <div className={s.container}>
-        <Typography className={s.text} variant="body1">
-          <span className={s.copyright}>&copy; 2015-present</span>
-          <a className={s.link} href="https://github.com/kriasoft">
-            Kriasoft
-          </a>
-          <span className={s.separator}>|</span>
-          <Link className={s.link} href="/about">
-            About Us
-          </Link>
-          <span className={s.separator}>|</span>
-          <Link className={s.link} href="/privacy">
-            Privacy
-          </Link>
-        </Typography>
-      </div>
-    );
-  }
+function LayoutFooter({ classes: s }) {
+  return (
+    <div className={s.container}>
+      <Typography className={s.text}>
+        <span className={s.copyright}>&copy; 2015-present</span>
+        <a className={s.link} href="https://github.com/kriasoft">
+          Kriasoft
+        </a>
+        <span className={s.separator}>|</span>
+        <Link className={s.link} href="/about">
+          About Us
+        </Link>
+        <span className={s.separator}>|</span>
+        <Link className={s.link} href="/privacy">
+          Privacy
+        </Link>
+      </Typography>
+    </div>
+  );
 }
 
 export default withStyles(styles)(LayoutFooter);

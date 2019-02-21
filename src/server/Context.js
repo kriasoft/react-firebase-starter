@@ -7,9 +7,9 @@
 /* @flow */
 
 import type { Request } from 'express';
+import DataLoader from 'dataloader';
 
 import db from './db';
-import DataLoader from './DataLoader';
 import Validator from './Validator';
 import { mapTo, mapToMany, mapToValues } from './utils';
 import { UnauthorizedError, ForbiddenError, ValidationError } from './errors';

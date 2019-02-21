@@ -7,40 +7,32 @@
 /* @flow */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 import { wrapDisplayName } from 'recompose';
 
 import { openWindow } from '../utils';
+import { useReset } from '../hooks';
 
-const withAuth = () => Component => {
-  class WithAuth extends React.Component {
-    static contextTypes = {
-      reset: PropTypes.func.isRequired,
-    };
+const withAuth = () => (Component: any) => {
+  function WithAuth(props) {
+    const reset = useReset();
 
-    logIn = (options = {}) => {
-      const { reset } = this.context;
+    function logIn(options: any = {}) {
       return openWindow(options.url || '/login', {
         onPostMessage(event) {
           if (event.data === 'login:success') return reset();
         },
       });
-    };
+    }
 
-    logOut = () => {
-      const { reset } = this.context;
+    function logOut() {
       return fetch('/login/clear', {
         method: 'POST',
         credentials: 'include',
-      }).then(reset);
-    };
-
-    render() {
-      return (
-        <Component logIn={this.logIn} logOut={this.logOut} {...this.props} />
-      );
+      }).then(() => reset());
     }
+
+    return <Component logIn={logIn} logOut={logOut} {...props} />;
   }
 
   if (process.env.NODE_ENV !== 'production') {

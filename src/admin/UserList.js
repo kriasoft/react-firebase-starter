@@ -9,10 +9,8 @@
 import React from 'react';
 import { graphql, createFragmentContainer } from 'react-relay';
 
-class UserList extends React.Component {
-  render() {
-    return <div>{this.props.children}</div>;
-  }
+function UserList({ children }) {
+  return <div>{children}</div>;
 }
 
 export default createFragmentContainer(

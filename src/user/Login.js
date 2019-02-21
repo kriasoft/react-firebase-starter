@@ -7,12 +7,13 @@
 /* @flow */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import QueryString from 'query-string';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
 import LoginButton from '../common/LoginButton';
 import { gtag } from '../utils';
+import { useHistory } from '../hooks';
 
 const styles = theme => ({
   '@global html': {
@@ -50,48 +51,37 @@ const styles = theme => ({
   },
 });
 
-class Login extends React.Component<{}> {
-  static contextTypes = {
-    history: PropTypes.object.isRequired,
-  };
+function Login({ classes: s }) {
+  const history = useHistory();
+  const [error, setError] = React.useState();
 
-  state = { error: null };
+  React.useEffect(() => {
+    const { location, top, opener } = window;
+    const query = QueryString.parse(location.search);
 
-  componentDidMount() {
-    const {
-      location: { search, origin },
-      top,
-      opener,
-    } = window;
-
-    if (search.includes('success') && top) {
+    if (query.success !== undefined && top) {
       gtag('event', 'login');
       if (opener) {
-        opener.postMessage('login:success', origin);
+        opener.postMessage('login:success', location.origin);
       } else {
-        this.context.history.push('/');
+        history.push('/');
       }
-    } else if (search.includes('error')) {
-      const params = search.slice(1).split('=');
-      const error = decodeURI(params[params.indexOf('error') + 1]);
-      gtag('event', 'exception', { description: error, fatal: false });
-      this.setState({ error });
+    } else if (query.error) {
+      gtag('event', 'exception', { description: query.error, fatal: false });
+      setError(query.error);
     }
-  }
+  });
 
-  render() {
-    const { classes: s } = this.props;
-    return (
-      <div className={s.container}>
-        <Typography className={s.title} variant="headline">
-          Sign In
-        </Typography>
-        <LoginButton className={s.login} provider="google" />
-        <LoginButton className={s.login} provider="facebook" />
-        <Typography className={s.error}>{this.state.error}</Typography>
-      </div>
-    );
-  }
+  return (
+    <div className={s.container}>
+      <Typography className={s.title} variant="h5">
+        Sign In
+      </Typography>
+      <LoginButton className={s.login} provider="google" />
+      <LoginButton className={s.login} provider="facebook" />
+      {error && <Typography className={s.error}>{error}</Typography>}
+    </div>
+  );
 }
 
 export default withStyles(styles, { withTheme: true })(Login);

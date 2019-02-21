@@ -3,7 +3,7 @@
 
 # Dependencies
 /node_modules
-
+/flow-typed
 # Testing
 /coverage
 

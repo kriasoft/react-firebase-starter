@@ -62,86 +62,81 @@ const styles = theme => ({
   },
 });
 
-class News extends React.Component<{}> {
-  state = { error: null };
+function News({ classes: s, data: { stories }, ...props }) {
+  const [error, setError] = React.useState();
 
-  like = event => {
+  function reset() {
+    setError(null);
+  }
+
+  function like(event) {
     event.preventDefault();
-    this.reset();
+    reset();
     const id = event.currentTarget.id;
-    const { environment } = this.props.relay;
+    const { environment } = props.relay;
     LikeStoryMutation.commit(environment, { id }).catch(err => {
       if (err.code === 401) {
-        this.props.logIn();
+        props.logIn();
       } else {
-        this.setState({ error: err.message });
+        setError(err.message);
       }
     });
-  };
-
-  reset = () => this.setState({ error: null });
-
-  render() {
-    const {
-      classes: s,
-      data: { stories },
-    } = this.props;
-    const { error } = this.state;
-    return (
-      <>
-        <Typography variant="body1" gutterBottom>
-          The latest news from React.js community.
-        </Typography>
-        <List>
-          {(stories || []).map(x => (
-            <ListItem
-              className={s.listItem}
-              key={x.id}
-              style={{ paddingLeft: 0 }}
-            >
-              <ListItemAvatar>
-                <Avatar src={x.author.photoURL} alt={x.author.displayName} />
-              </ListItemAvatar>
-              <ListItemText
-                className={s.listItemText}
-                primary={
-                  x.isURL ? (
-                    <a href={x.text}>
-                      {x.title}{' '}
-                      <OpenInNewIcon
-                        style={{ width: 10, height: 10, verticalAlign: 'top' }}
-                      />
-                    </a>
-                  ) : (
-                    <Link href={`/news/${x.slug}`}>{x.title}</Link>
-                  )
-                }
-                secondary={
-                  <>
-                    <span>
-                      by{' '}
-                      <Link href={`/@${x.author.username}`}>
-                        {x.author.displayName}
-                      </Link>{' '}
-                      | {x.createdAt}
-                    </span>
-                    <Link href={`/news/${x.slug}`}>
-                      <ChatBubbleOutlineIcon /> (0)
-                    </Link>
-                    <a id={x.id} href={`/news/${x.slug}`} onClick={this.like}>
-                      {x.pointGiven ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                      ({x.pointsCount})
-                    </a>
-                  </>
-                }
-              />
-            </ListItem>
-          ))}
-        </List>
-        <Snakbar open={!!error} message={error} onClose={this.reset} />
-      </>
-    );
   }
+
+  return (
+    <>
+      <Typography gutterBottom>
+        The latest news from React.js community.
+      </Typography>
+      <List>
+        {(stories || []).map(x => (
+          <ListItem
+            className={s.listItem}
+            key={x.id}
+            style={{ paddingLeft: 0 }}
+          >
+            <ListItemAvatar>
+              <Avatar src={x.author.photoURL} alt={x.author.displayName} />
+            </ListItemAvatar>
+            <ListItemText
+              className={s.listItemText}
+              primary={
+                x.isURL ? (
+                  <a href={x.text}>
+                    {x.title}{' '}
+                    <OpenInNewIcon
+                      style={{ width: 10, height: 10, verticalAlign: 'top' }}
+                    />
+                  </a>
+                ) : (
+                  <Link href={`/news/${x.slug}`}>{x.title}</Link>
+                )
+              }
+              secondary={
+                <>
+                  <span>
+                    by{' '}
+                    <Link href={`/@${x.author.username}`}>
+                      {x.author.displayName}
+                    </Link>{' '}
+                    | {x.createdAt}
+                  </span>
+                  <Link href={`/news/${x.slug}`}>
+                    <ChatBubbleOutlineIcon /> (0)
+                  </Link>
+                  <a id={x.id} href={`/news/${x.slug}`} onClick={like}>
+                    {x.pointGiven ? <FavoriteIcon /> : <FavoriteBorderIcon />}(
+                    {x.pointsCount})
+                  </a>
+                </>
+              }
+            />
+          </ListItem>
+        ))}
+      </List>
+      <Snakbar open={!!error} message={error} onClose={reset} />
+    </>
+  );
 }
 
 export default withStyles(styles)(

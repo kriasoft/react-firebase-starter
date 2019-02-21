@@ -7,7 +7,6 @@
 /* @flow */
 
 import React from 'react';
-import RelayPropTypes from 'react-relay/lib/RelayPropTypes';
 import { graphql, createFragmentContainer, commitMutation } from 'react-relay';
 import type { AutoUpdater_user } from './__generated__/AutoUpdater_user.graphql';
 
@@ -20,10 +19,6 @@ type Props = {
  * and updates these fields in the background when they become outdated.
  */
 class AutoUpdater extends React.Component<Props> {
-  static contextTypes = {
-    relay: RelayPropTypes.Relay,
-  };
-
   componentDidMount() {
     this.updateUser();
   }
@@ -41,12 +36,11 @@ class AutoUpdater extends React.Component<Props> {
   }
 
   updateUser() {
-    const { user } = this.props;
-    const { environment } = this.context.relay;
+    const { user, relay } = this.props;
     const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
 
     if (user && user.timeZone !== timeZone) {
-      commitMutation(environment, {
+      commitMutation(relay.environment, {
         mutation: graphql`
           mutation AutoUpdaterMutation($input: UpdateUserInput!) {
             updateUser(input: $input) {
