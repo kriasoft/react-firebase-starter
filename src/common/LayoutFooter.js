@@ -50,6 +50,10 @@ function LayoutFooter({ classes: s }) {
           About Us
         </Link>
         <span className={s.separator}>|</span>
+        <Link className={s.link} href="/terms">
+          Terms
+        </Link>
+        <span className={s.separator}>|</span>
         <Link className={s.link} href="/privacy">
           Privacy
         </Link>

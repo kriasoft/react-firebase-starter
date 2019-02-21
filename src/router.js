@@ -12,12 +12,14 @@ import UniversalRouter from 'universal-router';
 import pages from './pages';
 import user from './user';
 import news from './news';
+import legal from './legal';
 import ErrorPage from './pages/ErrorPage';
 
 const routes = [
   ...pages,
   ...user,
   ...news,
+  ...legal,
   {
     path: '/admin',
     children: () => import(/* webpackChunkName: 'admin' */ './admin'),
