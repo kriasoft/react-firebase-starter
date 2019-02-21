@@ -65,7 +65,7 @@ const styles = {
   },
 };
 
-class LoginButton extends React.PureComponent {
+class LoginButton extends React.PureComponent<any> {
   static propTypes = {
     provider: PropTypes.oneOf(Object.keys(providers)),
   };
@@ -78,7 +78,7 @@ class LoginButton extends React.PureComponent {
       <Button
         className={cx(className, s.root, s[provider])}
         color="primary"
-        variant="raised"
+        variant="contained"
         component="a"
         href={`/login/${provider}`}
         {...rest}

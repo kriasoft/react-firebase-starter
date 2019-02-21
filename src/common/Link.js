@@ -7,7 +7,7 @@
 /* @flow */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useHistory } from '../hooks';
 
 function isLeftClickEvent(event) {
   return event.button === 0;
@@ -21,18 +21,12 @@ type Props = {
   onClick: ?(event: MouseEvent) => void,
 };
 
-class Link extends React.Component<Props> {
-  static propTypes = {
-    onClick: PropTypes.func,
-  };
+function Link(props: Props) {
+  const history = useHistory();
 
-  static contextTypes = {
-    history: PropTypes.instanceOf(Object).isRequired,
-  };
-
-  handleClick = (event: MouseEvent) => {
-    if (this.props.onClick) {
-      this.props.onClick(event);
+  function handleClick(event: MouseEvent) {
+    if (props.onClick) {
+      props.onClick(event);
     }
 
     if (isModifiedEvent(event) || !isLeftClickEvent(event)) {
@@ -44,13 +38,11 @@ class Link extends React.Component<Props> {
     }
 
     event.preventDefault();
-    this.context.history.push(event.currentTarget.getAttribute('href'));
-  };
-
-  render() {
-    // eslint-disable-next-line jsx-a11y/anchor-has-content
-    return <a {...this.props} onClick={this.handleClick} />;
+    history.push(event.currentTarget.getAttribute('href'));
   }
+
+  // eslint-disable-next-line jsx-a11y/anchor-has-content
+  return <a {...props} onClick={handleClick} />;
 }
 
 export default Link;

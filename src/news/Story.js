@@ -13,34 +13,27 @@ import { graphql, createFragmentContainer } from 'react-relay';
 
 import Link from '../common/Link';
 
-class Story extends React.Component<{}> {
-  render() {
-    const { title, text, isURL } = this.props.data;
-    return (
-      <>
-        <Typography variant="title" gutterBottom>
-          {title}
+function Story({ data: { title, text, isURL } }) {
+  return (
+    <>
+      <Typography variant="h6" gutterBottom>
+        {title}
+      </Typography>
+      {isURL ? (
+        <Typography>
+          <a href={text}>{text}</a>
         </Typography>
-        {isURL ? (
-          <Typography variant="body1">
-            <a href={text}>{text}</a>
-          </Typography>
-        ) : (
-          text &&
-          text.split('\n').map(x => (
-            <Typography variant="body1" gutterBottom>
-              {x}
-            </Typography>
-          ))
-        )}
-        <div style={{ marginTop: 10, textAlign: 'right' }}>
-          <Button component={Link} href="/news">
-            Go back
-          </Button>
-        </div>
-      </>
-    );
-  }
+      ) : (
+        text &&
+        text.split('\n').map(x => <Typography gutterBottom>{x}</Typography>)
+      )}
+      <div style={{ marginTop: 10, textAlign: 'right' }}>
+        <Button component={Link} href="/news">
+          Go back
+        </Button>
+      </div>
+    </>
+  );
 }
 
 export default createFragmentContainer(

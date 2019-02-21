@@ -15,7 +15,7 @@ import passport from './passport';
 import templates from './templates';
 import routes from '../router';
 import createRelay from './createRelay';
-import assets from './assets.json';
+import stats from './stats.json'; // eslint-disable-line
 
 const router = new Router();
 
@@ -45,12 +45,13 @@ router.get('*', async (req, res, next) => {
         templates.ok({
           title: route.title,
           description: route.description,
-          assets: (route.chunks || [])
-            .reduce((chunks, name) => [...chunks, ...assets[name]], [
-              ...assets.vendors,
-              ...assets.main,
-            ])
-            .concat(assets['runtime~main']),
+          assets: (route.chunks || []).reduce(
+            (acc, name) => [
+              ...acc,
+              ...[].concat(stats.assetsByChunkName[name]),
+            ],
+            stats.entrypoints.main.assets,
+          ),
           data: serialize(req.data, { isJSON: true }),
           config: JSON.stringify({
             firebase: {

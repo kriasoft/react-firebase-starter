@@ -44,25 +44,22 @@ const styles = {
   },
 };
 
-class LayoutHeader extends React.Component {
-  render() {
-    const { classes: s } = this.props;
-    return (
-      <div className={s.root}>
-        <div className={s.container}>
-          <h1 className={s.title}>React Starter Kit</h1>
-          <p className={s.summary}>
-            Bootstrap new <strong>React.js</strong> + <strong>Firebase</strong>{' '}
-            application projects
-            <br />
-            in minutes, using modern mainstream libraries and tooling
-            <br />
-            with zero dependency on 3rd party frameworks.
-          </p>
-        </div>
+function LayoutHeader({ classes: s }) {
+  return (
+    <div className={s.root}>
+      <div className={s.container}>
+        <h1 className={s.title}>React Starter Kit</h1>
+        <p className={s.summary}>
+          Bootstrap new <strong>React.js</strong> + <strong>Firebase</strong>{' '}
+          application projects
+          <br />
+          in minutes, using modern mainstream libraries and tooling
+          <br />
+          with zero dependency on 3rd party frameworks.
+        </p>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default withStyles(styles)(LayoutHeader);

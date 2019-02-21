@@ -7,7 +7,6 @@
 /* @flow */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
@@ -24,6 +23,7 @@ import LayoutHeader from './LayoutHeader';
 import LayoutFooter from './LayoutFooter';
 import AutoUpdater from './AutoUpdater';
 import withAuth from '../common/withAuth';
+import { useHistory } from '../hooks';
 
 const styles = theme => ({
   '@global': {
@@ -63,7 +63,6 @@ const styles = theme => ({
   separator: {
     flexGrow: 1,
   },
-
   avatar: {
     width: 32,
     height: 32,
@@ -76,123 +75,100 @@ const styles = theme => ({
   },
 });
 
-class Layout extends React.Component {
-  static contextTypes = {
-    history: PropTypes.object.isRequired,
-  };
+function Layout({ classes: s, data: { me }, children, ...other }) {
+  const history = useHistory();
+  const [userMenuEl, setUserMenuEl] = React.useState();
 
-  state = {
-    userMenuEl: null,
-  };
-
-  openUserMenu = event => {
-    this.setState({ userMenuEl: event.currentTarget });
-  };
-
-  closeUserMenu = () => {
-    this.setState({ userMenuEl: null });
-  };
-
-  logOut = () => {
-    this.setState({ userMenuEl: null });
-    this.props.logOut();
-  };
-
-  render() {
-    const {
-      classes: s,
-      data: { me },
-    } = this.props;
-
-    const { userMenuEl } = this.state;
-
-    const {
-      history: {
-        location: { pathname: path },
-      },
-    } = this.context;
-
-    let index = false;
-
-    if (path === '/') {
-      index = 0;
-    } else if (path.startsWith('/news')) {
-      index = 1;
-    } else if (path.startsWith('/submit')) {
-      index = 2;
-    }
-
-    return (
-      <div className={s.container}>
-        <LayoutHeader />
-        <Paper className={s.body}>
-          <div className={s.toolbar}>
-            <Tabs value={index} onChange={this.handleChange}>
-              <Tab className={s.tab} label="Home" component={Link} href="/" />
-              <Tab
-                className={s.tab}
-                label="News"
-                component={Link}
-                href="/news"
-              />
-              <Tab
-                className={s.tab}
-                label="Submit"
-                component={Link}
-                href="/submit"
-              />
-            </Tabs>
-            <span className={s.separator} />
-            {me ? (
-              <>
-                <Avatar
-                  className={s.avatar}
-                  src={me.photoURL}
-                  alt={me.displayName}
-                  onClick={this.openUserMenu}
-                  aria-owns={userMenuEl ? 'user-menu' : null}
-                  aria-haspopup="true"
-                />
-                <Menu
-                  id="user-menu"
-                  role="menu"
-                  anchorEl={userMenuEl}
-                  open={Boolean(userMenuEl)}
-                  onClose={this.closeUserMenu}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  transformOrigin={{
-                    vertical: -56,
-                    horizontal: 82,
-                  }}
-                >
-                  <MenuItem
-                    component={Link}
-                    href={`/@${me.username}`}
-                    onClick={this.closeUserMenu}
-                  >
-                    My Profile
-                  </MenuItem>
-                  <MenuItem id="user-menu-signout" onClick={this.logOut}>
-                    Sign Out
-                  </MenuItem>
-                </Menu>
-              </>
-            ) : (
-              <Button className={s.login} onClick={this.props.logIn}>
-                Sign In
-              </Button>
-            )}
-          </div>
-          <div className={s.content}>{this.props.children}</div>
-        </Paper>
-        <LayoutFooter />
-        <AutoUpdater user={me} />
-      </div>
-    );
+  function openUserMenu(event) {
+    setUserMenuEl(event.currentTarget);
   }
+
+  function closeUserMenu() {
+    setUserMenuEl(null);
+  }
+
+  function logOut() {
+    setUserMenuEl(null);
+    other.logOut();
+  }
+
+  const path = history.location.pathname;
+
+  let index = false;
+
+  if (path === '/') {
+    index = 0;
+  } else if (path.startsWith('/news')) {
+    index = 1;
+  } else if (path.startsWith('/submit')) {
+    index = 2;
+  }
+
+  return (
+    <div className={s.container}>
+      <LayoutHeader />
+      <Paper className={s.body}>
+        <div className={s.toolbar}>
+          <Tabs value={index}>
+            <Tab className={s.tab} label="Home" component={Link} href="/" />
+            <Tab className={s.tab} label="News" component={Link} href="/news" />
+            <Tab
+              className={s.tab}
+              label="Submit"
+              component={Link}
+              href="/submit"
+            />
+          </Tabs>
+          <span className={s.separator} />
+          {me ? (
+            <>
+              <Avatar
+                className={s.avatar}
+                src={me.photoURL}
+                alt={me.displayName}
+                onClick={openUserMenu}
+                aria-owns={userMenuEl ? 'user-menu' : null}
+                aria-haspopup="true"
+              />
+              <Menu
+                id="user-menu"
+                role="menu"
+                anchorEl={userMenuEl}
+                open={Boolean(userMenuEl)}
+                onClose={closeUserMenu}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: -56,
+                  horizontal: 82,
+                }}
+              >
+                <MenuItem
+                  component={Link}
+                  href={`/@${me.username}`}
+                  onClick={closeUserMenu}
+                >
+                  My Profile
+                </MenuItem>
+                <MenuItem id="user-menu-signout" onClick={logOut}>
+                  Sign Out
+                </MenuItem>
+              </Menu>
+            </>
+          ) : (
+            <Button className={s.login} onClick={other.logIn}>
+              Sign In
+            </Button>
+          )}
+        </div>
+        <div className={s.content}>{children}</div>
+      </Paper>
+      <LayoutFooter />
+      <AutoUpdater user={me} />
+    </div>
+  );
 }
 
 export default compose(

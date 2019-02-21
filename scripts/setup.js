@@ -40,10 +40,6 @@ let status;
 
   db = knex(config);
 
-  // Make sure that the required PostgreSQL extensions are installed
-  await db.raw('CREATE EXTENSION IF NOT EXISTS ??', ['uuid-ossp']);
-  await db.raw('CREATE EXTENSION IF NOT EXISTS ??', ['hstore']);
-
   await db.destroy();
 
   // Migrate database schema to the latest version

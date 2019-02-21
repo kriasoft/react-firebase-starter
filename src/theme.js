@@ -7,10 +7,10 @@
 /* @flow */
 
 import { createMuiTheme } from '@material-ui/core/styles';
-import { indigo } from '@material-ui/core/colors';
+import indigo from '@material-ui/core/colors/indigo';
 
-// https://material-ui-next.com/customization/themes/
-// https://material-ui-next.com/style/color/
+// https://material-ui.com/customization/themes/
+// https://material-ui.com/style/color/
 export default createMuiTheme({
   palette: {
     primary: indigo,
@@ -21,5 +21,8 @@ export default createMuiTheme({
         color: 'white',
       },
     },
+  },
+  typography: {
+    useNextVariants: true,
   },
 });

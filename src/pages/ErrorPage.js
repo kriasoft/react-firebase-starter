@@ -7,10 +7,10 @@
 /* @flow */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import Link from '../common/Link';
+import { useHistory } from '../hooks';
 
 const color = '#607d8b';
 
@@ -77,56 +77,48 @@ type Props = {
   error: ?Error,
 };
 
-class ErrorPage extends React.Component<{}, Props, {}> {
-  static contextTypes = {
-    history: PropTypes.instanceOf(Object).isRequired,
-  };
-
-  componentDidMount() {
+function ErrorPage({ classes: s, ...props }: Props) {
+  const history = useHistory();
+  React.useEffect(() => {
     document.title =
-      this.props.error && this.props.error.status === 404
-        ? 'Page Not Found'
-        : 'Error';
-  }
+      props.error && props.error.status === 404 ? 'Page Not Found' : 'Error';
+  });
 
-  goBack = (event: MouseEvent) => {
+  function goBack(event: MouseEvent) {
     event.preventDefault();
-    this.context.history.goBack();
-  };
-
-  render() {
-    if (this.props.error) {
-      console.error(this.props.error); // eslint-disable-line no-console
-    }
-
-    const { classes: s } = this.props;
-    const [code, title] =
-      this.props.error && this.props.error.status === 404
-        ? ['404', 'Page not found']
-        : ['Error', 'Oops, something went wrong'];
-
-    return (
-      <div className={s.container}>
-        <main className={s.main}>
-          <h1 className={s.errorCode}>{code}</h1>
-          <p className={s.title}>{title}</p>
-          {code === '404' && (
-            <p className={s.text}>
-              The page you&apos;re looking for does not exist or an another
-              error occurred.
-            </p>
-          )}
-          <p className={s.text}>
-            <a href="/" onClick={this.goBack}>
-              Go back
-            </a>
-            , or head over to the&nbsp;
-            <Link href="/">home page</Link> to choose a new direction.
-          </p>
-        </main>
-      </div>
-    );
+    history.goBack();
   }
+
+  if (props.error) {
+    console.error(props.error); // eslint-disable-line no-console
+  }
+
+  const [code, title] =
+    props.error && props.error.status === 404
+      ? ['404', 'Page not found']
+      : ['Error', 'Oops, something went wrong'];
+
+  return (
+    <div className={s.container}>
+      <main className={s.main}>
+        <h1 className={s.errorCode}>{code}</h1>
+        <p className={s.title}>{title}</p>
+        {code === '404' && (
+          <p className={s.text}>
+            The page you&apos;re looking for does not exist or an another error
+            occurred.
+          </p>
+        )}
+        <p className={s.text}>
+          <a href="/" onClick={goBack}>
+            Go back
+          </a>
+          , or head over to the&nbsp;
+          <Link href="/">home page</Link> to choose a new direction.
+        </p>
+      </main>
+    </div>
+  );
 }
 
 export default withStyles(styles, { withTheme: true })(ErrorPage);
