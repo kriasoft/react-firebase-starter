@@ -12,39 +12,39 @@ import Layout from '../common/Layout';
 
 export default [
   {
-    path: '',
+    path: '/terms',
     query: graphql`
-      query pagesHomeQuery {
+      query legalTermsQuery {
         ...Layout
       }
     `,
-    components: () => [import(/* webpackChunkName: 'home' */ './Home')],
-    render: ([Home], data) => ({
-      title: 'React Starter Kit for Firebase',
+    components: () => [import(/* webpackChunkName: 'terms' */ './Terms')],
+    render: ([Terms], data) => ({
+      title: 'Terms of Use • React Starter Kit for Firebase',
       component: (
         <Layout data={data}>
-          <Home data={data} />
+          <Terms data={data} />
         </Layout>
       ),
-      chunks: ['home'],
+      chunks: ['terms'],
     }),
   },
   {
-    path: '/about',
+    path: '/privacy',
     query: graphql`
-      query pagesAboutQuery {
+      query legalPrivacyQuery {
         ...Layout
       }
     `,
-    components: () => [import(/* webpackChunkName: 'about' */ './About')],
-    render: ([About], data) => ({
-      title: 'About Us • React Starter Kit for Firebase',
+    components: () => [import(/* webpackChunkName: 'privacy' */ './Privacy')],
+    render: ([Privacy], data) => ({
+      title: 'Privacy Policy • React Starter Kit for Firebase',
       component: (
         <Layout data={data}>
-          <About data={data} />
+          <Privacy data={data} />
         </Layout>
       ),
-      chunks: ['about'],
+      chunks: ['privacy'],
     }),
   },
 ];
