@@ -20,7 +20,7 @@ export default [
     `,
     components: () => [import(/* webpackChunkName: 'home' */ './Home')],
     render: ([Home], data) => ({
-      title: process.env.APP_NAME,
+      title: process.env.REACT_APP_NAME,
       component: (
         <Layout data={data}>
           <Home data={data} />
@@ -38,7 +38,7 @@ export default [
     `,
     components: () => [import(/* webpackChunkName: 'about' */ './About')],
     render: ([About], data) => ({
-      title: `About Us • ${process.env.APP_NAME}`,
+      title: `About Us • ${process.env.REACT_APP_NAME}`,
       component: (
         <Layout data={data}>
           <About data={data} />

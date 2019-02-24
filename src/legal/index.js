@@ -20,7 +20,7 @@ export default [
     `,
     components: () => [import(/* webpackChunkName: 'terms' */ './Terms')],
     render: ([Terms], data) => ({
-      title: `Terms of Use • ${process.env.APP_NAME}`,
+      title: `Terms of Use • ${process.env.REACT_APP_NAME}`,
       component: (
         <Layout data={data}>
           <Terms data={data} />
@@ -38,7 +38,7 @@ export default [
     `,
     components: () => [import(/* webpackChunkName: 'privacy' */ './Privacy')],
     render: ([Privacy], data) => ({
-      title: `Privacy Policy • ${process.env.APP_NAME}`,
+      title: `Privacy Policy • ${process.env.REACT_APP_NAME}`,
       component: (
         <Layout data={data}>
           <Privacy data={data} />

@@ -15,7 +15,7 @@ export default [
     path: '/login',
     components: () => [import(/* webpackChunkName: 'login' */ './Login')],
     render: ([Login]) => ({
-      title: `Sign In • ${process.env.APP_NAME}`,
+      title: `Sign In • ${process.env.REACT_APP_NAME}`,
       component: <Login />,
       chunks: ['login'],
     }),
@@ -35,7 +35,7 @@ export default [
       }
     `,
     render: ([UserProfile], data) => ({
-      title: `${data.user.displayName} • ${process.env.APP_NAME}`,
+      title: `${data.user.displayName} • ${process.env.REACT_APP_NAME}`,
       component: (
         <Layout data={data}>
           <UserProfile data={data.user} />
@@ -54,7 +54,7 @@ export default [
       }
     `,
     render: ([Account], data) => ({
-      title: `My Account • ${process.env.APP_NAME}`,
+      title: `My Account • ${process.env.REACT_APP_NAME}`,
       component: (
         <Layout data={data}>
           <Account data={data} />
