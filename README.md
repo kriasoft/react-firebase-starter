@@ -30,12 +30,12 @@ This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kria
 
 ### Tech Stack
 
-- [Create React App][cra] (★ 55k) for development and test infrastructure (see [user guide][cradocs])
-- [Material UI][mui] (★ 40k) to reduce development time by integrating Google's [Material Design][material]
-- [Passport.js][passport] (★ 14k) for authentication configured with stateless JWT tokens for sessions
-- [GraphQL.js][gqljs] (★ 11k) and [Relay][relay] (★ 11k) for declarative data fetching and efficient client stage management
+- [Create React App][cra] (★ 64k) for development and test infrastructure (see [user guide][cradocs])
+- [Material UI][mui] (★ 45k) to reduce development time by integrating Google's [Material Design][material]
+- [Passport.js][passport] (★ 15k) for authentication configured with stateless JWT tokens for sessions
+- [GraphQL.js][gqljs] (★ 13k) and [Relay][relay] (★ 11k) for declarative data fetching and efficient client stage management
 - [Universal Router][router] (★ 1k) + [history][history] (★ 3k) for declarative routing and client-side navigation optimized for [Relay][relay]
-- [PostgreSQL][psql] database pre-configured with a query builder and migrations using [Knex.js][knex] (★ 6k)
+- [PostgreSQL][psql] database pre-configured with a query builder and migrations using [Knex.js][knex] (★ 10k)
 - [Google Cloud][gcp] & [Firebase][firebase] for serverless architecture - Cloud SQL, Cloud Functions, CDN hosting, file storage ([docs][fbdocs])
 
 Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([ES2015][es2015]) and [React](https://reactjs.org/docs/).
@@ -53,6 +53,7 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   ├── admin/                     # Admin section (Dashboard, User Management etc.)
 │   ├── common/                    # Shared React components and HOCs
 │   ├── icons/                     # Icon components
+│   ├── legal/                     # Terms of Use, Privacy Policy, etc.
 │   ├── news/                      # News section (example)
 │   ├── pages/                     # Static pages (landing, about, privacy, etc.)
 │   ├── server/                    # Server-side code (API, authentication, etc.)
@@ -75,14 +76,16 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   └── theme.js                   # Overrides for Material UI default styles
 ├── ssl/                           # SSL certificates for connecting to Cloud SQL instance
 ├── .env                           # Environment variables
-├── .env.local                     # Local (development) overrides
+├── .env.local                     # Environment variables overrides for local development
+├── .env.production                # Environment variables overrides for PROD environment
+├── .env.test                      # Environment variables overrides for TEST environment
 ├── graphql.schema                 # GraphQL schema (auto-generated, used by Relay)
 └── package.json                   # The list of project dependencies + NPM scripts
 ```
 
 ### Prerequisites
 
-- [Node.js][nodejs] v8.11 or higher + [Yarn][yarn] v1.6 or higher &nbsp; (_HINT: On Mac install
+- [Node.js][nodejs] v8.15 or higher + [Yarn][yarn] v1.13 or higher &nbsp; (_HINT: On Mac install
   them via [Brew][brew]_)
 - [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
@@ -116,8 +119,8 @@ $ yarn db-seed                     # Seed database with previously saved data
 $ yarn db                          # Open PostgreSQL shell (for testing/debugging)
 ```
 
-**Note**: Appending `--env=production` flag to any of the commands above will force it to use
-database connection settings from `.env.production` and/or `.env.production.local` file(s).
+**Note**: Appending `--prod` / `--test` flags to any of the commands above will force it to use
+database connection settings from `.env.production` and/or `.env.test` file(s).
 
 ### How to Test
 
@@ -133,8 +136,8 @@ $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 2.  Configure authentication in **Firebase** dashboard.
 3.  Set Firebase project ID in `.firebaserc` file.
 4.  Set API keys, secrets and other settings in `.env.production` file.
-5.  Migrate the database by running `NODE_ENV=production yarn db-migrate`.
-6.  Finally, deploy your application by running `yarn deploy`.
+5.  Migrate the database by running `yarn db-migrate --prod`.
+6.  Finally, deploy your application by running `yarn deploy-prod`.
 
 ### How to Update
 

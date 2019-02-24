@@ -11,7 +11,12 @@ const express = require('express');
 const firebase = require('firebase-admin');
 const functions = require('firebase-functions');
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+// Infer runtime environment from the project's name, for example:
+//   "example-prod" => "prod"
+//   "example-test" => "test"
+const [, env] = (x => x && x.match(/-(\w+)$/))(process.env.GCP_PROJECT) || [];
+
+dotenv.config({ path: `.env.${env === 'prod' ? 'production' : env}` });
 dotenv.config({ path: '.env.local' });
 dotenv.config({ path: '.env' });
 
