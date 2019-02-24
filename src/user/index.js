@@ -15,7 +15,7 @@ export default [
     path: '/login',
     components: () => [import(/* webpackChunkName: 'login' */ './Login')],
     render: ([Login]) => ({
-      title: 'Sign In • React Starter Kit for Firebase',
+      title: `Sign In • ${process.env.APP_NAME}`,
       component: <Login />,
       chunks: ['login'],
     }),
@@ -35,7 +35,7 @@ export default [
       }
     `,
     render: ([UserProfile], data) => ({
-      title: `${data.user.displayName} • React Starter Kit for Firebase`,
+      title: `${data.user.displayName} • ${process.env.APP_NAME}`,
       component: (
         <Layout data={data}>
           <UserProfile data={data.user} />
@@ -54,7 +54,7 @@ export default [
       }
     `,
     render: ([Account], data) => ({
-      title: 'My Account • React Starter Kit for Firebase',
+      title: `My Account • ${process.env.APP_NAME}`,
       component: (
         <Layout data={data}>
           <Account data={data} />
