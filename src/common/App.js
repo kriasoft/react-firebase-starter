@@ -108,13 +108,12 @@ class App extends React.Component<Props, State> {
     this.rendererRef.current.renderRoute(route, this.onRenderComplete);
   };
 
-  reset = () => {
-    this.relay = this.props.createRelay();
-    this.props.history.replace(this.props.history.location);
-    return new Promise(resolve => {
+  reset = () =>
+    new Promise(resolve => {
+      this.relay = this.props.createRelay();
       this.onRenderComplete = resolve;
+      this.props.history.replace(this.props.history.location);
     });
-  };
 
   render() {
     const { query, variables, render } = this.state;
