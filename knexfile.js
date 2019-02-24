@@ -7,7 +7,13 @@
 const fs = require('fs');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+const env = process.argv.includes('--prod')
+  ? 'production'
+  : process.argv.includes('--test')
+  ? 'test'
+  : '';
+
+dotenv.config({ path: `.env.${env}` });
 dotenv.config({ path: '.env.local' });
 dotenv.config({ path: '.env' });
 

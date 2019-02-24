@@ -4,15 +4,15 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-const dotenv = require('dotenv');
 const cp = require('child_process');
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
-dotenv.config({ path: '.env.local' });
-dotenv.config({ path: '.env' });
+// Load environment variables (PGHOST, PGUSER, etc.)
+require('../knexfile');
 
+// Ensure that the SSL key file has correct permissions
 if (process.env.PGSSLKEY) {
   cp.spawnSync('chmod', ['0600', process.env.PGSSLKEY], { stdio: 'inherit' });
 }
 
+// Launch interactive terminal for working with Postgres
 cp.spawn('psql', { stdio: 'inherit' });
