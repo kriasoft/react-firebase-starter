@@ -119,8 +119,8 @@ $ yarn db-seed                     # Seed database with previously saved data
 $ yarn db                          # Open PostgreSQL shell (for testing/debugging)
 ```
 
-**Note**: Appending `--prod` / `--test` flags to any of the commands above will force it to use
-database connection settings from `.env.production` and/or `.env.test` file(s).
+**Note**: Appending `--env=prod`, `--env=test` flags to any of the commands above will force it to
+use database connection settings from `.env.production` and/or `.env.test` file(s).
 
 ### How to Test
 
@@ -136,7 +136,7 @@ $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 2.  Configure authentication in **Firebase** dashboard.
 3.  Set Firebase project ID in `.firebaserc` file.
 4.  Set API keys, secrets and other settings in `.env.production` file.
-5.  Migrate the database by running `yarn db-migrate --prod`.
+5.  Migrate the database by running `yarn db-migrate --env=prod`.
 6.  Finally, deploy your application by running `yarn deploy-prod`.
 
 ### How to Update

@@ -23,7 +23,7 @@ passport.framework(
   jwt({
     name: process.env.JWT_NAME,
     secret: process.env.JWT_SECRET,
-    issuer: `https://${process.env.FIREBASE_AUTH_DOMAIN}`,
+    issuer: origin,
     createToken: req => ({
       sub: req.user.id,
       jti: uuid.v4(),
