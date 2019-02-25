@@ -30,6 +30,7 @@
     "express-graphql": "^0.7.1",
     "firebase-admin": "^7.0.0",
     "firebase-functions": "^2.2.0",
+    "got": "^9.6.0",
     "graphql": "^14.1.1",
     "graphql-relay": "^0.6.0",
     "history": "^4.7.2",
@@ -111,8 +112,8 @@
     "db-rollback": "knex migrate:rollback",
     "db-seed": "knex seed:run",
     "db-version": "knex migrate:currentVersion",
-    "deploy": "firebase --project=example-test deploy",
-    "deploy-test": "firebase --project=example-test deploy",
-    "deploy-prod": "firebase --project=example-prod deploy"
+    "deploy": "yarn run deploy-test",
+    "deploy-test": "firebase --project=example-test deploy && node ./scripts/post-deploy --env=test",
+    "deploy-prod": "firebase --project=example-prod deploy && node ./scripts/post-deploy --env=prod"
   }
 }
