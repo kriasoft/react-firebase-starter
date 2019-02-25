@@ -112,6 +112,7 @@
     "db-seed": "knex seed:run",
     "db-version": "knex migrate:currentVersion",
     "deploy": "firebase --project=example-test deploy",
+    "deploy-test": "firebase --project=example-test deploy",
     "deploy-prod": "firebase --project=example-prod deploy"
   }
 }
