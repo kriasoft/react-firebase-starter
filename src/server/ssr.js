@@ -43,6 +43,7 @@ router.get('*', async (req, res, next) => {
       }
       res.send(
         templates.ok({
+          url: `https://${process.env.FIREBASE_AUTH_DOMAIN}${req.path}`,
           title: route.title,
           description: route.description,
           assets: (route.chunks || []).reduce(

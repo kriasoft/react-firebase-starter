@@ -32,9 +32,15 @@ if (!firebase.apps.length) {
 
 if (process.env.NODE_ENV === 'production') {
   // Server environment
-  exports.login = functions.https.onRequest(require('./login').default);
-  exports.graphql = functions.https.onRequest(require('./api').default);
-  exports.default = functions.https.onRequest(require('./ssr').default);
+  exports.login = functions
+    .runWith({ memory: '2GB' })
+    .https.onRequest(require('./login').default);
+  exports.graphql = functions
+    .runWith({ memory: '2GB' })
+    .https.onRequest(require('./api').default);
+  exports.default = functions
+    .runWith({ memory: '2GB' })
+    .https.onRequest(require('./ssr').default);
 } else {
   // Local/dev environment
   const app = express();
