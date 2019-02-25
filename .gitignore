@@ -29,4 +29,5 @@ firebase-error.log*
 # VS Code
 .vscode/*
 !.vscode/snippets
+!.vscode/launch.json
 !.vscode/settings.json
