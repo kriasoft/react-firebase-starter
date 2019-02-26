@@ -28,15 +28,4 @@ module.exports = {
       ca: fs.readFileSync(process.env.PGSSLROOTCERT, 'utf8'),
     },
   },
-  // The order in which data is being saved or restored
-  // when you run `yarn db-save` or `yarn db-seed`.
-  tables: [
-    'users',
-    'user_identities',
-    'user_tokens',
-    'stories',
-    'story_points',
-    'comments',
-    'comment_points',
-  ],
 };
