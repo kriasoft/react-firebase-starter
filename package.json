@@ -96,9 +96,9 @@
     }
   },
   "scripts": {
+    "setup": "node ./scripts/setup",
     "update-schema": "node ./scripts/update-schema",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
-    "setup": "node ./scripts/setup",
     "prestart": "yarn relay",
     "start": "react-app start",
     "build": "react-app build",
@@ -106,7 +106,8 @@
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "lint-fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix . && yarn run prettier --write \"**/*.{js,json}\"",
     "db": "node ./scripts/db",
-    "db-save": "node ./scripts/db-save",
+    "db-backup": "node ./scripts/db-backup",
+    "db-restore": "node ./scripts/db-restore",
     "db-change": "knex migrate:make",
     "db-migrate": "knex migrate:latest",
     "db-rollback": "knex migrate:rollback",

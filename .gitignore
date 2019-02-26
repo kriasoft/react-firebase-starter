@@ -1,25 +1,17 @@
 # Include your project-specific ignores in this file
 # See https://help.github.com/ignore-files/ for more about ignoring files
 
+# Build output
+build/
+
 # Dependencies
-/node_modules
-/flow-typed
+node_modules/
+flow-typed/
+
 # Testing
-/coverage
+coverage/
 
-# Production
-/build
-/secrets
-
-# Misc
-.firebase/*
-__generated__
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -31,3 +23,13 @@ firebase-error.log*
 !.vscode/snippets
 !.vscode/launch.json
 !.vscode/settings.json
+
+# Misc
+.firebase/*
+__generated__
+.DS_Store
+.env.local
+.env.*.local
+.eslintcache
+.yarn-integrity
+backup.sql

@@ -48,7 +48,6 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 ├── node_modules/                  # 3rd-party libraries and utilities
 ├── public/                        # Static files such as favicon.ico etc.
 ├── scripts/                       # Automation scripts (yarn update-schema etc.)
-├── seeds/                         # Reference and seed data for the database
 ├── src/                           # Application source code
 │   ├── admin/                     # Admin section (Dashboard, User Management etc.)
 │   ├── common/                    # Shared React components and HOCs
@@ -114,13 +113,13 @@ Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
 $ yarn db-change                   # Create a new database migration file
 $ yarn db-migrate                  # Migrate database to the latest version
 $ yarn db-rollback                 # Rollback the latest migration
-$ yarn db-save                     # Save data from database to JSON files
-$ yarn db-seed                     # Seed database with previously saved data
+$ yarn db-backup --env=prod        # Write database backup to backup.sql
+$ yarn db-restore                  # Restore database backup from backup.sql
 $ yarn db                          # Open PostgreSQL shell (for testing/debugging)
 ```
 
-**Note**: Appending `--env=prod`, `--env=test` flags to any of the commands above will force it to
-use database connection settings from `.env.production` and/or `.env.test` file(s).
+**Note**: Appending `--env=prod` or `--env=test` flags to any of the commands above will force it
+to use database connection settings from `.env.production` or `.env.test` files.
 
 ### How to Test
 
@@ -134,7 +133,7 @@ $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 
 1.  Create a new **Google Cloud** project and **Cloud SQL** database.
 2.  Configure authentication in **Firebase** dashboard.
-3.  Set Firebase project ID in `.firebaserc` file.
+3.  Set Google Cloud project ID in `package.json` file (see `scripts`).
 4.  Set API keys, secrets and other settings in `.env.production` file.
 5.  Migrate the database by running `yarn db-migrate --env=prod`.
 6.  Finally, deploy your application by running `yarn deploy-prod`.
