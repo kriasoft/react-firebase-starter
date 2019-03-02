@@ -33,16 +33,10 @@ class App extends React.PureComponent {
   }
 
   state = { error: null };
-  resolveReset = null;
 
   componentDidRender = () => {
     const { history, title } = this.props;
     window.document.title = title;
-
-    if (this.resolveReset) {
-      this.resolveReset();
-      this.resolveReset = null;
-    }
 
     const scrollY = getScrollPosition(history.location.key);
 
@@ -51,15 +45,6 @@ class App extends React.PureComponent {
     } else {
       window.scrollTo(0, 0);
     }
-  };
-
-  reset = () => {
-    const { history, onReset } = this.props;
-    return new Promise(resolve => {
-      this.resolveReset = resolve;
-      onReset();
-      history.replace(history.location);
-    });
   };
 
   resetError = () => {
@@ -76,11 +61,12 @@ class App extends React.PureComponent {
   };
 
   render() {
-    const { history, relay, query, variables, payload } = this.props;
+    const { history, reset, relay, query, variables, payload } = this.props;
+
     return (
       <MuiThemeProvider theme={theme}>
         <HistoryContext.Provider value={history}>
-          <ResetContext.Provider value={this.reset}>
+          <ResetContext.Provider value={reset}>
             <QueryRenderer
               environment={relay}
               query={query}
