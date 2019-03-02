@@ -8,123 +8,89 @@
 
 import React from 'react';
 import { QueryRenderer } from 'react-relay';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
-import router from '../router';
-import AppRenderer from './AppRenderer';
+import theme from '../theme';
+import ErrorPage from './ErrorPage';
+import { getScrollPosition } from '../utils';
+import { HistoryContext, ResetContext } from '../hooks';
 
-type Props = {
-  history: any,
-  createRelay: () => any,
-};
-
-type State = {
-  query: any,
-  variables: any,
-  render: () => any,
-};
-
-class App extends React.Component<Props, State> {
-  onRenderComplete: any;
-  dispose: any;
-
-  state = {
-    query: null,
-    variables: null,
-    render: () => (
-      <AppRenderer
-        ref={this.rendererRef}
-        history={this.props.history}
-        reset={this.reset}
-      />
-    ),
-  };
-
-  relay = this.props.createRelay();
-  rendererRef = React.createRef();
+class App extends React.PureComponent {
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
 
   componentDidMount() {
-    const { history } = this.props;
-    this.dispose = history.listen(this.renderLocation);
-    this.renderLocation(history.location);
+    this.componentDidRender();
+  }
 
-    // Hot Module Replacement
-    // https://webpack.js.org/guides/hot-module-replacement/
-    if (module.hot) {
-      module.hot.accept('../router', () => {
-        router.renderLocation(history.location);
-      });
+  componentDidUpdate() {
+    this.componentDidRender();
+  }
+
+  componentDidCatch(error, info) {
+    console.log(error, info);
+  }
+
+  state = { error: null };
+  resolveReset = null;
+
+  componentDidRender = () => {
+    const { history, title } = this.props;
+    window.document.title = title;
+
+    if (this.resolveReset) {
+      this.resolveReset();
+      this.resolveReset = null;
     }
-  }
 
-  componentWillUnmount() {
-    this.dispose();
-  }
+    const scrollY = getScrollPosition(history.location.key);
 
-  renderLocation = (location: Location) => {
-    const { history } = this.props;
-    router
-      .resolve({
-        pathname: location.pathname,
-        fetchQuery: this.fetchQuery,
-      })
-      .then(route => {
-        if (route.redirect) {
-          history.push(route.redirect);
-        } else {
-          this.renderRoute(route);
-        }
-      });
+    if (scrollY && history.action === 'POP') {
+      window.scrollTo(0, scrollY);
+    } else {
+      window.scrollTo(0, 0);
+    }
   };
 
-  fetchQuery: (query: any, variables: any) => Promise<any> = (
-    query,
-    variables,
-  ) => {
-    return new Promise((resolve, reject) => {
-      this.setState({
-        query,
-        variables,
-        render: ({ error, props }) => {
-          if (error) {
-            const err = new Error(error.message);
-            err.code = error.code;
-            reject(err);
-          } else if (props !== null) {
-            resolve(props);
-          }
-          return (
-            <AppRenderer
-              ref={this.rendererRef}
-              history={this.props.history}
-              reset={this.reset}
-            />
-          );
-        },
-      });
+  reset = () => {
+    const { history, onReset } = this.props;
+    return new Promise(resolve => {
+      this.resolveReset = resolve;
+      onReset();
+      history.replace(history.location);
     });
   };
 
-  renderRoute = (route: any) => {
-    this.rendererRef.current.renderRoute(route, this.onRenderComplete);
+  resetError = () => {
+    this.setState({ error: null });
   };
 
-  reset = () =>
-    new Promise(resolve => {
-      this.relay = this.props.createRelay();
-      this.onRenderComplete = resolve;
-      this.props.history.replace(this.props.history.location);
-    });
+  renderProps = ({ error, props }) => {
+    const err = this.state.error || this.props.error || error;
+    return err ? (
+      <ErrorPage error={err} onClose={this.resetError} />
+    ) : (
+      this.props.render(props || this.props.data)
+    );
+  };
 
   render() {
-    const { query, variables, render } = this.state;
-
+    const { history, relay, query, variables, payload } = this.props;
     return (
-      <QueryRenderer
-        environment={this.relay}
-        query={query}
-        variables={variables || {}}
-        render={render}
-      />
+      <MuiThemeProvider theme={theme}>
+        <HistoryContext.Provider value={history}>
+          <ResetContext.Provider value={this.reset}>
+            <QueryRenderer
+              environment={relay}
+              query={query}
+              variables={variables}
+              render={this.renderProps}
+              cacheConfig={{ payload }}
+            />
+          </ResetContext.Provider>
+        </HistoryContext.Provider>
+      </MuiThemeProvider>
     );
   }
 }

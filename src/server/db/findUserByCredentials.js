@@ -35,7 +35,10 @@ export default async function findUserByCredentials(profile, credentials) {
   };
 
   const email = idx(profile, x => x.emails[0].value);
-  const photo = idx(profile, x => x.photos[0].value);
+  let photo = idx(profile, x => x.photos[0].value);
+  if (photo && profile.provider === 'facebook') {
+    photo = `https://graph.facebook.com/${profile.id}/picture?type=large`;
+  }
 
   let user = await db
     .table('user_identities')
@@ -66,7 +69,8 @@ export default async function findUserByCredentials(profile, credentials) {
             x
               .where('photo_url', 'like', '%googleusercontent.com/%')
               .orWhere('photo_url', 'like', '%facebook.com/%')
-              .orWhere('photo_url', 'like', '%fbcdn.net/%'),
+              .orWhere('photo_url', 'like', '%fbcdn.net/%')
+              .orWhere('photo_url', 'like', '%fbsbx.com/%'),
           )
           .update({
             photo_url: photo,

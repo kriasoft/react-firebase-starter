@@ -7,9 +7,10 @@
 /* @flow */
 
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-import Link from '../common/Link';
+import Link from './Link';
 import { useHistory } from '../hooks';
 
 const color = '#607d8b';
@@ -31,6 +32,8 @@ const styles = theme => ({
   },
   main: {
     paddingBottom: 80,
+    marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2,
     '@media screen and (max-width: 1024px)': {
       padding: `0 ${theme.spacing.unit}`,
     },
@@ -63,13 +66,13 @@ const styles = theme => ({
     },
   },
   text: {
-    paddingBottom: 0,
-    fontSize: '1.125em',
-    lineHeight: '1.5em',
     color: `color(${color} alpha(50%))`,
     '@media only screen and (max-width: 280px)': {
       width: '95%',
     },
+  },
+  link: {
+    color: theme.palette.primary.main,
   },
 });
 
@@ -86,6 +89,7 @@ function ErrorPage({ classes: s, ...props }: Props) {
 
   function goBack(event: MouseEvent) {
     event.preventDefault();
+    props.onClose();
     history.goBack();
   }
 
@@ -101,21 +105,29 @@ function ErrorPage({ classes: s, ...props }: Props) {
   return (
     <div className={s.container}>
       <main className={s.main}>
-        <h1 className={s.errorCode}>{code}</h1>
-        <p className={s.title}>{title}</p>
+        <Typography variant="h1" className={s.errorCode}>
+          {code}
+        </Typography>
+        <Typography className={s.title} paragraph>
+          {title}
+        </Typography>
         {code === '404' && (
-          <p className={s.text}>
+          <Typography className={s.text} variant="body1">
             The page you&apos;re looking for does not exist or an another error
             occurred.
-          </p>
+            <br />
+          </Typography>
         )}
-        <p className={s.text}>
-          <a href="/" onClick={goBack}>
+        <Typography className={s.text} variant="body1">
+          <a className={s.link} href="/" onClick={goBack}>
             Go back
           </a>
           , or head over to the&nbsp;
-          <Link href="/">home page</Link> to choose a new direction.
-        </p>
+          <Link className={s.link} href="/" onClick={props.onClose}>
+            home page
+          </Link>{' '}
+          to choose a new direction.
+        </Typography>
       </main>
     </div>
   );

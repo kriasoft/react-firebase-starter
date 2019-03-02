@@ -8,3 +8,4 @@
 
 export * from './gtag';
 export * from './openWindow';
+export { onScroll, getScrollPosition } from './scrolling';

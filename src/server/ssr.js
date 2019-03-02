@@ -6,11 +6,14 @@
 
 /* @flow */
 
+import React from 'react';
+import ReactDOM from 'react-dom/server';
+import qs from 'query-string';
 import serialize from 'serialize-javascript';
 import createHistory from 'history/createMemoryHistory';
-import { fetchQuery } from 'relay-runtime';
 import { Router } from 'express';
 
+import App from '../common/App';
 import passport from './passport';
 import templates from './templates';
 import routes from '../router';
@@ -24,48 +27,63 @@ router.use(passport.session());
 
 router.get('*', async (req, res, next) => {
   try {
-    const { path: pathname } = req;
+    const { path: pathname, originalUrl: url } = req;
     const history = createHistory({ initialEntries: [pathname] });
     const relay = createRelay(req);
 
-    // Find a matching route for the URL path
-    const route = await routes.resolve({
-      pathname,
-      history,
-      fetchQuery: fetchQuery.bind(undefined, relay),
-    });
+    // Prefer using the same query string parser in both
+    // browser and Node.js environments
+    const search = url.includes('?') ? url.substr(url.indexOf('?') + 1) : '';
+    const query = qs.parse(search);
+
+    // Resolves a route matching the provided URL path (location)
+    const route = await routes.resolve({ pathname, query, relay });
 
     if (route.redirect) {
       res.redirect(route.status || 302, route.redirect);
-    } else {
-      if (process.env.NODE_ENV === 'production') {
-        res.set('Cache-Control', 'public, max-age=600, s-maxage=900');
-      }
-      res.send(
-        templates.ok({
-          url: `https://${process.env.FIREBASE_AUTH_DOMAIN}${req.path}`,
-          title: route.title,
-          description: route.description,
-          assets: (route.chunks || []).reduce(
-            (acc, name) => [
-              ...acc,
-              ...[].concat(stats.assetsByChunkName[name]),
-            ],
-            stats.entrypoints.main.assets,
-          ),
-          data: serialize(req.data, { isJSON: true }),
-          config: JSON.stringify({
-            firebase: {
-              projectId: process.env.GCP_PROJECT,
-              authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-              apiKey: process.env.GCP_BROWSER_KEY,
-            },
-            gaTrackingId: process.env.GA_TRACKING_ID,
-          }),
-          env: process.env,
-        }),
-      );
+      return;
     }
+
+    // Configure caching for HTML pages
+    if (process.env.NODE_ENV === 'production') {
+      res.set('Cache-Control', 'public, max-age=600, s-maxage=900');
+    }
+
+    let body;
+
+    // Full server-side rendering for some routes like landing pages etc.
+    if (route.ssr === true) {
+      try {
+        body = ReactDOM.renderToString(
+          <App {...route} history={history} relay={relay} />,
+        );
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    res.send(
+      templates.ok({
+        url: `https://${process.env.FIREBASE_AUTH_DOMAIN}${req.path}`,
+        title: route.title,
+        description: route.description,
+        assets: (route.chunks || []).reduce(
+          (acc, name) => [...acc, ...[].concat(stats.assetsByChunkName[name])],
+          stats.entrypoints.main.assets,
+        ),
+        data: serialize(route.payload, { isJSON: true }),
+        body,
+        config: JSON.stringify({
+          firebase: {
+            projectId: process.env.GCP_PROJECT,
+            authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+            apiKey: process.env.GCP_BROWSER_KEY,
+          },
+          gaTrackingId: process.env.GA_TRACKING_ID,
+        }),
+        env: process.env,
+      }),
+    );
   } catch (err) {
     next(err);
   }

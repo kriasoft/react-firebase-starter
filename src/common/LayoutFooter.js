@@ -57,6 +57,10 @@ function LayoutFooter({ classes: s }) {
         <Link className={s.link} href="/privacy">
           Privacy
         </Link>
+        <span className={s.separator}>|</span>
+        <Link className={s.link} href="/not-found">
+          Not Found
+        </Link>
       </Typography>
     </div>
   );

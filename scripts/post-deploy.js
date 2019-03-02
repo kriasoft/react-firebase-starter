@@ -10,7 +10,15 @@ const got = require('got');
 require('../knexfile');
 
 // The list of URLs to purge from CDN cache after deployment is complete
-const urls = ['/', '/about', '/news', '/about', '/privacy', '/terms'];
+const urls = [
+  '/',
+  '/about',
+  '/news',
+  '/submit',
+  '/account',
+  '/privacy',
+  '/terms',
+];
 
 const options = {
   baseUrl: `https://${process.env.FIREBASE_AUTH_DOMAIN}`,
