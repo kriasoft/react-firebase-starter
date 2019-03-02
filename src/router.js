@@ -42,7 +42,7 @@ function resolveRoute(ctx) {
   }
 
   // Start fetching data from GraphQL API
-  const cacheConfig = {};
+  const cacheConfig = { payload: null };
   const variables = route.variables ? route.variables(params, ctx) : params;
   const dataPromise =
     route.query && fetchQuery(relay, route.query, variables, cacheConfig);
@@ -55,12 +55,13 @@ function resolveRoute(ctx) {
   return Promise.all([...componentsPromise, dataPromise]).then(components => {
     // GraphQL API response
     const data = components.pop();
+    const { payload } = cacheConfig;
 
     // If API response contains an authentication error,
     // redirect the user to a login page
-    const error = ((data && data.errors) || [])
+    const error = ((payload && payload.errors) || [])
       .map(x => x.originalError || x)
-      .find(x => [401, 403].includes(x.originalError && x.originalError.code));
+      .find(x => [401, 403].includes(x.code));
 
     if (error) {
       const errorMsg = encodeURIComponent(error.message);
@@ -78,7 +79,7 @@ function resolveRoute(ctx) {
           query: route.query,
           variables,
           data,
-          payload: cacheConfig.payload,
+          payload,
           render: props =>
             route.render(components, props, renderContext).component,
         }

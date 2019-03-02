@@ -26,16 +26,6 @@ export default function createRelay(req: Request) {
       // This is needed in order to hydrate/de-hydrate that
       // data on the client during the initial page load.
       cacheConfig.payload = payload;
-
-      // Some types of errors need to abort the whole request.
-      const error = (payload.errors || []).find(x =>
-        [401, 403].includes(x.originalError && x.originalError.code),
-      );
-
-      if (error) {
-        throw error.originalError;
-      }
-
       return payload;
     });
   }
