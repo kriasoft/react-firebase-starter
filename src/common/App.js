@@ -12,7 +12,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import theme from '../theme';
 import ErrorPage from './ErrorPage';
-import { getScrollPosition } from '../utils';
+import { gtag, getScrollPosition } from '../utils';
 import { HistoryContext, ResetContext } from '../hooks';
 
 class App extends React.PureComponent {
@@ -29,7 +29,8 @@ class App extends React.PureComponent {
   }
 
   componentDidCatch(error, info) {
-    console.log(error, info);
+    console.log(error, info); // eslint-disable-line no-console
+    gtag('event', 'exception', { description: error.message, fatal: false });
   }
 
   state = { error: null };
@@ -37,6 +38,12 @@ class App extends React.PureComponent {
   componentDidRender = () => {
     const { history, title } = this.props;
     window.document.title = title;
+
+    gtag('config', window.config.gaTrackingId, {
+      page_title: title,
+      page_location: window.location.href,
+      page_path: `${window.location.pathname}${window.location.search}`,
+    });
 
     const scrollY = getScrollPosition(history.location.key);
 

@@ -90,7 +90,7 @@ function resolveRoute(ctx) {
 function errorHandler(error) {
   return {
     title: error.code === '404' ? 'Page not found' : 'System Error',
-    status: error.code || 404,
+    status: error.code || 500,
     error,
   };
 }

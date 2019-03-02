@@ -38,7 +38,7 @@ function render(location) {
     })
     .then(route => {
       if (route.redirect) {
-        history.push(route.redirect);
+        history.replace(route.redirect);
       } else {
         ReactDOM.render(
           <App {...route} history={history} relay={relay} reset={reset} />,
