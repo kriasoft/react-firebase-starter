@@ -7,14 +7,22 @@
 /* @flow */
 
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
+import loading from './utils/loading';
 
 export default function createRelay() {
-  function fetchQuery(operation, variables) {
-    if (typeof window.data !== 'undefined') {
-      const data = window.data;
+  function fetchQuery(operation, variables, cacheConfig = {}) {
+    // Instead of making an actual HTTP request to the API, use
+    // hydrated data available during the initial page load.
+    if (window.data !== undefined) {
+      cacheConfig.payload = window.data;
       delete window.data;
-      return Promise.resolve(data);
     }
+
+    if (cacheConfig.payload) {
+      return Promise.resolve(cacheConfig.payload);
+    }
+
+    loading.notifyStart();
 
     return fetch('/graphql', {
       method: 'POST',
@@ -29,15 +37,13 @@ export default function createRelay() {
     })
       .then(res => res.json())
       .then(payload => {
-        const error = (payload.errors || []).find(x =>
-          [401, 403].includes(x.code),
-        );
-
-        if (error) {
-          throw error;
-        }
-
+        // Passes the raw payload up to the caller (see src/router.js).
+        // This is needed in order to optimize the initial rendering.
+        cacheConfig.payload = payload;
         return payload;
+      })
+      .finally(() => {
+        loading.notifyStop();
       });
   }
 

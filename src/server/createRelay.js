@@ -14,7 +14,7 @@ import schema from './schema';
 import Context from './Context';
 
 export default function createRelay(req: Request) {
-  function fetchQuery(operation, variables) {
+  function fetchQuery(operation, variables, cacheConfig) {
     return graphql({
       schema,
       source: operation.text,
@@ -22,8 +22,12 @@ export default function createRelay(req: Request) {
       variableValues: variables,
       operationName: operation.name,
     }).then(payload => {
-      req.data = payload;
+      // Passes the raw payload up to the caller (see src/router.js).
+      // This is needed in order to hydrate/de-hydrate that
+      // data on the client during the initial page load.
+      cacheConfig.payload = payload;
 
+      // Some types of errors need to abort the whole request.
       const error = (payload.errors || []).find(x =>
         [401, 403].includes(x.originalError && x.originalError.code),
       );
