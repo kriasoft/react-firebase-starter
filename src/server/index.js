@@ -23,11 +23,15 @@ dotenv.config({ path: '.env' });
 // Configure Firebase Admin SDK
 // https://firebase.google.com/docs/admin/setup
 if (!firebase.apps.length) {
-  firebase.initializeApp({
-    credential: firebase.credential.cert(
-      JSON.parse(process.env.GCP_SERVICE_KEY),
-    ),
-  });
+  firebase.initializeApp(
+    process.env.GCP_SERVICE_KEY
+      ? {
+          credential: firebase.credential.cert(
+            JSON.parse(process.env.GCP_SERVICE_KEY),
+          ),
+        }
+      : undefined,
+  );
 }
 
 if (process.env.NODE_ENV === 'production') {
