@@ -36,8 +36,21 @@ router.get('*', async (req, res, next) => {
     const search = url.includes('?') ? url.substr(url.indexOf('?') + 1) : '';
     const query = qs.parse(search);
 
+    // Application settings (see .env/.env.production)
+    const config = {
+      appName: process.env.APP_NAME,
+      appDescription: process.env.APP_DESCRIPTION,
+      appOrigin: process.env.APP_ORIGIN,
+      firebase: {
+        projectId: process.env.GCP_PROJECT,
+        authDomain: process.env.APP_ORIGIN.replace(/^https?:\/\//, ''),
+        apiKey: process.env.GCP_BROWSER_KEY,
+      },
+      gaTrackingId: process.env.GA_TRACKING_ID,
+    };
+
     // Resolves a route matching the provided URL path (location)
-    const route = await routes.resolve({ pathname, query, relay });
+    const route = await routes.resolve({ pathname, query, relay, config });
 
     if (route.redirect) {
       res.redirect(route.status || 302, route.redirect);
@@ -55,7 +68,7 @@ router.get('*', async (req, res, next) => {
     if (route.ssr === true) {
       try {
         body = ReactDOM.renderToString(
-          <App {...route} history={history} relay={relay} />,
+          <App {...route} config={config} history={history} relay={relay} />,
         );
       } catch (err) {
         console.error(err);
@@ -64,7 +77,7 @@ router.get('*', async (req, res, next) => {
 
     res.send(
       templates.ok({
-        url: `https://${process.env.FIREBASE_AUTH_DOMAIN}${req.path}`,
+        url: `${process.env.APP_ORIGIN}${req.path}`,
         title: route.title,
         description: route.description,
         assets: (route.chunks || []).reduce(
@@ -73,14 +86,7 @@ router.get('*', async (req, res, next) => {
         ),
         data: serialize(route.payload, { isJSON: true }),
         body,
-        config: JSON.stringify({
-          firebase: {
-            projectId: process.env.GCP_PROJECT,
-            authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-            apiKey: process.env.GCP_BROWSER_KEY,
-          },
-          gaTrackingId: process.env.GA_TRACKING_ID,
-        }),
+        config: JSON.stringify(config),
         env: process.env,
       }),
     );

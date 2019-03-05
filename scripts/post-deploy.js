@@ -21,7 +21,7 @@ const urls = [
 ];
 
 const options = {
-  baseUrl: `https://${process.env.FIREBASE_AUTH_DOMAIN}`,
+  baseUrl: process.env.APP_ORIGIN,
   method: 'PURGE',
 };
 

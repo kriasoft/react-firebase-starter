@@ -8,8 +8,10 @@
 
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { useConfig } from '../hooks';
 
 function Privacy() {
+  const { appOrigin } = useConfig();
   return (
     <>
       <Typography variant="h3" gutterBottom>
@@ -18,8 +20,8 @@ function Privacy() {
       <Typography paragraph>
         Your privacy is important to us. It is Company&#39;s policy to respect
         your privacy regarading any information we may collect from you across
-        our website, <a href="http://reactstarter.com">reactstarter.com</a>, and
-        other sites we own and operate.
+        our website, <a href={appOrigin}>{appOrigin}</a>, and other sites we own
+        and operate.
       </Typography>
       <Typography paragraph>
         We only ask for personal information when we truly need it to provide a

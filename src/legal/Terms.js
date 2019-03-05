@@ -9,6 +9,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
+import { useConfig } from '../hooks';
 
 const styles = theme => ({
   text: {
@@ -21,6 +22,7 @@ const styles = theme => ({
 });
 
 function Privacy({ classes: s }) {
+  const { appOrigin } = useConfig();
   return (
     <>
       <Typography variant="h3" gutterBottom>
@@ -28,9 +30,8 @@ function Privacy({ classes: s }) {
       </Typography>
       <Typography variant="h5">1. Terms</Typography>
       <Typography paragraph>
-        By accessing the website at{' '}
-        <a href="http://reactstarter.com">reactstarter.com</a>, you are agreeing
-        to be bound by these terms of service, all applicable laws and
+        By accessing the website at <a href={appOrigin}>{appOrigin}</a>, you are
+        agreeing to be bound by these terms of service, all applicable laws and
         regulations, and agree that you are responsible for compliance with any
         applicable local laws. If you do not agree with any of these terms, you
         are prohibited from using or accessing this site. The materials

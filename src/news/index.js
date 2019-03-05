@@ -20,8 +20,8 @@ export default [
         ...News
       }
     `,
-    render: ([News], data) => ({
-      title: `News • ${process.env.REACT_APP_NAME}`,
+    render: ([News], data, { config }) => ({
+      title: `News • ${config.appName}`,
       component: (
         <Layout data={data}>
           <News data={data} />
@@ -65,8 +65,8 @@ export default [
       }
     `,
     components: () => [import(/* webpackChunkName: 'submit' */ './Submit')],
-    render: ([Submit], data) => ({
-      title: `Submit a Story • ${process.env.REACT_APP_NAME}`,
+    render: ([Submit], data, { config }) => ({
+      title: `Submit a Story • ${config.appName}`,
       component: (
         <Layout data={data}>
           <Submit data={data} />

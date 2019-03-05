@@ -14,37 +14,19 @@ export default [
   {
     path: '',
     query: graphql`
-      query pagesHomeQuery {
+      query landingHomeQuery {
         ...Layout
       }
     `,
     components: () => [import(/* webpackChunkName: 'home' */ './Home')],
-    render: ([Home], data) => ({
-      title: process.env.REACT_APP_NAME,
+    render: ([Home], data, { config }) => ({
+      title: config.appName,
       component: (
         <Layout data={data}>
           <Home data={data} />
         </Layout>
       ),
       chunks: ['home'],
-    }),
-  },
-  {
-    path: '/about',
-    query: graphql`
-      query pagesAboutQuery {
-        ...Layout
-      }
-    `,
-    components: () => [import(/* webpackChunkName: 'about' */ './About')],
-    render: ([About], data) => ({
-      title: `About Us • ${process.env.REACT_APP_NAME}`,
-      component: (
-        <Layout data={data}>
-          <About data={data} />
-        </Layout>
-      ),
-      chunks: ['about'],
     }),
   },
 ];

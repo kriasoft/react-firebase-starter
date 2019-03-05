@@ -12,8 +12,13 @@ import { ReactRelayContext } from 'react-relay';
 // Default history object (for unit tests)
 const history = { location: { pathname: '/' } };
 
+export const ConfigContext = React.createContext({});
 export const HistoryContext = React.createContext(history);
 export const ResetContext = React.createContext(() => {});
+
+export function useConfig() {
+  return React.useContext(ConfigContext);
+}
 
 export function useHistory() {
   return React.useContext(HistoryContext);

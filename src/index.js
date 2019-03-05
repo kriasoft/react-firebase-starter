@@ -35,13 +35,20 @@ function render(location) {
       pathname: location.pathname,
       query: qs.parse(location.search),
       relay,
+      config: window.config,
     })
     .then(route => {
       if (route.redirect) {
         history.replace(route.redirect);
       } else {
         ReactDOM.render(
-          <App {...route} history={history} relay={relay} reset={reset} />,
+          <App
+            {...route}
+            config={window.config}
+            history={history}
+            relay={relay}
+            reset={reset}
+          />,
           container,
         );
       }

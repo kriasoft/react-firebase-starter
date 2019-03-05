@@ -15,9 +15,7 @@ import { Strategy as FacebookStrategy } from 'passport-facebook';
 import db, { findUserByCredentials } from './db';
 
 const origin =
-  process.env.NODE_ENV === 'production'
-    ? `https://${process.env.FIREBASE_AUTH_DOMAIN}`
-    : '';
+  process.env.NODE_ENV === 'production' ? `${process.env.APP_ORIGIN}` : '';
 
 passport.framework(
   jwt({

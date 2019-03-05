@@ -9,16 +9,18 @@
 import UniversalRouter from 'universal-router';
 import { fetchQuery } from 'relay-runtime';
 
-import pages from './pages';
+import landing from './landing';
+import legal from './legal';
+import misc from './misc';
 import user from './user';
 import news from './news';
-import legal from './legal';
 
 const routes = [
-  ...pages,
+  ...landing,
+  ...legal,
+  ...misc,
   ...user,
   ...news,
-  ...legal,
   {
     path: '/admin',
     children: () => import(/* webpackChunkName: 'admin' */ './admin'),
