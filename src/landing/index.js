@@ -19,8 +19,8 @@ export default [
       }
     `,
     components: () => [import(/* webpackChunkName: 'home' */ './Home')],
-    render: ([Home], data) => ({
-      title: process.env.REACT_APP_NAME,
+    render: ([Home], data, { config }) => ({
+      title: config.appName,
       component: (
         <Layout data={data}>
           <Home data={data} />

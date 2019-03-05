@@ -36,19 +36,7 @@ router.get('*', async (req, res, next) => {
     const search = url.includes('?') ? url.substr(url.indexOf('?') + 1) : '';
     const query = qs.parse(search);
 
-    // Resolves a route matching the provided URL path (location)
-    const route = await routes.resolve({ pathname, query, relay });
-
-    if (route.redirect) {
-      res.redirect(route.status || 302, route.redirect);
-      return;
-    }
-
-    // Configure caching for HTML pages
-    if (process.env.NODE_ENV === 'production') {
-      res.set('Cache-Control', 'public, max-age=600, s-maxage=900');
-    }
-
+    // Application settings (see .env/.env.production)
     const config = {
       appName: process.env.APP_NAME,
       appDescription: process.env.APP_DESCRIPTION,
@@ -60,6 +48,19 @@ router.get('*', async (req, res, next) => {
       },
       gaTrackingId: process.env.GA_TRACKING_ID,
     };
+
+    // Resolves a route matching the provided URL path (location)
+    const route = await routes.resolve({ pathname, query, relay, config });
+
+    if (route.redirect) {
+      res.redirect(route.status || 302, route.redirect);
+      return;
+    }
+
+    // Configure caching for HTML pages
+    if (process.env.NODE_ENV === 'production') {
+      res.set('Cache-Control', 'public, max-age=600, s-maxage=900');
+    }
 
     let body;
 

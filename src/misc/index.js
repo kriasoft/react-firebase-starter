@@ -19,8 +19,8 @@ export default [
       }
     `,
     components: () => [import(/* webpackChunkName: 'about' */ './About')],
-    render: ([About], data) => ({
-      title: `About Us • ${process.env.REACT_APP_NAME}`,
+    render: ([About], data, { config }) => ({
+      title: `About Us • ${config.appName}`,
       component: (
         <Layout data={data}>
           <About data={data} />

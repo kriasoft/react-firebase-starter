@@ -35,6 +35,7 @@ function render(location) {
       pathname: location.pathname,
       query: qs.parse(location.search),
       relay,
+      config: window.config,
     })
     .then(route => {
       if (route.redirect) {
