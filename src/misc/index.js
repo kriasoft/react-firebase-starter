@@ -12,27 +12,9 @@ import Layout from '../common/Layout';
 
 export default [
   {
-    path: '',
-    query: graphql`
-      query pagesHomeQuery {
-        ...Layout
-      }
-    `,
-    components: () => [import(/* webpackChunkName: 'home' */ './Home')],
-    render: ([Home], data) => ({
-      title: process.env.REACT_APP_NAME,
-      component: (
-        <Layout data={data}>
-          <Home data={data} />
-        </Layout>
-      ),
-      chunks: ['home'],
-    }),
-  },
-  {
     path: '/about',
     query: graphql`
-      query pagesAboutQuery {
+      query miscAboutQuery {
         ...Layout
       }
     `,

@@ -41,7 +41,13 @@ function render(location) {
         history.replace(route.redirect);
       } else {
         ReactDOM.render(
-          <App {...route} history={history} relay={relay} reset={reset} />,
+          <App
+            {...route}
+            config={window.config}
+            history={history}
+            relay={relay}
+            reset={reset}
+          />,
           container,
         );
       }

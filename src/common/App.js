@@ -13,7 +13,7 @@ import { MuiThemeProvider } from '@material-ui/core/styles';
 import theme from '../theme';
 import ErrorPage from './ErrorPage';
 import { gtag, getScrollPosition } from '../utils';
-import { HistoryContext, ResetContext } from '../hooks';
+import { ConfigContext, HistoryContext, ResetContext } from '../hooks';
 
 class App extends React.PureComponent {
   static getDerivedStateFromError(error) {
@@ -68,21 +68,31 @@ class App extends React.PureComponent {
   };
 
   render() {
-    const { history, reset, relay, query, variables, payload } = this.props;
+    const {
+      config,
+      history,
+      reset,
+      relay,
+      query,
+      variables,
+      payload,
+    } = this.props;
 
     return (
       <MuiThemeProvider theme={theme}>
-        <HistoryContext.Provider value={history}>
-          <ResetContext.Provider value={reset}>
-            <QueryRenderer
-              environment={relay}
-              query={query}
-              variables={variables}
-              render={this.renderProps}
-              cacheConfig={{ payload }}
-            />
-          </ResetContext.Provider>
-        </HistoryContext.Provider>
+        <ConfigContext.Provider value={config}>
+          <HistoryContext.Provider value={history}>
+            <ResetContext.Provider value={reset}>
+              <QueryRenderer
+                environment={relay}
+                query={query}
+                variables={variables}
+                render={this.renderProps}
+                cacheConfig={{ payload }}
+              />
+            </ResetContext.Provider>
+          </HistoryContext.Provider>
+        </ConfigContext.Provider>
       </MuiThemeProvider>
     );
   }
