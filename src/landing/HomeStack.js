@@ -64,8 +64,8 @@ function HomeStack({ classes: s, ...props }) {
         </Typography>
         <Typography className={s.desc}>
           <ExtLink>Material UI</ExtLink> is by far the most popular UI library
-          on <ExtLink>React.js</ExtLink> stack that follows Google's Material
-          Design guidelines.
+          on <ExtLink>React.js</ExtLink> stack that follows Google&#39;s
+          Material Design guidelines.
         </Typography>
       </Grid>
     </Grid>
