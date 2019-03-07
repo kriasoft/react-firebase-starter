@@ -8,12 +8,19 @@
 
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 import { useConfig } from '../hooks';
 
-function Privacy() {
+const styles = theme => ({
+  root: {
+    ...theme.mixins.content,
+  },
+});
+
+function Privacy({ classes: s }) {
   const { appOrigin } = useConfig();
   return (
-    <>
+    <div className={s.root}>
       <Typography variant="h3" gutterBottom>
         Privacy Policy
       </Typography>
@@ -59,8 +66,8 @@ function Privacy() {
       <Typography paragraph>
         This policy is effective as of January 1st, 2019.
       </Typography>
-    </>
+    </div>
   );
 }
 
-export default Privacy;
+export default withStyles(styles)(Privacy);

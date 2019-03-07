@@ -18,11 +18,14 @@ export default [
         ...Layout
       }
     `,
-    components: () => [import(/* webpackChunkName: 'home' */ './Home')],
-    render: ([Home], data, { config }) => ({
+    components: () => [
+      import(/* webpackChunkName: 'home' */ './Home'),
+      import(/* webpackChunkName: 'home' */ './HomeHero'),
+    ],
+    render: ([Home, HomeHero], data, { config }) => ({
       title: config.appName,
       component: (
-        <Layout data={data}>
+        <Layout data={data} hero={<HomeHero />}>
           <Home data={data} />
         </Layout>
       ),

@@ -6,7 +6,8 @@
 
 /* @flow */
 
-import React from 'react';
+import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Snakbar from '@material-ui/core/Snackbar';
@@ -22,10 +23,18 @@ import { withStyles } from '@material-ui/core/styles';
 import { graphql, createFragmentContainer } from 'react-relay';
 
 import Link from '../common/Link';
-import withAuth from '../common/withAuth';
 import LikeStoryMutation from './mutations/LikeStory';
+import SubmitDialog from './SubmitDialog';
 
 const styles = theme => ({
+  root: {
+    ...theme.mixins.content,
+  },
+  title: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   listItem: {
     paddingRight: 0,
     paddingLeft: 0,
@@ -62,8 +71,10 @@ const styles = theme => ({
   },
 });
 
-function News({ classes: s, data: { stories }, ...props }) {
-  const [error, setError] = React.useState();
+function News({ classes: s, data, ...props }) {
+  const [isOpen, setOpen] = useState();
+  const [error, setError] = useState();
+  const { stories } = data;
 
   function reset() {
     setError(null);
@@ -83,10 +94,31 @@ function News({ classes: s, data: { stories }, ...props }) {
     });
   }
 
+  function openDialog() {
+    setOpen(true);
+  }
+
+  function closeDialog() {
+    setOpen(false);
+  }
+
   return (
-    <>
+    <div className={s.root}>
+      <Typography className={s.title} variant="h3" gutterBottom>
+        <span className={s.grow}>News</span>
+        <Button onClick={openDialog}>Submit a Story</Button>
+      </Typography>
       <Typography gutterBottom>
-        The latest news from React.js community.
+        The latest news from React.js community. This page demonstrates how to
+        do basic CRUD operations with GraphQL and Relay (see{' '}
+        <a
+          href="https://github.com/kriasoft/react-firebase-starter"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          source code
+        </a>
+        ).
       </Typography>
       <List>
         {(stories || []).map(x => (
@@ -135,33 +167,33 @@ function News({ classes: s, data: { stories }, ...props }) {
         ))}
       </List>
       <Snakbar open={!!error} message={error} onClose={reset} />
-    </>
+      <SubmitDialog data={data} open={isOpen} onClose={closeDialog} />
+    </div>
   );
 }
 
 export default withStyles(styles)(
-  withAuth()(
-    createFragmentContainer(
-      News,
-      graphql`
-        fragment News on Query {
-          stories {
-            id
-            slug
-            title
-            text
-            isURL
-            createdAt(format: "MMM Do, YYYY")
-            author {
-              username
-              displayName
-              photoURL
-            }
-            pointsCount
-            pointGiven
+  createFragmentContainer(
+    News,
+    graphql`
+      fragment News on Query {
+        ...SubmitDialog
+        stories {
+          id
+          slug
+          title
+          text
+          isURL
+          createdAt(format: "MMM Do, YYYY")
+          author {
+            username
+            displayName
+            photoURL
           }
+          pointsCount
+          pointGiven
         }
-      `,
-    ),
+      }
+    `,
   ),
 );

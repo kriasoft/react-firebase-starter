@@ -7,16 +7,23 @@
 /* @flow */
 
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 import { graphql, createFragmentContainer } from 'react-relay';
 
 import Link from '../common/Link';
 
-function Story({ data: { title, text, isURL } }) {
+const styles = theme => ({
+  root: {
+    ...theme.mixins.content,
+  },
+});
+
+function Story({ classes: s, data: { title, text, isURL } }) {
   return (
-    <>
-      <Typography variant="h6" gutterBottom>
+    <div className={s.root}>
+      <Typography variant="h3" gutterBottom>
         {title}
       </Typography>
       {isURL ? (
@@ -32,17 +39,19 @@ function Story({ data: { title, text, isURL } }) {
           Go back
         </Button>
       </div>
-    </>
+    </div>
   );
 }
 
-export default createFragmentContainer(
-  Story,
-  graphql`
-    fragment Story on Story {
-      title
-      text
-      isURL
-    }
-  `,
+export default withStyles(styles)(
+  createFragmentContainer(
+    Story,
+    graphql`
+      fragment Story on Story {
+        title
+        text
+        isURL
+      }
+    `,
+  ),
 );

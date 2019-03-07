@@ -15,7 +15,7 @@ export default [
     path: '/login',
     components: () => [import(/* webpackChunkName: 'login' */ './Login')],
     render: ([Login], _, { config }) => ({
-      title: `Sign In • ${config.appName}`,
+      title: `Sign In to ${config.appName}`,
       component: <Login />,
       chunks: ['login'],
     }),

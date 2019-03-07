@@ -12,6 +12,9 @@ import { withStyles } from '@material-ui/core';
 import { useConfig } from '../hooks';
 
 const styles = theme => ({
+  root: {
+    ...theme.mixins.content,
+  },
   text: {
     ...theme.typography.body1,
     fontSize: '0.875rem',
@@ -24,7 +27,7 @@ const styles = theme => ({
 function Privacy({ classes: s }) {
   const { appOrigin } = useConfig();
   return (
-    <>
+    <div className={s.root}>
       <Typography variant="h3" gutterBottom>
         Terms of Use
       </Typography>
@@ -131,8 +134,8 @@ function Privacy({ classes: s }) {
         with the laws of CA and you irrevocably submit to the exclusive
         jurisdiction of the courts in that State or location.
       </Typography>
-    </>
+    </div>
   );
 }
 
-export default withStyles(styles, { withTheme: true })(Privacy);
+export default withStyles(styles)(Privacy);

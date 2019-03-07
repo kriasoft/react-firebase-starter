@@ -9,11 +9,18 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 import { graphql, createFragmentContainer } from 'react-relay';
 
-function UserProfile({ data: user }) {
+const styles = theme => ({
+  root: {
+    ...theme.mixins.content,
+  },
+});
+
+function UserProfile({ classes: s, data: user }) {
   return (
-    <>
+    <div className={s.root}>
       <Typography
         variant="h5"
         style={{ display: 'flex', alignItems: 'center' }}
@@ -37,18 +44,20 @@ function UserProfile({ data: user }) {
         with desktop publishing software like Aldus PageMaker including versions
         of Lorem Ipsum.
       </Typography>
-    </>
+    </div>
   );
 }
 
-export default createFragmentContainer(
-  UserProfile,
-  graphql`
-    fragment UserProfile on User {
-      id
-      username
-      displayName
-      photoURL
-    }
-  `,
+export default withStyles(styles)(
+  createFragmentContainer(
+    UserProfile,
+    graphql`
+      fragment UserProfile on User {
+        id
+        username
+        displayName
+        photoURL
+      }
+    `,
+  ),
 );
