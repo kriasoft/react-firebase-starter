@@ -133,4 +133,4 @@ function ErrorPage({ classes: s, ...props }: Props) {
   );
 }
 
-export default withStyles(styles, { withTheme: true })(ErrorPage);
+export default withStyles(styles)(ErrorPage);

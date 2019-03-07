@@ -56,23 +56,4 @@ export default [
         : null;
     },
   },
-  {
-    path: '/submit',
-    query: graphql`
-      query newsSubmitQuery {
-        ...Layout
-        ...Submit
-      }
-    `,
-    components: () => [import(/* webpackChunkName: 'submit' */ './Submit')],
-    render: ([Submit], data, { config }) => ({
-      title: `Submit a Story • ${config.appName}`,
-      component: (
-        <Layout data={data}>
-          <Submit data={data} />
-        </Layout>
-      ),
-      chunks: ['submit'],
-    }),
-  },
 ];

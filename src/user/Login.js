@@ -84,4 +84,4 @@ function Login({ classes: s }) {
   );
 }
 
-export default withStyles(styles, { withTheme: true })(Login);
+export default withStyles(styles)(Login);

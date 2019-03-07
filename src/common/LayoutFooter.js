@@ -13,14 +13,13 @@ import { withStyles } from '@material-ui/core/styles';
 import Link from './Link';
 
 const styles = theme => ({
-  container: {
-    maxWidth: 640,
-    margin: '0 auto',
+  root: {
+    ...theme.mixins.content,
     color: 'rgba(0, 0, 0, 0.4)',
+    borderTop: `1px solid ${theme.palette.grey[300]}`,
+    paddingTop: `${theme.spacing.unit * 2}px !important`,
   },
-  text: {
-    padding: '1em',
-  },
+  text: {},
   copyright: {
     paddingRight: '0.5em',
   },
@@ -39,7 +38,7 @@ const styles = theme => ({
 
 function LayoutFooter({ classes: s }) {
   return (
-    <div className={s.container}>
+    <div className={s.root}>
       <Typography className={s.text}>
         <span className={s.copyright}>&copy; 2015-present</span>
         <a className={s.link} href="https://github.com/kriasoft">

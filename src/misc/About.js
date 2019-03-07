@@ -8,11 +8,18 @@
 
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
 
-function About() {
+const styles = theme => ({
+  root: {
+    ...theme.mixins.content,
+  },
+});
+
+function About({ classes: s }) {
   return (
-    <>
-      <Typography variant="h5" gutterBottom>
+    <div className={s.root}>
+      <Typography variant="h3" gutterBottom>
         About Us
       </Typography>
       <Typography paragraph>
@@ -26,8 +33,8 @@ function About() {
         with desktop publishing software like Aldus PageMaker including versions
         of Lorem Ipsum.
       </Typography>
-    </>
+    </div>
   );
 }
 
-export default About;
+export default withStyles(styles)(About);
