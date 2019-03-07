@@ -14,6 +14,7 @@ import createHistory from 'history/createMemoryHistory';
 import { Router } from 'express';
 
 import App from '../common/App';
+import config from './config';
 import passport from './passport';
 import templates from './templates';
 import routes from '../router';
@@ -35,19 +36,6 @@ router.get('*', async (req, res, next) => {
     // browser and Node.js environments
     const search = url.includes('?') ? url.substr(url.indexOf('?') + 1) : '';
     const query = qs.parse(search);
-
-    // Application settings (see .env/.env.production)
-    const config = {
-      appName: process.env.APP_NAME,
-      appDescription: process.env.APP_DESCRIPTION,
-      appOrigin: process.env.APP_ORIGIN,
-      firebase: {
-        projectId: process.env.GCP_PROJECT,
-        authDomain: process.env.APP_ORIGIN.replace(/^https?:\/\//, ''),
-        apiKey: process.env.GCP_BROWSER_KEY,
-      },
-      gaTrackingId: process.env.GA_TRACKING_ID,
-    };
 
     // Resolves a route matching the provided URL path (location)
     const route = await routes.resolve({ pathname, query, relay, config });
