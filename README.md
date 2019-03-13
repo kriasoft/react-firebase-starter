@@ -53,8 +53,8 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   ├── common/                    # Shared React components and HOCs
 │   ├── icons/                     # Icon components
 │   ├── legal/                     # Terms of Use, Privacy Policy, etc.
+│   ├── misc/                      # Other pages (about us, contacts, etc.)
 │   ├── news/                      # News section (example)
-│   ├── pages/                     # Static pages (landing, about, privacy, etc.)
 │   ├── server/                    # Server-side code (API, authentication, etc.)
 │   │   ├── db/                    # Database client
 │   │   ├── story/                 # Story related schema, queries, and mutations
@@ -68,16 +68,17 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   │   ├── schema.js              # GraphQL schema
 │   │   └── ssr.js                 # Server-side rendering, e.g. ReactDOMServer.renderToString(<App />)
 │   ├── user/                      # User pages (login, account settings, user profile, etc)
+│   ├── utils/                     # Utility functions
 │   ├── createRelay.js             # Relay factory method for browser envrironment
+│   ├── hooks.js                   # React.js hooks and Context providers
 │   ├── index.js                   # Client-side entry point, e.g. ReactDOM.render(<App />, container)
 │   ├── router.js                  # Universal application router
 │   ├── serviceWorker.js           # Service worker helper methods
 │   └── theme.js                   # Overrides for Material UI default styles
 ├── ssl/                           # SSL certificates for connecting to Cloud SQL instance
-├── .env                           # Environment variables
-├── .env.local                     # Environment variables overrides for local development
-├── .env.production                # Environment variables overrides for PROD environment
-├── .env.test                      # Environment variables overrides for TEST environment
+├── .env                           # Environment variables for local development
+├── .env.production                # Environment variables for the production build
+├── .env.test                      # Environment variables for the test build
 ├── graphql.schema                 # GraphQL schema (auto-generated, used by Relay)
 └── package.json                   # The list of project dependencies + NPM scripts
 ```
@@ -114,12 +115,13 @@ $ yarn db-change                   # Create a new database migration file
 $ yarn db-migrate                  # Migrate database to the latest version
 $ yarn db-rollback                 # Rollback the latest migration
 $ yarn db-backup --env=prod        # Write database backup to backup.sql
-$ yarn db-restore                  # Restore database backup from backup.sql
+$ yarn db-restore --env=dev        # Restore database from backup.sql
 $ yarn db                          # Open PostgreSQL shell (for testing/debugging)
 ```
 
-**Note**: Appending `--env=prod` or `--env=test` flags to any of the commands above will force it
-to use database connection settings from `.env.production` or `.env.test` files.
+**Note**: Appending `--env=prod` or `--env=test` flags to any of the commands above will load the
+corresponding database settings for the selected deployment environment from
+[Firebase Config API](https://firebase.google.com/docs/functions/config-env)
 
 ### How to Test
 
@@ -131,12 +133,14 @@ $ yarn test                        # Run unit tests. Or, `yarn test -- --watch`
 
 ### How to Deploy
 
-1.  Create a new **Google Cloud** project and **Cloud SQL** database.
-2.  Configure authentication in **Firebase** dashboard.
-3.  Set Google Cloud project ID in `package.json` file (see `scripts`).
-4.  Set API keys, secrets and other settings in `.env.production` file.
-5.  Migrate the database by running `yarn db-migrate --env=prod`.
-6.  Finally, deploy your application by running `yarn deploy-prod`.
+```bash
+$ yarn build                       # Build the in production mode (NODE_ENV=production)
+$ yarn deploy-test                 # Deploy the app to TEST environment
+$ yarn deploy-prod                 # Deploy the app to PROD environment
+```
+
+For more information refer to the [Deployment](https://github.com/kriasoft/react-firebase-starter/wiki/deployment)
+guide in the project's Wiki.
 
 ### How to Update
 
@@ -144,16 +148,17 @@ If you keep the original Git history after cloning this repo, you can always fet
 the recent updates back into your project by running:
 
 ```bash
-git remote add react-firebase-starter https://github.com/kriasoft/react-firebase-starter.git
-git checkout master
-git fetch react-firebase-starter
-git merge react-firebase-starter/master
-yarn install
-yarn relay
+$ git remote add rsk https://github.com/kriasoft/react-firebase-starter.git
+$ git checkout master
+$ git fetch rsk
+$ git merge rsk/master
+$ yarn install
 ```
 
-_NOTE: Try to merge as soon as the new changes land on the master branch in the upstream repository,
-otherwise your project may differ too much from the base/upstream repo._
+_NOTE: Try to merge as soon as the new changes land on the `master` branch in the upstream
+repository, otherwise your project may differ too much from the base/upstream repo.
+Alternatively, you can use a folder diff tool like [Beyond Compare][bc] for keeping your project
+up to date with the base repository._
 
 ### How to Contribute
 
@@ -229,3 +234,4 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [vcjs]: https://marketplace.visualstudio.com/items?itemName=mgmcdermott.vscode-language-babel
 [watchman]: https://github.com/facebook/watchman
 [postgres]: https://www.postgresql.org/
+[bc]: https://www.scootersoftware.com/

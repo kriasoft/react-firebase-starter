@@ -11,12 +11,19 @@ const express = require('express');
 const firebase = require('firebase-admin');
 const functions = require('firebase-functions');
 
-// Infer runtime environment from the project's name, for example:
-//   "example-prod" => "prod"
-//   "example-test" => "test"
-const [, env] = (x => x && x.match(/-(\w+)$/))(process.env.GCP_PROJECT) || [];
+// Load API keys, secrets etc. from Firebase environment
+// https://firebase.google.com/docs/functions/config-env
+if (process.env.NODE_ENV === 'production') {
+  const { app: config } = functions.config();
+  Object.keys(config).forEach(key => {
+    process.env[key.toUpperCase()] =
+      typeof config[key] === 'object'
+        ? JSON.stringify(config[key])
+        : config[key];
+  });
+}
 
-dotenv.config({ path: `.env.${env === 'prod' ? 'production' : env}` });
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 dotenv.config({ path: '.env.local' });
 dotenv.config({ path: '.env' });
 
@@ -32,22 +39,14 @@ if (!firebase.apps.length) {
 
 if (process.env.NODE_ENV === 'production') {
   // Server environment
-  exports.login = functions
+  exports.app = functions
     .runWith({ memory: '2GB' })
-    .https.onRequest(require('./login').default);
-  exports.graphql = functions
-    .runWith({ memory: '2GB' })
-    .https.onRequest(require('./api').default);
-  exports.default = functions
-    .runWith({ memory: '2GB' })
-    .https.onRequest(require('./ssr').default);
+    .https.onRequest(require('./app').default);
 } else {
   // Local/dev environment
   const app = express();
   const db = require('./db').default;
-  app.use(require('./login').default);
-  app.use(require('./api').default);
-  app.use(require('./ssr').default);
+  app.use(require('./app').default);
   module.exports.default = app;
   module.exports.dispose = () => db.destroy();
 }

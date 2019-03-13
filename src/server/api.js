@@ -30,16 +30,18 @@ if (process.env.NODE_ENV !== 'production') {
   );
 }
 
-router.get('/graphql/model', (req, res) => {
-  res.send(templates.dataModel());
-});
+if (process.env.APP_ENV !== 'production') {
+  router.get('/graphql/model', (req, res) => {
+    res.send(templates.dataModel());
+  });
+}
 
 router.use(
   '/graphql',
   expressGraphQL(req => ({
     schema,
     context: new Context(req),
-    graphiql: true, // process.env.GCP_PROJECT !== '<name>',
+    graphiql: process.env.APP_ENV !== 'production',
     pretty: false,
     formatError: err => {
       console.error(err.originalError || err);

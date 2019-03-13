@@ -50,10 +50,11 @@ cmd = cp
   .spawn(
     'pg_dump',
     [
+      '--verbose',
       '--data-only',
       '--no-owner',
       '--no-privileges',
-      '--column-inserts',
+      // '--column-inserts',
       '--disable-triggers',
       '--exclude-table=migrations',
       '--exclude-table=migrations_lock',

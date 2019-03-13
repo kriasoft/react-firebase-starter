@@ -11,8 +11,6 @@ import passport from './passport';
 
 const router = new Router();
 
-router.use(passport.initialize());
-
 router.get(
   '/login/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }),
