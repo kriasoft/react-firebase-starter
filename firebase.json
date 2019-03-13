@@ -20,7 +20,6 @@
       ".env.local",
       ".env.*.local",
       ".eslintrc",
-      ".firebaserc",
       ".flowconfig",
       ".gitattributes",
       ".gitignore",
@@ -39,24 +38,8 @@
     "public": "build/public",
     "rewrites": [
       {
-        "source": "/login",
-        "function": "default"
-      },
-      {
-        "source": "/login/**",
-        "function": "login"
-      },
-      {
-        "source": "/graphql",
-        "function": "graphql"
-      },
-      {
-        "source": "/graphql/**",
-        "function": "graphql"
-      },
-      {
         "source": "**",
-        "function": "default"
+        "function": "app"
       }
     ],
     "headers": [

@@ -5,11 +5,34 @@
  */
 
 const fs = require('fs');
+const cp = require('child_process');
 const dotenv = require('dotenv');
 const { env } = require('minimist')(process.argv.slice(2));
 
-dotenv.config({ path: `.env.${env === 'prod' ? 'production' : env}` });
-dotenv.config({ path: '.env.local' });
+// Load API keys, secrets etc. from Firebase environment
+// https://firebase.google.com/docs/functions/config-env
+if (env && env !== 'dev') {
+  const { status, stdout } = cp.spawnSync(
+    'firebase',
+    [`--project=example-${env}`, 'functions:config:get'],
+    { stdio: ['pipe', 'pipe', 'inherit'] },
+  );
+
+  if (status !== 0) process.exit(status);
+
+  const config = JSON.parse(stdout.toString()).app;
+  Object.keys(config).forEach(key => {
+    process.env[key.toUpperCase()] =
+      typeof key === 'object' ? JSON.stringify(config[key]) : config[key];
+  });
+
+  dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
+  // delete process.env.PGHOST;
+  // delete process.env.PGSSLMODE;
+} else {
+  dotenv.config({ path: '.env.local' });
+}
+
 dotenv.config({ path: '.env' });
 
 // Knex configuration

@@ -15,16 +15,12 @@ import { Router } from 'express';
 
 import App from '../common/App';
 import config from './config';
-import passport from './passport';
 import templates from './templates';
 import routes from '../router';
 import createRelay from './createRelay';
 import stats from './stats.json'; // eslint-disable-line
 
 const router = new Router();
-
-router.use(passport.initialize());
-router.use(passport.session());
 
 router.get('*', async (req, res, next) => {
   try {

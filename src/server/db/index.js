@@ -9,9 +9,20 @@
 import fs from 'fs';
 import knex from 'knex';
 
+// Make it easier to identify open database connections by running:
+//   SELECT * from pg_stat_activity;
+if (process.env.X_GOOGLE_GCLOUD_PROJECT) {
+  process.env.PGAPPNAME = [
+    process.env.X_GOOGLE_GCLOUD_PROJECT,
+    process.env.X_GOOGLE_FUNCTION_NAME,
+    process.env.X_GOOGLE_FUNCTION_VERSION,
+  ].join('/');
+}
+
 const db = knex({
   client: 'pg',
   connection: {
+    min: process.env.X_GOOGLE_FUNCTION_NAME === 'app' ? 1 : 0,
     // Database connection pool must be set to max 1
     // when running in serverless environment.
     max: 1,
