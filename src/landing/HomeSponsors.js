@@ -41,6 +41,7 @@ function HomeSponsors({ classes: s }) {
     <div className={s.root}>
       {sponsors.map(x => (
         <a
+          key={x.name}
           className={s.link}
           href={x.link}
           target="_blank"

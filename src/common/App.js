@@ -36,14 +36,12 @@ class App extends React.PureComponent {
   state = { error: null };
 
   componentDidRender = () => {
-    const { history, title } = this.props;
+    const { history, title, config } = this.props;
     window.document.title = title;
 
-    gtag('config', window.config.gaTrackingId, {
-      page_title: title,
-      page_location: window.location.href,
-      page_path: `${window.location.pathname}${window.location.search}`,
-    });
+    // Track page views
+    gtag('config', config.gaTrackingId, { transport_type: 'beacon' });
+    // fb(FB => FB.AppEvents.logPageView());
 
     const scrollY = getScrollPosition(history.location.key);
 

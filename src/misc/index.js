@@ -20,7 +20,7 @@ export default [
     `,
     components: () => [import(/* webpackChunkName: 'about' */ './About')],
     render: ([About], data, { config }) => ({
-      title: `About Us • ${config.appName}`,
+      title: `About Us • ${config.app.name}`,
       component: (
         <Layout data={data}>
           <About data={data} />

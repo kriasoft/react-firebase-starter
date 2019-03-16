@@ -45,7 +45,7 @@ const styles = theme => ({
 
 function LayoutToolbar({ classes: s, data: me, className, ...props }) {
   const [userMenuEl, setUserMenuEl] = useState(null);
-  const { appName } = useConfig();
+  const { app } = useConfig();
 
   function openUserMenu(event) {
     setUserMenuEl(event.currentTarget);
@@ -60,7 +60,7 @@ function LayoutToolbar({ classes: s, data: me, className, ...props }) {
       <Toolbar>
         <Typography className={s.title} variant="h6" color="inherit">
           <Link className={s.link} href="/">
-            {appName}
+            {app.name}
           </Link>
         </Typography>
         <Button

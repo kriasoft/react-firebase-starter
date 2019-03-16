@@ -18,7 +18,7 @@ const styles = theme => ({
 });
 
 function Privacy({ classes: s }) {
-  const { appOrigin } = useConfig();
+  const { app } = useConfig();
   return (
     <div className={s.root}>
       <Typography variant="h3" gutterBottom>
@@ -27,8 +27,8 @@ function Privacy({ classes: s }) {
       <Typography paragraph>
         Your privacy is important to us. It is Company&#39;s policy to respect
         your privacy regarading any information we may collect from you across
-        our website, <a href={appOrigin}>{appOrigin}</a>, and other sites we own
-        and operate.
+        our website, <a href={`${app.origin}/`}>{app.origin}</a>, and other
+        sites we own and operate.
       </Typography>
       <Typography paragraph>
         We only ask for personal information when we truly need it to provide a
