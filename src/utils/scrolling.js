@@ -6,6 +6,8 @@
 
 /* @flow */
 
+import { canUseDOM } from './env';
+
 const listeners = new Set();
 const scrollPositions = new Map();
 
@@ -14,7 +16,7 @@ let ticking = false;
 
 let history;
 
-if (typeof window !== 'undefined') {
+if (canUseDOM) {
   window.addEventListener('scroll', () => {
     last_known_scroll_position = window.scrollY;
     if (!ticking) {

@@ -72,7 +72,7 @@ const styles = theme => ({
 });
 
 function News({ classes: s, data, ...props }) {
-  const [isOpen, setOpen] = useState();
+  const [isOpen, setOpen] = useState(false);
   const [error, setError] = useState();
   const { stories } = data;
 

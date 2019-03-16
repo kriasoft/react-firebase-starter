@@ -23,7 +23,7 @@ export default [
       import(/* webpackChunkName: 'home' */ './HomeHero'),
     ],
     render: ([Home, HomeHero], data, { config }) => ({
-      title: config.appName,
+      title: config.app.name,
       component: (
         <Layout data={data} hero={<HomeHero />}>
           <Home data={data} />

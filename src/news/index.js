@@ -21,7 +21,7 @@ export default [
       }
     `,
     render: ([News], data, { config }) => ({
-      title: `News • ${config.appName}`,
+      title: `News • ${config.app.name}`,
       component: (
         <Layout data={data}>
           <News data={data} />

@@ -6,8 +6,10 @@
 
 /* @flow */
 
+import { canUseDOM } from './env';
+
 export function gtag() {
-  if (window !== undefined && window.config.gaTrackingId) {
+  if (canUseDOM && window.dataLayer) {
     window.dataLayer.push(arguments);
   }
 }
