@@ -22,6 +22,13 @@ import stats from './stats.json'; // eslint-disable-line
 
 const router = new Router();
 
+// Static assets are supposed to be served via CDN.
+router.get('/static/*', (req, res) => {
+  res.status(404);
+  res.type('text/plain');
+  res.send('Not found');
+});
+
 router.get('*', async (req, res, next) => {
   try {
     const { path: pathname, originalUrl: url } = req;
@@ -39,11 +46,6 @@ router.get('*', async (req, res, next) => {
     if (route.redirect) {
       res.redirect(route.status || 302, route.redirect);
       return;
-    }
-
-    // Configure caching for HTML pages
-    if (process.env.NODE_ENV === 'production') {
-      res.set('Cache-Control', 'public, max-age=600, s-maxage=900');
     }
 
     let body;
