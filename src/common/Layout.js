@@ -7,14 +7,14 @@
 /* @flow */
 
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { makeStyles } from '@material-ui/styles';
+import { createFragmentContainer, graphql } from 'react-relay';
 
 import LayoutToolbar from './LayoutToolbar';
 import LayoutFooter from './LayoutFooter';
 import AutoUpdater from './AutoUpdater';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   '@global': {
     'html, body, #root': {
       height: '100%',
@@ -32,12 +32,15 @@ const styles = theme => ({
   toolbar: {
     ...theme.mixins.toolbar,
   },
-});
+}));
 
-function Layout({ classes: s, hero, data, children }) {
+function Layout(props) {
+  const { hero, data, children } = props;
+  const s = useStyles();
+
   return (
     <>
-      <LayoutToolbar data={data.me} {...!hero && { className: s.background }} />
+      <LayoutToolbar me={data.me} {...(!hero && { className: s.background })} />
       {hero && (
         <div className={s.background}>
           <div className={s.toolbar} />
@@ -52,16 +55,13 @@ function Layout({ classes: s, hero, data, children }) {
   );
 }
 
-export default withStyles(styles)(
-  createFragmentContainer(
-    Layout,
-    graphql`
-      fragment Layout on Query {
-        me {
-          ...LayoutToolbar
-          ...AutoUpdater_user
-        }
+export default createFragmentContainer(Layout, {
+  data: graphql`
+    fragment Layout_data on Query {
+      me {
+        ...LayoutToolbar_me
+        ...AutoUpdater_user
       }
-    `,
-  ),
-);
+    }
+  `,
+});

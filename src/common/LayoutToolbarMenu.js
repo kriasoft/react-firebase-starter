@@ -9,15 +9,17 @@
 import React from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import LogoutLink from './LogoutLink';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {},
-});
+}));
 
-function LayoutToolbarMenu({ classes: s, ...props }) {
+function LayoutToolbarMenu(props) {
+  const s = useStyles();
+
   return (
     <Menu className={s.root} {...props}>
       <MenuItem onClick={props.onClose} component={LogoutLink}>
@@ -27,4 +29,4 @@ function LayoutToolbarMenu({ classes: s, ...props }) {
   );
 }
 
-export default withStyles(styles)(LayoutToolbarMenu);
+export default LayoutToolbarMenu;

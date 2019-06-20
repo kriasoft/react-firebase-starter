@@ -27,7 +27,7 @@ export default [
     ],
     query: graphql`
       query userProfileQuery($username: String!) {
-        ...Layout
+        ...Layout_data
         user(username: $username) {
           displayName
           ...UserProfile
@@ -49,7 +49,7 @@ export default [
     components: () => [import(/* webpackChunkName: 'account' */ './Account')],
     query: graphql`
       query userQuery {
-        ...Layout
+        ...Layout_data
         ...Account
       }
     `,

@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:carbon
+      - image: circleci/node:dubnium
     steps:
       - checkout
       - restore_cache:

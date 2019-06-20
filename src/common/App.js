@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { QueryRenderer } from 'react-relay';
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 import theme from '../theme';
 import ErrorPage from './ErrorPage';
@@ -77,7 +77,7 @@ class App extends React.PureComponent {
     } = this.props;
 
     return (
-      <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <ConfigContext.Provider value={config}>
           <HistoryContext.Provider value={history}>
             <ResetContext.Provider value={reset}>
@@ -91,7 +91,7 @@ class App extends React.PureComponent {
             </ResetContext.Provider>
           </HistoryContext.Provider>
         </ConfigContext.Provider>
-      </MuiThemeProvider>
+      </ThemeProvider>
     );
   }
 }

@@ -85,7 +85,7 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 
 ### Prerequisites
 
-- [Node.js][nodejs] v8.15 or higher + [Yarn][yarn] v1.13 or higher &nbsp; (_HINT: On Mac install
+- [Node.js][nodejs] v10.15 or higher + [Yarn][yarn] v1.16 or higher &nbsp; (_HINT: On Mac install
   them via [Brew][brew]_)
 - [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
   [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins

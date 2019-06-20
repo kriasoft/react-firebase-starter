@@ -15,7 +15,7 @@ export default [
     path: '/terms',
     query: graphql`
       query legalTermsQuery {
-        ...Layout
+        ...Layout_data
       }
     `,
     components: () => [import(/* webpackChunkName: 'terms' */ './Terms')],
@@ -33,7 +33,7 @@ export default [
     path: '/privacy',
     query: graphql`
       query legalPrivacyQuery {
-        ...Layout
+        ...Layout_data
       }
     `,
     components: () => [import(/* webpackChunkName: 'privacy' */ './Privacy')],

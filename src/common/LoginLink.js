@@ -12,7 +12,8 @@ import Link from './Link';
 import { useHistory, useReset } from '../hooks';
 import { openWindow } from '../utils';
 
-function LoginLink({ onClick, href, ...props }) {
+const LoginLink = React.forwardRef(function LoginLink(props, ref) {
+  const { onClick, href, ...other } = props;
   const history = useHistory();
   const reset = useReset();
   const link = href ? `/login?return=${href}` : '/login';
@@ -31,7 +32,7 @@ function LoginLink({ onClick, href, ...props }) {
     });
   }
 
-  return <Link href={link} onClick={handleClick} {...props} />;
-}
+  return <Link href={link} onClick={handleClick} ref={ref} {...other} />;
+});
 
 export default LoginLink;

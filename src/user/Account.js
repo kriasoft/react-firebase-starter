@@ -9,10 +9,10 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { makeStyles } from '@material-ui/styles';
+import { createFragmentContainer, graphql } from 'react-relay';
 
-const styles = {
+const useStyles = makeStyles({
   container: {
     maxWidth: 600,
     boxSizing: 'border-box',
@@ -22,9 +22,11 @@ const styles = {
     padding: '1em 2em',
     margin: '2em 0',
   },
-};
+});
 
-function Account({ classes: s, ...props }) {
+function Account(props) {
+  const s = useStyles();
+
   return (
     <div className={s.container}>
       <Card className={s.content}>
@@ -39,18 +41,16 @@ function Account({ classes: s, ...props }) {
   );
 }
 
-export default withStyles(styles)(
-  createFragmentContainer(
-    Account,
-    graphql`
-      fragment Account on Query {
-        me {
-          id
-          username
-          displayName
-          photoURL
-        }
+export default createFragmentContainer(
+  Account,
+  graphql`
+    fragment Account on Query {
+      me {
+        id
+        username
+        displayName
+        photoURL
       }
-    `,
-  ),
+    }
+  `,
 );

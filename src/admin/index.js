@@ -8,25 +8,25 @@
 
 import React from 'react';
 import { graphql } from 'relay-runtime';
-import Layout from './Layout';
-import UserList from './UserList';
-import StoryList from './StoryList';
+import AdminLayout from './AdminLayout';
+import AdminUserList from './AdminUserList';
+import AdminStoryList from './AdminStoryList';
 
 export default [
   {
     path: '/users',
     query: graphql`
       query adminUserListQuery {
-        ...LayoutAdmin
-        ...UserListAdmin
+        ...AdminLayout_data
+        ...AdminUserList_data
       }
     `,
-    render: (_, data) => ({
+    render: (_, { data, users }) => ({
       title: 'Manage Users',
       component: (
-        <Layout data={data}>
-          <UserList data={data} />
-        </Layout>
+        <AdminLayout data={data}>
+          <AdminUserList data={data} />
+        </AdminLayout>
       ),
       chunks: ['admin'],
     }),
@@ -35,16 +35,16 @@ export default [
     path: '/stories',
     query: graphql`
       query adminStoryListQuery {
-        ...LayoutAdmin
-        ...StoryListAdmin
+        ...AdminLayout_data
+        ...AdminStoryList_data
       }
     `,
-    render: (_, data) => ({
+    render: (_, { data }) => ({
       title: 'Manage Stories',
       component: (
-        <Layout data={data}>
-          <StoryList data={data} />
-        </Layout>
+        <AdminLayout data={data}>
+          <AdminStoryList data={data} />
+        </AdminLayout>
       ),
       chunks: ['admin'],
     }),

@@ -6,22 +6,22 @@
 
 /* @flow */
 
-import cx from 'classnames';
+import clsx from 'clsx';
 import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { makeStyles } from '@material-ui/styles';
+import { createFragmentContainer, graphql } from 'react-relay';
 
 import Link from './Link';
 import LoginLink from './LoginLink';
 import LayoutToolbarMenu from './LayoutToolbarMenu';
 import { useConfig } from '../hooks';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: 'transparent',
   },
@@ -31,7 +31,7 @@ const styles = theme => ({
     fontWeight: 100,
   },
   avatar: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing(1),
   },
   link: {
     color: 'inherit',
@@ -41,10 +41,12 @@ const styles = theme => ({
     textTransform: 'none',
     fontWeight: 400,
   },
-});
+}));
 
-function LayoutToolbar({ classes: s, data: me, className, ...props }) {
+function LayoutToolbar(props) {
+  const { className, me } = props;
   const [userMenuEl, setUserMenuEl] = useState(null);
+  const s = useStyles();
   const { app } = useConfig();
 
   function openUserMenu(event) {
@@ -56,9 +58,13 @@ function LayoutToolbar({ classes: s, data: me, className, ...props }) {
   }
 
   return (
-    <AppBar className={cx(s.root, className)} position="absolute" elevation={0}>
+    <AppBar
+      className={clsx(s.root, className)}
+      position="absolute"
+      elevation={0}
+    >
       <Toolbar>
-        <Typography className={s.title} variant="h6" color="inherit">
+        <Typography className={s.title} variant="h6">
           <Link className={s.link} href="/">
             {app.name}
           </Link>
@@ -107,15 +113,12 @@ function LayoutToolbar({ classes: s, data: me, className, ...props }) {
   );
 }
 
-export default withStyles(styles)(
-  createFragmentContainer(
-    LayoutToolbar,
-    graphql`
-      fragment LayoutToolbar on User {
-        id
-        displayName
-        photoURL
-      }
-    `,
-  ),
-);
+export default createFragmentContainer(LayoutToolbar, {
+  me: graphql`
+    fragment LayoutToolbar_me on User {
+      id
+      displayName
+      photoURL
+    }
+  `,
+});

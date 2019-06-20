@@ -15,16 +15,8 @@ export default createMuiTheme({
   palette: {
     primary: indigo,
   },
-  overrides: {
-    MuiButton: {
-      raisedPrimary: {
-        color: 'white',
-      },
-    },
-  },
   typography: {
     monoFamily: '"Roboto Mono", "Helvetica", "Arial", sans-serif',
-    useNextVariants: true,
   },
   mixins: {
     content: {

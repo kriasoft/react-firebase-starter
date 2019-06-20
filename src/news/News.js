@@ -19,14 +19,14 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import { withStyles } from '@material-ui/core/styles';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { makeStyles } from '@material-ui/styles';
+import { createFragmentContainer, graphql } from 'react-relay';
 
 import Link from '../common/Link';
 import LikeStoryMutation from './mutations/LikeStory';
 import SubmitDialog from './SubmitDialog';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     ...theme.mixins.content,
   },
@@ -69,12 +69,14 @@ const styles = theme => ({
       verticalAlign: 'bottom',
     },
   },
-});
+}));
 
-function News({ classes: s, data, ...props }) {
-  const [isOpen, setOpen] = useState(false);
-  const [error, setError] = useState();
+function News(props) {
+  const { data } = props;
   const { stories } = data;
+  const [dialog, setDialog] = useState({ open: false });
+  const [error, setError] = useState();
+  const s = useStyles();
 
   function reset() {
     setError(null);
@@ -95,11 +97,11 @@ function News({ classes: s, data, ...props }) {
   }
 
   function openDialog() {
-    setOpen(true);
+    setDialog({ open: true, key: Date.now() });
   }
 
   function closeDialog() {
-    setOpen(false);
+    setDialog({ open: false });
   }
 
   return (
@@ -167,33 +169,35 @@ function News({ classes: s, data, ...props }) {
         ))}
       </List>
       <Snakbar open={!!error} message={error} onClose={reset} />
-      <SubmitDialog data={data} open={isOpen} onClose={closeDialog} />
+      <SubmitDialog
+        key={dialog.key}
+        open={dialog.open}
+        onClose={closeDialog}
+        data={data}
+      />
     </div>
   );
 }
 
-export default withStyles(styles)(
-  createFragmentContainer(
-    News,
-    graphql`
-      fragment News on Query {
-        ...SubmitDialog
-        stories {
-          id
-          slug
-          title
-          text
-          isURL
-          createdAt(format: "MMM Do, YYYY")
-          author {
-            username
-            displayName
-            photoURL
-          }
-          pointsCount
-          pointGiven
+export default createFragmentContainer(News, {
+  data: graphql`
+    fragment News_data on Query {
+      ...SubmitDialog_data
+      stories {
+        id
+        slug
+        title
+        text
+        isURL
+        createdAt(format: "MMM Do, YYYY")
+        author {
+          username
+          displayName
+          photoURL
         }
+        pointsCount
+        pointGiven
       }
-    `,
-  ),
-);
+    }
+  `,
+});

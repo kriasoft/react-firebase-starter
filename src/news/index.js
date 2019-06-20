@@ -16,12 +16,16 @@ export default [
     components: () => [import(/* webpackChunkName: 'news' */ './News')],
     query: graphql`
       query newsQuery {
-        ...Layout
-        ...News
+        ...Layout_data
+        ...News_data
       }
     `,
     render: ([News], data, { config }) => ({
-      title: `News • ${config.app.name}`,
+      title:
+        `News • ${config.app.name}` +
+        (() => {
+          console.dir(data);
+        })(),
       component: (
         <Layout data={data}>
           <News data={data} />
@@ -35,7 +39,7 @@ export default [
     components: () => [import(/* webpackChunkName: 'story' */ './Story')],
     query: graphql`
       query newsStoryQuery($slug: String!) {
-        ...Layout
+        ...Layout_data
         story(slug: $slug) {
           title
           ...Story

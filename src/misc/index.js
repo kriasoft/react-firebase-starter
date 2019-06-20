@@ -15,7 +15,7 @@ export default [
     path: '/about',
     query: graphql`
       query miscAboutQuery {
-        ...Layout
+        ...Layout_data
       }
     `,
     components: () => [import(/* webpackChunkName: 'about' */ './About')],

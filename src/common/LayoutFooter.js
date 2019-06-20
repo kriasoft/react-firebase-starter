@@ -8,16 +8,16 @@
 
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import Link from './Link';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     ...theme.mixins.content,
     color: 'rgba(0, 0, 0, 0.4)',
     borderTop: `1px solid ${theme.palette.grey[300]}`,
-    paddingTop: `${theme.spacing.unit * 2}px !important`,
+    paddingTop: `${theme.spacing(2)}px !important`,
   },
   text: {},
   copyright: {
@@ -34,9 +34,11 @@ const styles = theme => ({
       textDocoration: 'underline',
     },
   },
-});
+}));
 
-function LayoutFooter({ classes: s }) {
+function LayoutFooter() {
+  const s = useStyles();
+
   return (
     <div className={s.root}>
       <Typography className={s.text}>
@@ -65,4 +67,4 @@ function LayoutFooter({ classes: s }) {
   );
 }
 
-export default withStyles(styles)(LayoutFooter);
+export default LayoutFooter;
