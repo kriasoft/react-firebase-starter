@@ -9,13 +9,13 @@
 import React from 'react';
 import QueryString from 'query-string';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import LoginButton from '../common/LoginButton';
 import { gtag } from '../utils';
 import { useHistory } from '../hooks';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   '@global html': {
     height: '100%',
   },
@@ -38,20 +38,21 @@ const styles = theme => ({
     flexDirection: 'column',
   },
   title: {
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing(2),
     textAlign: 'center',
   },
   error: {
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing(2),
     color: theme.palette.error.main,
     textAlign: 'center',
   },
   login: {
-    marginBottom: theme.spacing.unit * 2,
+    marginBottom: theme.spacing(2),
   },
-});
+}));
 
-function Login({ classes: s }) {
+function Login() {
+  const s = useStyles();
   const history = useHistory();
   const [error, setError] = React.useState();
 
@@ -70,7 +71,7 @@ function Login({ classes: s }) {
       gtag('event', 'exception', { description: query.error, fatal: false });
       setError(query.error);
     }
-  });
+  }, []);
 
   return (
     <div className={s.container}>
@@ -84,4 +85,4 @@ function Login({ classes: s }) {
   );
 }
 
-export default withStyles(styles)(Login);
+export default Login;

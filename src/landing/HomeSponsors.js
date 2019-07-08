@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 const sponsors = [
   {
@@ -24,19 +24,21 @@ const sponsors = [
   },
 ];
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
     background: theme.palette.background.paper,
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
   },
   link: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(1),
   },
-});
+}));
 
-function HomeSponsors({ classes: s }) {
+function HomeSponsors() {
+  const s = useStyles();
+
   return (
     <div className={s.root}>
       {sponsors.map(x => (
@@ -54,4 +56,4 @@ function HomeSponsors({ classes: s }) {
   );
 }
 
-export default withStyles(styles)(HomeSponsors);
+export default HomeSponsors;

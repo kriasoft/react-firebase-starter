@@ -1,9 +1,9 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {},
   item: {
     textAlign: 'center',
@@ -12,7 +12,7 @@ const styles = theme => ({
   desc: {
     textAlign: 'left',
   },
-});
+}));
 
 const links = new Map([
   ['Knex.js', 'https://knexjs.org/'],
@@ -34,9 +34,11 @@ function ExtLink(props) {
   );
 }
 
-function HomeStack({ classes: s, ...props }) {
+function HomeStack() {
+  const s = useStyles();
+
   return (
-    <Grid className={s.root} container spacing={16}>
+    <Grid className={s.root} container spacing={2}>
       <Grid className={s.item} item xs>
         <Typography className={s.title} variant="h5" gutterBottom>
           GraphQL API
@@ -72,4 +74,4 @@ function HomeStack({ classes: s, ...props }) {
   );
 }
 
-export default withStyles(styles)(HomeStack);
+export default HomeStack;

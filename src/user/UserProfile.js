@@ -9,16 +9,19 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { makeStyles } from '@material-ui/styles';
+import { createFragmentContainer, graphql } from 'react-relay';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     ...theme.mixins.content,
   },
-});
+}));
 
-function UserProfile({ classes: s, data: user }) {
+function UserProfile(props) {
+  const { data: user } = props;
+  const s = useStyles();
+
   return (
     <div className={s.root}>
       <Typography
@@ -48,16 +51,14 @@ function UserProfile({ classes: s, data: user }) {
   );
 }
 
-export default withStyles(styles)(
-  createFragmentContainer(
-    UserProfile,
-    graphql`
-      fragment UserProfile on User {
-        id
-        username
-        displayName
-        photoURL
-      }
-    `,
-  ),
+export default createFragmentContainer(
+  UserProfile,
+  graphql`
+    fragment UserProfile on User {
+      id
+      username
+      displayName
+      photoURL
+    }
+  `,
 );

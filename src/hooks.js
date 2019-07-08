@@ -33,9 +33,9 @@ export function useReset() {
   return useContext(ResetContext);
 }
 
-export function useFacebookEvent(event, callback, deps = []) {
+export function useFacebookEvent(event, callback) {
   useEffect(() => {
     fb(FB => FB.Event.subscribe(event, callback), { async: false });
     return fb(FB => FB.Event.unsubscribe(event, callback), { async: false });
-  }, deps);
+  }, []);
 }

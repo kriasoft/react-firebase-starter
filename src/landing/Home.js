@@ -9,12 +9,12 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import HomeSponsors from './HomeSponsors';
 import HomeStack from './HomeStack';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   content: {
     ...theme.mixins.content,
   },
@@ -25,18 +25,20 @@ const styles = theme => ({
     textAlign: 'center',
   },
   code: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     color: theme.palette.common.white,
     backgroundColor: '#555',
     fontFamily: '"Roboto Mono"',
     fontWeight: 100,
     fontSize: '0.875rem',
-    marginBottom: theme.spacing.unit * 3,
+    marginBottom: theme.spacing(3),
   },
   block: {},
-});
+}));
 
-function Home({ classes: s }) {
+function Home() {
+  const s = useStyles();
+
   return (
     <>
       <HomeSponsors />
@@ -56,7 +58,7 @@ function Home({ classes: s }) {
           , tweak environment variables found in .env.* files in the root of the
           project and start hacking.
         </Typography>
-        <Paper className={s.code}>
+        <Paper className={s.code} elevation={2}>
           $ git clone https://github.com/kriasoft/react-firebase-starter.git
           example
           <br />
@@ -77,4 +79,4 @@ function Home({ classes: s }) {
   );
 }
 
-export default withStyles(styles)(Home);
+export default Home;

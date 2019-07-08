@@ -9,8 +9,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import qs from 'query-string';
+import history from 'history';
 import serialize from 'serialize-javascript';
-import createHistory from 'history/createMemoryHistory';
 import { Router } from 'express';
 
 import App from '../common/App';
@@ -32,7 +32,6 @@ router.get('/static/*', (req, res) => {
 router.get('*', async (req, res, next) => {
   try {
     const { path: pathname, originalUrl: url } = req;
-    const history = createHistory({ initialEntries: [pathname] });
     const relay = createRelay(req);
 
     // Prefer using the same query string parser in both
@@ -54,7 +53,14 @@ router.get('*', async (req, res, next) => {
     if (route.ssr === true) {
       try {
         body = ReactDOM.renderToString(
-          <App {...route} config={config} history={history} relay={relay} />,
+          <App
+            {...route}
+            config={config}
+            history={history.createMemoryHistory({
+              initialEntries: [pathname],
+            })}
+            relay={relay}
+          />,
         );
       } catch (err) {
         console.error(err);

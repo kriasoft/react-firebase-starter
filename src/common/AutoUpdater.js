@@ -63,12 +63,11 @@ class AutoUpdater extends React.Component<Props> {
   }
 }
 
-export default createFragmentContainer(
-  AutoUpdater,
-  graphql`
+export default createFragmentContainer(AutoUpdater, {
+  user: graphql`
     fragment AutoUpdater_user on User {
       id
       timeZone
     }
   `,
-);
+});

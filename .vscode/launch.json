@@ -7,6 +7,12 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Start",
+      "program": "${workspaceFolder}/node_modules/react-app-tools/scripts/start.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Build",
       "program": "${workspaceFolder}/node_modules/react-app-tools/scripts/build.js"
     },

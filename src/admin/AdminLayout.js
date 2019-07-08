@@ -7,19 +7,18 @@
 /* @flow */
 
 import React from 'react';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { createFragmentContainer, graphql } from 'react-relay';
 
-function Layout({ children }) {
+function AdminLayout({ children }) {
   return <div>{children}</div>;
 }
 
-export default createFragmentContainer(
-  Layout,
-  graphql`
-    fragment LayoutAdmin on Query {
+export default createFragmentContainer(AdminLayout, {
+  data: graphql`
+    fragment AdminLayout_data on Query {
       me {
         id
       }
     }
   `,
-);
+});

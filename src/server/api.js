@@ -43,7 +43,7 @@ router.use(
     context: new Context(req),
     graphiql: process.env.APP_ENV !== 'production',
     pretty: false,
-    formatError: err => {
+    customFormatError: err => {
       console.error(err.originalError || err);
       return {
         message: err.message,

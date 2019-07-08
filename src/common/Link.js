@@ -4,9 +4,8 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from '../hooks';
 
 function isLeftClickEvent(event) {
@@ -17,11 +16,7 @@ function isModifiedEvent(event) {
   return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }
 
-type Props = {
-  onClick: ?(event: MouseEvent) => void,
-};
-
-function Link(props: Props) {
+const Link = React.forwardRef(function Link(props, ref) {
   const history = useHistory();
 
   function handleClick(event: MouseEvent) {
@@ -42,7 +37,11 @@ function Link(props: Props) {
   }
 
   // eslint-disable-next-line jsx-a11y/anchor-has-content
-  return <a {...props} onClick={handleClick} />;
-}
+  return <a ref={ref} {...props} onClick={handleClick} />;
+});
+
+Link.propTypes = {
+  onClick: PropTypes.func,
+};
 
 export default Link;

@@ -9,18 +9,24 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import { graphql, createFragmentContainer } from 'react-relay';
+import { makeStyles } from '@material-ui/styles';
+import { createFragmentContainer, graphql } from 'react-relay';
 
 import Link from '../common/Link';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     ...theme.mixins.content,
   },
-});
+}));
 
-function Story({ classes: s, data: { title, text, isURL } }) {
+function Story(props) {
+  const {
+    data: { title, text, isURL },
+  } = props;
+
+  const s = useStyles();
+
   return (
     <div className={s.root}>
       <Typography variant="h3" gutterBottom>
@@ -43,15 +49,13 @@ function Story({ classes: s, data: { title, text, isURL } }) {
   );
 }
 
-export default withStyles(styles)(
-  createFragmentContainer(
-    Story,
-    graphql`
-      fragment Story on Story {
-        title
-        text
-        isURL
-      }
-    `,
-  ),
+export default createFragmentContainer(
+  Story,
+  graphql`
+    fragment Story on Story {
+      title
+      text
+      isURL
+    }
+  `,
 );

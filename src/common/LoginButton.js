@@ -6,12 +6,12 @@
 
 /* @flow */
 
-import cx from 'classnames';
+import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { darken } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/styles';
 
 import FacebookIcon from '../icons/Facebook';
 import GoogleIcon from '../icons/Google';
@@ -76,7 +76,7 @@ class LoginButton extends React.PureComponent<any> {
 
     return (
       <Button
-        className={cx(className, s.root, s[provider])}
+        className={clsx(className, s.root, s[provider])}
         color="primary"
         variant="contained"
         component="a"

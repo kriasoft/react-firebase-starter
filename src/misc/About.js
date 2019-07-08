@@ -8,15 +8,17 @@
 
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     ...theme.mixins.content,
   },
-});
+}));
 
-function About({ classes: s }) {
+function About() {
+  const s = useStyles();
+
   return (
     <div className={s.root}>
       <Typography variant="h3" gutterBottom>
@@ -37,4 +39,4 @@ function About({ classes: s }) {
   );
 }
 
-export default withStyles(styles)(About);
+export default About;

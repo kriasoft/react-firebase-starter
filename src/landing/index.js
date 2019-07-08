@@ -15,7 +15,7 @@ export default [
     path: '',
     query: graphql`
       query landingHomeQuery {
-        ...Layout
+        ...Layout_data
       }
     `,
     components: () => [

@@ -8,14 +8,14 @@
 
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import Link from './Link';
 import { useHistory } from '../hooks';
 
 const color = '#607d8b';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   container: {
     position: 'absolute',
     top: 0,
@@ -32,10 +32,10 @@ const styles = theme => ({
   },
   main: {
     paddingBottom: 80,
-    marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit * 2,
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
     '@media screen and (max-width: 1024px)': {
-      padding: `0 ${theme.spacing.unit}`,
+      padding: theme.spacing(0, 1),
     },
   },
   errorCode: {
@@ -74,14 +74,16 @@ const styles = theme => ({
   link: {
     color: theme.palette.primary.main,
   },
-});
+}));
 
 type Props = {
   error: ?Error,
 };
 
-function ErrorPage({ classes: s, ...props }: Props) {
+function ErrorPage(props: Props) {
   const history = useHistory();
+  const s = useStyles();
+
   React.useEffect(() => {
     document.title =
       props.error && props.error.status === 404 ? 'Page Not Found' : 'Error';
@@ -112,13 +114,13 @@ function ErrorPage({ classes: s, ...props }: Props) {
           {title}
         </Typography>
         {code === '404' && (
-          <Typography className={s.text} variant="body1">
+          <Typography className={s.text}>
             The page you&apos;re looking for does not exist or an another error
             occurred.
             <br />
           </Typography>
         )}
-        <Typography className={s.text} variant="body1">
+        <Typography className={s.text}>
           <a className={s.link} href="/" onClick={goBack}>
             Go back
           </a>
@@ -133,4 +135,4 @@ function ErrorPage({ classes: s, ...props }: Props) {
   );
 }
 
-export default withStyles(styles)(ErrorPage);
+export default ErrorPage;

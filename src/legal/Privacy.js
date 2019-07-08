@@ -8,17 +8,19 @@
 
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 import { useConfig } from '../hooks';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     ...theme.mixins.content,
   },
-});
+}));
 
-function Privacy({ classes: s }) {
+function Privacy() {
+  const s = useStyles();
   const { app } = useConfig();
+
   return (
     <div className={s.root}>
       <Typography variant="h3" gutterBottom>
@@ -70,4 +72,4 @@ function Privacy({ classes: s }) {
   );
 }
 
-export default withStyles(styles)(Privacy);
+export default Privacy;

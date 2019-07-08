@@ -6,11 +6,11 @@
 
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/styles';
 
 import LoginButton from '../common/LoginButton';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     ...theme.mixins.content,
     paddingTop: '2rem',
@@ -48,9 +48,11 @@ const styles = theme => ({
       backgroundColor: '#666',
     },
   },
-});
+}));
 
-function HomeHero({ classes: s, ...props }) {
+function HomeHero() {
+  const s = useStyles();
+
   return (
     <div className={s.root}>
       <Typography className={s.title} variant="h3">
@@ -67,4 +69,4 @@ function HomeHero({ classes: s, ...props }) {
   );
 }
 
-export default withStyles(styles)(HomeHero);
+export default HomeHero;

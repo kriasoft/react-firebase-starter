@@ -11,7 +11,8 @@ import React from 'react';
 import Link from './Link';
 import { useHistory, useReset } from '../hooks';
 
-function LoginLink({ onClick, href, ...props }) {
+const LogoutLink = React.forwardRef(function LogoutLink(props, ref) {
+  const { onClick, href, ...other } = props;
   const history = useHistory();
   const reset = useReset();
 
@@ -26,8 +27,13 @@ function LoginLink({ onClick, href, ...props }) {
   }
 
   return (
-    <Link href={history.location.pathname} onClick={handleClick} {...props} />
+    <Link
+      href={history.location.pathname}
+      onClick={handleClick}
+      ref={ref}
+      {...other}
+    />
   );
-}
+});
 
-export default LoginLink;
+export default LogoutLink;
