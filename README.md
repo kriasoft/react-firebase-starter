@@ -1,6 +1,7 @@
 <h1>
   React Starter Kit for Firebase &nbsp; <sup><i>a.k.a. Serverless Edition</i></sup><br>
   <a href="https://circleci.com/gh/kriasoft/react-firebase-starter"><img src="https://circleci.com/gh/kriasoft/react-firebase-starter.svg?style=svg" alt="Build Status" height="20" /></a>
+  <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/kriasoft/react-firebase-starter.svg" alt="Greenkeeper" height="20" /></a>
   <a href="https://opencollective.com/react-firebase-starter"><img src="https://opencollective.com/react-firebase-starter/backers/badge.svg?maxAge=3600" height="20"></a>
   <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&amp;label=Follow&amp;maxAge=3600" alt="Twitter" height="20"></a>
   <a href="https://t.me/ReactStarter"><img src="https://img.shields.io/badge/chat-Telegram-green.svg?style=social&amp;maxAge=3600" height="20"></a>
@@ -30,10 +31,10 @@ This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kria
 
 ### Tech Stack
 
-- [Create React App][cra] (★ 64k) for development and test infrastructure (see [user guide][cradocs])
-- [Material UI][mui] (★ 45k) to reduce development time by integrating Google's [Material Design][material]
+- [Create React App][cra] (★ 70k) for development and test infrastructure (see [user guide][cradocs])
+- [Material UI][mui] (★ 50k) to reduce development time by integrating Google's [Material Design][material]
 - [Passport.js][passport] (★ 15k) for authentication configured with stateless JWT tokens for sessions
-- [GraphQL.js][gqljs] (★ 13k) and [Relay][relay] (★ 11k) for declarative data fetching and efficient client stage management
+- [GraphQL.js][gqljs] (★ 15k) and [Relay][relay] (★ 11k) for declarative data fetching and efficient client stage management
 - [Universal Router][router] (★ 1k) + [history][history] (★ 3k) for declarative routing and client-side navigation optimized for [Relay][relay]
 - [PostgreSQL][psql] database pre-configured with a query builder and migrations using [Knex.js][knex] (★ 10k)
 - [Google Cloud][gcp] & [Firebase][firebase] for serverless architecture - Cloud SQL, Cloud Functions, CDN hosting, file storage ([docs][fbdocs])
@@ -107,6 +108,8 @@ $ yarn start                       # Compile the app and opens it in a browser w
 Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
 
 <p align='center'><img src='https://camo.githubusercontent.com/506a5a0a33aebed2bf0d24d3999af7f582b31808/687474703a2f2f692e696d6775722e636f6d2f616d794e66434e2e706e67' width='600' alt='npm start'></p>
+
+In order to re-compile GraphQL fragments, run `yarn relay` or `yarn relay --watch` (in watch mode).
 
 ### How to Migrate Database Schema
 
