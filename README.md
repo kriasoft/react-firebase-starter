@@ -26,6 +26,8 @@ design patterns.
 
 ---
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kriasoft/react-firebase-starter.svg)](https://greenkeeper.io/)
+
 This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kriasoft][kriasoft].
 
 ### Tech Stack
