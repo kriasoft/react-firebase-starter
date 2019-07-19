@@ -9,7 +9,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import qs from 'query-string';
-import createBrowserHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 
 import App from './common/App';
 import createRelay from './createRelay';
