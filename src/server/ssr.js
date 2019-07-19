@@ -9,8 +9,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import qs from 'query-string';
-import history from 'history';
 import serialize from 'serialize-javascript';
+import { createMemoryHistory } from 'history';
 import { Router } from 'express';
 
 import App from '../common/App';
@@ -56,7 +56,7 @@ router.get('*', async (req, res, next) => {
           <App
             {...route}
             config={config}
-            history={history.createMemoryHistory({
+            history={createMemoryHistory({
               initialEntries: [pathname],
             })}
             relay={relay}
