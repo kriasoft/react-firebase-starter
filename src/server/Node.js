@@ -4,7 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
 /* eslint-disable global-require */
 
 import { nodeDefinitions, fromGlobalId } from 'graphql-relay';

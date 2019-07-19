@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import UniversalRouter from 'universal-router';
 import { fetchQuery } from 'relay-runtime';
 

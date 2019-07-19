@@ -4,7 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
 /* eslint-disable import/no-webpack-loader-syntax */
 
 import ejs from 'ejs';

@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import slug from 'slug';
 import validator from 'validator';
 import { mutationWithClientMutationId } from 'graphql-relay';
@@ -19,9 +17,8 @@ import {
 import db from '../db';
 import StoryType from './StoryType';
 import { fromGlobalId } from '../utils';
-import type Context from '../Context';
 
-function validate(input, ctx: Context, id) {
+function validate(input, ctx, id) {
   function unique(slug) {
     return db
       .table('stories')
@@ -73,7 +70,7 @@ export const createStory = mutationWithClientMutationId({
     story: { type: StoryType },
   },
 
-  async mutateAndGetPayload(input: any, ctx: Context) {
+  async mutateAndGetPayload(input: any, ctx) {
     ctx.ensureIsAuthorized();
 
     // Validate and sanitize user input
@@ -110,7 +107,7 @@ export const updateStory = mutationWithClientMutationId({
     story: { type: StoryType },
   },
 
-  async mutateAndGetPayload(input, ctx: Context) {
+  async mutateAndGetPayload(input, ctx) {
     const id = fromGlobalId(input.id, 'Story');
     let story = await db
       .table('stories')
@@ -150,7 +147,7 @@ export const likeStory = mutationWithClientMutationId({
     story: { type: StoryType },
   },
 
-  async mutateAndGetPayload(input, ctx: Context) {
+  async mutateAndGetPayload(input, ctx) {
     ctx.ensureIsAuthorized();
     const id = fromGlobalId(input.id, 'Story');
     const keys = { story_id: id, user_id: ctx.user.id };

@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import uuid from 'uuid';
 import passport from 'passport';
 import jwt from 'jwt-passport';

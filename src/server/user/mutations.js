@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import { mutationWithClientMutationId } from 'graphql-relay';
 import {
   GraphQLNonNull,
@@ -17,7 +15,6 @@ import {
 import db from '../db';
 import UserType from './UserType';
 import { fromGlobalId } from '../utils';
-import type Context from '../Context';
 
 export const updateUser = mutationWithClientMutationId({
   name: 'UpdateUser',
@@ -38,7 +35,7 @@ export const updateUser = mutationWithClientMutationId({
     user: { type: UserType },
   },
 
-  async mutateAndGetPayload(input: any, ctx: Context) {
+  async mutateAndGetPayload(input, ctx) {
     const id = fromGlobalId(input.id, 'User');
 
     // Only the account owner or an admin can edit a user
@@ -111,7 +108,7 @@ export const deleteUser = mutationWithClientMutationId({
     },
   },
 
-  async mutateAndGetPayload(input: any, ctx: Context) {
+  async mutateAndGetPayload(input, ctx) {
     // Only an admin can delete a user
     ctx.ensureIsAuthorized(user => user.isAdmin);
     const id = fromGlobalId(input.id, 'User');

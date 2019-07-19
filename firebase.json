@@ -20,7 +20,6 @@
       ".env.local",
       ".env.*.local",
       ".eslintrc",
-      ".flowconfig",
       ".gitattributes",
       ".gitignore",
       ".prettierignore",

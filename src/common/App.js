@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import React from 'react';
 import { QueryRenderer } from 'react-relay';
 import { ThemeProvider } from '@material-ui/styles';

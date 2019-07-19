@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import isEmail from 'validator/lib/isEmail';
 import isLength from 'validator/lib/isLength';
 import isURL from 'validator/lib/isURL';
@@ -101,16 +99,12 @@ export default class Validator {
       if (options && options.min && options.max) {
         this.state.addError(
           message ||
-            `The ${this.state.name} field must be between ${options.min} and ${
-              options.max
-            } characters long.`,
+            `The ${this.state.name} field must be between ${options.min} and ${options.max} characters long.`,
         );
       } else if (options && options.max) {
         this.state.addError(
           message ||
-            `The ${this.state.name} field must be up to ${
-              options.max
-            } characters long.`,
+            `The ${this.state.name} field must be up to ${options.max} characters long.`,
         );
       } else {
         this.state.addError(message);

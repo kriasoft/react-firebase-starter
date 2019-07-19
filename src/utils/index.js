@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 export * from './env';
 export * from './fb';
 export * from './gtag';

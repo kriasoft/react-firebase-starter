@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import { globalIdField } from 'graphql-relay';
 import {
   GraphQLObjectType,
@@ -18,7 +16,6 @@ import {
 import IdentityType from './IdentityType';
 import { nodeInterface } from '../Node';
 import { dateField } from '../utils';
-import type Context from '../Context';
 
 export default new GraphQLObjectType({
   name: 'User',
@@ -33,7 +30,7 @@ export default new GraphQLObjectType({
 
     email: {
       type: GraphQLString,
-      resolve(self, args, ctx: Context) {
+      resolve(self, args, ctx) {
         return ctx.user && (ctx.user.id === self.id || ctx.user.isAdmin)
           ? self.email
           : null;
@@ -70,7 +67,7 @@ export default new GraphQLObjectType({
 
     isAdmin: {
       type: GraphQLBoolean,
-      resolve(self, args, ctx: Context) {
+      resolve(self, args, ctx) {
         return ctx.user && ctx.user.id === self.id
           ? ctx.user.isAdmin || false
           : self.is_admin;

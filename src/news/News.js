@@ -4,9 +4,7 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
@@ -74,8 +72,8 @@ const useStyles = makeStyles(theme => ({
 function News(props) {
   const { data } = props;
   const { stories } = data;
-  const [dialog, setDialog] = useState({ open: false });
-  const [error, setError] = useState();
+  const [dialog, setDialog] = React.useState({ open: false });
+  const [error, setError] = React.useState();
   const s = useStyles();
 
   function reset() {

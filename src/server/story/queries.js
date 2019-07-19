@@ -4,13 +4,10 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import { GraphQLList, GraphQLNonNull, GraphQLString } from 'graphql';
 
 import db from '../db';
 import StoryType from './StoryType';
-import type Context from '../Context';
 
 export const story = {
   type: StoryType,
@@ -19,7 +16,7 @@ export const story = {
     slug: { type: new GraphQLNonNull(GraphQLString) },
   },
 
-  resolve(root, { slug }, ctx: Context) {
+  resolve(root, { slug }, ctx) {
     return ctx.storyBySlug.load(slug);
   },
 };
@@ -27,7 +24,7 @@ export const story = {
 export const stories = {
   type: new GraphQLList(StoryType),
 
-  resolve(_, args, ctx: Context) {
+  resolve(_, args, ctx) {
     return db
       .table('stories')
       .where({ approved: true })

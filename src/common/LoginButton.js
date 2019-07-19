@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import clsx from 'clsx';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -65,7 +63,7 @@ const styles = {
   },
 };
 
-class LoginButton extends React.PureComponent<any> {
+class LoginButton extends React.PureComponent {
   static propTypes = {
     provider: PropTypes.oneOf(Object.keys(providers)),
   };

@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { createFragmentContainer, graphql } from 'react-relay';
