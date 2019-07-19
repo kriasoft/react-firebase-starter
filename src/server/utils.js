@@ -4,14 +4,9 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import moment from 'moment-timezone';
 import { GraphQLString } from 'graphql';
 import { fromGlobalId as parse } from 'graphql-relay';
-import type { GraphQLFieldConfig } from 'graphql';
-
-import type Context from './Context';
 
 export function fromGlobalId(globalId, expectedType) {
   const { id, type } = parse(globalId);
@@ -25,47 +20,37 @@ export function fromGlobalId(globalId, expectedType) {
   return id;
 }
 
-export function assignType(type: string) {
-  return (obj: any) => {
+export function assignType(type) {
+  return obj => {
     // eslint-disable-next-line no-underscore-dangle, no-param-reassign
     if (obj) obj.__type = type;
     return obj;
   };
 }
 
-export function getType(obj: any) {
+export function getType(obj) {
   // eslint-disable-next-line no-underscore-dangle
   return obj ? obj.__type : undefined;
 }
 
-export function mapTo(
-  keys: Array<string | number>,
-  keyFn: any => string | number,
-) {
-  return (rows: Array<any>) => {
+export function mapTo(keys, keyFn) {
+  return rows => {
     const group = new Map(keys.map(key => [key, null]));
     rows.forEach(row => group.set(keyFn(row), row));
     return Array.from(group.values());
   };
 }
 
-export function mapToMany(
-  keys: Array<string | number>,
-  keyFn: any => string | number,
-) {
-  return (rows: Array<any>) => {
+export function mapToMany(keys, keyFn) {
+  return rows => {
     const group = new Map(keys.map(key => [key, []]));
     rows.forEach(row => (group.get(keyFn(row)) || []).push(row));
     return Array.from(group.values());
   };
 }
 
-export function mapToValues(
-  keys: Array<string | number>,
-  keyFn: any => string | number,
-  valueFn: any => any,
-) {
-  return (rows: Array<any>) => {
+export function mapToValues(keys, keyFn, valueFn) {
+  return rows => {
     const group = new Map(keys.map(key => [key, null]));
     rows.forEach(row => group.set(keyFn(row), valueFn(row)));
     return Array.from(group.values());
@@ -76,7 +61,7 @@ const dateFieldArgs = {
   format: { type: GraphQLString },
 };
 
-const dateFieldResolve = (resolve, self, args, ctx: Context) => {
+const dateFieldResolve = (resolve, self, args, ctx) => {
   let date = resolve(self);
 
   if (!date) {
@@ -98,7 +83,7 @@ const dateFieldResolve = (resolve, self, args, ctx: Context) => {
  * Creates the configuration for a date/time field with support of format and time
  * zone.
  */
-export function dateField(resolve: any => ?Date): GraphQLFieldConfig<*, *> {
+export function dateField(resolve) {
   return {
     type: GraphQLString,
     args: dateFieldArgs,

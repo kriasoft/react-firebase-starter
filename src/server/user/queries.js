@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import { GraphQLNonNull, GraphQLInt, GraphQLString } from 'graphql';
 import {
   connectionDefinitions,
@@ -16,12 +14,11 @@ import {
 
 import db from '../db';
 import UserType from './UserType';
-import type Context from '../Context';
 
 export const me = {
   type: UserType,
 
-  resolve(root, args, ctx: Context) {
+  resolve(root, args, ctx) {
     return ctx.user ? ctx.userById.load(ctx.user.id) : null;
   },
 };
@@ -33,7 +30,7 @@ export const user = {
     username: { type: new GraphQLNonNull(GraphQLString) },
   },
 
-  resolve(root, { username }, ctx: Context) {
+  resolve(root, { username }, ctx) {
     return ctx.userByUsername.load(username);
   },
 };
@@ -49,7 +46,7 @@ export const users = {
 
   args: forwardConnectionArgs,
 
-  async resolve(root, args, ctx: Context) {
+  async resolve(root, args, ctx) {
     // Only admins allowed to fetch the list of users
     ctx.ensureIsAuthorized(user => user.isAdmin);
 

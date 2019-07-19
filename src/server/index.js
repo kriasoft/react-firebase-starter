@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 const dotenv = require('dotenv');
 const express = require('express');
 const firebase = require('firebase-admin');

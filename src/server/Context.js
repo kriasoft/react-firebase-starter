@@ -4,9 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
-import type { Request } from 'express';
 import DataLoader from 'dataloader';
 
 import db from './db';
@@ -17,7 +14,7 @@ import { UnauthorizedError, ForbiddenError, ValidationError } from './errors';
 class Context {
   errors = [];
 
-  constructor(req: Request) {
+  constructor(req) {
     if (req.user) {
       // Add user object to the cache
       this.userById.prime(req.user.id, req.user);

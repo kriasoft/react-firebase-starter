@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 
 import * as userQueries from './user/queries';

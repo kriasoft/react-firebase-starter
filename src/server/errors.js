@@ -4,13 +4,11 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 export class ValidationError extends Error {
   code = 400;
   state: any;
 
-  constructor(errors: Array<ValidationErrorEntry>) {
+  constructor(errors) {
     super('The request is invalid.');
     this.state = errors.reduce((result, error) => {
       if (Object.prototype.hasOwnProperty.call(result, error.key)) {

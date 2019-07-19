@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 it('renders without crashing', () => {
   // TODO: Implement a unit test
 });

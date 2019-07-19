@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import React, { useContext, useEffect } from 'react';
 import { ReactRelayContext } from 'react-relay';
 import { fb } from './utils';

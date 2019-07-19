@@ -4,21 +4,14 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import React from 'react';
 import { graphql, createFragmentContainer, commitMutation } from 'react-relay';
-import type { AutoUpdater_user } from './__generated__/AutoUpdater_user.graphql';
-
-type Props = {
-  user: AutoUpdater_user,
-};
 
 /**
  * Checks if user's profile settings (time zone etc.) are up-to-date,
  * and updates these fields in the background when they become outdated.
  */
-class AutoUpdater extends React.Component<Props> {
+class AutoUpdater extends React.Component {
   componentDidMount() {
     this.updateUser();
   }

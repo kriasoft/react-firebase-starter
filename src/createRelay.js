@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import loading from './utils/loading';
 

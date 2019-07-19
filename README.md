@@ -89,7 +89,7 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 - [Node.js][nodejs] v10.15 or higher + [Yarn][yarn] v1.17 or higher &nbsp; (_HINT: On Mac install
   them via [Brew][brew]_)
 - [VS Code][vc] editor (preferred) + [Project Snippets][vcsnippets], [EditorConfig][vceditconfig],
-  [ESLint][vceslint], [Flow][vcflow], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
+  [ESLint][vceslint], [Prettier][vcprettier], and [Babel JavaScript][vcjs] plug-ins
 - [Watchman][watchman] file watcher used by Relay Modern
 - [PostgreSQL][postgres] v9.6 or newer, only if you're planning to use a local db for development
 
@@ -232,7 +232,6 @@ and [contributors](https://github.com/kriasoft/react-firebase-starter/graphs/con
 [vcsnippets]: https://marketplace.visualstudio.com/items?itemName=rebornix.project-snippets
 [vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
 [vceslint]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
-[vcflow]: https://marketplace.visualstudio.com/items?itemName=flowtype.flow-for-vscode
 [vcprettier]: https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
 [vcjs]: https://marketplace.visualstudio.com/items?itemName=mgmcdermott.vscode-language-babel
 [watchman]: https://github.com/facebook/watchman

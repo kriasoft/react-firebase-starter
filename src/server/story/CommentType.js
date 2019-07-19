@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import { globalIdField } from 'graphql-relay';
 import {
   GraphQLObjectType,
@@ -19,7 +17,6 @@ import StoryType from './StoryType';
 import UserType from '../user/UserType';
 import { nodeInterface } from '../Node';
 import { dateField } from '../utils';
-import type Context from '../Context';
 
 const CommentType = new GraphQLObjectType({
   name: 'Comment',
@@ -30,28 +27,28 @@ const CommentType = new GraphQLObjectType({
 
     story: {
       type: new GraphQLNonNull(StoryType),
-      resolve(self, args, ctx: Context) {
+      resolve(self, args, ctx) {
         return ctx.storyById.load(self.story_id);
       },
     },
 
     parent: {
       type: CommentType,
-      resolve(self, args, ctx: Context) {
+      resolve(self, args, ctx) {
         return self.parent_id && ctx.commentById.load(self.parent_id);
       },
     },
 
     author: {
       type: new GraphQLNonNull(UserType),
-      resolve(self, args, ctx: Context) {
+      resolve(self, args, ctx) {
         return ctx.userById.load(self.author_id);
       },
     },
 
     comments: {
       type: new GraphQLList(CommentType),
-      resolve(self, args, ctx: Context) {
+      resolve(self, args, ctx) {
         return ctx.commentsByParentId.load(self.id);
       },
     },
@@ -62,7 +59,7 @@ const CommentType = new GraphQLObjectType({
 
     pointsCount: {
       type: new GraphQLNonNull(GraphQLInt),
-      resolve(self, args, ctx: Context) {
+      resolve(self, args, ctx) {
         return ctx.commentPointsCount.load(self.id);
       },
     },

@@ -1,6 +1,5 @@
 {
   "editor.formatOnSave": true,
-  "flow.useNPMPackagedFlow": true,
   "javascript.format.enable": false,
   "javascript.validate.enable": false,
   "vsicons.presets.angular": false,

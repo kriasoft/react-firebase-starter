@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import clsx from 'clsx';
 import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';

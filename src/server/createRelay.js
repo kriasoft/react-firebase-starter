@@ -4,16 +4,13 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import { graphql } from 'graphql';
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
-import type { Request } from 'express';
 
 import schema from './schema';
 import Context from './Context';
 
-export default function createRelay(req: Request) {
+export default function createRelay(req) {
   function fetchQuery(operation, variables, cacheConfig) {
     return graphql({
       schema,

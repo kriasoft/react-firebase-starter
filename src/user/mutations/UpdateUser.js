@@ -4,8 +4,6 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-/* @flow */
-
 import { graphql, commitMutation } from 'react-relay';
 
 const mutation = graphql`
