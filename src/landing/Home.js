@@ -38,7 +38,7 @@ function Home() {
   const s = useStyles();
 
   return (
-    <>
+    <React.Fragment>
       <HomeSponsors />
       <div className={s.content}>
         <Typography className={s.title} variant="h4" gutterBottom>
@@ -73,7 +73,7 @@ function Home() {
         </Typography>
         <HomeStack />
       </div>
-    </>
+    </React.Fragment>
   );
 }
 

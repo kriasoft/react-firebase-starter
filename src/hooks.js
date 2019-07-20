@@ -4,7 +4,7 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { ReactRelayContext } from 'react-relay';
 import { fb } from './utils';
 
@@ -16,23 +16,23 @@ export const HistoryContext = React.createContext(history);
 export const ResetContext = React.createContext(() => {});
 
 export function useConfig() {
-  return useContext(ConfigContext);
+  return React.useContext(ConfigContext);
 }
 
 export function useHistory() {
-  return useContext(HistoryContext);
+  return React.useContext(HistoryContext);
 }
 
 export function useRelay() {
-  return useContext(ReactRelayContext);
+  return React.useContext(ReactRelayContext);
 }
 
 export function useReset() {
-  return useContext(ResetContext);
+  return React.useContext(ResetContext);
 }
 
 export function useFacebookEvent(event, callback) {
-  useEffect(() => {
+  React.useEffect(() => {
     fb(FB => FB.Event.subscribe(event, callback), { async: false });
     return fb(FB => FB.Event.unsubscribe(event, callback), { async: false });
   }, []);

@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { graphql, createFragmentContainer, commitMutation } from 'react-relay';
+import { createFragmentContainer, commitMutation, graphql } from 'react-relay';
 
 /**
  * Checks if user's profile settings (time zone etc.) are up-to-date,

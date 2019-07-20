@@ -37,7 +37,7 @@ function Layout(props) {
   const s = useStyles();
 
   return (
-    <>
+    <React.Fragment>
       <LayoutToolbar me={data.me} {...(!hero && { className: s.background })} />
       {hero && (
         <div className={s.background}>
@@ -49,7 +49,7 @@ function Layout(props) {
       {children}
       <LayoutFooter />
       <AutoUpdater user={data.me} />
-    </>
+    </React.Fragment>
   );
 }
 

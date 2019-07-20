@@ -5,7 +5,7 @@
  */
 
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Avatar from '@material-ui/core/Avatar';
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 
 function LayoutToolbar(props) {
   const { className, me } = props;
-  const [userMenuEl, setUserMenuEl] = useState(null);
+  const [userMenuEl, setUserMenuEl] = React.useState(null);
   const s = useStyles();
   const { app } = useConfig();
 
@@ -76,7 +76,7 @@ function LayoutToolbar(props) {
           News
         </Button>
         {me ? (
-          <>
+          <React.Fragment>
             <Avatar
               className={s.avatar}
               src={me.photoURL}
@@ -100,7 +100,7 @@ function LayoutToolbar(props) {
                 horizontal: 82,
               }}
             />
-          </>
+          </React.Fragment>
         ) : (
           <Button className={s.button} color="inherit" component={LoginLink}>
             Sign In

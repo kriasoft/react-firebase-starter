@@ -145,7 +145,7 @@ function News(props) {
                 )
               }
               secondary={
-                <>
+                <React.Fragment>
                   <span>
                     by{' '}
                     <Link href={`/@${x.author.username}`}>
@@ -160,7 +160,7 @@ function News(props) {
                     {x.pointGiven ? <FavoriteIcon /> : <FavoriteBorderIcon />}(
                     {x.pointsCount})
                   </a>
-                </>
+                </React.Fragment>
               }
             />
           </ListItem>

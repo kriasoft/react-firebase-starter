@@ -4,7 +4,7 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-import { graphql, commitMutation } from 'react-relay';
+import { commitMutation, graphql } from 'react-relay';
 
 const mutation = graphql`
   mutation DeleteUserMutation($input: DeleteUserInput!) {
