@@ -12399,10 +12399,10 @@ unist-util-stringify-position@^1.0.0, unist-util-stringify-position@^1.1.1:
   resolved "https://registry.yarnpkg.com/unist-util-stringify-position/-/unist-util-stringify-position-1.1.2.tgz#3f37fcf351279dcbca7480ab5889bb8a832ee1c6"
   integrity sha512-pNCVrk64LZv1kElr0N1wPiHEUoXNVFERp+mlTg/s9R5Lwg87f9bM/3sQB99w+N9D/qnM9ar3+AKDBwo/gm/iQQ==
 
-universal-router@^8.2.0:
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/universal-router/-/universal-router-8.2.0.tgz#09b9333ffb022b4ab367e2af589efb5bca1d7ccf"
-  integrity sha512-QuCJiIv+QqPCKCU1dKJVtqBwGUn6RvkIiaHuUoy2cjcNa43Opl2bCUSisCe4AC/hSXFyHdUFB0k0iK8S7Ib2Gg==
+universal-router@^8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/universal-router/-/universal-router-8.2.1.tgz#bf7b5fb0a9514c897a03adce75c60285759855d6"
+  integrity sha512-P9rOUVIseSEDoJPjJvWhazjCwXwiaqKcv+1FMsI62XYrKAHiKVGgRh1VtAnv3hSwni6vkJxhosXIK+NWGVz7sg==
   dependencies:
     path-to-regexp "^3.0.0"
 

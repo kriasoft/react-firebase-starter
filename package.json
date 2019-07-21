@@ -57,7 +57,7 @@
     "request-promise-native": "^1.0.7",
     "serialize-javascript": "^1.7.0",
     "slug": "^1.1.0",
-    "universal-router": "^8.2.0",
+    "universal-router": "^8.2.1",
     "uuid": "^3.3.2",
     "validator": "^11.1.0"
   },
