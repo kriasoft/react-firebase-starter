@@ -18,13 +18,14 @@
     },
     {
       "type": "node",
-      "name": "Test",
       "request": "launch",
-      "args": ["--runInBand"],
-      "cwd": "${workspaceFolder}",
+      "name": "Test",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/react-app",
+      "args": ["test", "--runInBand", "--no-cache", "--watchAll=false"],
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
       "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
