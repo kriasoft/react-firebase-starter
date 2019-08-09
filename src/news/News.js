@@ -17,7 +17,7 @@ import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { createFragmentContainer, graphql } from 'react-relay';
 
 import Link from '../common/Link';

@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { createFragmentContainer, graphql } from 'react-relay';
 
 import LayoutToolbar from './LayoutToolbar';

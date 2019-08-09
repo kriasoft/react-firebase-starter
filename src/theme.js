@@ -13,9 +13,11 @@ export default createMuiTheme({
   palette: {
     primary: indigo,
   },
+
   typography: {
     monoFamily: '"Roboto Mono", "Helvetica", "Arial", sans-serif',
   },
+
   mixins: {
     content: {
       paddingTop: '1.5rem',

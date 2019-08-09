@@ -7,7 +7,7 @@
 import React from 'react';
 import QueryString from 'query-string';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import LoginButton from '../common/LoginButton';
 import { gtag } from '../utils';
