@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { darken } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import FacebookIcon from '../icons/Facebook';
 import GoogleIcon from '../icons/Google';
