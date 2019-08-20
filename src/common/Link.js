@@ -19,7 +19,7 @@ function isModifiedEvent(event) {
 const Link = React.forwardRef(function Link(props, ref) {
   const history = useHistory();
 
-  function handleClick(event: MouseEvent) {
+  function handleClick(event) {
     if (props.onClick) {
       props.onClick(event);
     }

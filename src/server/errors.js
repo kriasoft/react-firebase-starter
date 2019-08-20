@@ -6,7 +6,7 @@
 
 export class ValidationError extends Error {
   code = 400;
-  state: any;
+  state;
 
   constructor(errors) {
     super('The request is invalid.');

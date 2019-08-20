@@ -74,11 +74,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-type Props = {
-  error: ?Error,
-};
-
-function ErrorPage(props: Props) {
+function ErrorPage(props) {
   const history = useHistory();
   const s = useStyles();
 
@@ -87,7 +83,7 @@ function ErrorPage(props: Props) {
       props.error && props.error.status === 404 ? 'Page Not Found' : 'Error';
   });
 
-  function goBack(event: MouseEvent) {
+  function goBack(event) {
     event.preventDefault();
     props.onClose();
     history.goBack();

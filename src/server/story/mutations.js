@@ -70,7 +70,7 @@ export const createStory = mutationWithClientMutationId({
     story: { type: StoryType },
   },
 
-  async mutateAndGetPayload(input: any, ctx) {
+  async mutateAndGetPayload(input, ctx) {
     ctx.ensureIsAuthorized();
 
     // Validate and sanitize user input

@@ -11,12 +11,12 @@ import { wrapDisplayName } from 'recompose';
 import { openWindow } from '../utils';
 import { useHistory, useReset } from '../hooks';
 
-const withAuth = () => (Component: any) => {
+const withAuth = () => Component => {
   function WithAuth(props) {
     const history = useHistory();
     const reset = useReset();
 
-    function logIn(options: any = {}) {
+    function logIn(options = {}) {
       return openWindow(options.url || '/login', {
         onPostMessage({ data }) {
           if (typeof data === 'string' && data === 'login:success') {
