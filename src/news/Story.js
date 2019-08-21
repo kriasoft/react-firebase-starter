@@ -47,13 +47,12 @@ function Story(props) {
   );
 }
 
-export default createFragmentContainer(
-  Story,
-  graphql`
-    fragment Story on Story {
+export default createFragmentContainer(Story, {
+  story: graphql`
+    fragment Story_story on Story {
       title
       text
       isURL
     }
   `,
-);
+});

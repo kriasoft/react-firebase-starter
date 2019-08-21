@@ -4,7 +4,7 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-import { GraphQLNonNull, GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLNonNull, GraphQLInt } from 'graphql';
 import {
   connectionDefinitions,
   forwardConnectionArgs,
@@ -13,29 +13,9 @@ import {
 } from 'graphql-relay';
 
 import db from '../db';
-import UserType from './UserType';
+import { UserType } from '../user';
 
-export const me = {
-  type: UserType,
-
-  resolve(root, args, ctx) {
-    return ctx.user ? ctx.userById.load(ctx.user.id) : null;
-  },
-};
-
-export const user = {
-  type: UserType,
-
-  args: {
-    username: { type: new GraphQLNonNull(GraphQLString) },
-  },
-
-  resolve(root, { username }, ctx) {
-    return ctx.userByUsername.load(username);
-  },
-};
-
-export const users = {
+export default {
   type: connectionDefinitions({
     name: 'User',
     nodeType: UserType,

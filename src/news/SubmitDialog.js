@@ -8,131 +8,88 @@ import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import { makeStyles } from '@material-ui/core/styles';
 import { createFragmentContainer, graphql } from 'react-relay';
 
-import withAuth from '../common/withAuth';
-import CreateStoryMutation from './mutations/CreateStory';
-import { useHistory } from '../hooks';
+import TextField from '../common/TextField';
+import UpsertStoryMutation from '../mutations/UpsertStory';
+import { useHistory, useAuth } from '../hooks';
 
-const defaultState = {
+const initialState = {
   title: '',
   text: '',
+  loading: false,
+  errors: null,
 };
 
-const useStyles = makeStyles({
-  control: {
-    marginTop: '1em',
-  },
-});
-
 function SubmitDialog(props) {
-  const {
-    data: { me },
-    relay,
-  } = props;
-
+  const { me, relay } = props;
+  const [state, setState] = React.useState({ ...initialState });
   const history = useHistory();
-  const [error, setError] = React.useState({});
-  const [data, setData] = React.useState(defaultState);
-  const s = useStyles();
-
-  function handleChange({ target }) {
-    setData({ ...data, [target.id]: target.value });
-  }
+  const auth = useAuth();
 
   function handleSubmit(event) {
     event.preventDefault();
-    setError({});
-    CreateStoryMutation.commit(relay.environment, data)
-      .then(() => {
-        props.onClose();
-        history.push('/news');
-      })
-      .catch(error => setError(error.state));
+    setState(x => ({ ...x, loading: true, errors: null }));
+    UpsertStoryMutation.commit(
+      relay.environment,
+      {
+        title: state.title || '',
+        text: state.text || '',
+      },
+      (errors, story) => {
+        if (errors) {
+          setState(x => ({ ...x, loading: false, errors }));
+        } else {
+          props.onClose();
+          history.push(`/news/${story.slug}`);
+        }
+      },
+    );
   }
 
-  function hasError(key) {
-    return Boolean(error[key] && error[key].length);
-  }
-
-  function errorMessage(key) {
-    const message = error[key] && error[key][0];
-    return message ? (
-      <FormHelperText id={`${key}-text`}>{message}</FormHelperText>
-    ) : null;
-  }
-
-  function logIn(event) {
+  function signIn(event) {
     event.preventDefault();
-    props.logIn();
+    auth.signIn();
   }
 
   return (
-    <Dialog open={props.open} onClose={props.onClose}>
+    <Dialog open={props.open} onClose={props.onClose} maxWidth="sm" fullWidth>
       <DialogTitle>Submit a New Story</DialogTitle>
       <DialogContent>
-        <Typography>Do you have something cool to share?</Typography>
+        <DialogContentText>
+          Do you have something cool to share?
+        </DialogContentText>
         <form id="story-form" onSubmit={handleSubmit}>
-          <FormControl
-            className={s.control}
+          <TextField
+            name="title"
+            state={[state, setState]}
+            maxLength={80}
             fullWidth
-            error={hasError('title')}
-            aria-describedby="title-text"
-          >
-            <InputLabel htmlFor="title">Title</InputLabel>
-            <Input
-              id="title"
-              value={data.title}
-              onChange={handleChange}
-              margin="dense"
-              required
-            />
-            {errorMessage('title')}
-          </FormControl>
-          <FormControl
-            className={s.control}
+          />
+          <TextField
+            name="text"
+            state={[state, setState]}
             fullWidth
-            error={hasError('text')}
-            aria-describedby="text-text"
-          >
-            <InputLabel htmlFor="text">Text or URL</InputLabel>
-            <Input
-              id="text"
-              label="Text or URL"
-              value={data.text}
-              onChange={handleChange}
-              margin="dense"
-              multiline
-              required
-            />
-            {errorMessage('text')}
-          </FormControl>
-          <FormControl className={s.control}>
-            {!me && (
-              <FormHelperText>
-                Before posting a story you need to{' '}
-                <a href={history.location.pathname} onClick={logIn}>
-                  sign in
-                </a>
-                .
-              </FormHelperText>
-            )}
-          </FormControl>
+            multiline
+          />
+          {!me && (
+            <FormHelperText>
+              Before posting a story you need to{' '}
+              <a href={history.location.pathname} onClick={signIn}>
+                sign in
+              </a>
+              .
+            </FormHelperText>
+          )}
         </form>
       </DialogContent>
       <DialogActions>
-        <Button color="primary" onClick={props.onClose}>
-          Cancel
-        </Button>
-        <Button color="primary" type="submit" form="story-form" disabled={!me}>
+        <Button onClick={props.onClose}>Cancel</Button>
+        <Button type="submit" form="story-form" disabled={!me}>
           Submit
         </Button>
       </DialogActions>
@@ -140,14 +97,10 @@ function SubmitDialog(props) {
   );
 }
 
-export default withAuth()(
-  createFragmentContainer(SubmitDialog, {
-    data: graphql`
-      fragment SubmitDialog_data on Query {
-        me {
-          id
-        }
-      }
-    `,
-  }),
-);
+export default createFragmentContainer(SubmitDialog, {
+  me: graphql`
+    fragment SubmitDialog_me on User {
+      id
+    }
+  `,
+});

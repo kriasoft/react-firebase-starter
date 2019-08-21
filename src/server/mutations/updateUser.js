@@ -13,12 +13,12 @@ import {
 } from 'graphql';
 
 import db from '../db';
-import UserType from './UserType';
+import UserType from '../user/UserType';
 import { fromGlobalId } from '../utils';
 
 export const updateUser = mutationWithClientMutationId({
   name: 'UpdateUser',
-  description: 'Update user.',
+  description: 'Updates a user.',
 
   inputFields: {
     id: { type: new GraphQLNonNull(GraphQLID) },
@@ -38,7 +38,7 @@ export const updateUser = mutationWithClientMutationId({
   async mutateAndGetPayload(input, ctx) {
     const id = fromGlobalId(input.id, 'User');
 
-    // Only the account owner or an admin can edit a user
+    // Check permissions
     ctx.ensureIsAuthorized(user => user.id === id || user.isAdmin);
 
     function usernameAvailable(username) {
@@ -51,7 +51,7 @@ export const updateUser = mutationWithClientMutationId({
     }
 
     // Validate and sanitize user input
-    const data = await ctx.validate(input)(x =>
+    const data = await ctx.validate(input, 'update')(x =>
       x
         .field('username', { trim: true })
         .isLength({ min: 1, max: 50 })
@@ -79,45 +79,16 @@ export const updateUser = mutationWithClientMutationId({
       return { user: null };
     }
 
+    let user;
+
     if (Object.keys(data).length) {
-      await db
+      [user] = await db
         .table('users')
         .where({ id })
-        .update({ ...data, updated_at: db.fn.now() });
+        .update({ ...data, updated_at: db.fn.now() })
+        .returning('*');
     }
 
-    const user = await db
-      .table('users')
-      .where({ id })
-      .first();
-
     return { user };
-  },
-});
-
-export const deleteUser = mutationWithClientMutationId({
-  name: 'DeleteUser',
-  description: 'Delete user.',
-
-  inputFields: {
-    id: { type: new GraphQLNonNull(GraphQLID) },
-  },
-  outputFields: {
-    deletedUserId: {
-      type: GraphQLString,
-    },
-  },
-
-  async mutateAndGetPayload(input, ctx) {
-    // Only an admin can delete a user
-    ctx.ensureIsAuthorized(user => user.isAdmin);
-    const id = fromGlobalId(input.id, 'User');
-
-    await db
-      .table('users')
-      .where({ id })
-      .del();
-
-    return { deletedUserId: input.id };
   },
 });

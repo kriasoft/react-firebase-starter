@@ -58,8 +58,8 @@ class Context {
     this.errors.push({ key, message });
   }
 
-  validate(input) {
-    const validator = new Validator(input, errors => {
+  validate(input, mode) {
+    const validator = new Validator(input, mode, errors => {
       throw new ValidationError(errors);
     });
 
