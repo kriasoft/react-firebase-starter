@@ -17,18 +17,6 @@ type Comment implements Node {
   updatedAt(format: String): String
 }
 
-input CreateStoryInput {
-  title: String
-  text: String
-  validateOnly: Boolean
-  clientMutationId: String
-}
-
-type CreateStoryPayload {
-  story: Story
-  clientMutationId: String
-}
-
 input DeleteUserInput {
   id: ID!
   clientMutationId: String
@@ -61,16 +49,15 @@ type LikeStoryPayload {
 }
 
 type Mutation {
-  # Update user.
+  # Creates or updates a story.
+  upsertStory(input: UpsertStoryInput!): UpsertStoryPayload
+  likeStory(input: LikeStoryInput!): LikeStoryPayload
+
+  # Updates a user.
   updateUser(input: UpdateUserInput!): UpdateUserPayload
 
-  # Delete user.
+  # Deletes a user.
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
-
-  # Create a new story.
-  createStory(input: CreateStoryInput!): CreateStoryPayload
-  updateStory(input: UpdateStoryInput!): UpdateStoryPayload
-  likeStory(input: LikeStoryInput!): LikeStoryPayload
 }
 
 # An object with an ID
@@ -129,20 +116,6 @@ type Story implements Node {
   updatedAt(format: String): String
 }
 
-input UpdateStoryInput {
-  id: ID!
-  title: String
-  text: String
-  approved: Boolean
-  validateOnly: Boolean
-  clientMutationId: String
-}
-
-type UpdateStoryPayload {
-  story: Story
-  clientMutationId: String
-}
-
 input UpdateUserInput {
   id: ID!
   username: String
@@ -160,6 +133,20 @@ type UpdateUserPayload {
   clientMutationId: String
 }
 
+input UpsertStoryInput {
+  id: ID
+  title: String
+  text: String
+  approved: Boolean
+  validateOnly: Boolean
+  clientMutationId: String
+}
+
+type UpsertStoryPayload {
+  story: Story
+  clientMutationId: String
+}
+
 type User implements Node {
   # The ID of an object
   id: ID!
@@ -170,6 +157,7 @@ type User implements Node {
   timeZone: String
   identities: [Identity]
   isAdmin: Boolean
+  firebaseToken: String
   createdAt(format: String): String
   updatedAt(format: String): String
   lastLoginAt(format: String): String

@@ -42,16 +42,22 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 ├── src/                           # Application source code
 │   ├── admin/                     # Admin section (Dashboard, User Management etc.)
 │   ├── common/                    # Shared React components and HOCs
+│   ├── hooks/                     # React.js hooks and Context providers
 │   ├── icons/                     # Icon components
 │   ├── legal/                     # Terms of Use, Privacy Policy, etc.
 │   ├── misc/                      # Other pages (about us, contacts, etc.)
+│   ├── mutations/                 # GraphQL mutations to be used on the client
 │   ├── news/                      # News section (example)
 │   ├── server/                    # Server-side code (API, authentication, etc.)
 │   │   ├── db/                    # Database client
-│   │   ├── story/                 # Story related schema, queries, and mutations
+│   │   ├── mutations/             # GraphQL mutations
+│   │   ├── queries/               # The top-level GraphQL query fields
+│   │   ├── story/                 # GraphQL types: Story, Comment etc.
 │   │   ├── templates/             # HTML templates for server-side rendering
-│   │   ├── user/                  # User related schema, queries, and mutations
+│   │   ├── user/                  # GraphQL types: User, UserRole, UserIdentity etc.
 │   │   ├── api.js                 # GraphQL API middleware
+│   │   ├── app.js                 # Express.js application
+│   │   ├── config.js              # Configuration settings to be passed to the client
 │   │   ├── Context.js             # GraphQL context wrapper
 │   │   ├── createRelay.js         # Relay factory method for Node.js environment
 │   │   ├── index.js               # Node.js app entry point
@@ -61,7 +67,6 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   ├── user/                      # User pages (login, account settings, user profile, etc)
 │   ├── utils/                     # Utility functions
 │   ├── createRelay.js             # Relay factory method for browser envrironment
-│   ├── hooks.js                   # React.js hooks and Context providers
 │   ├── index.js                   # Client-side entry point, e.g. ReactDOM.render(<App />, container)
 │   ├── router.js                  # Universal application router
 │   ├── serviceWorker.js           # Service worker helper methods

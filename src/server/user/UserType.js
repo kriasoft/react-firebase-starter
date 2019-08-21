@@ -4,6 +4,7 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
+import firebase from 'firebase-admin';
 import { globalIdField } from 'graphql-relay';
 import {
   GraphQLObjectType,
@@ -71,6 +72,15 @@ export default new GraphQLObjectType({
         return ctx.user && ctx.user.id === self.id
           ? ctx.user.isAdmin || false
           : self.is_admin;
+      },
+    },
+
+    firebaseToken: {
+      type: GraphQLString,
+      resolve(self, args, ctx) {
+        return ctx.user && ctx.user.id === self.id
+          ? firebase.auth().createCustomToken(self.id)
+          : null;
       },
     },
 

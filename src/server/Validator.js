@@ -24,10 +24,14 @@ export default class Validator {
   errors = [];
   states = [];
 
-  constructor(input, onError) {
+  constructor(input, mode, onError) {
     this.input = input;
+    this.mode = mode || 'create';
     this.onError = onError;
-    this.mode = input.id ? 'edit' : 'create';
+
+    if (!(this.mode === 'create' || this.mode === 'update')) {
+      throw new Error(`The "${mode}" validation mode is not supported.`);
+    }
   }
 
   /**
@@ -75,8 +79,8 @@ export default class Validator {
 
   isRequired(message) {
     if (
-      (((this.input.validateOnly === true || this.mode === 'edit') &&
-        typeof this.state.value !== 'undefined') ||
+      (((this.input.validateOnly === true || this.mode === 'update') &&
+        this.state.value !== undefined) ||
         this.mode === 'create') &&
       !this.state.value
     ) {
@@ -147,7 +151,7 @@ export default class Validator {
       }
 
       return states
-        .filter(x => typeof x.value !== 'undefined')
+        .filter(x => x.value !== undefined)
         .reduce((acc, state) => {
           acc[state.as || state.key] = state.value;
           return acc;

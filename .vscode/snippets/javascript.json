@@ -80,7 +80,7 @@
       "  ${1:Component},",
       "  {",
       "    data: graphql`",
-      "      fragment ${1:Component} on Query {",
+      "      fragment ${1:Component}_data on Query {",
       "        id",
       "      }",
       "    `,",

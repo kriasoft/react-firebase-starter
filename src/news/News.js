@@ -21,7 +21,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { createFragmentContainer, graphql } from 'react-relay';
 
 import Link from '../common/Link';
-import LikeStoryMutation from './mutations/LikeStory';
+import LikeStoryMutation from '../mutations/LikeStory';
 import SubmitDialog from './SubmitDialog';
 
 const useStyles = makeStyles(theme => ({
@@ -85,13 +85,7 @@ function News(props) {
     reset();
     const id = event.currentTarget.id;
     const { environment } = props.relay;
-    LikeStoryMutation.commit(environment, { id }).catch(err => {
-      if (err.code === 401) {
-        props.logIn();
-      } else {
-        setError(err.message);
-      }
-    });
+    LikeStoryMutation.commit(environment, id);
   }
 
   function openDialog() {
@@ -171,7 +165,7 @@ function News(props) {
         key={dialog.key}
         open={dialog.open}
         onClose={closeDialog}
-        data={data}
+        me={data.me}
       />
     </div>
   );
@@ -180,7 +174,9 @@ function News(props) {
 export default createFragmentContainer(News, {
   data: graphql`
     fragment News_data on Query {
-      ...SubmitDialog_data
+      me {
+        ...SubmitDialog_me
+      }
       stories {
         id
         slug

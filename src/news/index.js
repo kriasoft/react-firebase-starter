@@ -39,23 +39,26 @@ export default [
       query newsStoryQuery($slug: String!) {
         ...Layout_data
         story(slug: $slug) {
+          ...Story_story
           title
-          ...Story
+          slug
         }
       }
     `,
-    render: ([Story], data) => {
-      return data.story
-        ? {
-            title: data.story.title,
-            component: (
-              <Layout data={data}>
-                <Story data={data.story} />
-              </Layout>
-            ),
-            chunks: ['story'],
-          }
-        : null;
+    render: ([Story], data, ctx) => {
+      if (data.story && data.story.slug !== ctx.params.slug) {
+        return { status: 301, redirect: `/news/${data.story.slug}` };
+      } else if (data.story) {
+        return {
+          title: data.story.title,
+          component: (
+            <Layout data={data}>
+              <Story data={data.story} />
+            </Layout>
+          ),
+          chunks: ['story'],
+        };
+      }
     },
   },
 ];
