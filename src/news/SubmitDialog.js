@@ -66,12 +66,14 @@ function SubmitDialog(props) {
         <form id="story-form" onSubmit={handleSubmit}>
           <TextField
             name="title"
+            label="Title"
             state={[state, setState]}
             maxLength={80}
             fullWidth
           />
           <TextField
             name="text"
+            label="Text or URL"
             state={[state, setState]}
             fullWidth
             multiline
