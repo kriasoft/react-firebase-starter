@@ -115,7 +115,7 @@
     "db-reset-test": "yarn db-rollback --env=test && yarn db-migrate --env=test && yarn db-restore --env=test",
     "db-reset-prod": "yarn db-rollback --env=prod && yarn db-migrate --env=prod && yarn db-restore --env=prod",
     "deploy": "yarn run deploy-test",
-    "deploy-test": "node ./scripts/post-deploy --env=test && firebase --project=example-test deploy && node ./scripts/post-deploy --env=test",
-    "deploy-prod": "node ./scripts/post-deploy --env=prod && firebase --project=example-prod deploy && node ./scripts/post-deploy --env=prod"
+    "deploy-test": "node ./scripts/pre-deploy --env=test && firebase --project=example-test deploy && node ./scripts/post-deploy --env=test",
+    "deploy-prod": "node ./scripts/pre-deploy --env=prod && firebase --project=example-prod deploy && node ./scripts/post-deploy --env=prod"
   }
 }
