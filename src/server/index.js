@@ -4,14 +4,17 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
+const fs = require('fs');
 const dotenv = require('dotenv');
 const express = require('express');
 const firebase = require('firebase-admin');
 const functions = require('firebase-functions');
 
-// Load API keys, secrets etc. from Firebase environment
-// https://firebase.google.com/docs/functions/config-env
 if (process.env.NODE_ENV === 'production') {
+  process.env.APP_VERSION = fs.readFileSync('./VERSION', 'utf8').trim();
+
+  // Load API keys, secrets etc. from Firebase environment
+  // https://firebase.google.com/docs/functions/config-env
   const { app: config } = functions.config();
   Object.keys(config).forEach(key => {
     process.env[key.toUpperCase()] =
