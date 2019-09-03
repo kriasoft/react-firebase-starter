@@ -6,21 +6,7 @@
 
 import idx from 'idx';
 import db from './';
-
-/**
- * Generates a random username for new users.
- */
-export function generateUsername() {
-  let text = '';
-  const possible =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-  for (let i = 0; i < 10; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-
-  return text;
-}
+import { generateUsername } from '../utils';
 
 /**
  * Finds a user matching the provided Passport.js credentials. If user not
@@ -85,7 +71,7 @@ export default async function findUserByCredentials(profile, credentials) {
         .table('users')
         .insert({
           email,
-          username: profile.username || generateUsername(),
+          username: profile.username || (await generateUsername(email)),
           display_name: profile.displayName,
           photo_url: photo,
         })
