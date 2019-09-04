@@ -5,14 +5,15 @@
  */
 
 import idx from 'idx';
-import db from './';
-import { generateUsername } from '../utils';
+
+import db from '../db';
+import { generateUsername } from './username';
 
 /**
  * Finds a user matching the provided Passport.js credentials. If user not
- * found, it atempts to create a new user account.
+ * found, it attempts to create a new user account.
  */
-export default async function findUserByCredentials(profile, credentials) {
+export async function upsertUser(profile, credentials) {
   const identityKeys = {
     'user_identities.provider': profile.provider,
     'user_identities.provider_id': profile.id,

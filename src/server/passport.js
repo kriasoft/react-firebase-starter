@@ -10,7 +10,8 @@ import jwt from 'jwt-passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 
-import db, { findUserByCredentials } from './db';
+import db from './db';
+import { upsertUser } from './utils';
 
 const origin =
   process.env.NODE_ENV === 'production' ? `${process.env.APP_ORIGIN}` : '';
@@ -55,7 +56,7 @@ passport.use(
     },
     (req, accessToken, refreshToken, profile, cb) => {
       const credentials = { accessToken, refreshToken };
-      findUserByCredentials(profile, credentials)
+      upsertUser(profile, credentials)
         .then(user => cb(null, user))
         .catch(err => cb(err));
     },
@@ -88,7 +89,7 @@ passport.use(
     },
     (req, accessToken, refreshToken, profile, cb) => {
       const credentials = { accessToken, refreshToken };
-      findUserByCredentials(profile, credentials)
+      upsertUser(profile, credentials)
         .then(user => cb(null, user))
         .catch(err => cb(err));
     },

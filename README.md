@@ -49,7 +49,6 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   ├── mutations/                 # GraphQL mutations to be used on the client
 │   ├── news/                      # News section (example)
 │   ├── server/                    # Server-side code (API, authentication, etc.)
-│   │   ├── db/                    # Database client
 │   │   ├── mutations/             # GraphQL mutations
 │   │   ├── queries/               # The top-level GraphQL query fields
 │   │   ├── templates/             # HTML templates for server-side rendering
@@ -58,6 +57,7 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   │   ├── app.js                 # Express.js application
 │   │   ├── config.js              # Configuration settings to be passed to the client
 │   │   ├── context.js             # GraphQL context wrapper
+│   │   ├── db.js                  # PostgreSQL database client (Knex.js)
 │   │   ├── relay.js               # Relay factory method for Node.js environment
 │   │   ├── index.js               # Node.js app entry point
 │   │   ├── login.js               # Authentication middleware (e.g. /login/facebook)
