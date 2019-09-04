@@ -13,7 +13,7 @@ import { printSchema } from 'graphql';
 import passport from './passport';
 import schema from './schema';
 import templates from './templates';
-import Context from './Context';
+import { Context } from './context';
 
 const router = new Router();
 

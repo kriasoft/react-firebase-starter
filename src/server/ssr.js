@@ -4,10 +4,10 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom/server';
 import qs from 'query-string';
 import serialize from 'serialize-javascript';
+import React from 'react';
+import ReactDOM from 'react-dom/server';
 import { createMemoryHistory } from 'history';
 import { Router } from 'express';
 
@@ -15,8 +15,8 @@ import App from '../common/App';
 import config from './config';
 import templates from './templates';
 import routes from '../router';
-import createRelay from './createRelay';
 import stats from './stats.json'; // eslint-disable-line
+import { createRelay } from './relay';
 
 const router = new Router();
 

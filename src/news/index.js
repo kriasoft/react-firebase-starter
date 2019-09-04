@@ -19,11 +19,7 @@ export default [
       }
     `,
     render: ([News], data, { config }) => ({
-      title:
-        `News • ${config.app.name}` +
-        (() => {
-          console.dir(data);
-        })(),
+      title: `News • ${config.app.name}`,
       component: (
         <Layout data={data}>
           <News data={data} />

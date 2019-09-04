@@ -15,12 +15,12 @@ import {
   GraphQLString,
 } from 'graphql';
 
-import UserType from '../user/UserType';
-import CommentType from './CommentType';
-import { nodeInterface } from '../Node';
+import { UserType } from './user';
+import { CommentType } from './comment';
+import { nodeInterface } from '../node';
 import { dateField } from '../utils';
 
-export default new GraphQLObjectType({
+export const StoryType = new GraphQLObjectType({
   name: 'Story',
   interfaces: [nodeInterface],
 

@@ -8,7 +8,7 @@ import { GraphQLSchema, GraphQLObjectType } from 'graphql';
 
 import * as queries from './queries';
 import * as mutations from './mutations';
-import { nodeField, nodesField } from './Node';
+import { nodeField, nodesField } from './node';
 
 export default new GraphQLSchema({
   query: new GraphQLObjectType({

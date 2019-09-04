@@ -27,11 +27,11 @@ export const { nodeInterface, nodeField, nodesField } = nodeDefinitions(
   obj => {
     switch (getType(obj)) {
       case 'User':
-        return require('./user/UserType').default;
+        return require('./types').UserType;
       case 'Story':
-        return require('./story/StoryType').default;
+        return require('./types').StoryType;
       case 'Comment':
-        return require('./story/CommentType').default;
+        return require('./types').CommentType;
       default:
         return null;
     }

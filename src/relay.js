@@ -7,7 +7,7 @@
 import { Environment, Network, RecordSource, Store } from 'relay-runtime';
 import loading from './utils/loading';
 
-export default function createRelay() {
+export function createRelay() {
   function fetchQuery(operation, variables, cacheConfig = {}) {
     // Instead of making an actual HTTP request to the API, use
     // hydrated data available during the initial page load.

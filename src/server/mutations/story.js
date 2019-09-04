@@ -8,10 +8,15 @@ import uuid from 'uuid';
 import slugify from 'slugify';
 import validator from 'validator';
 import { mutationWithClientMutationId } from 'graphql-relay';
-import { GraphQLID, GraphQLString, GraphQLBoolean } from 'graphql';
+import {
+  GraphQLNonNull,
+  GraphQLID,
+  GraphQLString,
+  GraphQLBoolean,
+} from 'graphql';
 
 import db from '../db';
-import StoryType from '../story/StoryType';
+import { StoryType } from '../types';
 import { fromGlobalId } from '../utils';
 
 function slug(text) {
@@ -100,6 +105,48 @@ export const upsertStory = mutationWithClientMutationId({
         })
         .returning('*');
     }
+
+    return { story };
+  },
+});
+
+export const likeStory = mutationWithClientMutationId({
+  name: 'LikeStory',
+  description: 'Marks the story as "liked".',
+
+  inputFields: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+  },
+
+  outputFields: {
+    story: { type: StoryType },
+  },
+
+  async mutateAndGetPayload(input, ctx) {
+    // Check permissions
+    ctx.ensureIsAuthorized();
+
+    const id = fromGlobalId(input.id, 'Story');
+    const keys = { story_id: id, user_id: ctx.user.id };
+
+    const points = await db
+      .table('story_points')
+      .where(keys)
+      .select(1);
+
+    if (points.length) {
+      await db
+        .table('story_points')
+        .where(keys)
+        .del();
+    } else {
+      await db.table('story_points').insert(keys);
+    }
+
+    const story = db
+      .table('stories')
+      .where({ id })
+      .first();
 
     return { story };
   },

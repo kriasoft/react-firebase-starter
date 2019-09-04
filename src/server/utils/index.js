@@ -9,3 +9,4 @@ export * from './relay';
 export * from './type';
 export * from './fields';
 export * from './username';
+export * from './user';

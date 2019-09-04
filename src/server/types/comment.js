@@ -13,12 +13,12 @@ import {
   GraphQLString,
 } from 'graphql';
 
-import StoryType from './StoryType';
-import UserType from '../user/UserType';
-import { nodeInterface } from '../Node';
+import { UserType } from './user';
+import { StoryType } from './story';
+import { nodeInterface } from '../node';
 import { dateField } from '../utils';
 
-const CommentType = new GraphQLObjectType({
+export const CommentType = new GraphQLObjectType({
   name: 'Comment',
   interfaces: [nodeInterface],
 
@@ -68,5 +68,3 @@ const CommentType = new GraphQLObjectType({
     updatedAt: dateField(self => self.updated_at),
   }),
 });
-
-export default CommentType;

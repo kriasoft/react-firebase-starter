@@ -34,5 +34,4 @@ const db = knex({
   },
 });
 
-export { default as findUserByCredentials } from './findUserByCredentials';
 export default db;

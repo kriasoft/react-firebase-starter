@@ -49,15 +49,17 @@ type LikeStoryPayload {
 }
 
 type Mutation {
-  # Creates or updates a story.
-  upsertStory(input: UpsertStoryInput!): UpsertStoryPayload
-  likeStory(input: LikeStoryInput!): LikeStoryPayload
-
   # Updates a user.
   updateUser(input: UpdateUserInput!): UpdateUserPayload
 
   # Deletes a user.
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
+
+  # Creates or updates a story.
+  upsertStory(input: UpsertStoryInput!): UpsertStoryPayload
+
+  # Marks the story as "liked".
+  likeStory(input: LikeStoryInput!): LikeStoryPayload
 }
 
 # An object with an ID
