@@ -8,7 +8,7 @@ import idx from 'idx';
 import { GraphQLObjectType, GraphQLEnumType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 
-export default new GraphQLObjectType({
+export const IdentityType = new GraphQLObjectType({
   name: 'Identity',
 
   fields: {

@@ -52,21 +52,20 @@ Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([
 │   │   ├── db/                    # Database client
 │   │   ├── mutations/             # GraphQL mutations
 │   │   ├── queries/               # The top-level GraphQL query fields
-│   │   ├── story/                 # GraphQL types: Story, Comment etc.
 │   │   ├── templates/             # HTML templates for server-side rendering
-│   │   ├── user/                  # GraphQL types: User, UserRole, UserIdentity etc.
+│   │   ├── types/                 # GraphQL types: User, UserRole, UserIdentity etc.
 │   │   ├── api.js                 # GraphQL API middleware
 │   │   ├── app.js                 # Express.js application
 │   │   ├── config.js              # Configuration settings to be passed to the client
-│   │   ├── Context.js             # GraphQL context wrapper
-│   │   ├── createRelay.js         # Relay factory method for Node.js environment
+│   │   ├── context.js             # GraphQL context wrapper
+│   │   ├── relay.js               # Relay factory method for Node.js environment
 │   │   ├── index.js               # Node.js app entry point
 │   │   ├── login.js               # Authentication middleware (e.g. /login/facebook)
 │   │   ├── schema.js              # GraphQL schema
 │   │   └── ssr.js                 # Server-side rendering, e.g. ReactDOMServer.renderToString(<App />)
 │   ├── user/                      # User pages (login, account settings, user profile, etc)
 │   ├── utils/                     # Utility functions
-│   ├── createRelay.js             # Relay factory method for browser envrironment
+│   ├── relay.js                   # Relay factory method for browser environment
 │   ├── index.js                   # Client-side entry point, e.g. ReactDOM.render(<App />, container)
 │   ├── router.js                  # Universal application router
 │   ├── serviceWorker.js           # Service worker helper methods

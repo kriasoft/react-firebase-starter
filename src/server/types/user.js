@@ -14,11 +14,11 @@ import {
   GraphQLBoolean,
 } from 'graphql';
 
-import IdentityType from './IdentityType';
-import { nodeInterface } from '../Node';
+import { IdentityType } from './identity';
+import { nodeInterface } from '../node';
 import { dateField } from '../utils';
 
-export default new GraphQLObjectType({
+export const UserType = new GraphQLObjectType({
   name: 'User',
   interfaces: [nodeInterface],
 

@@ -7,11 +7,11 @@
 import DataLoader from 'dataloader';
 
 import db from './db';
-import Validator from './Validator';
+import { Validator } from './validator';
 import { mapTo, mapToMany, mapToValues } from './utils';
 import { UnauthorizedError, ForbiddenError, ValidationError } from './errors';
 
-class Context {
+export class Context {
   errors = [];
 
   constructor(req) {
@@ -162,5 +162,3 @@ class Context {
       .then(mapToValues(keys, x => x.id, x => x.given));
   });
 }
-
-export default Context;

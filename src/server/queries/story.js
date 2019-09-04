@@ -4,12 +4,12 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-import { GraphQLNonNull, GraphQLString } from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLString } from 'graphql';
 
 import db from '../db';
-import { StoryType } from '../story';
+import { StoryType } from '../types';
 
-export default {
+export const story = {
   type: StoryType,
 
   args: {
@@ -34,5 +34,19 @@ export default {
     }
 
     return story;
+  },
+};
+
+export const stories = {
+  type: new GraphQLList(StoryType),
+
+  resolve(self, args, ctx) {
+    return db
+      .table('stories')
+      .where({ approved: true })
+      .orWhere({ approved: false, author_id: ctx.user ? ctx.user.id : null })
+      .orderBy('created_at', 'desc')
+      .limit(100)
+      .select();
   },
 };

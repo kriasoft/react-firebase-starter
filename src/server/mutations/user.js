@@ -13,7 +13,7 @@ import {
 } from 'graphql';
 
 import db from '../db';
-import UserType from '../user/UserType';
+import { UserType } from '../types';
 import { fromGlobalId } from '../utils';
 
 export const updateUser = mutationWithClientMutationId({
@@ -90,5 +90,34 @@ export const updateUser = mutationWithClientMutationId({
     }
 
     return { user };
+  },
+});
+
+export const deleteUser = mutationWithClientMutationId({
+  name: 'DeleteUser',
+  description: 'Deletes a user.',
+
+  inputFields: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+  },
+
+  outputFields: {
+    deletedUserId: {
+      type: GraphQLString,
+    },
+  },
+
+  async mutateAndGetPayload(input, ctx) {
+    // Check permissions
+    ctx.ensureIsAuthorized(user => user.isAdmin);
+
+    const id = fromGlobalId(input.id, 'User');
+
+    await db
+      .table('users')
+      .where({ id })
+      .del();
+
+    return { deletedUserId: input.id };
   },
 });

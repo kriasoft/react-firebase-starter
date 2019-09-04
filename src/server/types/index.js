@@ -4,5 +4,7 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-export { default as UserType } from './UserType';
-export { default as IdentityType } from './IdentityType';
+export * from './user';
+export * from './identity';
+export * from './story';
+export * from './comment';

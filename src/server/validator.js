@@ -20,7 +20,7 @@ function isEmpty(value) {
  * on the popular "validator" library that you can find at:
  * https://github.com/chriso/validator.js
  */
-export default class Validator {
+export class Validator {
   errors = [];
   states = [];
 
