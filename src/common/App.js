@@ -5,11 +5,13 @@
  */
 
 import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import { QueryRenderer } from 'react-relay';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 
 import theme from '../theme';
 import ErrorPage from './ErrorPage';
+import LoginDialog from './LoginDialog';
 import { gtag, getScrollPosition } from '../utils';
 import { ConfigContext, HistoryContext, ResetContext } from '../hooks';
 
@@ -79,6 +81,7 @@ class App extends React.PureComponent {
         <ConfigContext.Provider value={config}>
           <HistoryContext.Provider value={history}>
             <ResetContext.Provider value={reset}>
+              <CssBaseline />
               <QueryRenderer
                 environment={relay}
                 query={query}
@@ -86,6 +89,7 @@ class App extends React.PureComponent {
                 render={this.renderProps}
                 cacheConfig={{ payload }}
               />
+              <LoginDialog />
             </ResetContext.Provider>
           </HistoryContext.Provider>
         </ConfigContext.Provider>

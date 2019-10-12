@@ -5,38 +5,108 @@
  */
 
 import React from 'react';
-
 import { useHistory } from './useHistory';
 import { useReset } from './useReset';
-import { openWindow } from '../utils';
 
-export function useAuth() {
+const WINDOW_WIDTH = 600;
+const WINDOW_HEIGHT = 600;
+
+let loginWindow;
+
+function openLoginWindow(url) {
+  if (loginWindow && !loginWindow.closed) {
+    loginWindow.location.href = url;
+    loginWindow.focus();
+  } else {
+    const { screenLeft, screenTop, innerWidth, innerHeight, screen } = window;
+    const html = window.document.documentElement;
+
+    const dualScreenLeft = screenLeft !== undefined ? screenLeft : screen.left;
+    const dualScreenTop = screenTop !== undefined ? screenTop : screen.top;
+    const w = innerWidth || html.clientWidth || screen.width;
+    const h = innerHeight || html.clientHeight || screen.height;
+
+    const config = {
+      width: WINDOW_WIDTH,
+      height: WINDOW_HEIGHT,
+      left: w / 2 - WINDOW_WIDTH / 2 + dualScreenLeft,
+      top: h / 2 - WINDOW_HEIGHT / 2 + dualScreenTop,
+    };
+
+    loginWindow = window.open(
+      url,
+      null,
+      Object.keys(config)
+        .map(key => `${key}=${config[key]}`)
+        .join(','),
+    );
+  }
+}
+
+const onLoginCallbacks = new Set();
+
+function signIn() {
+  return new Promise(resolve => {
+    onLoginCallbacks.forEach(cb => cb(resolve));
+  });
+}
+
+export function useAuth(options) {
+  const callbacks = React.useRef([]);
   const history = useHistory();
   const reset = useReset();
 
-  return React.useMemo(
-    () => ({
-      signIn(options = {}) {
-        return openWindow(options.url || '/login', {
-          onPostMessage({ data }) {
-            if (typeof data === 'string' && data === 'login:success') {
-              reset();
-              history.replace(history.location);
-              return Promise.resolve();
-            }
-          },
-        });
-      },
+  React.useEffect(() => {
+    if (options && options.onLogin) {
+      onLoginCallbacks.add(options.onLogin);
+    }
 
-      async signOut() {
-        await fetch('/login/clear', {
-          method: 'POST',
-          credentials: 'include',
-        });
+    function handleMessage({ origin, data }) {
+      if (origin === window.location.origin && data.type === 'LOGIN') {
+        callbacks.current.forEach(cb =>
+          data.error ? cb[1](data.error) : cb[0](data.user),
+        );
+        callbacks.current = [];
+      }
+    }
+
+    window.addEventListener('message', handleMessage, true);
+    return () => {
+      window.removeEventListener('message', handleMessage);
+
+      if (options && options.onLogin) {
+        onLoginCallbacks.delete(options.onLogin);
+      }
+    };
+  }, []);
+
+  const signInWith = React.useCallback(
+    provider => {
+      openLoginWindow(`/login/${provider}`);
+      return new Promise((resolve, reject) => {
+        callbacks.current.push([resolve, reject]);
+      }).then(user => {
         reset();
-        history.push('/');
-      },
-    }),
-    [],
+        history.replace(history.location);
+        return user;
+      });
+    },
+    [reset],
   );
+
+  const signOut = React.useCallback(() => {
+    fetch('/login/clear', {
+      method: 'POST',
+      credentials: 'include',
+    }).then(() => {
+      reset();
+      history.push('/');
+    });
+  }, [reset]);
+
+  return React.useMemo(() => ({ signIn, signInWith, signOut }), [
+    signIn,
+    signInWith,
+    signOut,
+  ]);
 }

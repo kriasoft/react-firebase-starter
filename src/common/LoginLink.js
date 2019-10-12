@@ -7,30 +7,27 @@
 import React from 'react';
 
 import Link from './Link';
-import { useHistory, useReset } from '../hooks';
-import { openWindow } from '../utils';
+import { useAuth, useHistory } from '../hooks';
 
 const LoginLink = React.forwardRef(function LoginLink(props, ref) {
-  const { onClick, href, ...other } = props;
-  const history = useHistory();
-  const reset = useReset();
-  const link = href ? `/login?return=${href}` : '/login';
+  const { onClick, ...other } = props;
+  const { location } = useHistory();
+  const auth = useAuth();
+
+  const href =
+    location.pathname === '/'
+      ? '/login'
+      : `/login?return=${encodeURIComponent(location.pathname)}`;
 
   function handleClick(event) {
     event.preventDefault();
-    if (onClick) onClick();
-    openWindow(link, {
-      onPostMessage({ data }) {
-        if (typeof data === 'string' && data === 'login:success') {
-          reset();
-          history.replace(history.location);
-          return Promise.resolve();
-        }
-      },
-    });
+    auth.signIn();
+    if (onClick) {
+      onClick();
+    }
   }
 
-  return <Link href={link} onClick={handleClick} ref={ref} {...other} />;
+  return <Link href={href} onClick={handleClick} ref={ref} {...other} />;
 });
 
 export default LoginLink;

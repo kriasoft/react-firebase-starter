@@ -6,7 +6,7 @@
 
 import { commitMutation, graphql } from 'react-relay';
 
-function commit(environment, storyId) {
+function commit(environment, storyId, done) {
   return commitMutation(environment, {
     mutation: graphql`
       mutation LikeStoryMutation($input: LikeStoryInput!) {
@@ -21,6 +21,12 @@ function commit(environment, storyId) {
     `,
 
     variables: { input: { id: storyId } },
+
+    onCompleted({ likeStory }, errors) {
+      if (done) {
+        done((errors && errors[0]) || null, likeStory && likeStory.story);
+      }
+    },
 
     optimisticUpdater(store) {
       const story = store.get(storyId);
