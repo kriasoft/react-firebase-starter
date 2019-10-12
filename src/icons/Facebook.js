@@ -7,16 +7,29 @@
 import React from 'react';
 import SvgIcon from '@material-ui/core/SvgIcon';
 
-const Facebook = props => (
-  <SvgIcon
-    aria-labelledby="simpleicons-facebook-icon"
-    role="img"
-    viewBox="0 0 24 24"
-    {...props}
-  >
-    <title id="simpleicons-facebook-icon">Facebook icon</title>
-    <path d="M22.676 0H1.324C.593 0 0 .593 0 1.324v21.352C0 23.408.593 24 1.324 24h11.494v-9.294H9.689v-3.621h3.129V8.41c0-3.099 1.894-4.785 4.659-4.785 1.325 0 2.464.097 2.796.141v3.24h-1.921c-1.5 0-1.792.721-1.792 1.771v2.311h3.584l-.465 3.63H16.56V24h6.115c.733 0 1.325-.592 1.325-1.324V1.324C24 .593 23.408 0 22.676 0" />
-  </SvgIcon>
-);
+const Facebook = React.forwardRef(function Facebook(props, ref) {
+  const { size = 256, ...other } = props;
+  return (
+    <SvgIcon
+      ref={ref}
+      role="img"
+      width={size}
+      height={size}
+      viewBox="0 0 256 256"
+      {...other}
+    >
+      <g>
+        <path
+          d="M241.871,256.001 C249.673,256.001 256,249.675 256,241.872 L256,14.129 C256,6.325 249.673,0 241.871,0 L14.129,0 C6.324,0 0,6.325 0,14.129 L0,241.872 C0,249.675 6.324,256.001 14.129,256.001 L241.871,256.001"
+          fill="#395185"
+        ></path>
+        <path
+          d="M176.635,256.001 L176.635,156.864 L209.912,156.864 L214.894,118.229 L176.635,118.229 L176.635,93.561 C176.635,82.375 179.742,74.752 195.783,74.752 L216.242,74.743 L216.242,40.188 C212.702,39.717 200.558,38.665 186.43,38.665 C156.932,38.665 136.738,56.67 136.738,89.736 L136.738,118.229 L103.376,118.229 L103.376,156.864 L136.738,156.864 L136.738,256.001 L176.635,256.001"
+          fill="#FFFFFF"
+        ></path>
+      </g>
+    </SvgIcon>
+  );
+});
 
 export default Facebook;

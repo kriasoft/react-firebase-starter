@@ -7,15 +7,14 @@
 import React from 'react';
 import { graphql } from 'relay-runtime';
 import Layout from '../common/Layout';
+import Login from './Login';
 
 export default [
   {
     path: '/login',
-    components: () => [import(/* webpackChunkName: 'login' */ './Login')],
-    render: ([Login], _, { config }) => ({
+    render: (_, data, { config }) => ({
       title: `Sign In to ${config.app.name}`,
       component: <Login />,
-      chunks: ['login'],
     }),
   },
   {

@@ -21,8 +21,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { createFragmentContainer, graphql } from 'react-relay';
 
 import Link from '../common/Link';
-import LikeStoryMutation from '../mutations/LikeStory';
 import SubmitDialog from './SubmitDialog';
+import LikeStoryMutation from '../mutations/LikeStory';
+import { useAuth } from '../hooks';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -70,11 +71,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function News(props) {
-  const { data } = props;
+  const { data, relay } = props;
   const { stories } = data;
+  const self = React.useRef({});
   const [dialog, setDialog] = React.useState({ open: false });
   const [error, setError] = React.useState();
+  const auth = useAuth();
   const s = useStyles();
+
+  // Retry the last mutation after the user signs in
+  React.useEffect(() => {
+    if (self.current.retryLike) {
+      LikeStoryMutation.commit(relay.environment, self.current.retryLike);
+    }
+  }, [self.current.retryLike]);
 
   function reset() {
     setError(null);
@@ -84,8 +94,13 @@ function News(props) {
     event.preventDefault();
     reset();
     const id = event.currentTarget.id;
-    const { environment } = props.relay;
-    LikeStoryMutation.commit(environment, id);
+    LikeStoryMutation.commit(relay.environment, id, err => {
+      if (err && err.code === 401) {
+        auth.signIn().then(user => {
+          if (user) self.current.retryLike = id;
+        });
+      }
+    });
   }
 
   function openDialog() {

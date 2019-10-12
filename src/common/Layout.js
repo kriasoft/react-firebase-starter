@@ -13,16 +13,6 @@ import LayoutFooter from './LayoutFooter';
 import AutoUpdater from './AutoUpdater';
 
 const useStyles = makeStyles(theme => ({
-  '@global': {
-    'html, body, #root': {
-      height: '100%',
-    },
-    body: {
-      padding: 0,
-      margin: 0,
-      backgroundColor: theme.palette.background.default,
-    },
-  },
   background: {
     backgroundColor: '#3f51b5',
     backgroundImage: 'linear-gradient(-225deg, #3db0ef, #5e5bb7)',
