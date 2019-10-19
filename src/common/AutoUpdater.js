@@ -16,11 +16,11 @@ class AutoUpdater extends React.Component {
     this.updateUser();
   }
 
-  shouldComponentUpdate({ user: nextUser }) {
-    const { user } = this.props;
+  shouldComponentUpdate({ me: next }) {
+    const { me } = this.props;
     return !(
-      (user && user.id) === (nextUser && nextUser.id) &&
-      (user && user.timeZone) === (nextUser && nextUser.timeZone)
+      (me && me.id) === (next && next.id) &&
+      (me && me.timeZone) === (next && next.timeZone)
     );
   }
 
@@ -29,10 +29,10 @@ class AutoUpdater extends React.Component {
   }
 
   updateUser() {
-    const { user, relay } = this.props;
+    const { me, relay } = this.props;
     const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
 
-    if (user && user.timeZone !== timeZone) {
+    if (me && me.timeZone !== timeZone) {
       commitMutation(relay.environment, {
         mutation: graphql`
           mutation AutoUpdaterMutation($input: UpdateUserInput!) {
@@ -45,7 +45,7 @@ class AutoUpdater extends React.Component {
           }
         `,
         variables: {
-          input: { id: user.id, timeZone },
+          input: { id: me.id, timeZone },
         },
       });
     }
@@ -57,8 +57,8 @@ class AutoUpdater extends React.Component {
 }
 
 export default createFragmentContainer(AutoUpdater, {
-  user: graphql`
-    fragment AutoUpdater_user on User {
+  me: graphql`
+    fragment AutoUpdater_me on User {
       id
       timeZone
     }
