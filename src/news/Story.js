@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 function Story(props) {
   const {
-    data: { title, text, isURL },
+    story: { title, text, isURL },
   } = props;
 
   const s = useStyles();
@@ -36,7 +36,11 @@ function Story(props) {
         </Typography>
       ) : (
         text &&
-        text.split('\n').map(x => <Typography gutterBottom>{x}</Typography>)
+        text.split('\n').map((x, i) => (
+          <Typography key={i} gutterBottom>
+            {x}
+          </Typography>
+        ))
       )}
       <div style={{ marginTop: 10, textAlign: 'right' }}>
         <Button component={Link} href="/news">

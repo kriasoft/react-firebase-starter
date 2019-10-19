@@ -49,7 +49,7 @@ export default [
           title: data.story.title,
           component: (
             <Layout data={data}>
-              <Story data={data.story} />
+              <Story story={data.story} />
             </Layout>
           ),
           chunks: ['story'],
