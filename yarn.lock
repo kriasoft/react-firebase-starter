@@ -10991,10 +10991,18 @@ relay-compiler@^6.0.0:
     signedsource "^1.0.0"
     yargs "^9.0.0"
 
-relay-runtime@6.0.0, relay-runtime@^6.0.0:
+relay-runtime@6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-6.0.0.tgz#073ec2408f41a28c3a7310d71dd5f42f8e4e4bf3"
   integrity sha512-zIXQqFfe0zBCVzKbMGEPMvKFxfbE3pY2RbZsKBvHAr/vMDj6OX9E+f4R4udE5xvMbI7g+baYFHi2I9NDEydGaQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    fbjs "^1.0.0"
+
+relay-runtime@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/relay-runtime/-/relay-runtime-7.0.0.tgz#49642c0e16096cd4e5f435fcbdd63ffd8da54090"
+  integrity sha512-w0TPq5xvL6dlxD8+tBR19gGep3kFsx0fJ2Xr4hsxpDFKskH2oOmsMSp6gNVsUd2T1zf/DYll5eJqjoiQc5nB1A==
   dependencies:
     "@babel/runtime" "^7.0.0"
     fbjs "^1.0.0"
