@@ -17,7 +17,7 @@
     "@babel/runtime": "^7.6.3",
     "@firebase/app": "^0.4.20",
     "@firebase/auth": "^0.12.3",
-    "@material-ui/core": "^4.5.1",
+    "@material-ui/core": "^4.5.2",
     "@material-ui/icons": "^4.5.1",
     "body-parser": "^1.19.0",
     "clsx": "^1.0.4",
