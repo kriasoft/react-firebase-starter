@@ -48,7 +48,7 @@
     "pg": "^7.12.1",
     "prop-types": "^15.7.2",
     "query-string": "^6.8.3",
-    "react": "^16.10.2",
+    "react": "^16.11.0",
     "react-dom": "^16.10.2",
     "react-relay": "^6.0.0",
     "recompose": "^0.30.0",
