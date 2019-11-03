@@ -1,7 +1,7 @@
 <h1>
   React Starter Kit for Firebase &nbsp; <sup><i>a.k.a. Serverless Edition</i></sup><br>
   <a href="https://circleci.com/gh/kriasoft/react-firebase-starter"><img src="https://circleci.com/gh/kriasoft/react-firebase-starter.svg?style=svg" alt="Build Status" height="20" /></a>
-  <a href="https://greenkeeper.io/"><img src="https://badges.greenkeeper.io/kriasoft/react-firebase-starter.svg" alt="Greenkeeper" height="20" /></a>
+  <img src="https://api.dependabot.com/badges/status?host=github&repo=kriasoft/react-firebase-starter" alt="Dependabot" height="20" />
   <a href="https://opencollective.com/react-firebase-starter"><img src="https://opencollective.com/react-firebase-starter/backers/badge.svg?maxAge=3600" height="20"></a>
   <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&amp;label=Follow&amp;maxAge=3600" alt="Twitter" height="20"></a>
   <a href="https://t.me/ReactStarter"><img src="https://img.shields.io/badge/chat-Telegram-green.svg?style=social&amp;maxAge=3600" height="20"></a>
@@ -21,12 +21,12 @@ This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kria
 
 ### Tech Stack
 
-- [Create React App][cra] (★ 70k) for development and test infrastructure (see [user guide][cradocs])
-- [Material UI][mui] (★ 50k) to reduce development time by integrating Google's [Material Design][material]
-- [Passport.js][passport] (★ 15k) for authentication configured with stateless JWT tokens for sessions
-- [GraphQL.js][gqljs] (★ 15k) and [Relay][relay] (★ 11k) for declarative data fetching and efficient client stage management
-- [Universal Router][router] (★ 1k) + [history][history] (★ 3k) for declarative routing and client-side navigation optimized for [Relay][relay]
-- [PostgreSQL][psql] database pre-configured with a query builder and migrations using [Knex.js][knex] (★ 10k)
+- [Create React App][cra] (★ 73k) for development and test infrastructure (see [user guide][cradocs])
+- [Material UI][mui] (★ 52k) to reduce development time by integrating Google's [Material Design][material]
+- [Passport.js][passport] (★ 17k) for authentication configured with stateless JWT tokens for sessions
+- [GraphQL.js][gqljs] (★ 15k) and [Relay][relay] (★ 14k) for declarative data fetching and efficient client stage management
+- [Universal Router][router] (★ 1k) + [history][history] (★ 6k) for declarative routing and client-side navigation optimized for [Relay][relay]
+- [PostgreSQL][psql] database pre-configured with a query builder and migrations using [Knex.js][knex] (★ 11k)
 - [Google Cloud][gcp] & [Firebase][firebase] for serverless architecture - Cloud SQL, Cloud Functions, CDN hosting, file storage ([docs][fbdocs])
 
 Also, you need to be familiar with [HTML][html], [CSS][css], [JavaScript][js] ([ES2015][es2015]) and [React](https://reactjs.org/docs/).
