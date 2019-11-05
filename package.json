@@ -54,7 +54,7 @@
     "recompose": "^0.30.0",
     "relay-runtime": "^6.0.0",
     "request": "^2.88.0",
-    "request-promise-native": "^1.0.7",
+    "request-promise-native": "^1.0.8",
     "serialize-javascript": "^2.1.0",
     "slugify": "^1.3.5",
     "universal-router": "^8.3.0",
