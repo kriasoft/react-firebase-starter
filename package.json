@@ -13,8 +13,8 @@
     "not op_mini all"
   ],
   "dependencies": {
-    "@babel/polyfill": "^7.6.0",
-    "@babel/runtime": "^7.6.3",
+    "@babel/polyfill": "^7.7.0",
+    "@babel/runtime": "^7.7.2",
     "@firebase/app": "^0.4.22",
     "@firebase/auth": "^0.12.3",
     "@material-ui/core": "^4.6.0",
@@ -62,8 +62,8 @@
     "validator": "^12.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/register": "^7.6.2",
+    "@babel/core": "^7.7.2",
+    "@babel/register": "^7.7.0",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-relay": "^7.0.0",
     "chai": "^4.2.0",
