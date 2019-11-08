@@ -50,9 +50,9 @@
     "query-string": "^6.8.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-relay": "^7.0.0",
+    "react-relay": "^7.1.0",
     "recompose": "^0.30.0",
-    "relay-runtime": "^7.0.0",
+    "relay-runtime": "^7.1.0",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.8",
     "serialize-javascript": "^2.1.0",
@@ -65,7 +65,7 @@
     "@babel/core": "^7.7.2",
     "@babel/register": "^7.7.0",
     "babel-plugin-lodash": "^3.3.4",
-    "babel-plugin-relay": "^7.0.0",
+    "babel-plugin-relay": "^7.1.0",
     "chai": "^4.2.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
@@ -75,7 +75,7 @@
     "prettier": "^1.18.2",
     "raw-loader": "^3.1.0",
     "react-app-tools": "^3.1.0-preview.7",
-    "relay-compiler": "^7.0.0"
+    "relay-compiler": "^7.1.0"
   },
   "lint-staged": {
     "*.js": [
