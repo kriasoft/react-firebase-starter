@@ -65,6 +65,10 @@ router.get('*', async (req, res, next) => {
       }
     }
 
+    if (route.status && route.status !== 200) {
+      res.status(route.status);
+    }
+
     res.send(
       templates.ok({
         url: `${process.env.APP_ORIGIN}${req.path}`,
