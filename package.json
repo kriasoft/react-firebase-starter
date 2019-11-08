@@ -15,7 +15,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.7.0",
     "@babel/runtime": "^7.7.2",
-    "@firebase/app": "^0.4.22",
+    "@firebase/app": "^0.4.23",
     "@firebase/auth": "^0.12.3",
     "@material-ui/core": "^4.6.0",
     "@material-ui/icons": "^4.5.1",
