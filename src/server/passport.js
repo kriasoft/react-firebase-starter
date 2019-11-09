@@ -21,6 +21,10 @@ passport.framework(
     name: process.env.JWT_NAME,
     secret: process.env.JWT_SECRET,
     issuer: origin,
+    expiresIn: '1y',
+    cookie: {
+      maxAge: 31536000000 /* 1 year */,
+    },
     createToken: req => ({
       sub: req.user.id,
       jti: uuid.v4(),
