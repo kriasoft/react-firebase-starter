@@ -40,4 +40,7 @@ export default {
 
   // Analytics
   gaTrackingId: process.env.GA_TRACKING_ID,
+
+  // Google Cloud Platform API Key
+  gcpServiceKey: process.env.GCP_BROWSER_KEY,
 };

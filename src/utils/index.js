@@ -5,7 +5,6 @@
  */
 
 export * from './env';
-export * from './fb';
 export * from './gtag';
 export * from './openWindow';
 export { onScroll, getScrollPosition } from './scrolling';
