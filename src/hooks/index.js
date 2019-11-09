@@ -6,7 +6,9 @@
 
 export * from './useAuth';
 export * from './useConfig';
+export * from './useFacebook';
 export * from './useFirebase';
+export * from './useGoogleMaps';
 export * from './useHistory';
 export * from './useRelay';
 export * from './useReset';

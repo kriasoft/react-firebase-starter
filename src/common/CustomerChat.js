@@ -5,42 +5,35 @@
  */
 
 import React from 'react';
-import { fb } from '../utils';
-import { ConfigContext } from '../hooks';
+import { useConfig, useFacebook } from '../hooks';
 
 // https://developers.facebook.com/docs/messenger-platform/discovery/customer-chat-plugin
-class CustomerChat extends React.PureComponent {
-  componentDidMount() {
-    this.timeout = setTimeout(() => {
-      fb(FB => this.timeout && FB.XFBML.parse());
-    }, 3000);
-  }
+const CustomerChat = React.memo(function CustomerChat() {
+  const timeoutRef = React.useRef();
+  const config = useConfig();
 
-  componentWillUnmount() {
-    clearTimeout(this.timeout);
-    delete this.timeout;
-  }
+  // Initialize Facebook widget(s) in 2 seconds after
+  // the component is mounted.
+  useFacebook({ xfbml: false }, FB => {
+    if (timeoutRef.current !== null) {
+      timeoutRef.current = setTimeout(() => {
+        const el = document.createElement('div');
+        el.className = 'fb-customerchat';
+        el.setAttribute('attribution', 'setup_tool');
+        el.setAttribute('page_id', config.facebook.pageId);
+        // el.setAttribute('ptheme_color', '...');
+        // el.setAttribute('plogged_in_greeting', '...');
+        // el.setAttribute('plogged_out_greeting', '...');
+        // el.setAttribute('pgreeting_dialog_display', '...');
+        // el.setAttribute('pgreeting_dialog_delay', '...');
+        // el.setAttribute('pminimized', 'false');
+        document.body.appendChild(el);
+        FB.XFBML.parse();
+      }, 2000);
+    }
+  });
 
-  render() {
-    return (
-      <ConfigContext.Consumer>
-        {config => (
-          <div
-            className="fb-customerchat"
-            attribution="setup_tool"
-            page_id={config.facebook.pageId}
-            // theme_color="..."
-            // logged_in_greeting="..."
-            // logged_out_greeting="..."
-            // greeting_dialog_display="..."
-            // greeting_dialog_delay="..."
-            // minimized="false"
-            // ref="..."
-          />
-        )}
-      </ConfigContext.Consumer>
-    );
-  }
-}
+  return null;
+});
 
 export default CustomerChat;
