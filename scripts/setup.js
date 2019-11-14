@@ -25,10 +25,9 @@ let status;
     connection: { ...config.connection, database: 'postgres' },
   });
 
-  const { rowCount } = await db.raw(
-    'SELECT 1 FROM pg_database WHERE datname = ?',
-    [database],
-  );
+  const {
+    rowCount,
+  } = await db.raw('SELECT 1 FROM pg_database WHERE datname = ?', [database]);
 
   // Create a new database if it doesn't exist
   if (!rowCount) {

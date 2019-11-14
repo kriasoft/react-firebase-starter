@@ -140,7 +140,13 @@ export class Context {
       .whereIn('stories.id', keys)
       .groupBy('stories.id')
       .select('stories.id', db.raw('count(story_points.user_id)::int'))
-      .then(mapToValues(keys, x => x.id, x => parseInt(x.count, 10))),
+      .then(
+        mapToValues(
+          keys,
+          x => x.id,
+          x => parseInt(x.count, 10),
+        ),
+      ),
   );
 
   storyPointGiven = new DataLoader(keys => {
@@ -159,6 +165,12 @@ export class Context {
         'stories.id',
         db.raw('(story_points.user_id IS NOT NULL) AS given'),
       )
-      .then(mapToValues(keys, x => x.id, x => x.given));
+      .then(
+        mapToValues(
+          keys,
+          x => x.id,
+          x => x.given,
+        ),
+      );
   });
 }
