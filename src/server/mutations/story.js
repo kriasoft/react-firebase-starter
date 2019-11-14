@@ -64,7 +64,10 @@ export const upsertStory = mutationWithClientMutationId({
     }
 
     // Validate and sanitize user input
-    const data = await ctx.validate(input, id ? 'update' : 'create')(x =>
+    const data = await ctx.validate(
+      input,
+      id ? 'update' : 'create',
+    )(x =>
       x
         .field('title', { trim: true })
         .isRequired()

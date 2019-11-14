@@ -51,7 +51,10 @@ export const updateUser = mutationWithClientMutationId({
     }
 
     // Validate and sanitize user input
-    const data = await ctx.validate(input, 'update')(x =>
+    const data = await ctx.validate(
+      input,
+      'update',
+    )(x =>
       x
         .field('username', { trim: true })
         .isLength({ min: 1, max: 50 })
