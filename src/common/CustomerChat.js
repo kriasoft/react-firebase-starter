@@ -5,12 +5,23 @@
  */
 
 import React from 'react';
+import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { useConfig, useFacebook } from '../hooks';
+
+const useStyles = makeStyles(theme => ({
+  '@global': {
+    '.fb_dialog,.fb_reset iframe': {
+      zIndex: `${theme.zIndex.modal - 10} !important`,
+    },
+  },
+}));
 
 // https://developers.facebook.com/docs/messenger-platform/discovery/customer-chat-plugin
 const CustomerChat = React.memo(function CustomerChat() {
   const timeoutRef = React.useRef();
   const config = useConfig();
+  const theme = useTheme();
+  useStyles();
 
   // Initialize Facebook widget(s) in 2 seconds after
   // the component is mounted.
@@ -21,7 +32,7 @@ const CustomerChat = React.memo(function CustomerChat() {
         el.className = 'fb-customerchat';
         el.setAttribute('attribution', 'setup_tool');
         el.setAttribute('page_id', config.facebook.pageId);
-        // el.setAttribute('ptheme_color', '...');
+        el.setAttribute('ptheme_color', theme.palette.primary.main);
         // el.setAttribute('plogged_in_greeting', '...');
         // el.setAttribute('plogged_out_greeting', '...');
         // el.setAttribute('pgreeting_dialog_display', '...');
