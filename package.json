@@ -25,7 +25,7 @@
     "cookie-parser": "^1.4.4",
     "dataloader": "^1.4.0",
     "dotenv": "^8.2.0",
-    "ejs": "^2.7.2",
+    "ejs": "^2.7.3",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "firebase-admin": "^8.7.0",
