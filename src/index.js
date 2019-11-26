@@ -28,6 +28,7 @@ function reset() {
 }
 
 function render(location) {
+  const startTime = performance.now();
   router
     .resolve({
       pathname: location.pathname,
@@ -44,8 +45,10 @@ function render(location) {
             {...route}
             config={window.config}
             history={history}
+            location={location}
             relay={relay}
             reset={reset}
+            startTime={startTime}
           />,
           container,
         );

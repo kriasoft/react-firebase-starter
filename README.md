@@ -4,7 +4,7 @@
   <img src="https://api.dependabot.com/badges/status?host=github&repo=kriasoft/react-firebase-starter" alt="Dependabot" height="20" />
   <a href="https://opencollective.com/react-firebase-starter"><img src="https://opencollective.com/react-firebase-starter/backers/badge.svg?maxAge=3600" height="20"></a>
   <a href="https://twitter.com/ReactStarter"><img src="https://img.shields.io/twitter/follow/ReactStarter.svg?style=social&amp;label=Follow&amp;maxAge=3600" alt="Twitter" height="20"></a>
-  <a href="https://t.me/ReactStarter"><img src="https://img.shields.io/badge/chat-Telegram-green.svg?style=social&amp;maxAge=3600" height="20"></a>
+  <a href="https://discord.gg/2nKEnKq"><img src="https://img.shields.io/badge/chat-Discord-green.svg?style=social&amp;maxAge=3600" height="20"></a>
 </h1>
 
 **React Starter Kit** _for Firebase_ is a popular project template (aka, boilerplate) for building
@@ -13,11 +13,11 @@ provided by <a href="https://cloud.google.com/">Google Cloud</a> (Cloud SQL, Clo
 hosting, and file storage). It allows you to save time and build upon a solid foundation and
 design patterns.
 
-<p align="center"><strong>View</strong> <a href="https://firebase.reactstarter.com">online demo</a> (<a href="https://firebase.reactstarter.com/graphql">API</a>, <a href="https://firebase.reactstarter.com/graphql/model">data model</a>) &nbsp;|&nbsp; <strong>Follow us</strong> on <a href="https://twitter.com/ReactStarter">Twitter</a> &nbsp;|&nbsp; <strong>Get FREE support</strong> on <a href="https://t.me/ReactStarter">Telegram</a> &nbsp;|&nbsp; <a href="https://angel.co/company/kriasoft/jobs/"><strong>We're hiring!</strong></a></p>
+<p align="center"><strong>View</strong> <a href="https://firebase.reactstarter.com">online demo</a> (<a href="https://firebase.reactstarter.com/graphql">API</a>, <a href="https://firebase.reactstarter.com/graphql/model">data model</a>) &nbsp;|&nbsp; <strong>Follow us</strong> on <a href="https://twitter.com/ReactStarter">Twitter</a> &nbsp;|&nbsp; <strong>Get FREE support</strong> on <a href="https://discord.gg/2nKEnKq">Discord</a> &nbsp;|&nbsp; <a href="https://angel.co/company/kriasoft/jobs/"><strong>We're hiring!</strong></a></p>
 
 ---
 
-This project was bootstraped with [React Starter Kit for Firebase][rfs] by [Kriasoft][kriasoft].
+This project was bootstrapped with [React Starter Kit for Firebase][rfs] by [Kriasoft][kriasoft].
 
 ### Tech Stack
 
@@ -107,18 +107,38 @@ In order to re-compile GraphQL fragments, run `yarn relay` or `yarn relay --watc
 
 ### How to Migrate Database Schema
 
+While the app is in development, you can use a simplified migration workflow by
+creating a backup of your existing database, making changes to the existing
+migration file (see `migrations/20180101000000_initial.js`), re-apply the
+migration and restore data from the backup file (`backup.sql`):
+
 ```bash
-$ yarn db-change                   # Create a new database migration file
-$ yarn db-migrate                  # Migrate database to the latest version
-$ yarn db-rollback                 # Rollback the latest migration
-$ yarn db-backup --env=prod        # Write database backup to backup.sql
-$ yarn db-restore --env=dev        # Restore database from backup.sql
-$ yarn db                          # Open PostgreSQL shell (for testing/debugging)
+$ yarn db-backup --env=dev         # Or, yarn db-backup --env=test
+$ yarn db-reset-dev                # Or, yarn db-reset-test
 ```
 
-**Note**: Appending `--env=prod` or `--env=test` flags to any of the commands above will load the
-corresponding database settings for the selected deployment environment from
-[Firebase Config API](https://firebase.google.com/docs/functions/config-env)
+Upon deployment to production, switch to normal migration workflow:
+
+```bash
+$ yarn db-change <name>            # Create a new database migration file
+$ yarn db-migrate --env=dev        # Migrate database to the latest version
+```
+
+**HINT**: Test your migration thoroughly with a local instance of the DB first
+(by using `--env=local` or `--env=dev` (default) flag) then apply it to your
+`test` or `prod` database instance using `--env=test` or `--env=prod` command
+argument.
+
+Other helpful database scripts:
+
+```bash
+$ yarn db-version --env=dev        # Print the version number of the last migration
+$ yarn db-rollback --env=dev       # Rollback the latest migration
+$ yarn db-restore --env=dev        # Restore database from backup.sql
+$ yarn db-seed --env=dev           # Seed database with test data
+$ yarn db --env=dev                # Open Knex.js REPL shell (type ".exit" for exit)
+$ yarn psql --env=dev              # Open PostgreSQL shell (type "\q" for exit)
+```
 
 ### How to Test
 
