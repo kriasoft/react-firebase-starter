@@ -74,6 +74,7 @@ router.get('*', async (req, res, next) => {
         url: `${process.env.APP_ORIGIN}${req.path}`,
         title: route.title,
         description: route.description,
+        preload: route.preload || [],
         assets: (route.chunks || []).reduce(
           (acc, name) => [...acc, ...[].concat(stats.assetsByChunkName[name])],
           stats.entrypoints.main.assets,

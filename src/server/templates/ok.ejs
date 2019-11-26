@@ -9,6 +9,9 @@
   <meta name="theme-color" content="#000000">
   <link rel="manifest" href="/manifest.json">
   <link rel="shortcut icon" href="/favicon.ico">
+<% preload.forEach(x => { -%>
+  <link rel="preload" href="<%= x.href %>" as="<%= x.as %>">
+<% }); -%>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Roboto+Mono:300">
   <meta property="og:url" content="<%= url %>">
   <meta property="og:type" content="website">

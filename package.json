@@ -103,7 +103,6 @@
     "test": "react-app test",
     "lint": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
     "lint-fix": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" --fix . && yarn run prettier --write \"**/*.{js,json}\"",
-    "db": "node ./scripts/db",
     "db-backup": "node ./scripts/db-backup",
     "db-restore": "node ./scripts/db-restore",
     "db-change": "knex migrate:make",
@@ -114,6 +113,8 @@
     "db-reset-dev": "yarn db-rollback --env=dev && yarn db-migrate --env=dev && yarn db-restore --env=dev",
     "db-reset-test": "yarn db-rollback --env=test && yarn db-migrate --env=test && yarn db-restore --env=test",
     "db-reset-prod": "yarn db-rollback --env=prod && yarn db-migrate --env=prod && yarn db-restore --env=prod",
+    "db": "node --experimental-repl-await ./scripts/db",
+    "psql": "node ./scripts/psql",
     "deploy": "yarn run deploy-test",
     "deploy-test": "node ./scripts/pre-deploy --env=test && firebase --project=example-test deploy && node ./scripts/post-deploy --env=test",
     "deploy-prod": "node ./scripts/pre-deploy --env=prod && firebase --project=example-prod deploy && node ./scripts/post-deploy --env=prod"
