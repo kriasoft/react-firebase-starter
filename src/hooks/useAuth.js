@@ -5,7 +5,9 @@
  */
 
 import React from 'react';
+import { commitLocalUpdate } from 'relay-runtime';
 import { useHistory } from './useHistory';
+import { useRelay } from './useRelay';
 import { useReset } from './useReset';
 
 const WINDOW_WIDTH = 600;
@@ -52,9 +54,15 @@ function signIn() {
 }
 
 export function useAuth(options) {
+  const relayRef = React.useRef();
   const callbacks = React.useRef([]);
   const history = useHistory();
+  const relay = useRelay();
   const reset = useReset();
+
+  React.useEffect(() => {
+    relayRef.current = relay && relay.environment;
+  }, [relay && relay.environment]);
 
   React.useEffect(() => {
     if (options && options.onLogin) {
@@ -63,6 +71,19 @@ export function useAuth(options) {
 
     function handleMessage({ origin, data }) {
       if (origin === window.location.origin && data.type === 'LOGIN') {
+        if (!data.error && relayRef.current) {
+          const user = data.user;
+          if (user && user.id) {
+            commitLocalUpdate(relayRef.current, store => {
+              const me = store.get(user.id) || store.create(user.id, 'User');
+              Object.keys(user).forEach(key => {
+                me.setValue(user[key], key);
+              });
+              store.getRoot().setLinkedRecord(me, 'me');
+            });
+          }
+        }
+
         callbacks.current.forEach(cb =>
           data.error ? cb[1](data.error) : cb[0](data.user),
         );

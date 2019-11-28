@@ -21,7 +21,13 @@ function authenticate(provider) {
               id: toGlobalId('User', user.id),
               username: user.username,
               email: user.email,
+              emailVerified: user.email_verified,
               displayName: user.display_name,
+              photoURL: user.photo_url,
+              timeZone: user.time_zone,
+              createdAt: user.created_at,
+              updatedAt: user.updated_at,
+              lastLoginAt: user.last_login_at,
             }
           : null,
       };

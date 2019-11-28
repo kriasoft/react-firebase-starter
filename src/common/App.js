@@ -72,9 +72,9 @@ class App extends React.PureComponent {
     const err = this.state.error || this.props.error || error;
     return err ? (
       <ErrorPage error={err} onClose={this.resetError} />
-    ) : (
+    ) : props ? (
       this.props.render(props || this.props.data)
-    );
+    ) : null;
   };
 
   render() {
