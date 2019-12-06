@@ -4,7 +4,7 @@
  * Copyright (c) 2015-present Kriasoft | MIT License
  */
 
-import { GraphQLNonNull, GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLNonNull, GraphQLString } from 'graphql';
 import {
   connectionDefinitions,
   forwardConnectionArgs,
@@ -13,6 +13,7 @@ import {
 } from 'graphql-relay';
 
 import db from '../db';
+import { countField } from '../utils';
 import { UserType } from '../types';
 
 export const me = {
@@ -39,42 +40,38 @@ export const users = {
   type: connectionDefinitions({
     name: 'User',
     nodeType: UserType,
-    connectionFields: {
-      totalCount: { type: new GraphQLNonNull(GraphQLInt) },
-    },
+    connectionFields: { totalCount: countField },
   }).connectionType,
 
   args: forwardConnectionArgs,
 
   async resolve(root, args, ctx) {
-    // Only admins allowed to fetch the list of users
+    // Only admins are allowed to fetch the list of users
     ctx.ensureIsAuthorized(user => user.isAdmin);
 
-    const limit = typeof args.first === 'undefined' ? '100' : args.first;
+    const query = db.table('users');
+
+    const limit = args.first === undefined ? 50 : args.first;
     const offset = args.after ? cursorToOffset(args.after) + 1 : 0;
 
-    const [data, totalCount] = await Promise.all([
-      db
-        .table('users')
-        .orderBy('created_at', 'desc')
-        .limit(limit)
-        .offset(offset)
-        .then(rows => {
-          rows.forEach(x => ctx.userById.prime(x.id, x));
-          return rows;
-        }),
-      db
-        .table('users')
-        .count()
-        .then(x => x[0].count),
-    ]);
+    const data = await query
+      .clone()
+      .limit(limit)
+      .offset(offset)
+      .orderBy('created_at', 'desc')
+      .select();
+
+    data.forEach(x => {
+      ctx.userById.prime(x.id, x);
+      ctx.userByUsername.prime(x.username, x);
+    });
 
     return {
       ...connectionFromArraySlice(data, args, {
         sliceStart: offset,
-        arrayLength: totalCount,
+        arrayLength: offset + data.length,
       }),
-      totalCount,
+      query,
     };
   },
 };

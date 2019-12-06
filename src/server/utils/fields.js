@@ -5,7 +5,7 @@
  */
 
 import moment from 'moment-timezone';
-import { GraphQLString } from 'graphql';
+import { GraphQLNonNull, GraphQLString, GraphQLInt } from 'graphql';
 
 const dateFieldArgs = {
   format: { type: GraphQLString },
@@ -40,3 +40,10 @@ export function dateField(resolve) {
     resolve: dateFieldResolve.bind(undefined, resolve),
   };
 }
+
+export const countField = {
+  type: new GraphQLNonNull(GraphQLInt),
+  resolve(self) {
+    return self.query.count().then(x => x[0].count);
+  },
+};

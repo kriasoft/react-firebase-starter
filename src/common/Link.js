@@ -17,6 +17,7 @@ function isModifiedEvent(event) {
 }
 
 const Link = React.forwardRef(function Link(props, ref) {
+  const { state, ...other } = props;
   const history = useHistory();
 
   function handleClick(event) {
@@ -33,14 +34,15 @@ const Link = React.forwardRef(function Link(props, ref) {
     }
 
     event.preventDefault();
-    history.push(event.currentTarget.getAttribute('href'));
+    history.push(event.currentTarget.getAttribute('href'), state);
   }
 
   // eslint-disable-next-line jsx-a11y/anchor-has-content
-  return <a ref={ref} {...props} onClick={handleClick} />;
+  return <a ref={ref} {...other} onClick={handleClick} />;
 });
 
 Link.propTypes = {
+  state: PropTypes.instanceOf(Object),
   onClick: PropTypes.func,
 };
 
