@@ -30,6 +30,7 @@ router.get('/static/*', (req, res) => {
 router.get('*', async (req, res, next) => {
   try {
     const { path: pathname, originalUrl: url } = req;
+    const history = createMemoryHistory({ initialEntries: [pathname] });
     const relay = createRelay(req);
 
     // Prefer using the same query string parser in both
@@ -51,14 +52,7 @@ router.get('*', async (req, res, next) => {
     if (route.ssr === true) {
       try {
         body = ReactDOM.renderToString(
-          <App
-            {...route}
-            config={config}
-            history={createMemoryHistory({
-              initialEntries: [pathname],
-            })}
-            relay={relay}
-          />,
+          <App {...route} config={config} history={history} relay={relay} />,
         );
       } catch (err) {
         console.error(err);
