@@ -1399,7 +1399,7 @@
     "@svgr/plugin-svgo" "^4.0.3"
     loader-utils "^1.1.0"
 
-"@szmarczak/http-timer@^3.1.0":
+"@szmarczak/http-timer@^3.1.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@szmarczak/http-timer/-/http-timer-3.1.1.tgz#8b876acd14a4f36ad274468910ee858241e356ad"
   integrity sha512-F7vS53bV9NXT+mmYFeSBr2nXaOI1h6qxdlLDVP+4CPG/c60MMStT7aaqYD2TSNWob1DA3GH9ikFY0UW31bUsWA==
@@ -5633,13 +5633,13 @@ google-p12-pem@^2.0.0:
   dependencies:
     node-forge "^0.8.0"
 
-got@^10.0.1:
-  version "10.0.1"
-  resolved "https://registry.yarnpkg.com/got/-/got-10.0.1.tgz#0c9eb81a7e5e3baca2dddd611a4bd7c054e31fdd"
-  integrity sha512-lXOWDVJczIX4uOZG5CRSlIzNAGqft40Kj7/rLSccH8y9GKs1a86rO/+23CC4kF8OdHFazapX3mI6gZPqDrIAfA==
+got@^10.0.3:
+  version "10.0.3"
+  resolved "https://registry.yarnpkg.com/got/-/got-10.0.3.tgz#0bd93429fd2891de0026ed731a16143e6193e7ac"
+  integrity sha512-5QBO/EhIq3nbt2madWsez9aTPc0k1oWBzXipfqLdb6JmnrWNxcHEvnxuWErec/PE67Jy/QAgacq6XzGbyzXCzg==
   dependencies:
     "@sindresorhus/is" "^1.0.0"
-    "@szmarczak/http-timer" "^3.1.0"
+    "@szmarczak/http-timer" "^3.1.1"
     "@types/cacheable-request" "^6.0.1"
     cacheable-lookup "^0.2.1"
     cacheable-request "^7.0.0"
