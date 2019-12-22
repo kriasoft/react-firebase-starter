@@ -50,7 +50,7 @@
     "query-string": "^6.9.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-relay": "^7.1.0",
+    "react-relay": "^8.0.0",
     "recompose": "^0.30.0",
     "relay-runtime": "^7.1.0",
     "request": "^2.88.0",
