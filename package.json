@@ -62,7 +62,7 @@
     "validator": "^12.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.5",
+    "@babel/core": "^7.7.7",
     "@babel/register": "^7.7.4",
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-relay": "^7.1.0",
