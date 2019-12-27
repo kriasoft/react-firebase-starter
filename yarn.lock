@@ -9334,10 +9334,10 @@ pg-types@^2.1.0:
     postgres-date "~1.0.4"
     postgres-interval "^1.1.0"
 
-pg@^7.15.1:
-  version "7.15.1"
-  resolved "https://registry.yarnpkg.com/pg/-/pg-7.15.1.tgz#a0bac84ebaeb809f3a369fb695ae89b314b08b22"
-  integrity sha512-o293Pxx5bNRpTv3Dh4+IIhPbTw19Bo4zvppLgR+MAV2I7AF3sMr9gPB4JPvBffWb24pDfC+7Ghe6xh2VxVMBpQ==
+pg@^7.15.2:
+  version "7.15.2"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-7.15.2.tgz#8322281eafad15a27c4a46f989aa143a53702bc5"
+  integrity sha512-0JejgUM7GyQLtDgCyv/cxKeZragMrs4SjcBy3gkjoLli8qn7szyy8xN7sE08ShCyZzcs1rvePlfYjBOngC6x+g==
   dependencies:
     buffer-writer "2.0.0"
     packet-reader "1.0.0"
