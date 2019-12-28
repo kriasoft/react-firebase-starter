@@ -35,7 +35,7 @@ function authenticate(provider) {
       res.send(`
 <script>
   if (window.opener) {
-    window.opener.postMessage(${JSON.stringify(data)});
+    window.opener.postMessage(${JSON.stringify(data)}, '${process.env.APP_ORIGIN}');
     window.opener.focus();
     window.close();
   } else {
