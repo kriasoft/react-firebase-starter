@@ -972,17 +972,17 @@
   resolved "https://registry.yarnpkg.com/@firebase/auth-interop-types/-/auth-interop-types-0.1.1.tgz#b3e1bc5ea8b2df1c376b5fc14aae8a3572dbcace"
   integrity sha512-rNpCOyCspZvNDoQVQLQQgWAGBMB2ClCWKN1c8cEFgLNFgnMJrjVB+tcL7KW2q2UjKa7l8Mxgwys7szTiEDAcvA==
 
-"@firebase/auth-types@0.9.3":
-  version "0.9.3"
-  resolved "https://registry.yarnpkg.com/@firebase/auth-types/-/auth-types-0.9.3.tgz#c2e719a9911486177c31fb0c25a857e82c455e0d"
-  integrity sha512-eS9BEuZ1XxBQReUhG6lbus9ScOgHwqYPT7a645PKa/tBb1BWsgivwRFzH0BATPGLP+JTtRvy5JqEsQ25S7J4ig==
+"@firebase/auth-types@0.9.4":
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/@firebase/auth-types/-/auth-types-0.9.4.tgz#b0074830f0781f425148f4104fa4ddb8be3a9bc1"
+  integrity sha512-06ZrpYz1GaUfIJs7C3Yf4lARH8+2kzgKfgG/9B3FaGHFYLa5U7rLBGGaca4oiVI12jmhe9CV3+M8e3U2CRCr2w==
 
-"@firebase/auth@^0.13.3":
-  version "0.13.3"
-  resolved "https://registry.yarnpkg.com/@firebase/auth/-/auth-0.13.3.tgz#ef07d09952ecb561ae5117850cf37581ece78c48"
-  integrity sha512-Ks+6PdLzuxrlkbnSbrMKpOdCbvrfJEBwXe2/GfHCDuJWsxUEx2qFcda+g04pgXnlf1qCjPeNEJM8U0WzTvGHyA==
+"@firebase/auth@^0.13.4":
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/@firebase/auth/-/auth-0.13.4.tgz#77ce603403a7b638c0fa045b1f30f1f942f07fb2"
+  integrity sha512-dFDuLMHHmigs9ZH56h+UO78SMuvYkwRcPbEudaemYisGLXnYFa0pUKS2WfvA/9d/14X/VnzG8NGApAw5BylpvA==
   dependencies:
-    "@firebase/auth-types" "0.9.3"
+    "@firebase/auth-types" "0.9.4"
 
 "@firebase/component@0.1.1":
   version "0.1.1"
