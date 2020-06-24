@@ -12628,6 +12628,11 @@ uuid@^3.0.1, uuid@^3.2.1, uuid@^3.3.2, uuid@^3.3.3:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.3.tgz#4568f0216e78760ee1dbf3a4d2cf53e224112866"
   integrity sha512-pW0No1RGHgzlpHJO1nsVrHKpOEIxkGg1xB+v0ZmdNH5OAeAwzAVrCnI2/6Mtx+Uys6iaylxa+D3g4j63IKKjSQ==
 
+uuid@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.2.0.tgz#cb10dd6b118e2dada7d0cd9730ba7417c93d920e"
+  integrity sha512-CYpGiFTUrmI6OBMkAdjSDM0k5h8SkkiTP4WAjQgDgNB1S3Ou9VBEvr6q0Kv2H1mMk7IWfxYGpMH5sd5AvcIV2Q==
+
 v8flags@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/v8flags/-/v8flags-3.1.3.tgz#fc9dc23521ca20c5433f81cc4eb9b3033bb105d8"
