@@ -71,7 +71,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "husky": "^4.0.4",
     "lint-staged": "^9.5.0",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "prettier": "^1.19.1",
     "raw-loader": "^4.0.0",
     "react-app-tools": "^3.1.0-preview.7",
