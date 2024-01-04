@@ -13,8 +13,21 @@ import { createFragmentContainer, graphql } from 'react-relay';
 function AdminStoryList(props) {
   return (
     <React.Fragment>
-      <Typography variant="h3">Stories</Typography>
+      <Typography variant="h1">Stories</Typography>
       <List>
+        <ListItem><Typography variant="h2">Group 1</h1></Typography></ListItem>
+        <ListItem>Story A</ListItem>
+        <ListItem>Story B</ListItem>
+        <ListItem>Story C</ListItem>
+      </List>
+      <List>
+        <ListItem><Typography variant="h2">Group 2</h1></Typography></ListItem>
+        <ListItem>Story A</ListItem>
+        <ListItem>Story B</ListItem>
+        <ListItem>Story C</ListItem>
+      </List>
+      <List>
+        <ListItem><Typography variant="h2">Group 3</h1></Typography></ListItem>
         <ListItem>Story A</ListItem>
         <ListItem>Story B</ListItem>
         <ListItem>Story C</ListItem>
